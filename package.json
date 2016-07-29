@@ -1,0 +1,11 @@
+{
+  "name": "my-meal",
+  "version": "1.0.0",
+  "description": "A platform for providing home-cooked meals ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nizar Ayari, Joseph Capezzuto, Michael Chen, Phil Seidel",
+  "license": "ISC"
+}
