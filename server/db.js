@@ -120,7 +120,7 @@ const Review = sequelize.define('review', {
   },
 });
 
-
+/** ********MANY TO MANY RELATIONSHIPS**********/
 // join tables: events_dishes, users_tags, users_events, events_tags
 Event.belongsToMany(Dish, { through: 'event_dish', foreignKey: 'event_id' });
 Dish.belongsToMany(Event, { through: 'event_dish', foreignKey: 'dish_id' });
@@ -133,12 +133,23 @@ Tag.belongsToMany(User, { through: 'user_tag', foreignKey: 'tag_id' });
 
 Event.belongsToMany(Tag, { through: 'event_tag', foreignKey: 'event_id' });
 Tag.belongsToMany(Event, { through: 'event_tag', foreignKey: 'tag_id' });
+
+/** ********ONE TO MANY RELATIONSHIPS**********/
 // one in many: (1:many) users:dishes, events:reviews, users:reviews (two times)
+Dish.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
 User.hasMany(Dish, { foreignKey: 'user_id' });
+
+Review.belongsTo(Event, { as: 'event', foreignKey: 'event_id' });
 Event.hasMany(Review, { foreignKey: 'event_id' });
-User.hasMany(Review, { foreignKey: 'user_id_for' });
-User.hasMany(Review, { foreignKey: 'user_id_from' });
-User.hasMany(Event, { foreignKey: 'host_user_id' });
+
+Review.belongsTo(User, { as: 'host', foreignKey: 'user_id' });
+User.hasMany(Review, { foreignKey: 'user_id' });
+
+Review.belongsTo(User, { as: 'reviewer', foreignKey: 'user_id' });
+User.hasMany(Review, { foreignKey: 'user_id' });
+
+Event.belongsTo(User, { as: 'host', foreignKey: 'user_id' });
+User.hasMany(Event, { foreignKey: 'user_id' });
 
 
 sequelize
