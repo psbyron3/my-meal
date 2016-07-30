@@ -122,8 +122,24 @@ const Review = sequelize.define('review', {
 
 
 // join tables: events_dishes, users_tags, users_events, events_tags
+Event.belongsToMany(Dish, { through: 'event_dish', foreignKey: 'event_id' });
+Dish.belongsToMany(Event, { through: 'event_dish', foreignKey: 'dish_id' });
+
+User.belongsToMany(Event, { through: 'user_event', foreignKey: 'user_id' });
+Event.belongsToMany(User, { through: 'user_event', foreignKey: 'event_id' });
+
+User.belongsToMany(Tag, { through: 'user_tag', foreignKey: 'user_id' });
+Tag.belongsToMany(User, { through: 'user_tag', foreignKey: 'tag_id' });
+
+Event.belongsToMany(Tag, { through: 'event_tag', foreignKey: 'event_id' });
+Tag.belongsToMany(Event, { through: 'event_tag', foreignKey: 'tag_id' });
 // one in many: (1:many) users:dishes, events:reviews, users:reviews (two times)
-// one to one: user:event_host_id
+User.hasMany(Dish, { foreignKey: 'user_id' });
+Event.hasMany(Review, { foreignKey: 'event_id' });
+User.hasMany(Review, { foreignKey: 'user_id_for' });
+User.hasMany(Review, { foreignKey: 'user_id_from' });
+User.hasMany(Event, { foreignKey: 'host_user_id' });
+
 
 sequelize
   .sync()
