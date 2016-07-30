@@ -136,9 +136,9 @@ Tag.belongsToMany(Event, { through: 'event_tag', foreignKey: 'tag_id' });
 // one in many: (1:many) users:dishes, events:reviews, users:reviews (two times)
 User.hasMany(Dish, { foreignKey: 'user_id' });
 Event.hasMany(Review, { foreignKey: 'event_id' });
-User.hasMany(Review, { foreignKey: 'user_id_for' });
-User.hasMany(Review, { foreignKey: 'user_id_from' });
-User.hasMany(Event, { foreignKey: 'host_user_id' });
+User.hasMany(Review, { as: 'host', foreignKey: 'user_id' });
+User.hasMany(Review, { as: 'reviewer', foreignKey: 'user_id' });
+User.hasMany(Event, { as: 'host', foreignKey: 'host_user_id' });
 
 
 sequelize
