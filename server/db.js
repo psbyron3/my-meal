@@ -1,138 +1,138 @@
 
 
-var Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 
-var sequelize = new Sequelize(process.env.db_database, process.env.db_user, process.env.db_password, {
+const sequelize = new Sequelize(process.env.db_db, process.env.db_user, process.env.db_pass, {
   host: 'https://mymeal.justinpchen.com',
-  dialect: 'mysql'
+  dialect: 'mysql',
 });
 
 sequelize
   .authenticate()
-  .then(function() {
+  .then(function () {
     console.log('Connection has been established successfully');
   })
-  .catch(function() {
+  .catch(function () {
     console.log('Unable to connect to the database');
   });
 
 
-var User = sequelize.define('user', {
+const User = sequelize.define('user', {
   user_name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   first_name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   last_name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   email: {
     type: Sequelize.STRING,
     validate: {
       isEmail: {
-        msg: 'Must be a valid email address'
-      }
+        msg: 'Must be a valid email address',
+      },
     },
-    allowNull: false
+    allowNull: false,
   },
   address: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   password: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+  },
 });
 
-var Event = sequelize.define('event', {
+const Event = sequelize.define('event', {
   event_name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   event_pic: {
     type: Sequelize.STRING,
     validate: {
       isUrl: {
-        msg: 'Must be a valid URL';
-      }
-    }
+        msg: 'Must be a valid URL',
+      },
+    },
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   latitude: {
     type: Sequelize.DECIMAL,
-    allowNull: false
+    allowNull: false,
   },
   longitude: {
     type: Sequelize.DECIMAL,
-    allowNull: false
+    allowNull: false,
   },
   start_datetime: {
     type: Sequelize.DATE,
-    allowNull: false
+    allowNull: false,
   },
   end_datetime: {
     type: Sequelize.DATE,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 
 });
 
-var Tag = sequelize.define('tag', {
+const Tag = sequelize.define('tag', {
   tagname: {
     type: Sequelize.STRING,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
-var Dish = sequelize.define('dish', {
+const Dish = sequelize.define('dish', {
   dish_name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   description: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   dish_pic: {
     type: Sequelize.STRING,
     validate: {
       isUrl: {
-        msg: 'Must be a valid URL'
-      }
-    }
-  }
+        msg: 'Must be a valid URL',
+      },
+    },
+  },
 });
 
-var Review = sequelize.define('review', {
+const Review = sequelize.define('review', {
   content: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   rating: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       max: 5,
-      min: 1
-    }
-  }
+      min: 1,
+    },
+  },
 });
 
 
-//join tables: events_dishes, users_tags, users_events, events_tags
-//one in many: (1:many) users:dishes, events:reviews, users:reviews (two times)
-//one to one: user:event_host_id
+// join tables: events_dishes, users_tags, users_events, events_tags
+// one in many: (1:many) users:dishes, events:reviews, users:reviews (two times)
+// one to one: user:event_host_id
 
 sequelize
   .sync()
-  .then(function() {
-      console.log("Created tables from schema");
+  .then(function () {
+    console.log('Created tables from schema');
   });
 
-  exports.User = User;
-  exports.Event = Event;
-  exports.Tag = Tag;
-  exports.Dish = Dish;
-  exports.Review = Review;
+exports.User = User;
+exports.Event = Event;
+exports.Tag = Tag;
+exports.Dish = Dish;
+exports.Review = Review;
