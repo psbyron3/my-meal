@@ -1,11 +1,8 @@
-
-
+const path = require('path');
 const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize(process.env.db_db, process.env.db_user, process.env.db_pass, {
-  host: 'https://mymeal.justinpchen.com',
-  dialect: 'mysql',
-});
+const env = 'development';
+const config = require('../../sqlConfig.js')[env];
+const sequelize = new Sequelize(config.database, config.user, config.password, config.connection);
 
 sequelize
   .authenticate()
@@ -62,10 +59,10 @@ const Event = sequelize.define('Event', {
     },
   },
   price: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.DECIMAL,
   },
   maxGuests: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
   },
   address: {
     type: Sequelize.STRING,

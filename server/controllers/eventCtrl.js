@@ -98,7 +98,7 @@ module.exports = {
             res.send(event);
           } else {
             console.log('event', eventID, 'was not found');
-            res.end('event ' + eventID + ' was not found');
+            res.end('event ', eventID, ' was not found');
           }
         });
     },
