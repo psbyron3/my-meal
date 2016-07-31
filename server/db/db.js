@@ -4,6 +4,7 @@ const env = 'development';
 const config = require('../../sqlConfig.js')[env];
 const sequelize = new Sequelize(config.database, config.user, config.password, config.connection);
 
+console.log('user=',config.user, 'password=', config.password);
 sequelize
   .authenticate()
   .then(function () {
@@ -38,7 +39,7 @@ const User = sequelize.define('User', {
     type: Sequelize.STRING,
   },
   phoneNumber: {
-
+    type: Sequelize.STRING
   },
   password: {
     type: Sequelize.STRING,
@@ -126,20 +127,40 @@ const Review = sequelize.define('Review', {
   },
 });
 
+const UsersEvent = sequelize.define('UsersEvent', {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    userId: {
+      type: Sequelize.INTEGER
+    },
+    eventId: {
+      type: Sequelize.INTEGER
+    },
+    role: {
+      type: Sequelize.STRING,
+      validate: {
+        isIn: [['guest', 'host']]
+      }
+    }
+})
+
 
 /** ********MANY TO MANY RELATIONSHIPS**********/
 // join tables: events_dishes, users_tags, users_events, events_tags
-Event.belongsToMany(Dish, { through: 'EventDish', foreignKey: 'eventId' });
-Dish.belongsToMany(Event, { through: 'EventDish', foreignKey: 'dishId' });
+Event.belongsToMany(Dish, { through: 'EventsDishes', foreignKey: 'eventId' });
+Dish.belongsToMany(Event, { through: 'EventsDishes', foreignKey: 'dishId' });
 
-User.belongsToMany(Event, { through: 'UserEvent', foreignKey: 'userId' });
-Event.belongsToMany(User, { through: 'UserEvent', foreignKey: 'eventId' });
+User.belongsToMany(Event, { through: 'UsersEvent', foreignKey: 'userId' });
+Event.belongsToMany(User, { through: 'UsersEvent', foreignKey: 'eventId' });
 
-User.belongsToMany(Tag, { through: 'UserTag', foreignKey: 'userId' });
-Tag.belongsToMany(User, { through: 'UserTag', foreignKey: 'tagId' });
+User.belongsToMany(Tag, { through: 'UsersTags', foreignKey: 'userId' });
+Tag.belongsToMany(User, { through: 'UsersTags', foreignKey: 'tagId' });
 
-Event.belongsToMany(Tag, { through: 'TagEvent', foreignKey: 'eventId' });
-Tag.belongsToMany(Event, { through: 'TagEvent', foreignKey: 'tagId' });
+Event.belongsToMany(Tag, { through: 'TagsEvents', foreignKey: 'eventId' });
+Tag.belongsToMany(Event, { through: 'TagsEvents', foreignKey: 'tagId' });
 
 /** ********ONE TO MANY RELATIONSHIPS**********/
 // one in many: (1:many) users:dishes, events:reviews, users:reviews (two times)
@@ -149,18 +170,18 @@ User.hasMany(Dish, { foreignKey: 'userId' });
 Review.belongsTo(Event, { as: 'event', foreignKey: 'eventId' });
 Event.hasMany(Review, { foreignKey: 'eventId' });
 
-Review.belongsTo(User, { as: 'host', foreignKey: 'userId' });
-User.hasMany(Review, { foreignKey: 'userId' });
+Review.belongsTo(User, { as: 'host', foreignKey: 'hostId' });
+User.hasMany(Review, { foreignKey: 'hostId' });
 
-Review.belongsTo(User, { as: 'reviewer', foreignKey: 'userId' });
-User.hasMany(Review, { foreignKey: 'userId' });
+Review.belongsTo(User, { as: 'reviewer', foreignKey: 'reviewerId' });
+User.hasMany(Review, { foreignKey: 'reviewerId' });
 
 Event.belongsTo(User, { as: 'host', foreignKey: 'userId' });
 User.hasMany(Event, { foreignKey: 'userId' });
 
 
 sequelize
-  .sync()
+  .sync({force: true})
   .then(function () {
     console.log('Created tables from schema');
   });

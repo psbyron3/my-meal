@@ -6,7 +6,7 @@ module.exports = {
     user     : process.env.db_username,
     password : process.env.db_password,
     database : 'mymeal_db',
-    connection: { 
+    connection: {
     	host     : 'mymeal.justinpchen.com',
     	dialect: 'mysql',
     },
