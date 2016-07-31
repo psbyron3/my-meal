@@ -17,15 +17,15 @@ sequelize
   });
 
 
-const User = sequelize.define('user', {
-  user_name: {
+const User = sequelize.define('User', {
+  userName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  first_name: {
+  firstName: {
     type: Sequelize.STRING,
   },
-  last_name: {
+  lastName: {
     type: Sequelize.STRING,
   },
   email: {
@@ -40,23 +40,32 @@ const User = sequelize.define('user', {
   address: {
     type: Sequelize.STRING,
   },
+  phoneNumber: {
+
+  },
   password: {
     type: Sequelize.STRING,
   },
 });
 
-const Event = sequelize.define('event', {
-  event_name: {
+const Event = sequelize.define('Event', {
+  eventName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  event_pic: {
+  eventPic: {
     type: Sequelize.STRING,
     validate: {
       isUrl: {
         msg: 'Must be a valid URL',
       },
     },
+  },
+  price: {
+    type: Sequelize.DECIMAL
+  },
+  maxGuests: {
+    type: Sequelize.INTEGER
   },
   address: {
     type: Sequelize.STRING,
@@ -70,33 +79,33 @@ const Event = sequelize.define('event', {
     type: Sequelize.DECIMAL,
     allowNull: false,
   },
-  start_datetime: {
+  startDatetime: {
     type: Sequelize.DATE,
     allowNull: false,
   },
-  end_datetime: {
+  endDatetime: {
     type: Sequelize.DATE,
     allowNull: false,
   },
 
 });
 
-const Tag = sequelize.define('tag', {
-  tagname: {
+const Tag = sequelize.define('Tag', {
+  tagName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 });
 
-const Dish = sequelize.define('dish', {
-  dish_name: {
+const Dish = sequelize.define('Dish', {
+  dishName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
   description: {
     type: Sequelize.STRING,
   },
-  dish_pic: {
+  dishPic: {
     type: Sequelize.STRING,
     validate: {
       isUrl: {
@@ -106,7 +115,7 @@ const Dish = sequelize.define('dish', {
   },
 });
 
-const Review = sequelize.define('review', {
+const Review = sequelize.define('Review', {
   content: {
     type: Sequelize.STRING,
   },
@@ -120,36 +129,37 @@ const Review = sequelize.define('review', {
   },
 });
 
+
 /** ********MANY TO MANY RELATIONSHIPS**********/
 // join tables: events_dishes, users_tags, users_events, events_tags
-Event.belongsToMany(Dish, { through: 'event_dish', foreignKey: 'event_id' });
-Dish.belongsToMany(Event, { through: 'event_dish', foreignKey: 'dish_id' });
+Event.belongsToMany(Dish, { through: 'EventDish', foreignKey: 'eventId' });
+Dish.belongsToMany(Event, { through: 'EventDish', foreignKey: 'dishId' });
 
-User.belongsToMany(Event, { through: 'user_event', foreignKey: 'user_id' });
-Event.belongsToMany(User, { through: 'user_event', foreignKey: 'event_id' });
+User.belongsToMany(Event, { through: 'UserEvent', foreignKey: 'userId' });
+Event.belongsToMany(User, { through: 'UserEvent', foreignKey: 'eventId' });
 
-User.belongsToMany(Tag, { through: 'user_tag', foreignKey: 'user_id' });
-Tag.belongsToMany(User, { through: 'user_tag', foreignKey: 'tag_id' });
+User.belongsToMany(Tag, { through: 'UserTag', foreignKey: 'userId' });
+Tag.belongsToMany(User, { through: 'UserTag', foreignKey: 'tagId' });
 
-Event.belongsToMany(Tag, { through: 'event_tag', foreignKey: 'event_id' });
-Tag.belongsToMany(Event, { through: 'event_tag', foreignKey: 'tag_id' });
+Event.belongsToMany(Tag, { through: 'TagEvent', foreignKey: 'eventId' });
+Tag.belongsToMany(Event, { through: 'TagEvent', foreignKey: 'tagId' });
 
 /** ********ONE TO MANY RELATIONSHIPS**********/
 // one in many: (1:many) users:dishes, events:reviews, users:reviews (two times)
-Dish.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
-User.hasMany(Dish, { foreignKey: 'user_id' });
+Dish.belongsTo(User, { as: 'user', foreignKey: 'userId' });
+User.hasMany(Dish, { foreignKey: 'userId' });
 
-Review.belongsTo(Event, { as: 'event', foreignKey: 'event_id' });
-Event.hasMany(Review, { foreignKey: 'event_id' });
+Review.belongsTo(Event, { as: 'event', foreignKey: 'eventId' });
+Event.hasMany(Review, { foreignKey: 'eventId' });
 
-Review.belongsTo(User, { as: 'host', foreignKey: 'user_id' });
-User.hasMany(Review, { foreignKey: 'user_id' });
+Review.belongsTo(User, { as: 'host', foreignKey: 'userId' });
+User.hasMany(Review, { foreignKey: 'userId' });
 
-Review.belongsTo(User, { as: 'reviewer', foreignKey: 'user_id' });
-User.hasMany(Review, { foreignKey: 'user_id' });
+Review.belongsTo(User, { as: 'reviewer', foreignKey: 'userId' });
+User.hasMany(Review, { foreignKey: 'userId' });
 
-Event.belongsTo(User, { as: 'host', foreignKey: 'user_id' });
-User.hasMany(Event, { foreignKey: 'user_id' });
+Event.belongsTo(User, { as: 'host', foreignKey: 'userId' });
+User.hasMany(Event, { foreignKey: 'userId' });
 
 
 sequelize
