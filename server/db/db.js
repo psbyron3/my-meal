@@ -4,7 +4,7 @@ const env = 'development';
 const config = require('../../sqlConfig.js')[env];
 const sequelize = new Sequelize(config.database, config.user, config.password, config.connection);
 
-console.log('user=',config.user, 'password=', config.password);
+console.log('user=', config.user, 'password=', config.password);
 sequelize
   .authenticate()
   .then(function () {
@@ -39,7 +39,7 @@ const User = sequelize.define('User', {
     type: Sequelize.STRING,
   },
   phoneNumber: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   password: {
     type: Sequelize.STRING,
@@ -128,24 +128,24 @@ const Review = sequelize.define('Review', {
 });
 
 const UsersEvent = sequelize.define('UsersEvent', {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  userId: {
+    type: Sequelize.INTEGER,
+  },
+  eventId: {
+    type: Sequelize.INTEGER,
+  },
+  role: {
+    type: Sequelize.STRING,
+    validate: {
+      isIn: [['guest', 'host']],
     },
-    userId: {
-      type: Sequelize.INTEGER
-    },
-    eventId: {
-      type: Sequelize.INTEGER
-    },
-    role: {
-      type: Sequelize.STRING,
-      validate: {
-        isIn: [['guest', 'host']]
-      }
-    }
-})
+  },
+});
 
 
 /** ********MANY TO MANY RELATIONSHIPS**********/
@@ -181,7 +181,7 @@ User.hasMany(Event, { foreignKey: 'userId' });
 
 
 sequelize
-  .sync({force: true})
+  .sync({ force: true })
   .then(function () {
     console.log('Created tables from schema');
   });
