@@ -13,7 +13,11 @@
   },
   "rules": {
     "prefer-arrow-callback": 1,
-    "max-len": [2, 120, 2]
+    "max-len": [2, 120, 2],
+    "no-unused-vars": 0,
+    "new-cap": 0,
+    "guard-for-in": 1,
+    "no-restricted-syntax": 0
   },
   "env": {
     "browser": true,
