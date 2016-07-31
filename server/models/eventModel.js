@@ -6,7 +6,7 @@ Event.findEventById = function (id) {
   return; // Sequelize query
 };
 
-Event.findAllToilets = function () {
+Event.findAllEvents = function () {
   return; // Sequelize query
 };
 
