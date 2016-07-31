@@ -10,7 +10,7 @@ module.exports = {
 
       Event.findAllEvents()
         .then(function (events) {
-          if (eventss.length === 0) {
+          if (events.length === 0) {
             console.log('no events exist yet');
             res.end('no events exist yet');
           } else {
