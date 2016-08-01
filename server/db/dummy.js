@@ -64,7 +64,7 @@ Dummy.init = function () {
     longitude: -118.496216,
     startDatetime: new Date(),
     endDatetime: new Date(),
-    userId: 1
+    userId: 1,
   }).then(function (result) {
     console.log(result);
   });
@@ -79,7 +79,7 @@ Dummy.init = function () {
     longitude: -118.497611,
     startDatetime: new Date(),
     endDatetime: new Date(),
-    userId: 2
+    userId: 2,
   }).then(function (result) {
     console.log(result);
   });
@@ -94,8 +94,8 @@ Dummy.init = function () {
     longitude: -118.3515677,
     startDatetime: '2016-08-14 18:00:00',
     endDatetime: '2016-08-14 20:00:00',
-    userId: 2
-  }).then( (result) => {
+    userId: 2,
+  }).then((result) => {
     console.log(result);
   });
 
@@ -109,8 +109,8 @@ Dummy.init = function () {
     longitude: -118.3491435,
     startDatetime: '2016-08-07 18:00:00',
     endDatetime: '2016-08-07 20:00:00',
-    userId: 2
-  }).then( (result) => {
-    console.log(result)
+    userId: 2,
+  }).then((result) => {
+    console.log(result);
   });
 };

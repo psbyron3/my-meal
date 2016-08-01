@@ -181,7 +181,7 @@ User.hasMany(Review, { foreignKey: 'reviewerId' });
 
 
 sequelize
-  .sync({force: true})
+  .sync({ force: true })
   .then(() => {
     console.log('Created tables from schema');
     dummy.init();

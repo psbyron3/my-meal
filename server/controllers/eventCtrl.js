@@ -75,8 +75,6 @@ module.exports = {
     },
     post(req, res) {
       console.log('Received POST at /api/event/location');
-
-
     },
     put(req, res) {
       console.log('Received PUT at /api/event/location');
