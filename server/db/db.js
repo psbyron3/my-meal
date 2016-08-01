@@ -3,17 +3,17 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const env = 'development';
 const config = require('../../sqlConfig.js')[env];
-const dummy = require ('./dummy')
+const dummy = require('./dummy');
 
 const sequelize = new Sequelize(config.database, config.user, config.password, config.connection);
 
 
 sequelize
   .authenticate()
-  .then(function () {
+  .then(() => {
     console.log('Connection has been established successfully');
   })
-  .catch(function () {
+  .catch(() => {
     console.log('Unable to connect to the database');
   });
 
@@ -63,7 +63,7 @@ const Event = sequelize.define('Event', {
     },
   },
   price: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.DECIMAL(6, 2),
   },
   maxGuests: {
     type: Sequelize.INTEGER,
@@ -73,11 +73,11 @@ const Event = sequelize.define('Event', {
     allowNull: false,
   },
   latitude: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.DECIMAL(10, 7),
     allowNull: false,
   },
   longitude: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.DECIMAL(10, 7),
     allowNull: false,
   },
   startDatetime: {
@@ -179,17 +179,12 @@ User.hasMany(Review, { foreignKey: 'hostId' });
 Review.belongsTo(User, { as: 'reviewer', foreignKey: 'reviewerId' });
 User.hasMany(Review, { foreignKey: 'reviewerId' });
 
-Event.belongsTo(User, { as: 'host', foreignKey: 'userId' });
-User.hasMany(Event, { foreignKey: 'userId' });
-
 
 sequelize
   .sync({ force: true })
-  .then(function () {
+  .then(() => {
     console.log('Created tables from schema');
-    dummy.init()
-
-
+    dummy.init();
   });
 
 exports.User = User;

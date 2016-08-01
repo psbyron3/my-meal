@@ -60,21 +60,21 @@ module.exports = {
   '/location/': {
     get(req, res) {
       console.log('Received GET at /api/event/location');
-    },
-    post(req, res) {
-      console.log('Received POST at /api/event/location');
-
       const loc = {
-        lat: req.body.latitude,
-        long: req.body.longitude,
-        address: req.body.address,
+        lat: req.query.latitude,
+        lng: req.query.longitude,
+        address: req.query.address,
       };
 
-      Event.findEventsInRadius(loc.lat, loc.long)
+
+      Event.findEventsInRadius(loc.lat, loc.lng)
         .then(function (result) {
           console.log('returned radius stuff');
           res.send(result);
         });
+    },
+    post(req, res) {
+      console.log('Received POST at /api/event/location');
     },
     put(req, res) {
       console.log('Received PUT at /api/event/location');

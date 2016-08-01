@@ -20,7 +20,9 @@
     "no-restricted-syntax": 0,
     "no-console": 0,
     "func-names": 0,
-    "react/prefer-stateless-function": 0
+    "react/prefer-stateless-function": 0,
+    "no-param-reassign": 1
+
   },
   "env": {
     "browser": true,
