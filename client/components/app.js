@@ -5,9 +5,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-      Hello World!!
+        Hello World coming live from App!
       </div>
-
     );
   }
 }
