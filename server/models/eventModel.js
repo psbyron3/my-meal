@@ -25,7 +25,11 @@ Event.findEventsInRadius = function (lat, long) {
 };
 
 Event.createEvent = function (attr) {
-  return new Promise(function (resolve, reject) {
-    return; // Sequelize query
+return new Promise(function(resolve, reject) {
+    return db.Event.create(attr)
+      .then(function(result) {
+        attr.id = result.dataValues.id;
+        resolve(attr);
+      });    
   });
 };
