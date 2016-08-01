@@ -64,21 +64,53 @@ Dummy.init = function () {
     longitude: -118.496216,
     startDatetime: new Date(),
     endDatetime: new Date(),
+    userId: 1
   }).then(function (result) {
-    console.log('created ', result.eventName);
+    console.log(result);
   });
 
   Event.createEvent({
     eventName: 'Tacos Party',
     eventPic: 'http://mediad.publicbroadcasting.net/p/kwmu/files/201508/tacos.jpg',
-    price: 5,
+    price: 5.00,
     maxGuests: 15,
     address: '418 Wilshire Blvd, Santa Monica, CA 90401',
     latitude: 34.019855,
     longitude: -118.497611,
     startDatetime: new Date(),
     endDatetime: new Date(),
+    userId: 2
   }).then(function (result) {
-    console.log('created ', result.eventName);
+    console.log(result);
+  });
+
+  Event.createEvent({
+    eventName: 'Carne Asada Cookout',
+    eventPic: 'http://tipsforbbq.com/Include/Images/Recipes/Carne-Asada/AndrewLLoydSriracha.1024.jpg',
+    price: 0.00,
+    maxGuests: 20,
+    address: '1349 South Redondo Blvd, Los Angeles, CA 90019',
+    latitude: 34.0487404,
+    longitude: -118.3515677,
+    startDatetime: '2016-08-14 18:00:00',
+    endDatetime: '2016-08-14 20:00:00',
+    userId: 2
+  }).then( (result) => {
+    console.log(result);
+  });
+
+  Event.createEvent({
+    eventName: 'Vegetarian Feast',
+    eventPic: 'http://clv.h-cdn.co/assets/16/02/1452527843-vegetarian-pad-tha-2-2-600x900.jpg',
+    price: 7.00,
+    maxGuests: 10,
+    address: '1289 South Redondo Blvd, Los Angeles, CA 90019',
+    latitude: 34.0505127,
+    longitude: -118.3491435,
+    startDatetime: '2016-08-07 18:00:00',
+    endDatetime: '2016-08-07 20:00:00',
+    userId: 2
+  }).then( (result) => {
+    console.log(result)
   });
 };

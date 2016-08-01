@@ -179,12 +179,9 @@ User.hasMany(Review, { foreignKey: 'hostId' });
 Review.belongsTo(User, { as: 'reviewer', foreignKey: 'reviewerId' });
 User.hasMany(Review, { foreignKey: 'reviewerId' });
 
-Event.belongsTo(User, { as: 'host', foreignKey: 'userId' });
-User.hasMany(Event, { foreignKey: 'userId' });
-
 
 sequelize
-  .sync({ force: true })
+  .sync({force: true})
   .then(() => {
     console.log('Created tables from schema');
     dummy.init();
