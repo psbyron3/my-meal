@@ -4,6 +4,27 @@ const bcrypt = require('bcrypt');
 
 const User = module.exports;
 
+
+function hashPassword(pw) {
+  console.log('hashing password');
+  return new Promise(function (resolve, reject, next) {
+    return bcrypt.genSalt(10, function (err, salt) {
+      if (err) {
+        return next(err);
+      }
+      return bcrypt.hash(pw, salt, function (error, hash) {
+        if (error) {
+          return next(error);
+        }
+        return resolve({
+          salt,
+          hash,
+        });
+      });
+    });
+  });
+}
+
 User.findUserByUsername = function (username) {
   return; // sequelize
 };
@@ -35,23 +56,4 @@ User.createUser = function (attr) {
       });
   });
 
-  function hashPassword(pw) {
-    console.log('hashing password');
-    return new Promise(function (resolve, reject) {
-      return bcrypt.genSalt(10, function (err, salt) {
-        if (err) {
-          return next(err);
-        }
-        bcrypt.hash(pw, salt, function (err, hash) {
-          if (err) {
-            return next(err);
-          }
-          resolve({
-            salt,
-            hash,
-          });
-        });
-      });
-    });
-  }
 };

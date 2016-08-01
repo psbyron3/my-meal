@@ -36,6 +36,7 @@ Event.findEventsInRadius = function (lat, lng) {
 };
 
 Event.createEvent = function (attr) {
+
   return db.Event.create(attr)
     .then(function (event) {
       console.log('result of createEvent', event);
@@ -45,4 +46,5 @@ Event.createEvent = function (attr) {
         event.setUsers([user], { role: 'host' });
       });
     }).then((event) => `Success! Created ${attr.eventName}`);
+
 };

@@ -113,4 +113,5 @@ Dummy.init = function () {
   }).then((result) => {
     console.log(result);
   });
+
 };
