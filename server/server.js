@@ -13,6 +13,7 @@ const db = require('./db/db.js');
 const routesUser = require('./routes/routesUser.js');
 const routesEvent = require('./routes/routesEvent.js');
 
+
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
@@ -23,6 +24,8 @@ app.use(express.static('./client'));
 // Routing
 app.use('/api/user', routesUser);
 app.use('/api/event', routesEvent);
+app.use('api/dish', routesDish);
+
 
 
 

@@ -22,14 +22,21 @@ module.exports = {
     post(req, res) {
       console.log('Received POST at /api/event/');
       console.log('creating event');
-
+      //Use moment.js here to correctly format datetimes?
       const newEvent = {
-        name: req.body.name,
+        eventName: req.body.eventName,
+        eventPic: req.body.eventPic,
         description: req.body.description,
-        id_Users: req.body.id_Users,
+        price: req.body.price,
+        maxGuests: req.body.maxGuests,
+        address: req.body.address,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
-        address: req.body.address,
+        startDatetime: req.body.startDatetime,
+        endDatetime: req.body.endDatetime,
+        userId: req.body.userId,
+        dish: req.body.dish,
+        tags: req.body.tags
       };
 
       Event.findEventByLocation(newEvent.latitude, newEvent.longitude)
@@ -41,7 +48,7 @@ module.exports = {
 
             Event.createEvent(newEvent)
               .then(function (result) {
-                console.log('result', result);
+                console.log('result...', result);
 
                 return res.send(result);
               });
@@ -66,7 +73,6 @@ module.exports = {
         address: req.query.address,
       };
 
-
       Event.findEventsInRadius(loc.lat, loc.lng)
         .then(function (result) {
           console.log('returned radius stuff');
@@ -75,6 +81,7 @@ module.exports = {
     },
     post(req, res) {
       console.log('Received POST at /api/event/location');
+      res.end('Received POST at /api/event/location');
     },
     put(req, res) {
       console.log('Received PUT at /api/event/location');
