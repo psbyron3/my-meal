@@ -64,12 +64,11 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
 
 Event.createEvent = function (attr) {
   return db.Event.create(attr)
-    .then(function (event) {
-      console.log('result of createEvent', event);
+    .then(function (newEvent) {
       console.log('newEvent is:', newEvent);
-      db.User.findById(newEvent.userId).then(function (user) {
+      db.User.findById(attr.userId).then(function (user) {
         console.log('User = ', user);
-        event.setUsers([user], { role: 'host' });
+        newEvent.setUsers([user], { role: 'host' });
       });
-    }).then((event) => `Success! Created ${newEvent.eventName}`);
+    }).then((newEvent) => 'Success! Created');
 };
