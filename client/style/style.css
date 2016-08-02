@@ -5,10 +5,13 @@ body {
   padding: 0;
 }
 
+<<<<<<< b131bdeb033ae3d1124b81ff42eba6380eedd127
 body {
   padding-top: 50px;
 }
 
+=======
+>>>>>>> [add] style map to fit browser full screen
 
 
 .map {
@@ -19,6 +22,7 @@ body {
   margin: 0;
   padding: 0;
   position: absolute;
+<<<<<<< b131bdeb033ae3d1124b81ff42eba6380eedd127
 }
 
 /*NavBar***************************************/
@@ -122,3 +126,6 @@ input::-webkit-input-placeholder {
   color: #999;
 }
 
+=======
+}
+>>>>>>> [add] style map to fit browser full screen
