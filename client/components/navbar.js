@@ -1,45 +1,50 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import NavBar from 'react-bootstrap/lib/Navbar';
+// import AppBar from 'material-ui/AppBar';
+// import IconButton from 'material-ui/IconButton';
+// import IconMenu from 'material-ui/IconMenu';
+// import MenuItem from 'material-ui/MenuItem';
+// import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import getMuiTheme from 'material-ui/styles/getMuiTheme';
+// import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
-import materialize from 'materialize-css';
+// import materialize from 'materialize-css';
 
 
-class NavBar extends Component {
-  constructor(props) {
-    super(props);
+export default class NavBarComp extends Component {
+  // constructor(props) {
+  //   super(props);
 
-    this.state = '';
-  }
+  //   this.state = {};
+  // }
 
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-default navbar-fixed-top">
+      <div className="nav-bar">
+        <NavBar fixedTop inverse>
           <div className="nav-logo">
-            Let's Eat
+            <Link to="/">Food Now!</Link>
           </div>
           <div className="nav-search">
-            <form >
+            <form>
               <input type="search" placeholder="Search" />
             </form>
           </div>
-        </nav>
+          <div className="sign-up">
+            <button className="btn btn-primary">Sign Up</button>
+          </div>
+          <div className="sign-in">
+            <button className="btn btn-primary">Sign In</button>
+          </div>
+        </NavBar>
       </div>
 
     );
   }
 }
-
-export default NavBar;
 
 
         // <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
