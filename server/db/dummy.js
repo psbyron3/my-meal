@@ -14,7 +14,7 @@ Dummy.init = function () {
     email: 'joe@gmail.com',
     address: 'Roma',
     phoneNumber: '4159305687',
-  }).then(function (result) {
+  }).then((result) => {
     console.log('created ', result.userName);
     return;
   }).then(() => {
@@ -26,7 +26,7 @@ Dummy.init = function () {
       email: 'nizz@gmail.com',
       address: 'Paris',
       phoneNumber: '4159345687',
-    }).then(function (result) {
+    }).then((result) => {
       console.log('created ', result.userName);
       return;
     }).then(() => {
@@ -38,7 +38,7 @@ Dummy.init = function () {
         email: 'phil@gmail.com',
         address: 'Santa',
         phoneNumber: '3259345687',
-      }).then(function (result) {
+      }).then((result) => {
         console.log('created ', result.userName);
         return;
       }).then(() => {
@@ -50,7 +50,7 @@ Dummy.init = function () {
           email: 'mike@gmail.com',
           address: 'Seoul',
           phoneNumber: '3259342787',
-        }).then(function (result) {
+        }).then((result) => {
           console.log('created ', result.userName);
           return;
         }).then(() => {
@@ -67,7 +67,7 @@ Dummy.init = function () {
             startDatetime: new Date(),
             endDatetime: new Date(),
             userId: 1,
-          }).then(function (result) {
+          }).then((result) => {
             console.log('Made', result.eventName);
             return;
           }).then(() => {
@@ -83,7 +83,7 @@ Dummy.init = function () {
               startDatetime: new Date(),
               endDatetime: new Date(),
               userId: 2,
-            }).then(function (result) {
+            }).then((result) => {
               console.log(result.eventName);
               return;
             }).then(() => {
@@ -119,6 +119,21 @@ Dummy.init = function () {
                   console.log(result.eventName);
                   return;
                 }).then(() => {
+
+                  Event.createEvent({
+                    eventName: 'Hot Dog Async Party (...WUT?)',
+                    eventPic: 'https://a.dilcdn.com/bl/wp-content/uploads/sites/8/2011/05/hot-dogs-chili11-480.jpg',
+                    price: 0.00,
+                    maxGuests: 20,
+                    description: 'PWYW for some gourmet hot dogs in Santa Monica!',
+                    address: '1314 10th Street Santa Monica, CA 90401',
+                    latitude: 34.022006,
+                    longitude: -118.490653,
+                    startDatetime: '2016-08-18T18:00:00',
+                    endDatetime: '2016-08-18T20:00:00',
+                    userId: 1
+                  });
+
                   return Event.createEvent({
                     eventName: 'Hot Dog Eating (No Contest)',
                     eventPic: 'https://a.dilcdn.com/bl/wp-content/uploads/sites/8/2011/05/hot-dogs-chili11-480.jpg',
@@ -130,7 +145,7 @@ Dummy.init = function () {
                     longitude: -118.347645,
                     startDatetime: '2016-08-18T18:00:00',
                     endDatetime: '2016-08-18T20:00:00',
-                    userId: 1,
+                    userId: 1
                   }).then((result) => {
                     console.log(result.eventName);
                     return;
@@ -215,7 +230,7 @@ Dummy.init = function () {
       });
     });
   })
-  .catch((err) => {
-    console.log(err);
-  });
+    .catch((err) => {
+      console.log(err);
+    });
 };

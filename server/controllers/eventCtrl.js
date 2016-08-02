@@ -8,7 +8,7 @@ module.exports = {
       console.log('getting all events');
       // maybe this should be findOne instead?
       Event.findAllEvents()
-        .then(function (events) {
+        .then((events) => {
           if (events.length === 0) {
             console.log('no events exist yet');
             res.end('no events exist yet');
@@ -45,14 +45,14 @@ module.exports = {
         newEvent.longitude,
         newEvent.startDatetime,
         newEvent.endDatetime)
-        .then(function (event) {
+        .then((event) => {
           if (event.length > 0) {
             console.log('event already added');
             return res.send('event already added');
           }
           console.log('event does not exist');
           return Event.createEvent(newEvent)
-            .then(function (result) {
+            .then((result) => {
               console.log('result...', result);
               return res.send(result);
             });
@@ -79,7 +79,7 @@ module.exports = {
       console.log('loc.lng', loc.lng);
 
       Event.findEventsInRadius(loc.lat, loc.lng)
-        .then(function (result) {
+        .then((result) => {
           console.log('returned radius stuff');
           res.send(result);
         });

@@ -14,8 +14,8 @@ Event.findEventsInRadius = function (lat, lng) {
 
   return db.Event.findAll({
     where: {
-      latitude: { $between: [lat - rad, lat + rad] },
-      longitude: { $between: [lng - rad, lng + rad] },
+      latitude: { $between: [lat - rad, +lat + rad] },
+      longitude: { $between: [lng - rad, +lng + rad] },
       startDatetime: { $gt: currentDate },
     },
   })
@@ -78,7 +78,7 @@ Event.createEvent = function (newEvent) {
       console.log('result of createEvent', event.eventName);
       console.log('newEvent is:', newEvent);
       db.User.findById(newEvent.userId)
-        .then(function (user) {
+        .then((user) => {
           console.log('User = ', user.userName);
           event.setUsers([user], { role: 'host' });
         });
