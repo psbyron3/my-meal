@@ -14,18 +14,13 @@ import materialize from 'materialize-css';
 
 
 class NavBar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = '';
-  }
 
   render() {
     return (
       <div>
         <nav className="navbar navbar-default navbar-fixed-top">
           <div className="nav-logo">
-            Let's Eat
+            Lets Eat
           </div>
           <div className="nav-search">
             <form >
