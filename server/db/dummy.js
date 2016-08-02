@@ -1,5 +1,6 @@
 const User = require('../models/userModel.js');
 const Event = require('../models/eventModel.js');
+const Review = require('../models/reviewModel.js')
 
 const Dummy = module.exports;
 
@@ -66,7 +67,7 @@ Dummy.init = function () {
     endDatetime: new Date(),
     userId: 1,
   }).then(function (result) {
-    console.log(result);
+    console.log(result.eventName);
   });
 
   Event.createEvent({
@@ -81,7 +82,7 @@ Dummy.init = function () {
     endDatetime: new Date(),
     userId: 2,
   }).then(function (result) {
-    console.log(result);
+    console.log(result.eventName);
   });
 
   Event.createEvent({
@@ -96,7 +97,7 @@ Dummy.init = function () {
     endDatetime: '2016-08-14 20:00:00',
     userId: 2,
   }).then((result) => {
-    console.log(result);
+    console.log(result.eventName);
   });
 
   Event.createEvent({
@@ -111,7 +112,17 @@ Dummy.init = function () {
     endDatetime: '2016-08-07 20:00:00',
     userId: 2,
   }).then((result) => {
-    console.log(result);
+    console.log(result.eventName);
+  });
+
+  //add dummy reviews
+  Review.createReview({
+    content: 'Awsome cook',
+    rating: 5,
+    eventId:1,
+    userId:1
+  }).then((result) => {
+    console.log(result.content);
   });
 
 };

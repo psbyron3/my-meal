@@ -25,16 +25,39 @@ function hashPassword(pw) {
   });
 }
 
-User.findUserByUsername = function (username) {
-  return; // sequelize
+User.comparePasswords = function(hashedPw, attempt) {
+  return new Promise(function(resolve, reject) {
+    bcrypt.compare(attempt, hashedPw, function(err, res) {
+      if (err) return reject(err);
+      resolve(res);
+    });
+  });
+}
+
+User.findUserByUsername = function (userName) {
+  return db.User.findAll({
+    where: { 
+      userName: userName
+     }
+  })
 };
 
 User.findUserById = function (id) {
-  return; // sequelize
+  return db.User.findAll({
+    where: { 
+      id: id
+     }
+  })
 };
 
 User.findUserByEmail = function (email) {
-  return; // sequelize
+  return db.User.findAll({
+    where: { 
+      email: email
+     }
+  }).then(function (rows) {
+      return rows[0];
+    });
 };
 
 User.createUser = function (attr) {

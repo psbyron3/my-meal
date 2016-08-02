@@ -12,6 +12,8 @@ const db = require('./db/db.js');
 
 const routesUser = require('./routes/routesUser.js');
 const routesEvent = require('./routes/routesEvent.js');
+const routesAuth = require('./routes/routesAuth.js');
+const routesReview = require('./routes/routesReview.js');
 
 app.use(bodyParser.json());
 
@@ -22,8 +24,9 @@ app.use(express.static('./client'));
 
 // Routing
 app.use('/api/user', routesUser);
+app.use('/api/auth', routesAuth);
 app.use('/api/event', routesEvent);
-
+app.use('/api/review', routesReview);
 
 
 app.get('*', function (request, response) {
