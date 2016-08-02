@@ -1,4 +1,4 @@
-const controllers = require('../controllers/eventCtrl.js');
+const controllers = require('../controllers/dishCtrl.js');
 const router = require('express').Router();
 
 for (const route in controllers) {

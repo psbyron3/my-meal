@@ -1,18 +1,9 @@
 const db = require('../db/db.js');
-
+const moment = require('moment');
 const Event = module.exports;
 
-
-Event.findEventById = function (id) {
-  return; // Sequelize query
-};
-
 Event.findAllEvents = function () {
-  return; // Sequelize query
-};
-
-Event.findEventByLocation = function (lat, lng) {
-  return; // Sequelize query
+  return db.Event.findAll(); // Sequelize query
 };
 
 Event.findEventsInRadius = function (lat, lng) {
@@ -35,16 +26,50 @@ Event.findEventsInRadius = function (lat, lng) {
   }); // Sequelize query
 };
 
-Event.createEvent = function (attr) {
+Event.findEventsByTime = function (startDatetime, endDatetime) {
+  // for now, datetime will be a string 'YYYY-MM-DDThh:mm:ss'
+  return db.Event.findAll(); // Sequelize query
+};
 
-  return db.Event.create(attr)
-    .then(function (event) {
+Event.findEventById = function (eventId) {
+  return; // Sequelize query
+};
+
+Event.findEventByLocation = function (lat, lng) {
+  return db.Event.findAll({
+    where: {
+      latitude: lat,
+      longitude: lng,
+    },
+  });
+};
+
+Event.findEventByLocationAndDate = function (lat, lng, start, end) {
+  const eventStart = new Date(start);
+  const eventEnd = new Date(end);
+  return db.Event.findAll({
+    where: {
+      latitude: lat,
+      longitude: lng,
+      $or: [
+        { startDatetime: { $between: [eventStart, eventEnd] } },
+        { endDatetime: { $between: [eventStart, eventEnd] } },
+        { startDatetime: { $lte: eventStart },
+          endDatetime: { $gte: eventEnd },
+        },
+      ],
+    },
+  }); // Sequelize query
+};
+
+Event.createEvent = function (newEvent) {
+  return db.Event.create(newEvent)
+    .then((event) => {
       console.log('result of createEvent', event);
-      console.log('attr is:', attr);
-      db.User.findById(attr.userId).then(function (user) {
+      console.log('newEvent is:', newEvent);
+      db.User.findById(newEvent.userId).then(function (user) {
         console.log('User = ', user);
         event.setUsers([user], { role: 'host' });
       });
-    }).then((event) => `Success! Created ${attr.eventName}`);
-
+    }).then((event) => `Success! Created ${newEvent.eventName}`);
 };
