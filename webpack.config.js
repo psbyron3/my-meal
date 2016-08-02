@@ -1,18 +1,19 @@
 module.exports = {
   entry: [
-    './src/index.js'
+    './client/index.js'
   ],
   output: {
-    path: __dirname,
+    path: __dirname + '/client/dist',
     publicPath: '/',
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
+    loaders: [
+    {
       exclude: /node_modules/,
-      loader: 'babel',
+      loader: 'babel-loader',
       query: {
-        presets: ['react', 'es2015', 'stage-1']
+        presets: ['react', 'es2015']
       }
     }]
   },
