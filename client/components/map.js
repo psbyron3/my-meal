@@ -1,4 +1,6 @@
 import React, { PropTypes, Component } from 'react';
+import { Link } from 'react-router';
+// import shouldPureComponentUpdate from 'react-addons-shallow-compare';
 
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
@@ -6,8 +8,8 @@ import { fitBounds } from 'google-map-react/utils';
 const API_KEY = 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs';
 
 const size = {
-  width: '100%',
-  height: '100%',
+  width: 640,
+  height: 640,
 };
 
 const bounds = {
@@ -22,21 +24,24 @@ const bounds = {
 };
 
 
-const { center, zoom } = fitBounds(bounds, size);
+// const { center, zoom } = fitBounds(bounds, size);
 
 
-export default class SimpleMapPage extends Component {
-  static defaultProps = {
-    center: { lat: 34.0195, lng: 118.4912 },
-    zoom: 13,
-  }
+export default class Home extends Component {
+
 
   constructor(props) {
     super(props);
 
-    this.state = '';
+    this.state = {
+      center: { lat: 34.0195, lng: -118.4912 },
+      zoom: 13,
+    };
   }
 
+  // componentDidMount() {
+  //   createMapOptions()
+  // }
 
   // createMapOptions = function (maps) {
   //   return {
@@ -46,16 +51,25 @@ export default class SimpleMapPage extends Component {
 
   render() {
     return (
-      <GoogleMap
-        // options={createMapOptions}
-        bootstrapURLKeys={{
-          key: API_KEY,
-          language: 'en',
-        }}
-        // defaultCenter={this.props.center}
-        // defaultZoom={this.props.zoom}
-      />
+      <div>Here is the map:
+        <div className="text-xs-right">
+          <Link to="/" className="btn btn-primary">Back</Link>
+        </div>
+        <div className="map">
+          <GoogleMap
+
+            bootstrapURLKeys={{
+              key: API_KEY,
+              language: 'en',
+            }}
+            defaultCenter={this.state.center}
+            defaultZoom={this.state.zoom}
+          />
+        </div>
+      </div>
     );
   }
-
 }
+
+// shouldComponentUpdate = shouldPureComponentUpdate;
+

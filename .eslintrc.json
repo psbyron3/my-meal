@@ -21,7 +21,8 @@
     "no-console": 0,
     "func-names": 0,
     "react/prefer-stateless-function": 0,
-    "no-param-reassign": 1
+    "no-param-reassign": 1,
+    "react/prop-types": 1
   },
   "env": {
     "browser": true,
