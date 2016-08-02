@@ -119,7 +119,6 @@ Dummy.init = function () {
                   console.log(result.eventName);
                   return;
                 }).then(() => {
-
                   Event.createEvent({
                     eventName: 'Hot Dog Async Party (...WUT?)',
                     eventPic: 'https://a.dilcdn.com/bl/wp-content/uploads/sites/8/2011/05/hot-dogs-chili11-480.jpg',
@@ -131,7 +130,7 @@ Dummy.init = function () {
                     longitude: -118.490653,
                     startDatetime: '2016-08-18T18:00:00',
                     endDatetime: '2016-08-18T20:00:00',
-                    userId: 1
+                    userId: 1,
                   });
 
                   return Event.createEvent({
@@ -145,7 +144,7 @@ Dummy.init = function () {
                     longitude: -118.347645,
                     startDatetime: '2016-08-18T18:00:00',
                     endDatetime: '2016-08-18T20:00:00',
-                    userId: 1
+                    userId: 1,
                   }).then((result) => {
                     console.log(result.eventName);
                     return;

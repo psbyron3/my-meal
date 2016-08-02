@@ -116,8 +116,15 @@ module.exports = {
       res.end('Received POST at /api/event/:eventId');
     },
     put(req, res) {
+      const eventId = url.parse(req.url, true).path.slice(1);
+
       console.log('Received PUT at /api/event/:eventId');
-      res.end('Received PUT at /api/event/:eventId');
+      Event.findEventById(eventId)
+        .then( (event) => {
+          return event.update(req.body, {fields: Object.keys(req.body)});
+        }).then(() => {
+          res.end('Received PUT at /api/event/:eventId');
+        });
     },
     delete(req, res) {
       // where does verification occur?

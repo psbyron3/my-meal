@@ -38,7 +38,7 @@ Event.findEventsByTime = function (start, end) {
         },
       ],
     },
-  }); // Sequelize query
+  }); // Sequelize query `
 };
 
 Event.findEventById = function (eventId) {
