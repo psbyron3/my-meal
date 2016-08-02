@@ -55,5 +55,4 @@ User.createUser = function (attr) {
           });
       });
   });
-
 };

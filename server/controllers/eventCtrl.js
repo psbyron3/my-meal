@@ -17,12 +17,14 @@ module.exports = {
             console.log('events exist');
             res.send(events);
           }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
     post(req, res) {
       console.log('Received POST at /api/event/');
       console.log('creating event');
-      //Use moment.js here to correctly format datetimes?
       const newEvent = {
         eventName: req.body.eventName,
         eventPic: req.body.eventPic,
@@ -36,23 +38,25 @@ module.exports = {
         endDatetime: req.body.endDatetime,
         userId: req.body.userId,
         dish: req.body.dish,
-        tags: req.body.tags
+        tags: req.body.tags,
       };
 
-      Event.findEventByLocation(newEvent.latitude, newEvent.longitude)
+      Event.findEventByLocationAndDate(
+        newEvent.latitude,
+        newEvent.longitude,
+        newEvent.startDatetime,
+        newEvent.endDatetime)
         .then(function (event) {
-          if (event) {
+          if (event.length > 0) {
             console.log('event already added');
-          } else {
-            console.log('event does not exist');
-
-            Event.createEvent(newEvent)
-              .then(function (result) {
-                console.log('result...', result);
-
-                return res.send(result);
-              });
+            return res.send('event already added');
           }
+          console.log('event does not exist');
+          return Event.createEvent(newEvent)
+            .then(function (result) {
+              console.log('result...', result);
+              return res.send(result);
+            });          
         });
     },
     put(req, res) {

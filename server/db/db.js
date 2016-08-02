@@ -62,7 +62,7 @@ const Event = sequelize.define('Event', {
     },
   },
   description: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   price: {
     type: Sequelize.DECIMAL(6, 2),

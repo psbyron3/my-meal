@@ -12,6 +12,7 @@ const db = require('./db/db.js');
 
 const routesUser = require('./routes/routesUser.js');
 const routesEvent = require('./routes/routesEvent.js');
+const routesDish = require('./routes/routesDish.js');
 
 
 app.use(bodyParser.json());
@@ -25,8 +26,6 @@ app.use(express.static('./client'));
 app.use('/api/user', routesUser);
 app.use('/api/event', routesEvent);
 app.use('api/dish', routesDish);
-
-
 
 
 app.get('*', function (request, response) {
