@@ -25,11 +25,11 @@ const bounds = {
 
 
 // const { center, zoom } = fitBounds(bounds, size);
+//const { center, zoom } = fitBounds(bounds, size);
+
 
 
 export default class Home extends Component {
-
-
   constructor(props) {
     super(props);
 
@@ -57,7 +57,6 @@ export default class Home extends Component {
         </div>
         <div className="map">
           <GoogleMap
-
             bootstrapURLKeys={{
               key: API_KEY,
               language: 'en',
