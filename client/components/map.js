@@ -29,7 +29,6 @@ const bounds = {
 // const { center, zoom } = fitBounds(bounds, size);
 
 
-
 export default class Home extends Component {
   constructor(props) {
     super(props);
