@@ -104,7 +104,7 @@ module.exports = {
 
       Event.findEventById(eventId)
         .then((event) => {
-          if(event) {
+          if (event) {
             return res.send(event);
           }
           return res.end('event ', eventId, ' was not found');
