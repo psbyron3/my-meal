@@ -62,9 +62,9 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
   }); // Sequelize query
 };
 
-Event.createEvent = function (newEvent) {
-  return db.Event.create(newEvent)
-    .then((event) => {
+Event.createEvent = function (attr) {
+  return db.Event.create(attr)
+    .then(function (event) {
       console.log('result of createEvent', event);
       console.log('newEvent is:', newEvent);
       db.User.findById(newEvent.userId).then(function (user) {
