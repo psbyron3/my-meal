@@ -25,39 +25,39 @@ function hashPassword(pw) {
   });
 }
 
-User.comparePasswords = function(hashedPw, attempt) {
-  return new Promise(function(resolve, reject) {
-    bcrypt.compare(attempt, hashedPw, function(err, res) {
+User.comparePasswords = function (hashedPw, attempt) {
+  return new Promise(function (resolve, reject) {
+    return bcrypt.compare(attempt, hashedPw, function (err, res) {
       if (err) return reject(err);
       resolve(res);
     });
   });
-}
+};
 
 User.findUserByUsername = function (userName) {
   return db.User.findAll({
-    where: { 
-      userName: userName
-     }
-  })
+    where: {
+      userName,
+    },
+  });
 };
 
 User.findUserById = function (id) {
   return db.User.findAll({
-    where: { 
-      id: id
-     }
-  })
+    where: {
+      id,
+    },
+  });
 };
 
 User.findUserByEmail = function (email) {
   return db.User.findAll({
-    where: { 
-      email: email
-     }
+    where: {
+      email,
+    },
   }).then(function (rows) {
-      return rows[0];
-    });
+    return rows[0];
+  });
 };
 
 User.createUser = function (attr) {
@@ -78,5 +78,4 @@ User.createUser = function (attr) {
           });
       });
   });
-
 };

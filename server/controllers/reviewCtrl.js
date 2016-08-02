@@ -1,5 +1,4 @@
-var Review = require('../models/reviewModel.js');
-var Event = require('../models/EventModel.js');
-var url = require('url');
-
+const Review = require('../models/reviewModel.js');
+const Event = require('../models/eventModel.js');
+const url = require('url');
 

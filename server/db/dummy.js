@@ -1,6 +1,6 @@
 const User = require('../models/userModel.js');
 const Event = require('../models/eventModel.js');
-const Review = require('../models/reviewModel.js')
+const Review = require('../models/reviewModel.js');
 
 const Dummy = module.exports;
 
@@ -115,14 +115,13 @@ Dummy.init = function () {
     console.log(result.eventName);
   });
 
-  //add dummy reviews
+  // add dummy reviews
   Review.createReview({
     content: 'Awsome cook',
     rating: 5,
-    eventId:1,
-    userId:1
+    eventId: 1,
+    userId: 1,
   }).then((result) => {
     console.log(result.content);
   });
-
 };

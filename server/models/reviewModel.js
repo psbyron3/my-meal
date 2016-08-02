@@ -1,11 +1,10 @@
-var db = require('../db/db.js');
+const db = require('../db/db.js');
 
-var Review = module.exports;
+const Review = module.exports;
 
 
-
-//create review for event in attr
-Review.createReview = function(attr) {
+// create review for event in attr
+Review.createReview = function (attr) {
   return db.Review.create(attr)
     .then(function (review) {
       console.log('result of createEvent', review);
@@ -14,5 +13,5 @@ Review.createReview = function(attr) {
         console.log('User = ', user);
         event.setUsers([user], { role: 'host' });
       });
-    }).then((event) => `Success! Created ${attr.eventName}`);  
+    }).then((event) => `Success! Created ${attr.eventName}`);
 };
