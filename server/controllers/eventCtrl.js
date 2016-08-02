@@ -7,7 +7,7 @@ module.exports = {
     get(req, res) {
       console.log('Received GET at /api/event/');
       console.log('getting all events');
-      //maybe this should be findOne instead?
+      // maybe this should be findOne instead?
       Event.findAllEvents()
         .then(function (events) {
           if (events.length === 0) {
@@ -119,7 +119,7 @@ module.exports = {
       const eventId = url.parse(req.url, true).path.slice(1);
       console.log('Received DELETE at /api/event/:eventId');
       Event.findEventById(eventId)
-        .then( Event.destroyEvent );
+        .then(Event.destroyEvent);
       res.end('Received DELETE at /api/event/:eventId');
     },
   },

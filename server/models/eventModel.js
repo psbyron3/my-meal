@@ -14,15 +14,15 @@ Event.findEventsInRadius = function (lat, lng) {
 
   return db.Event.findAll({
     where: {
-        latitude: { $between: [lat - rad, lat + rad] },
-        longitude: { $between: [lng - rad, lng + rad] },
-        startDatetime: { $gt: '2016-08-05 23:59:59' },
-      },
+      latitude: { $between: [lat - rad, lat + rad] },
+      longitude: { $between: [lng - rad, lng + rad] },
+      startDatetime: { $gt: '2016-08-05 23:59:59' },
+    },
   })
-  .then((results) => {
-    console.log('results from findEventsInRadius', results);
-    return results;
-  }); // Sequelize query
+    .then((results) => {
+      console.log('results from findEventsInRadius', results);
+      return results;
+    }); // Sequelize query
 };
 
 Event.findEventsByTime = function (start, end) {
@@ -36,8 +36,8 @@ Event.findEventsByTime = function (start, end) {
         { startDatetime: { $lte: eventStart },
           endDatetime: { $gte: eventEnd },
         },
-      ]
-    }
+      ],
+    },
   }); // Sequelize query
 };
 
