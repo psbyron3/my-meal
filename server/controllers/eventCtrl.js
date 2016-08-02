@@ -1,5 +1,4 @@
 const Event = require('../models/eventModel.js');
-const User = require('../models/userModel.js');
 const url = require('url');
 
 module.exports = {
@@ -76,6 +75,8 @@ module.exports = {
         lng: req.query.longitude,
         address: req.query.address,
       };
+      console.log('loc.lat', loc.lat);
+      console.log('loc.lng', loc.lng);
 
       Event.findEventsInRadius(loc.lat, loc.lng)
         .then(function (result) {
@@ -119,6 +120,7 @@ module.exports = {
       res.end('Received PUT at /api/event/:eventId');
     },
     delete(req, res) {
+      // where does verification occur?
       const eventId = url.parse(req.url, true).path.slice(1);
       console.log('Received DELETE at /api/event/:eventId');
       Event.findEventById(eventId)

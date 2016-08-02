@@ -1,5 +1,4 @@
 const db = require('../db/db.js');
-const moment = require('moment');
 const Event = module.exports;
 
 Event.findAllEvents = function () {
@@ -11,12 +10,13 @@ Event.findEventsInRadius = function (lat, lng) {
   console.log('lat', lat);
   console.log('lng', lng);
   const rad = 0.015;
+  const currentDate = new Date();
 
   return db.Event.findAll({
     where: {
       latitude: { $between: [lat - rad, lat + rad] },
       longitude: { $between: [lng - rad, lng + rad] },
-      startDatetime: { $gt: '2016-08-05 23:59:59' },
+      startDatetime: { $gt: currentDate },
     },
   })
     .then((results) => {
@@ -75,13 +75,15 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
 Event.createEvent = function (newEvent) {
   return db.Event.create(newEvent)
     .then((event) => {
-      console.log('result of createEvent', event);
+      console.log('result of createEvent', event.eventName);
       console.log('newEvent is:', newEvent);
-      db.User.findById(newEvent.userId).then(function (user) {
-        console.log('User = ', user);
-        newEvent.setUsers([user], { role: 'host' });
-      });
-    }).then((event) => 'Success! Created');
+      db.User.findById(newEvent.userId)
+        .then(function (user) {
+          console.log('User = ', user.userName);
+          event.setUsers([user], { role: 'host' });
+        });
+      return event;
+    });
 };
 
 Event.destroyEvent = function (event) {
