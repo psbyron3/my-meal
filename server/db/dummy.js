@@ -121,67 +121,57 @@ Dummy.init = function () {
 
   // add dummy reviews
   Review.createReview({
-    content:'Awsome cook',
+    content: 'Awsome cook',
     rating: 5,
     eventId: 2,
     hostId: 3,
-    reviewerId:1
+    reviewerId: 1,
   }).then((result) => {
     console.log(result.dataValues.content);
   });
 
-  
-    Review.createReview({
-    content:'Great cook',
+
+  Review.createReview({
+    content: 'Great cook',
     rating: 5,
     eventId: 3,
     hostId: 1,
-    reviewerId:2
+    reviewerId: 2,
   }).then((result) => {
     console.log(result.dataValues.content);
   });
 
 
   Review.createReview({
-    content:'So tasty',
+    content: 'So tasty',
     rating: 5,
     eventId: 4,
     hostId: 1,
-    reviewerId:3
+    reviewerId: 3,
   }).then((result) => {
     console.log(result.dataValues.content);
   });
 
 
   Review.createReview({
-    content:'Love it',
+    content: 'Love it',
     rating: 5,
     eventId: 2,
     hostId: 3,
-    reviewerId:1
+    reviewerId: 1,
   }).then((result) => {
     console.log(result.dataValues.content);
   });
 
 
   Review.createReview({
-    content:'Lovely host',
+    content: 'Lovely host',
     rating: 5,
     eventId: 1,
     hostId: 2,
-    reviewerId:1
+    reviewerId: 1,
   }).then((result) => {
     console.log(result.dataValues.content);
   });
-
 };
-
-
-
-
-
-
-
-
-
 

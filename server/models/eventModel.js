@@ -70,5 +70,5 @@ Event.createEvent = function (attr) {
         console.log('User = ', user);
         newEvent.setUsers([user], { role: 'host' });
       });
-    }).then((newEvent) => `Success! Created`);
+    }).then((newEvent) => 'Success! Created');
 };
