@@ -56,7 +56,7 @@ module.exports = {
             .then(function (result) {
               console.log('result...', result);
               return res.send(result);
-            });          
+            });
         });
     },
     put(req, res) {
