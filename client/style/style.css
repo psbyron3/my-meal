@@ -6,8 +6,9 @@ body {
 }
 
 body {
-  padding-top: 50px;
+  padding-top: 70px;
 }
+
 
 
 
@@ -23,16 +24,24 @@ body {
 
 /*NavBar***************************************/
 
-.navbar-fixed-top {
+.navbar > .container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between; 
 
 }
 
+
+
 .nav-logo {
-  text-align: left;
+  display: flex;
+  align-items: flex-start; 
+ 
 }
 
 .nav-search {
-  right: 50 px;
+ 
 }
 
 .nav-search input[type=search] {
@@ -122,3 +131,10 @@ input::-webkit-input-placeholder {
   color: #999;
 }
 
+/**************NavBar Auth Buttons**********************/
+
+
+.sign-up {
+  display: flex;
+  align-items: flex-end;
+}
