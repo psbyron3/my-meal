@@ -8,31 +8,41 @@ Event.findAllEvents = function () {
 
 Event.findEventsInRadius = function (lat, lng) {
   console.log('inside events in radius');
-  const rad = 0.015;
-
   console.log('lat', lat);
   console.log('lng', lng);
+  const rad = 0.015;
 
   return db.Event.findAll({
-    where: // sequelize.where(sequelize.fn('date', sequelize.col('startDatetime')), '>=', '2016-08-05'),
-    {
+    where: {
       latitude: { $between: [lat - rad, lat + rad] },
       longitude: { $between: [lng - rad, lng + rad] },
       startDatetime: { $gt: '2016-08-05 23:59:59' },
     },
-  }).then((results) => {
-    console.log('results from findEventsInRadius', results);
-    return results;
+  })
+    .then((results) => {
+      console.log('results from findEventsInRadius', results);
+      return results;
+    }); // Sequelize query
+};
+
+Event.findEventsByTime = function (start, end) {
+  const eventStart = new Date(start);
+  const eventEnd = new Date(end);
+  return db.Event.findAll({
+    where: {
+      $or: [
+        { startDatetime: { $between: [eventStart, eventEnd] } },
+        { endDatetime: { $between: [eventStart, eventEnd] } },
+        { startDatetime: { $lte: eventStart },
+          endDatetime: { $gte: eventEnd },
+        },
+      ],
+    },
   }); // Sequelize query
 };
 
-Event.findEventsByTime = function (startDatetime, endDatetime) {
-  // for now, datetime will be a string 'YYYY-MM-DDThh:mm:ss'
-  return db.Event.findAll(); // Sequelize query
-};
-
 Event.findEventById = function (eventId) {
-  return; // Sequelize query
+  return db.Event.findById(eventId); // Sequelize query
 };
 
 Event.findEventByLocation = function (lat, lng) {
@@ -62,13 +72,19 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
   }); // Sequelize query
 };
 
-Event.createEvent = function (attr) {
-  return db.Event.create(attr)
-    .then(function (newEvent) {
+Event.createEvent = function (newEvent) {
+  return db.Event.create(newEvent)
+    .then((event) => {
+      console.log('result of createEvent', event);
       console.log('newEvent is:', newEvent);
-      db.User.findById(attr.userId).then(function (user) {
+      db.User.findById(newEvent.userId).then(function (user) {
         console.log('User = ', user);
         newEvent.setUsers([user], { role: 'host' });
       });
-    }).then((newEvent) => 'Success! Created');
+    }).then((event) => 'Success! Created');
+};
+
+Event.destroyEvent = function (event) {
+  console.log('typeof event receieved in destroyEvent:', typeof event);
+  return event.destroy();
 };

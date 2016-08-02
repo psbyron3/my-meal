@@ -32,10 +32,10 @@ module.exports = {
           } else {
             console.log('user does not exist');
             User.createUser(newAccount)
-              .then(function (user) {
+              .then(() => {
                 console.log('result of creationUser', user);
                 console.log(process.env.secret, 'process');
-                		// do session id/jwt stuff
+                // do session id/jwt stuff
                 const token = jwt.sign(user, process.env.secret, {
                   expiresIn: 1440 * 60,
                 });
@@ -43,7 +43,7 @@ module.exports = {
                 delete user.password;
                 delete user.salt;
 
-                		// return the information including token as JSON
+                // return the information including token as JSON
                 res.json({
                   token,
                   user,
@@ -53,9 +53,8 @@ module.exports = {
                 res.send(err);
               });
           }
-	                                                                                                                                                                                                                                         });
+        });
     },
-
     put(req, res) {
       console.log('Received PUT at /api/auth/signup');
       res.end('Received PUT at /api/auth/signup');

@@ -13,7 +13,7 @@ Review.createReview = function (attr) {
 };
 
 // find one review based on review id
-Review.findReviewById = function (revieweId) {
+Review.findReviewById = function (reviewId) {
   return db.Review.findAll({ where: { reviewId } })
     .then(function (rows) {
       return rows[0];
