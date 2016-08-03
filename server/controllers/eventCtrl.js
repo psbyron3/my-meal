@@ -36,8 +36,8 @@ module.exports = {
         startDatetime: req.body.startDatetime,
         endDatetime: req.body.endDatetime,
         userId: req.body.userId,
-        dish: req.body.dish,
-        tags: req.body.tags,
+        dishes: req.body.dishes,
+        tags: req.body.tags
       };
 
       Event.findEventByLocationAndDate(
