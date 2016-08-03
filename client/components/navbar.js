@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import SearchBar from '../containers/searchBar';
 
 import NavBar from 'react-bootstrap/lib/Navbar';
 // import AppBar from 'material-ui/AppBar';
@@ -28,11 +29,7 @@ export default class NavBarComp extends Component {
           <div className="nav-logo">
             <Link to="/">Food Now!</Link>
           </div>
-          <div className="nav-search">
-            <form>
-              <input type="search" placeholder="Search" />
-            </form>
-          </div>
+          <SearchBar />
           <div className="sign-up">
             <button className="btn btn-primary">Sign Up</button>
           </div>
