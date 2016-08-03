@@ -11,7 +11,7 @@ import routes from './routes';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-// const store = createStoreWithMiddleware(reducers, persistedState, window.devToolsExtension)
+//let store = createStore(reducers, window.devToolsExtension && window.devToolsExtension())
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
