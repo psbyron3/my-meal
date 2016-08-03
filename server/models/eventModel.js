@@ -5,6 +5,10 @@ Event.findAllEvents = function () {
   return db.Event.findAll(); // Sequelize query
 };
 
+Event.findEventById = function (eventId) {
+  return db.Event.findById(eventId); // Sequelize query
+};
+
 Event.findEventsInRadius = function (lat, lng) {
   console.log('inside events in radius');
   console.log('lat', lat);
@@ -12,9 +16,6 @@ Event.findEventsInRadius = function (lat, lng) {
   const rad = 0.015;
   const currentDate = new Date();
 
-  Event.findEventById = function (eventId) {
-    return db.Event.findById(eventId); // Sequelize query
-  };
 
   return db.Event.findAll({
     where: {
