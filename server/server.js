@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.use(express.static('../client'));
+app.use(express.static('./client'));
 
 
 // Routing
@@ -32,7 +32,7 @@ app.use('/api/review', routesReview);
 
 
 app.get('*', function (request, response) {
-  response.sendFile(path.resolve(__dirname, './client', 'index.html'));
+  response.sendFile(path.resolve(__dirname, '../client', 'index.html'));
 });
 
 app.set('port', process.env.PORT || 8000);
