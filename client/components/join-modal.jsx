@@ -4,25 +4,25 @@ import { Modal, Button } from 'react-bootstrap';
 class JoinModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false }
+    this.state = { show: false };
   }
 
   close() {
     this.setState({
-      show: false
+      show: false,
     });
   }
   open() {
     this.setState({
-      show: true
-    })
+      show: true,
+    });
   }
 
   render() {
-    return(
+    return (
       <Modal>
         <Modal.Header>
-          {/*<h1>{this.props.selectedEvent.eventName}</h1>*/}
+          {/* <h1>{this.props.selectedEvent.eventName}</h1>*/}
         </Modal.Header>
         <Modal.Body>
 
@@ -31,7 +31,7 @@ class JoinModal extends Component {
 
         </Modal.Footer>
       </Modal>
-    )
+    );
   }
 }
 
