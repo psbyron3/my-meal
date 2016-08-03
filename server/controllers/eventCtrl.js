@@ -36,7 +36,7 @@ module.exports = {
         startDatetime: req.body.startDatetime,
         endDatetime: req.body.endDatetime,
         userId: req.body.userId,
-        dish: req.body.dish,
+        dishes: req.body.dishes,
         tags: req.body.tags,
       };
 
