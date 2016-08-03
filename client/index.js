@@ -10,7 +10,7 @@ import reducers from './reducers';
 import routes from './routes';
 
 
-const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension() : f => f);
+const store = applyMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension() : f => f);
 
 
 ReactDOM.render(

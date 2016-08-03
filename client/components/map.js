@@ -23,7 +23,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log("location in map: ", this.props.location)
+    console.log('location in map: ', this.props.location);
     return (
       <div>Here is the map:
         <div className="text-xs-right">
@@ -37,9 +37,14 @@ class Home extends Component {
               language: 'en',
             }}
             defaultZoom={this.state.zoom}
-            center={this.props.location.lat ? { lat: this.props.location.lat, lng: this.props.location.lng } : this.state.center} 
+            center={this.props.location.lat ?
+              {
+                lat: this.props.location.lat,
+                lng: this.props.location.lng,
+              }
+              : this.state.center}
           />
-         
+
         </div>
 
       </div>
@@ -48,8 +53,8 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state to props :", state.map )
-  return {location: state.map}
+  console.log('state to props :', state.map);
+  return { location: state.map };
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(Home);

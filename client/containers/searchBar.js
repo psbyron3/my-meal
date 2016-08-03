@@ -15,25 +15,25 @@ class SearchBar extends Component {
   }
 
   onInputChange(event) {
-    console.log("inputChange: ", event.target.value);
-    this.setState({ query: event.target.value})
+    console.log('inputChange: ', event.target.value);
+    this.setState({ query: event.target.value });
   }
 
   onFormSubmit(event) {
     event.preventDefault();
 
     this.props.searchLocations(this.state);
-    console.log("state.query: ", this.state.query);
+    console.log('state.query: ', this.state.query);
     this.setState({ query: '' });
   }
 
   render() {
     return (
       <div className="nav-search">
-        <form onSubmit={this.onFormSubmit} className='search-input'>
+        <form onSubmit={this.onFormSubmit} className="search-input">
           <input
-            className="form-control" 
-            type="search" 
+            className="form-control"
+            type="search"
             placeholder="Search Location"
             value={this.state.query}
             onChange={this.onInputChange}
@@ -45,7 +45,7 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ searchLocations}, dispatch);
+  return bindActionCreators({ searchLocations }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar);
