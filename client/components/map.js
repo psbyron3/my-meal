@@ -1,9 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
+import MapList from './maplist';
+// import IceFixedTable from '../exampleTable/example_maplist'
 // import shouldPureComponentUpdate from 'react-addons-shallow-compare';
 
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
+
 
 const API_KEY = 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs';
 
@@ -65,6 +68,7 @@ export default class Home extends Component {
             defaultZoom={this.state.zoom}
           />
         </div>
+
       </div>
     );
   }
