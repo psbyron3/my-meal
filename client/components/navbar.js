@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import SearchBar from '../containers/searchBar';
-
 import NavBar from 'react-bootstrap/lib/Navbar';
 // import AppBar from 'material-ui/AppBar';
 // import IconButton from 'material-ui/IconButton';
@@ -13,7 +12,6 @@ import NavBar from 'react-bootstrap/lib/Navbar';
 // import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 // import materialize from 'materialize-css';
-
 
 export default class NavBarComp extends Component {
   // constructor(props) {

@@ -7,7 +7,7 @@ export default class App extends Component {
     return (
       <div>
         <NavBarComp />
-        <div>
+        <div id="routeView">
           {this.props.children}
         </div>
       </div>

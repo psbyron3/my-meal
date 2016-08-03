@@ -4,6 +4,7 @@ import UserHistory from './user_history_reducer';
 import MapReducer from './map_reducer';
 import FilteredReducer from './filtered_events_reducer';
 import SelectedEvent from './selected_event_reducer';
+import { reducer as formReducer } from 'redux-form';
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   map: MapReducer,
   filteredReducer: FilteredReducer,
   selectedEvent: SelectedEvent,
+  form: formReducer,
 });
 
 export default rootReducer;
