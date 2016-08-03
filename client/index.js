@@ -11,10 +11,10 @@ import routes from './routes';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-// const store = createStoreWithMiddleware(reducers, persistedState, window.devToolsExtension)
+const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension() : f => f);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
   </Provider>
   , document.getElementById('app'));

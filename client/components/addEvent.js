@@ -1,25 +1,49 @@
 import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
 
-export default class AddEvent extends Component {
+class AddEvent extends Component {
+
+  onSubmit(props) {
+    console.log(props);
+  }
 
 
   render() {
+    const { fields: { eventName,
+                      foodType,
+                      glutenFree,
+                      vegetarian,
+                      vegan,
+                      description,
+                      price,
+                      maxGuest,
+                      guestDecide,
+                      start,
+                      end,
+                      address,
+                      city,
+                      usState,
+                      zip,
+                    }, handleSubmit } = this.props;
+    // const eventName = this.props.fields.eventName;
+    // const handleSubmit = this.props.handleSubmit;
+
     return (
       <div className="top-margin">
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
-              <form className="form-hotizontal row col">
+              <form className="form-hotizontal row col" onSubmit={handleSubmit(() => this.onSubmit)}>
                 <fieldset>
                   <h3>Create New Event</h3>
                   <div>
                     <label> Event Name </label>
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" {...eventName} />
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="foodType"> Food Type </label>
-                    <select className="form-control" id="foodType">
+                    <select className="form-control" id="foodType" {...foodType} value={foodType.value || ''}>
                       <option value="french">French</option>
                       <option value="mexican">Mexican</option>
                       <option value="japanese">Japanese</option>
@@ -32,15 +56,15 @@ export default class AddEvent extends Component {
                   <label> Other Preference : </label>
                   <div>
                     <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" value="glutenFree" /> Gluten Free
+                      <input className="form-check-input" type="checkbox" {...glutenFree} /> Gluten Free
                     </label>
 
                     <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" value="vegetarian" /> Vegetarian
+                      <input className="form-check-input" type="checkbox" {...vegetarian} /> Vegetarian
                     </label>
 
                     <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" value="vegan" /> Vegan
+                      <input className="form-check-input" type="checkbox" {...vegan} /> Vegan
                     </label>
                   </div>
 
@@ -48,7 +72,7 @@ export default class AddEvent extends Component {
 
                   <div>
                     <label> Description </label>
-                    <textarea className="form-control" rows="6" />
+                    <textarea className="form-control" rows="6" {...description} />
                   </div>
 
                   <br />
@@ -66,18 +90,18 @@ export default class AddEvent extends Component {
                   <div className="row">
                     <div className="col-md-2">
                       <label> Price </label>
-                      <input type="text" className="form-control" />
+                      <input type="text" className="form-control" {...price} />
                     </div>
 
                     <div className="col-md-3">
                       <label> Max Guests </label>
-                      <input type="number" className="form-control" />
+                      <input type="number" className="form-control" {...maxGuest} />
                     </div>
                   </div>
 
                   <div>
                     <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" value="checked" /> Let Your Guests Decide!
+                      <input className="form-check-input" type="checkbox" {...guestDecide} /> Let Your Guests Decide!
                     </label>
                   </div>
 
@@ -86,12 +110,12 @@ export default class AddEvent extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <label> Start </label>
-                      <input type="datetime-local" className="form-control" />
+                      <input type="datetime-local" className="form-control" {...start} />
                     </div>
 
                     <div className="col-md-6">
                       <label> End </label>
-                      <input type="datetime-local" className="form-control" />
+                      <input type="datetime-local" className="form-control" {...end} />
                     </div>
                   </div>
 
@@ -99,17 +123,17 @@ export default class AddEvent extends Component {
 
                   <div>
                     <label> Location </label>
-                    <input type="text" className="form-control" placeholder="Street Address" />
+                    <input type="text" className="form-control" placeholder="Street Address" {...address} />
                     <br />
                     <div className="row">
                       <div className="col-md-4">
-                      <input type="text" className="form-control" placeholder="City" />
+                        <input type="text" className="form-control" placeholder="City" {...city} />
                       </div>
                       <div className="col-md-4">
-                      <input type="text" className="form-control" placeholder="State" />
+                        <input type="text" className="form-control" placeholder="State" {...usState} />
                       </div>
                       <div className="col-md-4">
-                      <input type="number" className="form-control" placeholder="Zip Code" />
+                        <input type="number" className="form-control" placeholder="Zip Code" {...zip} />
                       </div>
                     </div>
                   </div>
@@ -117,9 +141,9 @@ export default class AddEvent extends Component {
                   <br />
 
                   <div className="pull-right">
-                    <button type="button" className="btn btn-outline-danger">Cancel</button>
+                    <button type="submit" className="btn btn-outline-danger">Cancel</button>
                     <span> </span>
-                    <button type="button" className="btn btn-outline-primary">Create</button>
+                    <button type="submit" className="btn btn-outline-primary">Create</button>
 
                   </div>
                 </fieldset>
@@ -131,3 +155,25 @@ export default class AddEvent extends Component {
     );
   }
 }
+
+export default reduxForm({
+  form: 'AddEventForm',
+  fields: ['eventName',
+           'foodType',
+           'glutenFree',
+           'vegetarian',
+           'vegan',
+           'description',
+           'price',
+           'maxGuest',
+           'guestDecide',
+           'start',
+           'end',
+           'address',
+           'city',
+           'usState',
+           'zip'],
+})(AddEvent);
+
+//
+
