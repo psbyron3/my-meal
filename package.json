@@ -55,6 +55,7 @@
     "redux": "^3.5.2",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",
-    "sequelize": "^3.23.6"
+    "sequelize": "^3.23.6",
+    "size-decorator": "0.0.1"
   }
 }
