@@ -22,7 +22,8 @@
     "func-names": 0,
     "react/prefer-stateless-function": 0,
     "no-param-reassign": 1,
-    "react/prop-types": 1
+    "react/prop-types": 1,
+    "arrow-body-style": 1
   },
   "env": {
     "browser": true,

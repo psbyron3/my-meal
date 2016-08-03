@@ -106,9 +106,6 @@ const Dish = sequelize.define('Dish', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  description: {
-    type: Sequelize.STRING,
-  },
   dishPic: {
     type: Sequelize.STRING,
     validate: {
@@ -184,7 +181,7 @@ User.hasMany(Review, { foreignKey: 'reviewerId' });
 
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log('Created tables from schema');
     dummy.init();

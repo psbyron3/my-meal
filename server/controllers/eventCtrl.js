@@ -1,5 +1,4 @@
 const Event = require('../models/eventModel.js');
-const User = require('../models/userModel.js');
 const url = require('url');
 
 module.exports = {
@@ -9,7 +8,7 @@ module.exports = {
       console.log('getting all events');
       // maybe this should be findOne instead?
       Event.findAllEvents()
-        .then(function (events) {
+        .then((events) => {
           if (events.length === 0) {
             console.log('no events exist yet');
             res.end('no events exist yet');
@@ -46,14 +45,14 @@ module.exports = {
         newEvent.longitude,
         newEvent.startDatetime,
         newEvent.endDatetime)
-        .then(function (event) {
+        .then((event) => {
           if (event.length > 0) {
             console.log('event already added');
             return res.send('event already added');
           }
           console.log('event does not exist');
           return Event.createEvent(newEvent)
-            .then(function (result) {
+            .then((result) => {
               console.log('result...', result);
               return res.send(result);
             });
@@ -76,9 +75,11 @@ module.exports = {
         lng: req.query.longitude,
         address: req.query.address,
       };
+      console.log('loc.lat', loc.lat);
+      console.log('loc.lng', loc.lng);
 
       Event.findEventsInRadius(loc.lat, loc.lng)
-        .then(function (result) {
+        .then((result) => {
           console.log('returned radius stuff');
           res.send(result);
         });
@@ -98,6 +99,7 @@ module.exports = {
   },
   '/:eventId': {
     get(req, res) {
+      // Used to get a specific event by id
       console.log('Received GET at /api/event/:eventId');
 
       const eventId = url.parse(req.url, true).path.slice(1);
@@ -107,18 +109,38 @@ module.exports = {
           if (event) {
             return res.send(event);
           }
-          return res.end('event ', eventId, ' was not found');
+          return res.end(`event ${eventId} not found`);
         });
     },
     post(req, res) {
+      // Used to join an event
+      const eventId = url.parse(req.url, true).path.slice(1);
+      const userId = req.body.userId;
       console.log('Received POST at /api/event/:eventId');
-      res.end('Received POST at /api/event/:eventId');
+      Event.joinEvent(eventId, userId)
+        .then((result) => {
+          if (result.length > 0) {
+            res.end('Successfully added user as guest');
+          }
+          res.end('Unable to add guest because of prior association');
+        })
+        .catch((err) => {
+          res.end(`Error in attempt to join event #${eventId}`);
+        });
     },
     put(req, res) {
+      // Used to edit an event
+      const eventId = url.parse(req.url, true).path.slice(1);
       console.log('Received PUT at /api/event/:eventId');
-      res.end('Received PUT at /api/event/:eventId');
+      Event.findEventById(eventId)
+        .then((event) => {
+          return event.update(req.body, { fields: Object.keys(req.body) });
+        }).then(() => {
+          res.end('Received PUT at /api/event/:eventId');
+        });
     },
     delete(req, res) {
+      // Used to delete an event
       const eventId = url.parse(req.url, true).path.slice(1);
       console.log('Received DELETE at /api/event/:eventId');
       Event.findEventById(eventId)
