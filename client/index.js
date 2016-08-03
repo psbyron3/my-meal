@@ -9,9 +9,7 @@ import App from './components/app';
 import reducers from './reducers';
 import routes from './routes';
 
-
 const store = applyMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension() : f => f);
-
 
 ReactDOM.render(
   <Provider store={store}>
