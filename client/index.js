@@ -9,9 +9,9 @@ import App from './components/app';
 import reducers from './reducers';
 import routes from './routes';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension() : f => f);
+
 
 ReactDOM.render(
   <Provider store={store}>

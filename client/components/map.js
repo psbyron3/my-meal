@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import MapList from './maplist';
+import { connect } from 'react-redux';
 // import IceFixedTable from '../exampleTable/example_maplist'
 // import shouldPureComponentUpdate from 'react-addons-shallow-compare';
 
@@ -10,24 +11,7 @@ import { fitBounds } from 'google-map-react/utils';
 
 const API_KEY = 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs';
 
-const size = {
-  width: 640,
-  height: 640,
-};
-
-const bounds = {
-  nw: {
-    lat: 50.01038826014866,
-    lng: -118.6525866875,
-  },
-  se: {
-    lat: 32.698335045970396,
-    lng: -92.0217273125,
-  },
-};
-
-export default class Home extends Component {
-
+class Home extends Component {
 
   constructor(props) {
     super(props);
@@ -38,17 +22,8 @@ export default class Home extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   createMapOptions()
-  // }
-
-  // createMapOptions = function (maps) {
-  //   return {
-
-  //   };
-  // }
-
   render() {
+    console.log("location in map: ", this.props.location)
     return (
       <div>Here is the map:
         <div className="text-xs-right">
@@ -61,9 +36,10 @@ export default class Home extends Component {
               key: API_KEY,
               language: 'en',
             }}
-            defaultCenter={this.state.center}
             defaultZoom={this.state.zoom}
+            center={this.props.location.lat ? { lat: this.props.location.lat, lng: this.props.location.lng } : this.state.center} 
           />
+         
         </div>
 
       </div>
@@ -71,3 +47,9 @@ export default class Home extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  console.log("state to props :", state.map )
+  return {location: state.map}
+}
+
+export default connect(mapStateToProps)(Home)
