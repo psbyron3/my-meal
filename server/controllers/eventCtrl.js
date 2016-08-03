@@ -99,6 +99,7 @@ module.exports = {
   },
   '/:eventId': {
     get(req, res) {
+      // Used to get a specific event by id
       console.log('Received GET at /api/event/:eventId');
 
       const eventId = url.parse(req.url, true).path.slice(1);
@@ -108,26 +109,38 @@ module.exports = {
           if (event) {
             return res.send(event);
           }
-          return res.end('event ', eventId, ' was not found');
+          return res.end(`event ${eventId} not found`);
         });
     },
     post(req, res) {
+      // Used to join an event
+      const eventId = url.parse(req.url, true).path.slice(1);
+      const userId = req.body.userId;
       console.log('Received POST at /api/event/:eventId');
-      res.end('Received POST at /api/event/:eventId');
+      Event.joinEvent(eventId, userId)
+        .then((result) => {
+          if (result.length > 0) {
+            res.end('Successfully added user as guest');
+          }
+          res.end('Unable to add guest because of prior association');
+        })
+        .catch((err) => {
+          res.end(`Error in attempt to join event #${eventId}`);
+        });
     },
     put(req, res) {
+      // Used to edit an event
       const eventId = url.parse(req.url, true).path.slice(1);
-
       console.log('Received PUT at /api/event/:eventId');
       Event.findEventById(eventId)
-        .then( (event) => {
-          return event.update(req.body, {fields: Object.keys(req.body)});
+        .then((event) => {
+          return event.update(req.body, { fields: Object.keys(req.body) });
         }).then(() => {
           res.end('Received PUT at /api/event/:eventId');
         });
     },
     delete(req, res) {
-      // where does verification occur?
+      // Used to delete an event
       const eventId = url.parse(req.url, true).path.slice(1);
       console.log('Received DELETE at /api/event/:eventId');
       Event.findEventById(eventId)

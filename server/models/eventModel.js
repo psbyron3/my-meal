@@ -12,6 +12,10 @@ Event.findEventsInRadius = function (lat, lng) {
   const rad = 0.015;
   const currentDate = new Date();
 
+  Event.findEventById = function (eventId) {
+    return db.Event.findById(eventId); // Sequelize query
+  };
+
   return db.Event.findAll({
     where: {
       latitude: { $between: [lat - rad, +lat + rad] },
@@ -39,10 +43,6 @@ Event.findEventsByTime = function (start, end) {
       ],
     },
   }); // Sequelize query `
-};
-
-Event.findEventById = function (eventId) {
-  return db.Event.findById(eventId); // Sequelize query
 };
 
 Event.findEventByLocation = function (lat, lng) {
@@ -83,6 +83,28 @@ Event.createEvent = function (newEvent) {
           event.setUsers([user], { role: 'host' });
         });
       return event;
+    });
+};
+
+Event.joinEvent = function (eventId, userId) {
+  // check to see if user relationship with event exists
+  return db.Event.findById(eventId)
+    .then((event) => {
+      return event.getUsers({
+        where: { id: userId },
+      })
+        .then((result) => {
+          if (result.length) {
+            return ([]);
+          }
+          return db.User.findById(userId)
+            .then((user) => {
+              return event.addUsers([user], { role: 'guest' });
+            });
+        });
+    })
+    .catch(err => {
+      console.log('error is:', err);
     });
 };
 

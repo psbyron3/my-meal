@@ -105,9 +105,6 @@ const Dish = sequelize.define('Dish', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  description: {
-    type: Sequelize.STRING,
-  },
   dishPic: {
     type: Sequelize.STRING,
     validate: {
