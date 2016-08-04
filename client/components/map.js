@@ -37,10 +37,10 @@ class MapView extends Component {
               language: 'en',
             }}
             defaultZoom={this.state.zoom}
-            center={this.props.location.lat ?
+            center={this.props.location.latitude ?
               {
-                lat: this.props.location.lat,
-                lng: this.props.location.lng,
+                lat: this.props.location.latitude,
+                lng: this.props.location.longitude,
               }
               : this.state.center}
           />
@@ -55,7 +55,10 @@ class MapView extends Component {
 
 function mapStateToProps(state) {
   console.log('state to props :', state.map);
-  return { location: state.map };
+  return { 
+    location: state.map,
+    allEvents : state.allEvents
+  };
 }
 
 

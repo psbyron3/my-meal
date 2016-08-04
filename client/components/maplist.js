@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { Table, Column, Cell } from 'fixed-data-table';
+
 
 // Table data as a list of array.
 
@@ -19,12 +22,18 @@ export default class MapList extends React.Component {
     };
   }
 
+
   render() {
+    let rows = this.state.allEvents ?
+      this.state.allEvents.length
+      :
+      1;
+
     return (
       <div className="event-list" >
         <Table
 
-          rowsCount={this.state.myTableData.length}
+          rowsCount={rows}
           rowHeight={50}
           headerHeight={50}
           width={300}
@@ -34,7 +43,7 @@ export default class MapList extends React.Component {
             header={<Cell>Name</Cell>}
             cell={props => (
               <Cell {...props}>
-                {this.state.myTableData[props.rowIndex].name}
+                {this.props.allEvents}
               </Cell>
             )}
             width={200}
@@ -44,3 +53,11 @@ export default class MapList extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    allEvents : state.allEvents
+  }
+}
+
+export default connect(mapStateToProps)(MapList);
