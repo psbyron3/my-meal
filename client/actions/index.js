@@ -14,6 +14,7 @@ export function getAllEvents(locationObj) {
 }
 
 export function convertAddress(searchParams) {
+
   return function (dispatch) {
     axios({
       method: 'GET',
@@ -25,7 +26,6 @@ export function convertAddress(searchParams) {
         const locationObj = {};
         locationObj.latitude = response.data.results[0].geometry.location.lat;
         locationObj.longitude = response.data.results[0].geometry.location.lng;
-
         dispatch({
           type: CONVERT_ADDRESS,
           payload: locationObj,
