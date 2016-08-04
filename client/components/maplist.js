@@ -7,7 +7,7 @@ import { Table, Column, Cell } from 'fixed-data-table';
 // Table data as a list of array.
 
 // Render your table
-export default class MapList extends React.Component {
+class MapList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -56,8 +56,8 @@ export default class MapList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    allEvents : state.allEvents
-  }
+    allEvents: state.allEvents,
+  };
 }
 
 export default connect(mapStateToProps)(MapList);

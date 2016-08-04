@@ -1,11 +1,18 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-//import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
 
 export const CONVERT_ADDRESS = 'CONVERT_ADDRESS';
 export const SELECT_EVENT = 'SELECT_EVENT';
 export const CREATE_TOILET = 'CREATE_TOILET';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
+
+
+export function getAllEvents(locationObj) {
+  return axios.get('/api/event/location', {
+    params: locationObj,
+  });
+}
 
 export function convertAddress(searchParams) {
   return function (dispatch) {
@@ -25,27 +32,22 @@ export function convertAddress(searchParams) {
           payload: locationObj,
         });
         getAllEvents(locationObj)
-          .then(function(events) {
-            console.log("here come the events : ", events);
+          .then(function (events) {
+            console.log('here come the events : ', events);
             dispatch({
               type: GET_ALL_EVENTS,
-              payload : events.data
-            })
+              payload: events.data,
+            });
           });
       })
-        .catch(function (err) {
-          if (err) {
-            console.log('error searching location from actions searchLocation', err);
-          }
-        });
+      .catch(function (err) {
+        if (err) {
+          console.log('error searching location from actions searchLocation', err);
+        }
+      });
   };
 }
 
-export function getAllEvents(locationObj) {
-    return axios.get('/api/event/location', {
-      params : locationObj
-    })
-}
 
 export function selectEvent(event) {
   return {

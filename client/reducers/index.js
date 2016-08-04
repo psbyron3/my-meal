@@ -9,7 +9,7 @@ import { reducer as formReducer } from 'redux-form';
 
 
 const rootReducer = combineReducers({
-  allEvents : AllEventsReducer,
+  allEvents: AllEventsReducer,
   userInfo: UserInfoReducer,
   userHistory: UserHistory,
   map: MapReducer,

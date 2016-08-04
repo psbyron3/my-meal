@@ -55,9 +55,9 @@ class MapView extends Component {
 
 function mapStateToProps(state) {
   console.log('state to props :', state.map);
-  return { 
+  return {
     location: state.map,
-    allEvents : state.allEvents
+    allEvents: state.allEvents,
   };
 }
 
