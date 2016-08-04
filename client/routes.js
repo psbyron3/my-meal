@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/app';
-import Home from './components/map';
+import Home from './components/home.jsx';
 import Landing from './components/landing';
 import AddEvent from './components/addEvent';
 

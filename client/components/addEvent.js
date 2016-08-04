@@ -184,4 +184,3 @@ export default reduxForm({
 }, null, { createEvent })(AddEvent);
 
 //
-

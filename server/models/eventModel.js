@@ -16,7 +16,6 @@ Event.findEventsInRadius = function (lat, lng) {
   const rad = 0.015;
   const currentDate = new Date();
 
-
   return db.Event.findAll({
     where: {
       latitude: { $between: [lat - rad, +lat + rad] },
