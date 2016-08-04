@@ -12,7 +12,6 @@ import { fitBounds } from 'google-map-react/utils';
 const API_KEY = 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs';
 
 
-
 class MapView extends Component {
   constructor(props) {
     super(props);
