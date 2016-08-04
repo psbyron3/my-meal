@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { createEvent } from '../actions/index';
 
 class AddEvent extends Component {
 
   onSubmit(props) {
     console.log(props);
+    createEvent(props)
+      // after creating new event, navigate user to index
+      // navigate by calling this.context.router.push
+      // with path endpoint of where to navigate to
+    
+      // instead of that ^ we actually need to 
+      // search and center map on event on submit
   }
 
 
@@ -90,7 +98,7 @@ class AddEvent extends Component {
                   <div className="row">
                     <div className="col-md-2">
                       <label> Price </label>
-                      <input type="text" className="form-control" {...price} />
+                      <input type="number" className="form-control" {...price} />
                     </div>
 
                     <div className="col-md-3">
@@ -173,7 +181,7 @@ export default reduxForm({
            'city',
            'usState',
            'zip'],
-})(AddEvent);
+}, null,{createEvent})(AddEvent);
 
 //
 
