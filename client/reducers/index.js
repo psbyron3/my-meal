@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   map: MapReducer,
   filteredReducer: FilteredReducer,
   selectedEvent: SelectedEvent,
-  form: formReducer
+  form: formReducer,
 });
 
 export default rootReducer;
