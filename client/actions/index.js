@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
-export const SEARCH_LOCATIONS = 'SEARCH-LOCATIONS';
+export const SEARCH_LOCATIONS = 'SEARCH_LOCATIONS';
+export const SELECT_EVENT = 'SELECT_EVENT';
 
 export function searchLocations(searchParams) {
   return function (dispatch) {
@@ -27,5 +28,12 @@ export function searchLocations(searchParams) {
           console.log('error searching location from actions searchLocation', err);
         }
       });
+  };
+}
+
+export function selectEvent(event) {
+  return {
+    type: SELECT_EVENT,
+    payload: event,
   };
 }
