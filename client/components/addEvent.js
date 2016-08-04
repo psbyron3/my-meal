@@ -6,12 +6,12 @@ class AddEvent extends Component {
 
   onSubmit(props) {
     console.log(props);
-    createEvent(props)
+    createEvent(props);
       // after creating new event, navigate user to index
       // navigate by calling this.context.router.push
       // with path endpoint of where to navigate to
-    
-      // instead of that ^ we actually need to 
+
+      // instead of that ^ we actually need to
       // search and center map on event on submit
   }
 
@@ -181,7 +181,7 @@ export default reduxForm({
            'city',
            'usState',
            'zip'],
-}, null,{createEvent})(AddEvent);
+}, null, { createEvent })(AddEvent);
 
 //
 

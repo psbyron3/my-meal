@@ -44,49 +44,6 @@ export function selectEvent(event) {
     payload: event,
   };
 
-export function createEvent(props) {
-  console.log("PROOOOOPS: ", props);
-  let targetAddress = props.address + props.city + props.usState;
-  return convertAddress(targetAddress)
-  .then((payload) => {
-    let address = payload.data.address;
-    let latitude = payload.data.latitude;
-    let longitude = payload.data.longitude;
-
-    let params = {
-      eventName: props.eventName,
-      // foodType?? glutenFree, vegetarian, vegan??
-      description: props.description,
-      price: props.price,
-      maxGuests: props.maxGuest,
-      // guestDecide??
-      address,
-      latitude,
-      longitude,
-      startDatetime: props.start,
-      endDatetime: props.end
-    }
-
-    console.log("PARAAAAAMS: ", params);
-
-    const request = axios.post('./api/event', params);
-    return {
-      type: CREATE_TOILET,
-      payload: request
-    }
-  })
-  .then( () => 
-      browserHistory.push('/')
-    )
-  .catch((err) => {
-    console.log('ERROR', err);
-    // return {
-    //   type: '??????????',
-    //   payload: '??????????'
-    // };
-  })
-}
-
 export function convertAddress(address) {
   return new Promise((resolve, reject) => {
     let response;
@@ -97,23 +54,66 @@ export function convertAddress(address) {
       url: 'https://maps.googleapis.com/maps/api/geocode/json',
       params: {
         address,
-        key: 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs'
-      }
+        key: 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs',
+      },
     })
-    .then((payload) => {
+      .then((payload) => {
       // try console.log payload here
-      response = payload.data.results[0].geometry.location;
-      coordinate = {
-        latitude: response.lat,
-        longitude: response.lng,
-        address
-      }
+        response = payload.data.results[0].geometry.location;
+        coordinate = {
+          latitude: response.lat,
+          longitude: response.lng,
+          address,
+        };
+        return {
+          data: coordinate,
+        };
+      }))
+      .catch((err) => {
+        console.log('ERROR ', err);
+      });
+  });
+}
+
+export function createEvent(props) {
+  console.log('PROOOOOPS: ', props);
+  const targetAddress = props.address + props.city + props.usState;
+  return convertAddress(targetAddress)
+    .then((payload) => {
+      const address = payload.data.address;
+      const latitude = payload.data.latitude;
+      const longitude = payload.data.longitude;
+
+      const params = {
+        eventName: props.eventName,
+      // foodType?? glutenFree, vegetarian, vegan??
+        description: props.description,
+        price: props.price,
+        maxGuests: props.maxGuest,
+      // guestDecide??
+        address,
+        latitude,
+        longitude,
+        startDatetime: props.start,
+        endDatetime: props.end,
+      };
+
+      console.log('PARAAAAAMS: ', params);
+
+      const request = axios.post('./api/event', params);
       return {
-        data: coordinate
-      }
-    }))
-    .catch((err) => {
-      console.log('ERROR ', err)
+        type: CREATE_TOILET,
+        payload: request,
+      };
     })
-  })
+    .then(() =>
+      browserHistory.push('/')
+    )
+    .catch((err) => {
+      console.log('ERROR', err);
+    // return {
+    //   type: '??????????',
+    //   payload: '??????????'
+    // };
+    });
 }
