@@ -19,13 +19,13 @@ class JoinModal extends Component {
       userId: 1,
     })
       .then(() => {
-        this.close();
+        this.props.closeModal();
       });
   }
 
   handleCancel(e) {
     e.preventDefault();
-    this.close();
+    this.props.closeModal();
   }
 
   close() {
@@ -56,7 +56,7 @@ class JoinModal extends Component {
     let startTime = moment(this.props.selectedEvent.startDatetime).format('MMMM Do YYYY, h:mm');
     let endTime = moment(this.props.selectedEvent.endDatetime).format('h:mm');
     return (
-      <Modal show={this.state.showModal} onHide={this.close}>
+      <Modal show={this.props.showModal} onHide={this.props.closeModal}>
         <Modal.Header>
           <h1>{this.props.selectedEvent.eventName}</h1>
         </Modal.Header>
@@ -73,7 +73,7 @@ class JoinModal extends Component {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.handleJoinEvent}>Confirm</Button>
-          <Button onClick={this.close}>Cancel</Button>
+          <Button onClick={this.props.closeModal}>Cancel</Button>
         </Modal.Footer>
       </Modal>
     );

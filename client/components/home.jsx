@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Button, Grid, Row, Col } from 'react-bootstrap';
 import MapView from './map.js';
 import MapList from './maplist.js';
 import JoinModal from './join-modal.jsx';
@@ -7,7 +7,9 @@ import JoinModal from './join-modal.jsx';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { showModal: false };
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
   }
 
   close() {
@@ -16,7 +18,8 @@ class Home extends Component {
     });
   }
 
-  open() {
+  open(e) {
+    e.preventDefault();
     this.setState({
       showModal: true,
     });
@@ -25,9 +28,12 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <MapView />
-        <JoinModal />
-        <MapList />
+        <div>
+          <Button style={{position:'fixed', zIndex:'2'}} onClick={this.open}>Show Modal</Button>
+        </div>
+        <MapView openModal={this.open}/>
+        <div id="placeholder">MapList</div>
+        <JoinModal showModal={this.state.showModal} closeModal={this.close}/>
       </div>
     );
   }
