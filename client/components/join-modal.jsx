@@ -16,9 +16,9 @@ class JoinModal extends Component {
 
   renderPic() {
     if (this.props.selectedEvent.eventPic) {
-      return (<img src={this.props.selectedEvent.eventPic} alt={this.props.selectedEvent.eventName}/>);
+      return (<img src={this.props.selectedEvent.eventPic} alt={this.props.selectedEvent.eventName} />);
     }
-    return(<div></div>);
+    return (<div></div>);
   }
 
   render() {
