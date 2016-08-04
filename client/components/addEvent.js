@@ -33,7 +33,7 @@ class AddEvent extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
-              <form className="form-hotizontal row col" onSubmit={handleSubmit(() => this.onSubmit)}>
+              <form className="form-hotizontal row col" onSubmit={handleSubmit(this.onSubmit)}>
                 <fieldset>
                   <h3>Create New Event</h3>
                   <div>
