@@ -96,7 +96,7 @@ class AddEvent extends Component {
                   <br />
 
                   <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-3">
                       <label> Price </label>
                       <input type="number" className="form-control" {...price} />
                     </div>

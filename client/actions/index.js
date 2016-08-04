@@ -43,6 +43,7 @@ export function selectEvent(event) {
     type: SELECT_EVENT,
     payload: event,
   };
+}
 
 export function convertAddress(address) {
   return new Promise((resolve, reject) => {
