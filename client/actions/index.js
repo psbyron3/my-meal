@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
-export const SEARCH_LOCATIONS = 'SEARCH-LOCATIONS';
+export const SEARCH_LOCATIONS = 'SEARCH_LOCATIONS';
+export const SELECT_EVENT = 'SELECT_EVENT';
 
 export function searchLocations(searchParams) {
   return function (dispatch) {
@@ -16,7 +17,6 @@ export function searchLocations(searchParams) {
         // searchParams.lng = response.data.results[0].geometry.location.lng;
         // searchParams.address = response.data.results[0].formatted_address;
         // searchParams.name = response.data.results[0].formatted_address;
-
         const determinedLocation = {
           address: response.data.results[0].formatted_address,
           lat: response.data.results[0].geometry.location.lat,
@@ -33,5 +33,12 @@ export function searchLocations(searchParams) {
       type: SEARCH_LOCATIONS,
       payload: searchParams,
     };
+  };
+}
+
+export function selectEvent(event) {
+  return {
+    type: SELECT_EVENT,
+    payload: event,
   };
 }

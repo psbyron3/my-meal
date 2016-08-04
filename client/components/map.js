@@ -32,7 +32,7 @@ const bounds = {
 // const { center, zoom } = fitBounds(bounds, size);
 
 
-export default class Home extends Component {
+export default class MapView extends Component {
   constructor(props) {
     super(props);
 
@@ -75,4 +75,3 @@ export default class Home extends Component {
 }
 
 // shouldComponentUpdate = shouldPureComponentUpdate;
-
