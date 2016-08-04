@@ -44,11 +44,11 @@ class AddEvent extends Component {
               <form className="form-hotizontal row col" onSubmit={handleSubmit(this.onSubmit)}>
                 <fieldset>
                   <h3>Create New Event</h3>
-                  <div className={`form-group ${eventName.touched && eventName.invalid ? "has-danger" : ""}`}>
+                  <div className={`form-group ${eventName.touched && eventName.invalid ? 'has-danger' : ''}`}>
                     <label> Event Name </label>
                     <input type="text" className="form-control" {...eventName} />
                     <div className="text-help">
-                      {eventName.touched ? eventName.error : ""}
+                      {eventName.touched ? eventName.error : ''}
                     </div>
                   </div>
 
@@ -124,21 +124,21 @@ class AddEvent extends Component {
 
                   <div className="row">
                     <div className="col-md-6">
-                      <div className={`form-group ${start.touched && start.invalid ? "has-danger" : ""}`}>
+                      <div className={`form-group ${start.touched && start.invalid ? 'has-danger' : ''}`}>
                         <label> Start </label>
                         <input type="datetime-local" className="form-control" {...start} />
                         <div className="text-help">
-                          {start.touched ? start.error : ""}
+                          {start.touched ? start.error : ''}
                         </div>
                       </div>
                     </div>
 
                     <div className="col-md-6">
-                      <div className={`form-group ${end.touched && end.invalid ? "has-danger" : ""}`}>
+                      <div className={`form-group ${end.touched && end.invalid ? 'has-danger' : ''}`}>
                         <label> End </label>
                         <input type="datetime-local" className="form-control" {...end} />
                         <div className="text-help">
-                          {end.touched ? end.error : ""}
+                          {end.touched ? end.error : ''}
                         </div>
                       </div>
                     </div>
@@ -150,27 +150,27 @@ class AddEvent extends Component {
 
                     <label> Location </label>
                     <div className="text-help">
-                      <div className={`form-group ${address.touched && address.invalid ? "has-danger" : ""}`}>
+                      <div className={`form-group ${address.touched && address.invalid ? 'has-danger' : ''}`}>
                         <input type="text" className="form-control" placeholder="Street Address" {...address} />
-                        {address.touched ? address.error : ""}
+                        {address.touched ? address.error : ''}
                       </div>
                     </div>
 
                     <div className="row">
                       <div>
-                        <div className={`form-group ${city.touched && city.invalid ? "has-danger" : ""}`}>
+                        <div className={`form-group ${city.touched && city.invalid ? 'has-danger' : ''}`}>
                           <div className="col-md-4">
                             <input type="text" className="form-control" placeholder="City" {...city} />
                           </div>
                         </div>
 
-                        <div className={`form-group ${usState.touched && usState.invalid ? "has-danger" : ""}`}>
+                        <div className={`form-group ${usState.touched && usState.invalid ? 'has-danger' : ''}`}>
                           <div className="col-md-4">
                             <input type="text" className="form-control" placeholder="State" {...usState} />
                           </div>
                         </div>
 
-                        <div className={`form-group ${zip.touched && zip.invalid ? "has-danger" : ""}`}>
+                        <div className={`form-group ${zip.touched && zip.invalid ? 'has-danger' : ''}`}>
                           <div className="col-md-4">
                             <input type="number" className="form-control" placeholder="Zip Code" {...zip} />
                           </div>
@@ -180,15 +180,15 @@ class AddEvent extends Component {
 
                     <div className="row">
                       <div className="text-help col-md-4">
-                       {city.touched ? city.error : ""}
+                       {city.touched ? city.error : ''}
                       </div>
 
                       <div className="text-help col-md-4">
-                       {usState.touched ? usState.error : ""}
+                       {usState.touched ? usState.error : ''}
                       </div>
 
                       <div className="text-help col-md-4">
-                       {zip.touched ? zip.error : ""}
+                       {zip.touched ? zip.error : ''}
                       </div>
                     </div>
 
@@ -212,48 +212,48 @@ class AddEvent extends Component {
   }
 }
 
-let priceChecker = (num) => {
-  let clone = num;
-  let decimals = clone.toString().split(".")[1].length;
+const priceChecker = (num) => {
+  const clone = num;
+  const decimals = clone.toString().split('.')[1].length;
   return decimals > 2;
-}
+};
 
-console.log("HELLOOOOOOOOO", priceChecker(12345.678));
+console.log('HELLOOOOOOOOO', priceChecker(12345.678));
 
 
-let validate = (values) => {
+const validate = (values) => {
   const errors = {};
 
-  if(!values.eventName) {
+  if (!values.eventName) {
     errors.eventName = 'Please enter an event name';
   }
 
-  if(!values.start) {
+  if (!values.start) {
     errors.start = 'Please enter a start time';
   }
 
-  if(!values.end) {
+  if (!values.end) {
     errors.end = 'Please enter an end time';
   }
 
-  if(!values.address) {
+  if (!values.address) {
     errors.address = 'Enter a valid address';
   }
 
-  if(!values.city) {
+  if (!values.city) {
     errors.city = 'Enter a city';
   }
 
-  if(!values.usState) {
+  if (!values.usState) {
     errors.usState = 'Enter a state';
   }
 
-  if(!values.zip) {
+  if (!values.zip) {
     errors.zip = 'Enter zip code';
   }
 
   return errors;
-}
+};
 
 export default reduxForm({
   form: 'AddEventForm',
@@ -272,7 +272,7 @@ export default reduxForm({
            'city',
            'usState',
            'zip'],
-           validate,
+  validate,
 }, null, { createEvent })(AddEvent);
 
 //
