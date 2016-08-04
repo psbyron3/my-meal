@@ -7,7 +7,6 @@ export const SELECT_EVENT = 'SELECT_EVENT';
 export const CREATE_TOILET = 'CREATE_TOILET';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 
-
 export function getAllEvents(locationObj) {
   return axios.get('/api/event/location', {
     params: locationObj,

@@ -9,7 +9,6 @@ class SearchBar extends Component {
     super(props);
 
     this.state = { query: '' };
-
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
@@ -21,7 +20,6 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-
     this.props.convertAddress(this.state);
     console.log('state.query: ', this.state.query);
     this.setState({ query: '' });
