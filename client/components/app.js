@@ -11,7 +11,9 @@ export default class App extends Component {
           <SearchBar />
         </NavBarComp>
         <div id="routeView">
-          {this.props.children}
+          <div>
+            {this.props.children}
+          </div>
         </div>
       </div>
 

@@ -18,7 +18,7 @@ body {
 /*MAP**************************/
 
 .map {
-  width: 100%;
+  width: 67%;
   height: 100%;
   left: 0px;
   top: 0px;
@@ -134,4 +134,14 @@ input::-webkit-input-placeholder {
   max-width: 95%;
   position: relative;
   margin: 10px auto;
+}
+
+
+/***********************     HOME COMPONENTS    ***************************/
+
+.event-list {
+  width: 33%;
+  height: 100%;
+  float : right;
+  position : fixed;
 }

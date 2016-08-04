@@ -1,9 +1,9 @@
-import { SEARCH_LOCATIONS } from '../actions/index.js';
+import { CONVERT_ADDRESS } from '../actions/index.js';
 
 
 export default function (state = [], action) {
   switch (action.type) {
-    case SEARCH_LOCATIONS:
+    case CONVERT_ADDRESS:
       console.log('in reducer payload: ', action.payload);
       return action.payload;
     default:

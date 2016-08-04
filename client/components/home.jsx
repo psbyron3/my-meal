@@ -27,12 +27,15 @@ class Home extends Component {
       <div>
         <MapView />
         <JoinModal />
+        <MapList />
       </div>
     );
   }
 }
 
 export default Home;
+
+
 // <Grid>
 //   <Row>
 //     <Col xs={12} md={8}>

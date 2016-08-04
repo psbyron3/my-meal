@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { searchLocations } from '../actions/index';
+import { convertAddress } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 
@@ -22,7 +22,7 @@ class SearchBar extends Component {
   onFormSubmit(event) {
     event.preventDefault();
 
-    this.props.searchLocations(this.state);
+    this.props.convertAddress(this.state);
     console.log('state.query: ', this.state.query);
     this.setState({ query: '' });
   }
@@ -45,7 +45,7 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ searchLocations }, dispatch);
+  return bindActionCreators({ convertAddress }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar);

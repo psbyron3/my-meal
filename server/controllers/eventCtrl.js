@@ -67,13 +67,13 @@ module.exports = {
       res.end('Received DELETE at /api/event/');
     },
   },
-  '/location/': {
+  '/location': {
     get(req, res) {
-      console.log('Received GET at /api/event/location');
+      console.log('Received GET at /api/event/location, req.query: ', req);
       const loc = {
         lat: req.query.latitude,
         lng: req.query.longitude,
-        address: req.query.address,
+        //address: req.query.address,
       };
       console.log('loc.lat', loc.lat);
       console.log('loc.lng', loc.lng);
