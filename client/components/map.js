@@ -52,11 +52,11 @@ class MapView extends Component {
               language: 'en',
             }}
             defaultZoom={this.state.zoom}
-            center={this.props.location.lat ? 
-              { 
-                lat: this.props.location.lat, 
-                lng: this.props.location.lng 
-              } 
+            center={this.props.location.lat ?
+              {
+                lat: this.props.location.lat,
+                lng: this.props.location.lng,
+              }
               : this.state.center}
           />
 
