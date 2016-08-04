@@ -10,14 +10,25 @@ class JoinModal extends Component {
     this.state = { showModal: true };
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
+    this.handleJoinEvent = this.handleJoinEvent.bind(this);
   }
 
   handleJoinEvent() {
-    // axios()
+    console.log('eventId is:', this.props.selectedEvent.id);
+    axios.post(`api/event/${this.props.selectedEvent.id}`, {
+      userId: 1
+    })
+    .then(() => {
+      this.close();
+    })
   }
 
-  close(e) {
+  handleCancel(e) {
     e.preventDefault();
+    this.close();
+  }
+
+  close() {
     this.setState({
       showModal: false,
     });
@@ -61,7 +72,7 @@ class JoinModal extends Component {
           <div>{startTime} - {endTime}</div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.close}>Confirm</Button>
+          <Button onClick={this.handleJoinEvent}>Confirm</Button>
           <Button onClick={this.close}>Cancel</Button>
         </Modal.Footer>
       </Modal>
