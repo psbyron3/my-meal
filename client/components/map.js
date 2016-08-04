@@ -22,16 +22,16 @@ class MapView extends Component {
     };
   }
 
-  bounds = {
-    nw: {
-      lat: 50.01038826014866,
-      lng: -118.6525866875,
-    },
-    se: {
-      lat: 32.698335045970396,
-      lng: -92.0217273125,
-    },
-  };
+  // bounds = {
+  //   nw: {
+  //     lat: 50.01038826014866,
+  //     lng: -118.6525866875,
+  //   },
+  //   se: {
+  //     lat: 32.698335045970396,
+  //     lng: -92.0217273125,
+  //   }
+  // };
 
 
   // const { center, zoom } = fitBounds(bounds, size);
