@@ -7,6 +7,26 @@ export const SELECT_EVENT = 'SELECT_EVENT';
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 
+export function SignInFunc(props) {
+  let email = props.email;
+  let password = props.password;
+
+  return axios({
+    method: 'GET',
+    url: '/api/auth/login',
+    params: {
+      email,
+      password
+    }
+  })
+  .then((payload) => {
+    console.log("PAYLOOOOOOOOAAAAD: ", payload);
+  })
+  .catch((err) => {
+    console.log("ERROR: ", err);
+  })
+}
+
 export function convertAddress(address) {
   let response;
   let coordinate;

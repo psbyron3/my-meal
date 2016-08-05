@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
-// import sign in action creator
+import { SignInFunc } from '../actions/index';
 
 class SignIn extends Component {
 
   onSubmit(props) {
     console.log(props);
-    // sign in func
+    SignInFunc(props);
   }
 
 
