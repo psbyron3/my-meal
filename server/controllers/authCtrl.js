@@ -10,7 +10,7 @@ module.exports = {
     },
     post(req, res) {
       console.log('Received POST at /api/auth/signup');
-
+      console.log(req.body,"BOOOOOOOOOOOOOOODY")
       const newAccount = {
         userName: req.body.userName,
         password: req.body.password,
@@ -32,21 +32,21 @@ module.exports = {
           } else {
             console.log('user does not exist');
             User.createUser(newAccount)
-              .then(() => {
-                console.log('result of creationUser', user);
+              .then((result) => {
+                console.log('result of creationUser', result);
                 console.log(process.env.secret, 'process');
                 // do session id/jwt stuff
-                const token = jwt.sign(user, process.env.secret, {
+                const token = jwt.sign(result, process.env.secret, {
                   expiresIn: 1440 * 60,
                 });
-
-                delete user.password;
-                delete user.salt;
+                console.log('tokeeeeeeeeeeeen',token)
+                delete result.password;
+                delete result.salt;
 
                 // return the information including token as JSON
                 res.json({
                   token,
-                  user,
+                  result,
                 });
               })
               .catch(function (err) {

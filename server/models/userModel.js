@@ -6,7 +6,7 @@ const User = module.exports;
 
 
 function hashPassword(pw) {
-  console.log('hashing password');
+  console.log('hashing password',pw);
   return new Promise(function (resolve, reject, next) {
     return bcrypt.genSalt(10, function (err, salt) {
       if (err) {
@@ -61,7 +61,7 @@ User.findUserByEmail = function (email) {
 };
 
 User.createUser = function (attr) {
-  console.log('creating user');
+  console.log('creating user', attr);
   return new Promise(function (resolve, reject) {
     return hashPassword(attr.password)
       .then(function (hashObj) {
@@ -71,10 +71,11 @@ User.createUser = function (attr) {
       .then(function () {
         console.log('password hashed');
         console.log('this is the pre inserted attr', attr);
-        return db.User.create(attr)
+        db.User.create(attr)
           .then(function (result) {
-            attr.id = result.dataValues.id;
-            resolve(attr);
+            const output = result.dataValues
+            console.log(output, 'aaaaaattttribut')
+            resolve(output);
           });
       });
   });
