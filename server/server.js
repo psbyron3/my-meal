@@ -16,6 +16,10 @@ const routesDish = require('./routes/routesDish.js');
 const routesAuth = require('./routes/routesAuth.js');
 const routesReview = require('./routes/routesReview.js');
 
+const multiparty = require('connect-multiparty');
+const multipartyMiddleware = multiparty();
+
+app.use(multipartyMiddleware);
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
