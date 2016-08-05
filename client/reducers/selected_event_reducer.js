@@ -14,7 +14,7 @@ const initialState = {
   createdAt: '2016-08-03T20:58:41.000Z',
   updatedAt: '2016-08-03T20:58:41.000Z',
 };
-export default function (state = initialState, action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case SELECT_EVENT:
       return action.payload;

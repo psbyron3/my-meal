@@ -74,6 +74,7 @@ export function getAllInRadius(searchParams) {
 }
 
 export function selectEvent(event) {
+  console.log('In selectEvent......', event);
   return {
     type: SELECT_EVENT,
     payload: event,
