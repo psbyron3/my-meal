@@ -19,8 +19,10 @@ class SignIn extends Component {
     return (
       <div className="top-margin">
         <div className="container">
+
           <div className="row">
             <div className="col-md-4 col-md-offset-4">
+
               <form className="form-signin" onSubmit={handleSubmit(this.onSubmit)}>
                 <fieldset>
                   <h3 className="form-signin-heading">Sign In</h3>
@@ -28,7 +30,6 @@ class SignIn extends Component {
                     <div className={`form-group ${email.touched && email.invalid ? 'has-danger' : ''}`}>
                       <input type="text" className="form-control" placeholder="Email Address" {...email} />
                     </div>
-
 
                     <div className={`form-group ${password.touched && password.invalid ? 'has-danger' : ''}`}>
                       <input type="password" className="form-control" placeholder="Password" {...password} />
@@ -41,8 +42,10 @@ class SignIn extends Component {
                   </div>
                 </fieldset>
               </form>
+
             </div>
           </div>
+
         </div>
       </div>
     );
@@ -68,5 +71,4 @@ export default reduxForm({
   fields: ['email',
            'password'],
   validate,
-
 })(SignIn);
