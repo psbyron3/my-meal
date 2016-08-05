@@ -36,9 +36,12 @@
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
+    "busboy-body-parser": "^0.1.0",
+    "connect-multiparty": "^2.0.0",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "fixed-data-table": "^0.6.3",
+    "fs": "0.0.2",
     "google-map-react": "^0.16.3",
     "jquery": "^3.1.0",
     "jsonwebtoken": "^7.1.7",
@@ -57,6 +60,7 @@
     "redux-form": "^5.3.2",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",
+    "s3fs": "^2.4.8",
     "sequelize": "^3.23.6",
     "size-decorator": "0.0.1"
   }

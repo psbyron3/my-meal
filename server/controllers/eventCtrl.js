@@ -1,5 +1,12 @@
 const Event = require('../models/eventModel.js');
 const url = require('url');
+const fs = require('fs');
+
+const S3FS = require('s3fs');
+const s3fsImpl = new S3FS('mymealmks', {
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+});
 
 module.exports = {
   '/': {
@@ -24,6 +31,7 @@ module.exports = {
     post(req, res) {
       console.log('Received POST at /api/event/');
       console.log('creating event');
+
       const newEvent = {
         eventName: req.body.eventName,
         eventPic: req.body.eventPic,
@@ -67,6 +75,38 @@ module.exports = {
       res.end('Received DELETE at /api/event/');
     },
   },
+  '/picture/': {
+    get(req, res) {
+      console.log('Received GET at /api/event/picture');
+      res.end('Received GET at /api/event/picture');
+    },
+    post(req, res) {
+      console.log('Received POST at /api/event/picture');
+      const file = req.files.file; // get the file from the request object thanks to multyparty middleware
+      const stream = fs.createReadStream(file.path); // read the file
+
+      const fsImplStyles = s3fsImpl.getPath(file.name);
+      const picUrl = `https://s3-us-west-2.amazonaws.com/${fsImplStyles}`;
+      // we are sending to s3 the file using this stream
+      s3fsImpl.writeFile(file.originalFilename, stream, { ContentType : 'image/jpeg' }).then(function () {
+        fs.unlink(file.path, function (err) {
+          if (err) {
+            console.error(err);
+          }
+        });
+        return res.end(picUrl);
+      });
+    },
+    put(req, res) {
+      console.log('Received PUT at /api/event/picture');
+      res.end('Received PUT at /api/event/picture');
+    },
+    delete(req, res) {
+      console.log('Received DELETE at /api/event/picture');
+      res.end('Received DELETE at /api/event/picture');
+    },
+  },
+
   '/location/': {
     get(req, res) {
       console.log('Received GET at /api/event/location');
