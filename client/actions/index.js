@@ -7,6 +7,56 @@ export const SELECT_EVENT = 'SELECT_EVENT';
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 
+export function SignInFunc(props) {
+  const email = props.email;
+  const password = props.password;
+
+  return axios({
+    method: 'GET',
+    url: '/api/auth/login',
+    params: {
+      email,
+      password,
+    },
+  })
+    .then((payload) => {
+      console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
+    })
+    .catch((err) => {
+      console.log('ERROR: ', err);
+    });
+}
+
+export function SignUpFunc(props) {
+  const firstName = props.firstName;
+  const lastName = props.lastName;
+  const address = props.address;
+  const phoneNumber = props.phoneNumber;
+  const userName = props.userName;
+  const email = props.email;
+  const password = props.password;
+
+  return axios({
+    method: 'GET',
+    url: '/api/auth/signup',
+    params: {
+      firstName,
+      lastName,
+      address,
+      phoneNumber,
+      userName,
+      email,
+      password,
+    },
+  })
+    .then((payload) => {
+      console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', payload);
+    })
+    .catch((err) => {
+      console.log('ERROR', err);
+    });
+}
+
 export function convertAddress(address) {
   let response;
   let coordinate;
