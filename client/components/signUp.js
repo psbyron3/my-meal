@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
-// import sign up action creator
+import { SignUpFunc } from '../actions/index';
 
 class SignUp extends Component {
 
   onSubmit(props) {
     console.log(props);
-    // sign up func
+    SignUpFunc(props);
   }
 
 
@@ -15,8 +15,9 @@ class SignUp extends Component {
     const { fields: { firstName,
                       lastName,
                       address,
-                      phone,
+                      phoneNumber,
                       email,
+                      userName,
                       password,
                     }, handleSubmit } = this.props;
 
@@ -46,12 +47,16 @@ class SignUp extends Component {
                           <input type="text" className="form-control" placeholder="Address" {...address} />
                         </div>
 
-                        <div className={`form-group ${phone.touched && phone.invalid ? 'has-danger' : ''}`}>
-                          <input type="text" className="form-control" placeholder="Phone Number" {...phone} />
+                        <div className={`form-group ${phoneNumber.touched && phoneNumber.invalid ? 'has-danger' : ''}`}>
+                          <input type="text" className="form-control" placeholder="phone Number" {...phoneNumber} />
                         </div>
 
                         <div className={`form-group ${email.touched && email.invalid ? 'has-danger' : ''}`}>
                           <input type="text" className="form-control" placeholder="Email Address" {...email} />
+                        </div>
+
+                        <div className={`form-group ${userName.touched && userName.invalid ? 'has-danger' : ''}`}>
+                          <input type="text" className="form-control" placeholder="Username" {...userName} />
                         </div>
 
                         <div className={`form-group ${password.touched && password.invalid ? 'has-danger' : ''}`}>
@@ -93,12 +98,16 @@ const validate = (values) => {
     errors.address = 'Please enter a valid address';
   }
 
-  if (!values.phone) {
-    errors.phone = 'Please enter a phone number';
+  if (!values.phoneNumber) {
+    errors.phoneNumber = 'Please enter a phone number';
   }
 
   if (!values.email) {
     errors.email = 'Please enter valid email';
+  }
+
+  if (!values.userName) {
+    errors.userName = 'Plesae enter username';
   }
 
   if (!values.password) {
@@ -113,8 +122,9 @@ export default reduxForm({
   fields: ['firstName',
            'lastName',
            'address',
-           'phone',
+           'phoneNumber',
            'email',
+           'userName',
            'password'],
   validate,
 })(SignUp);

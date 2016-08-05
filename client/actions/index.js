@@ -8,8 +8,8 @@ export const CREATE_EVENT = 'CREATE_EVENT';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 
 export function SignInFunc(props) {
-  const email = props.email;
-  const password = props.password;
+  let email = props.email;
+  let password = props.password;
 
   return axios({
     method: 'GET',
@@ -19,12 +19,42 @@ export function SignInFunc(props) {
       password,
     },
   })
-    .then((payload) => {
-      console.log('PAYLOOOOOOOOAAAAD: ', payload);
-    })
-    .catch((err) => {
-      console.log('ERROR: ', err);
-    });
+  .then((payload) => {
+    console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
+  })
+  .catch((err) => {
+    console.log('ERROR: ', err);
+  });
+}
+
+export function SignUpFunc(props) {
+  let firstName = props.firstName;
+  let lastName = props.lastName;
+  let address = props.address;
+  let phoneNumber = props.phoneNumber;
+  let userName = props.userName;
+  let email = props.email;
+  let password = props.password;
+
+  return axios({
+    method: 'GET',
+    url: '/api/auth/signup',
+    params: {
+      firstName,
+      lastName,
+      address,
+      phoneNumber,
+      userName,
+      email,
+      password
+    },
+  })
+  .then((payload) => {
+    console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', payload);
+  })
+  .catch((err) => {
+    console.log('ERROR', err);
+  });
 }
 
 export function convertAddress(address) {
