@@ -10,7 +10,7 @@ module.exports = {
     },
     post(req, res) {
       console.log('Received POST at /api/auth/signup');
-      console.log(req.body,"BOOOOOOOOOOOOOOODY")
+      console.log(req.body, 'BOOOOOOOOOOOOOOODY');
       const newAccount = {
         userName: req.body.userName,
         password: req.body.password,
@@ -39,7 +39,7 @@ module.exports = {
                 const token = jwt.sign(result, process.env.secret, {
                   expiresIn: 1440 * 60,
                 });
-                console.log('tokeeeeeeeeeeeen',token)
+                console.log('tokeeeeeeeeeeeen', token);
                 delete result.password;
                 delete result.salt;
 
