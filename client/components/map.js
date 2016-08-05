@@ -9,13 +9,11 @@ import { connect } from 'react-redux';
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
 
-
 const API_KEY = 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs';
 
 class MapView extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       center: { lat: 34.0195, lng: -118.4912 },
       zoom: 13,

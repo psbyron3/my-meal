@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { convertAddress } from '../actions/index';
+import { getAllInRadius } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 
@@ -20,7 +20,7 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.convertAddress(this.state);
+    this.props.getAllInRadius(this.state);
     console.log('state.query: ', this.state.query);
     this.setState({ query: '' });
   }
@@ -43,7 +43,7 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ convertAddress }, dispatch);
+  return bindActionCreators({ getAllInRadius }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar);
