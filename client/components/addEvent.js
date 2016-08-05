@@ -89,7 +89,7 @@ class AddEvent extends Component {
                   <label> Select a Picture </label>
                   <div>
                     <label className="custom-file">
-                      <FileInput 
+                      <FileInput
                         name="myImage"
                         accept=".jpeg"
                         placeholder="insert a dish picture"
