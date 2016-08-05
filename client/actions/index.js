@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-// import thunk from 'redux-thunk';
 
 export const MAP_CENTER = 'MAP_CENTER';
 export const SELECT_EVENT = 'SELECT_EVENT';
@@ -70,7 +69,6 @@ export function convertAddress(address) {
     },
   })
     .then((payload) => {
-    // try console.log payload here
       response = payload.data.results[0].geometry.location;
       coordinate = {
         latitude: response.lat,
