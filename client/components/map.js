@@ -26,12 +26,8 @@ class MapView extends Component {
     console.log('location in map: ', this.props.location);
     return (
       <div>Here is the map:
-        <div className="text-xs-right">
-          <Link to="/" className="btn btn-primary">Back</Link>
-        </div>
         <div className="map">
           <GoogleMap
-
             bootstrapURLKeys={{
               key: API_KEY,
               language: 'en',
