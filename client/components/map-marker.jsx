@@ -19,16 +19,15 @@ class MapMarker extends Component {
 
   handleJoinEvent(e) {
     this.handleClick(e);
-    const selectedEvent = this.props.allEvents.find((event) => {
-      return event.id === this.props.index;
-    });
-    this.props.selectEvent(selectedEvent);
     this.props.openModal();
   }
 
   handleClick(e) {
     e.preventDefault();
-    console.log('e.target=', e.target);
+    const selectedEvent = this.props.allEvents.find((event) => {
+      return event.id === this.props.index;
+    });
+    this.props.selectEvent(selectedEvent)
     this.props.setCurrent(this.props.index);
     this.setState({
       target: e.target,
