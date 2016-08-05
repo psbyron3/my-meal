@@ -28,7 +28,7 @@ class Home extends Component {
     return (
       <div>
         <MapView openModal={this.open} />
-        <div id="placeholder">MapList</div>
+        <MapList />
         <JoinModal showModal={this.state.showModal} closeModal={this.close} />
       </div>
     );
