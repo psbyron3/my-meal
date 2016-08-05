@@ -26,16 +26,18 @@ class MapView extends Component {
     if (this.props.allEvents.length > 0) {
       return this.props.allEvents.map((event) => {
         console.log('for each event in allevents map: ', event);
-        return (<MapMarker
-          key={event.id}
-          lat={event.latitude}
-          lng={event.longitude}
-          eventName={event.eventName}
-          address={event.address}
-          startTime={event.startDatetime}
-          endTime={event.endDatetime}
-          openModal={this.props.openModal}
-        />);
+        return (
+          <MapMarker
+            key={event.id}
+            lat={event.latitude}
+            lng={event.longitude}
+            eventName={event.eventName}
+            address={event.address}
+            startTime={event.startDatetime}
+            endTime={event.endDatetime}
+            openModal={this.props.openModal}
+          />
+        );
       });
     }
     return (<div>BBBBB</div>);
