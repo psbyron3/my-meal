@@ -3,13 +3,12 @@ import Infowindow from './infowindow.jsx';
 import { OverlayTrigger } from 'react-bootstrap';
 
 const MapMarker = (props) => {
-
   const style = {
     position: 'absolute',
     left: -20,
-    top: -20
+    top: -20,
   };
-  const infowindow = (<Infowindow {...props}/>);
+  const infowindow = (<Infowindow {...props} />);
 
   return (
     <div style={style}>
@@ -21,7 +20,7 @@ const MapMarker = (props) => {
         />
       </OverlayTrigger>
     </div>
-  )
-}
+  );
+};
 
 export default MapMarker;

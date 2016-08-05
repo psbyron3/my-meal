@@ -19,21 +19,21 @@ export function convertAddress(address) {
       key: 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs',
     },
   })
-  .then((payload) => {
+    .then((payload) => {
     // try console.log payload here
-    response = payload.data.results[0].geometry.location;
-    coordinate = {
-      latitude: response.lat,
-      longitude: response.lng,
-      address,
-    };
-    return {
-      data: coordinate,
-    };
-  })
-  .catch((err) => {
-    console.log('ERROR ', err);
-  });
+      response = payload.data.results[0].geometry.location;
+      coordinate = {
+        latitude: response.lat,
+        longitude: response.lng,
+        address,
+      };
+      return {
+        data: coordinate,
+      };
+    })
+    .catch((err) => {
+      console.log('ERROR ', err);
+    });
 }
 
 export function getAllEvents(locationObj) {
@@ -50,7 +50,7 @@ export function getAllInRadius(searchParams) {
         console.log('Coming back from map api', response.data);
         const locationObj = {
           latitude: response.data.latitude,
-          longitude: response.data.longitude
+          longitude: response.data.longitude,
         };
         dispatch({
           type: MAP_CENTER,
@@ -109,7 +109,7 @@ export function createEvent(props) {
 
       const request = axios.post('./api/event', params);
       return {
-        type: CREATE_EVENT
+        type: CREATE_EVENT,
       };
     })
     .then(() =>

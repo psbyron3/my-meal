@@ -21,14 +21,14 @@ class Infowindow extends Component {
   }
 
   render() {
-    return(
+    return (
       <Popover>
         <h5>{this.props.eventName}</h5>
         <h6>{this.props.address}</h6>
         <h6>{this.props.startTime} - {this.props.endTime}</h6>
         <Button onClick={this.handleJoinEvent}>Join</Button>
       </Popover>
-    )
+    );
   }
 }
 
