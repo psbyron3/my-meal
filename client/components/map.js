@@ -17,28 +17,44 @@ class MapView extends Component {
     this.state = {
       center: { lat: 34.0195, lng: -118.4912 },
       zoom: 13,
+      currentMarker: null,
     };
+    this.setCurrent = this.setCurrent.bind(this);
   }
 
+  setCurrent(index) {
+    if (this.state.currentMarker !== index) {
+      return this.setState({
+        currentMarker: index,
+      });
+    }
+    return this.setState({
+      currentMarker: null,
+    });
+  }
 
   renderMarkers() {
     console.log('allEvents:', this.props.allEvents);
     if (this.props.allEvents.length > 0) {
       return this.props.allEvents.map((event) => {
-        console.log('for each event in allevents map: ', event);
-        return (<MapMarker
-          key={event.id}
-          lat={event.latitude}
-          lng={event.longitude}
-          eventName={event.eventName}
-          address={event.address}
-          startTime={event.startDatetime}
-          endTime={event.endDatetime}
-          openModal={this.props.openModal}
-        />);
+        return (
+          <MapMarker
+            index={event.id}
+            key={event.id}
+            lat={event.latitude}
+            lng={event.longitude}
+            eventName={event.eventName}
+            address={event.address}
+            startTime={event.startDatetime}
+            endTime={event.endDatetime}
+            openModal={this.props.openModal}
+            setCurrent={this.setCurrent}
+            currentMarker={this.state.currentMarker}
+          />
+        );
       });
     }
-    return (<div>BBBBB</div>);
+    return (<div></div>);
   }
 
   render() {
@@ -64,9 +80,7 @@ class MapView extends Component {
           >
             {this.renderMarkers()}
           </GoogleMap>
-
         </div>
-
       </div>
     );
   }
