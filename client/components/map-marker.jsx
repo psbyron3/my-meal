@@ -15,11 +15,35 @@ class MapMarker extends Component {
     };
     this.handleJoinEvent = this.handleJoinEvent.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleOut = this.handleOut.bind(this);
   }
 
   handleJoinEvent(e) {
     this.handleClick(e);
     this.props.openModal();
+  }
+
+  handleEnter(e) {
+    e.preventDefault();
+    const selectedEvent = this.props.allEvents.find((event) => {
+      return event.id === this.props.index;
+    });
+    // action creator that sets current selection
+    this.props.selectEvent(selectedEvent);
+    //
+    this.props.setCurrent(this.props.index);
+    this.setState({
+      target: e.target,
+    });
+  }
+
+  handleOut(e) {
+    e.preventDefault();
+    this.props.setCurrent(null);
+    this.setState({
+      target: e.target,
+    });
   }
 
   handleClick(e) {
@@ -28,7 +52,7 @@ class MapMarker extends Component {
       return event.id === this.props.index;
     });
     this.props.selectEvent(selectedEvent);
-    this.props.setCurrent(this.props.index);
+    this.props.setCurrent(null);
     this.setState({
       target: e.target,
     });
@@ -37,12 +61,20 @@ class MapMarker extends Component {
   render() {
     return (
       <div style={this.style} >
-        <a href="#" className="marker" onClick={this.handleClick}>
+        <a
+          href="#"
+          className="marker"
+          onClick={this.handleJoinEvent}
+          mouseover={this.handleEnter}
+          mouseout={this.handleOut}
+        >
           <img
             src="../assets/map-marker.png"
             role="presentation"
             width="16px"
             height="32px"
+            onMouseEnter={this.handleEnter}
+            onMouseLeave={this.handleOut}
           />
         </a>
         <Overlay
@@ -63,7 +95,7 @@ class MapMarker extends Component {
 }
 
 function mapStateToProps(state) {
-  return { allEvents: state.allEvents };
+  return { allEvents: state.allEvents, selectedEvent: state.selectedEvent };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -44,7 +44,7 @@ body {
 
 .nav-logo {
   text-align: left;
-  
+
 }
 
 .nav-search > .search-input {
@@ -154,11 +154,10 @@ input::-webkit-input-placeholder {
   width: 33%;
   height: 100%;
   float : right;
-  position : fixed;
+  /*position : fixed;*/
 }
 
   /*position : absolute;*/
-}
 
 .list-entry {
   width: 250px;
@@ -174,6 +173,5 @@ input::-webkit-input-placeholder {
 .event-price {
   display: flex;
   justify-content: space-between;
-  flex-direction: 
+  flex-direction:
 }
-

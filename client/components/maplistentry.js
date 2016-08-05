@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { classNames } from 'classnames';
 
 class MapListEntry extends Component {
 
@@ -48,6 +49,7 @@ class MapListEntry extends Component {
 function mapStateToProps(state) {
   return {
     allEvents: state.allEvents,
+    selectedEvent: state.selectedEvent,
   };
 }
 
