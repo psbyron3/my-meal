@@ -8,8 +8,8 @@ export const CREATE_EVENT = 'CREATE_EVENT';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 
 export function SignInFunc(props) {
-  let email = props.email;
-  let password = props.password;
+  const email = props.email;
+  const password = props.password;
 
   return axios({
     method: 'GET',
@@ -19,22 +19,22 @@ export function SignInFunc(props) {
       password,
     },
   })
-  .then((payload) => {
-    console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
-  })
-  .catch((err) => {
-    console.log('ERROR: ', err);
-  });
+    .then((payload) => {
+      console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
+    })
+    .catch((err) => {
+      console.log('ERROR: ', err);
+    });
 }
 
 export function SignUpFunc(props) {
-  let firstName = props.firstName;
-  let lastName = props.lastName;
-  let address = props.address;
-  let phoneNumber = props.phoneNumber;
-  let userName = props.userName;
-  let email = props.email;
-  let password = props.password;
+  const firstName = props.firstName;
+  const lastName = props.lastName;
+  const address = props.address;
+  const phoneNumber = props.phoneNumber;
+  const userName = props.userName;
+  const email = props.email;
+  const password = props.password;
 
   return axios({
     method: 'GET',
@@ -46,15 +46,15 @@ export function SignUpFunc(props) {
       phoneNumber,
       userName,
       email,
-      password
+      password,
     },
   })
-  .then((payload) => {
-    console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', payload);
-  })
-  .catch((err) => {
-    console.log('ERROR', err);
-  });
+    .then((payload) => {
+      console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', payload);
+    })
+    .catch((err) => {
+      console.log('ERROR', err);
+    });
 }
 
 export function convertAddress(address) {
