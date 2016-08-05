@@ -12,7 +12,7 @@ body {
 /*ROUTEVIEW*****************/
 
 #routeView {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 /*MAP**************************/
@@ -24,26 +24,31 @@ body {
   top: 0px;
   margin: 0;
   padding: 0;
-  position: absolute;
+  position: fixed;
 }
 
 /*NavBar***************************************/
 
-.navbar-fixed-top {
-
+.navbar > .container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .nav-logo {
   text-align: left;
+  
 }
 
-.nav-search {
-  right: 50 px;
+.nav-search > .search-input {
+  right: 50px;
+  border-radius: 100%
+
 }
 
 .nav-search input[type=search] {
   width: 15px;
-  padding-left: 10px;
   color: transparent;
   cursor: pointer;
 }
@@ -143,5 +148,23 @@ input::-webkit-input-placeholder {
   width: 33%;
   height: 100%;
   float : right;
-  position : fixed;
+  
+  /*position : absolute;*/
+}
+
+.list-entry {
+  width: 250px;
+  margin: 20px;
+  border : solid black 3px;
+  text-align: center;
+}
+
+.list-entry:hover{
+  background-color: gray;
+}
+
+.event-price {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: 
 }
