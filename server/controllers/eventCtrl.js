@@ -86,7 +86,7 @@ module.exports = {
       const stream = fs.createReadStream(file.path); // read the file
 
       const fsImplStyles = s3fsImpl.getPath(file.name);
-      const picUrl = `https://s3-us-west-2.amazonaws.com/${fsImplStyles.replace(" ","")}`;
+      const picUrl = `https://s3-us-west-2.amazonaws.com/${fsImplStyles.replace(' ', '')}`;
       // we are sending to s3 the file using this stream
       s3fsImpl.writeFile(file.originalFilename, stream, { ContentType: 'image/jpeg' }).then(function () {
         fs.unlink(file.path, function (err) {
