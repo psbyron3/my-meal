@@ -31,8 +31,8 @@ class MapMarker extends Component {
     console.log('e.target=', e.target);
     this.props.setCurrent(this.props.index);
     this.setState({
-      target: e.target
-    })
+      target: e.target,
+    });
   }
 
   render() {
@@ -47,7 +47,7 @@ class MapMarker extends Component {
           />
         </a>
         <Overlay
-          show={this.props.currentMarker===this.props.index}
+          show={this.props.currentMarker === this.props.index}
           target={this.state.target}
           placement="top"
         >

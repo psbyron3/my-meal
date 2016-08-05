@@ -17,20 +17,20 @@ class MapView extends Component {
     this.state = {
       center: { lat: 34.0195, lng: -118.4912 },
       zoom: 13,
-      currentMarker: null
+      currentMarker: null,
     };
     this.setCurrent = this.setCurrent.bind(this);
   }
 
   setCurrent(index) {
-    if(this.state.currentMarker !== index) {
+    if (this.state.currentMarker !== index) {
       return this.setState({
-        currentMarker: index
+        currentMarker: index,
       });
     }
     return this.setState({
-      currentMarker: null
-    })
+      currentMarker: null,
+    });
   }
 
   renderMarkers() {

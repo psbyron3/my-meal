@@ -29,7 +29,8 @@ class Home extends Component {
       <div>
         <div>
           <Button
-            style={{ position: 'fixed', zIndex: '2' }} onClick={this.open}>Show Modal</Button>
+            style={{ position: 'fixed', zIndex: '2' }} onClick={this.open}
+          >Show Modal</Button>
         </div>
         <MapView openModal={this.open} />
         <div id="placeholder">MapList</div>
