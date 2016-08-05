@@ -45,6 +45,7 @@ export function convertAddress(searchParams) {
           console.log('error searching location from actions searchLocation', err);
         }
       });
+      browserHistory.push('home')
   };
 }
 
