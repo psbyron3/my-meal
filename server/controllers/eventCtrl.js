@@ -69,7 +69,7 @@ module.exports = {
   },
   '/location': {
     get(req, res) {
-      console.log('Received GET at /api/event/location, req.query: ', req);
+      console.log('Received GET at /api/event/location');
       const loc = {
         lat: req.query.latitude,
         lng: req.query.longitude,
