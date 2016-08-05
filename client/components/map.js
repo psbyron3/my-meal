@@ -24,13 +24,9 @@ class MapView extends Component {
 
   setCurrent(index) {
     if (this.state.currentMarker !== index) {
-      return this.setState({
-        currentMarker: index,
-      });
+      return this.setState({ currentMarker: index });
     }
-    return this.setState({
-      currentMarker: null,
-    });
+    return this.setState({ currentMarker: null });
   }
 
   renderMarkers() {

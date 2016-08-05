@@ -13,7 +13,6 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension() : f => f);
 
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />

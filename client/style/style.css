@@ -29,11 +29,6 @@ body {
 }
 
 .marker {
-  width:32px;
-  height: 32px;
-  border-radius:50%;
-  background-image:url('../assets/map-marker.png');
-  background-repeat: no-repeat
   padding: 0;
   margin: 0;
 }
