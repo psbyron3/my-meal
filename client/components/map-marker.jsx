@@ -27,7 +27,7 @@ class MapMarker extends Component {
     const selectedEvent = this.props.allEvents.find((event) => {
       return event.id === this.props.index;
     });
-    this.props.selectEvent(selectedEvent)
+    this.props.selectEvent(selectedEvent);
     this.props.setCurrent(this.props.index);
     this.setState({
       target: e.target,
