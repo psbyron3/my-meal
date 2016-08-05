@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 
 export default class SignIn extends Component {
@@ -16,6 +17,9 @@ export default class SignIn extends Component {
                   <input type="password" className="form-control" placeholder="Password" />
 
                   <button className="btn btn-md btn-primary btn-block" type="submit">Login</button>
+                  <div className="pull-right">
+                    <Link to="signUp">New user? Sign up here!</Link>
+                  </div>
                 </fieldset>
               </form>
             </div>
