@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { classNames } from 'classnames';
+import classNames from 'classnames';
 
 class MapListEntry extends Component {
 
   renderList() {
+    console.log('type of classNames:', typeof classNames);
     return this.props.allEvents.map((event) => {
+      const entryClass = classNames({
+        'list-entry': true,
+        'selected-entry': event.id === this.props.hoverEvent,
+      });
       return (
-        <div className="list-entry" key={event.id}>
+        <div className={entryClass} key={event.id}>
           <div className="event-name">
             <strong>{event.eventName}</strong>
           </div>

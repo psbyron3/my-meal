@@ -38,7 +38,7 @@ class MapList extends Component {
             header={<Cell>Events:</Cell>}
             cell={
               <Cell>
-                <MapListEntry />
+                <MapListEntry hoverEvent={this.props.hoverEvent} />
               </Cell>
             }
             width={200}

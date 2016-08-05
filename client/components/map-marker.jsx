@@ -31,8 +31,11 @@ class MapMarker extends Component {
     });
     // action creator that sets current selection
     this.props.selectEvent(selectedEvent);
-    //
+    // function passed down as props to determine whether infowindow appears
     this.props.setCurrent(this.props.index);
+    // function passed down as props to determine whether maplistentry should highlight
+    this.props.setHoverEvent(this.props.index);
+    // sets the position for the infowindow
     this.setState({
       target: e.target,
     });
@@ -41,6 +44,7 @@ class MapMarker extends Component {
   handleOut(e) {
     e.preventDefault();
     this.props.setCurrent(null);
+    this.props.setHoverEvent(null);
     this.setState({
       target: e.target,
     });
@@ -48,14 +52,8 @@ class MapMarker extends Component {
 
   handleClick(e) {
     e.preventDefault();
-    const selectedEvent = this.props.allEvents.find((event) => {
-      return event.id === this.props.index;
-    });
-    this.props.selectEvent(selectedEvent);
     this.props.setCurrent(null);
-    this.setState({
-      target: e.target,
-    });
+    this.props.openModal();
   }
 
   render() {
@@ -65,8 +63,6 @@ class MapMarker extends Component {
           href="#"
           className="marker"
           onClick={this.handleJoinEvent}
-          mouseover={this.handleEnter}
-          mouseout={this.handleOut}
         >
           <img
             src="../assets/map-marker.png"
@@ -86,7 +82,6 @@ class MapMarker extends Component {
             <h5>{this.props.eventName}</h5>
             <h6>{this.props.address}</h6>
             <h6>{this.props.startTime} - {this.props.endTime}</h6>
-            <Button onClick={this.handleJoinEvent}>Join</Button>
           </Popover>
         </Overlay>
       </div>
