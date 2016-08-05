@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import MapList from './maplist';
+import MapMarker from './map-marker.jsx';
 import { connect } from 'react-redux';
 // import IceFixedTable from '../exampleTable/example_maplist'
 // import shouldPureComponentUpdate from 'react-addons-shallow-compare';
@@ -22,6 +23,26 @@ class MapView extends Component {
   }
 
 
+  renderMarkers() {
+    console.log('allEvents:', this.props.allEvents);
+    if (this.props.allEvents.length > 0) {
+      return this.props.allEvents.map((event) => {
+        console.log('for each event in allevents map: ', event);
+        return (<MapMarker
+          key={event.id}
+          lat={event.latitude}
+          lng={event.longitude}
+          eventName={event.eventName}
+          address={event.address}
+          startTime={event.startDatetime}
+          endTime={event.endDatetime}
+          openModal={this.props.openModal}
+        />);
+      });
+    }
+    return (<div>BBBBB</div>);
+  }
+
   render() {
     console.log('location in map: ', this.props.location);
     return (
@@ -31,7 +52,6 @@ class MapView extends Component {
         </div>
         <div className="map">
           <GoogleMap
-
             bootstrapURLKeys={{
               key: API_KEY,
               language: 'en',
@@ -43,7 +63,9 @@ class MapView extends Component {
                 lng: this.props.location.longitude,
               }
               : this.state.center}
-          />
+          >
+            {this.renderMarkers()}
+          </GoogleMap>
 
         </div>
 

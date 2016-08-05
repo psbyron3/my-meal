@@ -14,7 +14,7 @@ export function getAllEvents(locationObj) {
 }
 
 export function convertAddress(searchParams) {
-
+  console.log('IN CONVERTADDRESS...searchParams =', searchParams);
   return function (dispatch) {
     axios({
       method: 'GET',
@@ -55,36 +55,6 @@ export function selectEvent(event) {
   };
 }
 
-// export function convertAddress(address) {
-//   return new Promise((resolve, reject) => {
-//     let response;
-//     let coordinate;
-
-//     resolve(axios({
-//       method: 'GET',
-//       url: 'https://maps.googleapis.com/maps/api/geocode/json',
-//       params: {
-//         address,
-//         key: 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs',
-//       },
-//     })
-//       .then((payload) => {
-//       // try console.log payload here
-//         response = payload.data.results[0].geometry.location;
-//         coordinate = {
-//           latitude: response.lat,
-//           longitude: response.lng,
-//           address,
-//         };
-//         return {
-//           data: coordinate,
-//         };
-//       }))
-//       .catch((err) => {
-//         console.log('ERROR ', err);
-//       });
-//   });
-// }
 
 export function createEvent(props) {
   console.log('PROOOOOPS: ', props);

@@ -13,7 +13,7 @@ Event.findEventsInRadius = function (lat, lng) {
   console.log('inside events in radius');
   console.log('lat', lat);
   console.log('lng', lng);
-  const rad = 0.015;
+  const rad = 0.075;
   const currentDate = new Date();
 
   return db.Event.findAll({

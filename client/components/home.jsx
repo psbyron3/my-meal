@@ -18,8 +18,7 @@ class Home extends Component {
     });
   }
 
-  open(e) {
-    e.preventDefault();
+  open() {
     this.setState({
       showModal: true,
     });
