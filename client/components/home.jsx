@@ -27,11 +27,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div>
-          <Button
-            style={{ position: 'fixed', zIndex: '2' }} onClick={this.open}
-          >Show Modal</Button>
-        </div>
         <MapView openModal={this.open} />
         <div id="placeholder">MapList</div>
         <JoinModal showModal={this.state.showModal} closeModal={this.close} />
@@ -41,16 +36,3 @@ class Home extends Component {
 }
 
 export default Home;
-
-
-// <Grid>
-//   <Row>
-//     <Col xs={12} md={8}>
-//       <MapView />
-//     </Col>
-//     <Col xs={12} md={4}>
-//       <MapList />
-//     </Col>
-//     <JoinModal />
-//   </Row>
-// </Grid>
