@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { createEvent } from '../actions/index';
+import FileInput from 'react-file-input';
 
 class AddEvent extends Component {
 
@@ -15,7 +16,6 @@ class AddEvent extends Component {
       // search and center map on event on submit
   }
 
-
   render() {
     const { fields: { eventName,
                       foodType,
@@ -23,6 +23,7 @@ class AddEvent extends Component {
                       vegetarian,
                       vegan,
                       description,
+                      picture,
                       price,
                       maxGuest,
                       guestDecide,
@@ -93,8 +94,13 @@ class AddEvent extends Component {
                   <label> Select a Picture </label>
                   <div>
                     <label className="custom-file">
-                      <input type="file" id="file" className="custom-file-input" />
-                      <span className="custom-file-control" />
+                      <FileInput
+                        name="myImage"
+                        accept=".jpeg"
+                        placeholder="insert a dish picture"
+                        className="input-file"
+                        {...picture}
+                      />
                     </label>
                   </div>
 
@@ -263,6 +269,7 @@ export default reduxForm({
            'vegetarian',
            'vegan',
            'description',
+           'picture',
            'price',
            'maxGuest',
            'guestDecide',

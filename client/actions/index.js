@@ -88,36 +88,62 @@ export function createEvent(props) {
       const address = payload.data.address;
       const latitude = payload.data.latitude;
       const longitude = payload.data.longitude;
-
-      const params = {
-        eventName: props.eventName,
-      // foodType?? glutenFree, vegetarian, vegan??
-        description: props.description,
-        price: props.price,
-        maxGuests: props.maxGuest,
-      // guestDecide??
+      const coords = {
         address,
         latitude,
         longitude,
-        startDatetime: props.start,
-        endDatetime: props.end,
       };
-
-      console.log('PARAAAAAMS: ', params);
-
-      const request = axios.post('./api/event', params);
-      return {
-        type: CREATE_EVENT,
+      return coords;
+    }).then((coords) => {
+      console.log('PIC PARAAAAAMS: ', props.picture[0]);
+      const data = new FormData();
+      data.append('file', props.picture[0]);
+      const opts = {
+        transformRequest() { return data; },
       };
-    })
-    .then(() =>
+      axios.post('/api/event/picture', data, opts).then((resp) => {
+        const url = resp.data;
+        console.log(url, 'SUPPOSED URL');
+        const output = {
+          address: coords.address,
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          url };
+        return output;
+      }).then((output) => {
+        console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
+        const params = {
+          eventName: props.eventName,
+      // foodType?? glutenFree, vegetarian, vegan??
+          description: props.description,
+          eventPic: output.url,
+          price: props.price,
+          maxGuests: props.maxGuest,
+      // guestDecide??
+          address: output.address,
+          latitude: output.latitude,
+          longitude: output.longitude,
+          startDatetime: props.start,
+          endDatetime: props.end,
+        };
+
+        console.log('PARAMSSSSSS', params);
+
+        const request = axios.post('/api/event/', params);
+        return {
+          type: 'CREATE_EVENT',
+          payload: request,
+        };
+      })
+        .then(() =>
       browserHistory.push('/')
     )
-    .catch((err) => {
-      console.log('ERROR', err);
+        .catch((err) => {
+          console.log('ERROR', err);
     // return {
     //   type: '??????????',
     //   payload: '??????????'
     // };
+        });
     });
 }
