@@ -218,9 +218,6 @@ const priceChecker = (num) => {
   return decimals > 2;
 };
 
-console.log('HELLOOOOOOOOO', priceChecker(12345.678));
-
-
 const validate = (values) => {
   const errors = {};
 
