@@ -36,31 +36,38 @@ class SignUp extends Component {
                       <h3 className="form-signin-heading">Sign Up</h3>
                       <div className="text-help">
                         <div className={`form-group ${firstName.touched && firstName.invalid ? 'has-danger' : ''}`}>
-                          <input type="text" className="form-control" placeholder="First Name" {...firstName} />
+                          <label>First Name</label>
+                          <input type="text" className="form-control" {...firstName} />
                         </div>
 
                         <div className={`form-group ${lastName.touched && lastName.invalid ? 'has-danger' : ''}`}>
-                          <input type="text" className="form-control" placeholder="Last Name" {...lastName} />
+                          <label>Last Name</label>
+                          <input type="text" className="form-control" {...lastName} />
                         </div>
 
                         <div className={`form-group ${address.touched && address.invalid ? 'has-danger' : ''}`}>
-                          <input type="text" className="form-control" placeholder="Address" {...address} />
+                          <label>Address</label>
+                          <input type="text" className="form-control" {...address} />
                         </div>
 
                         <div className={`form-group ${phoneNumber.touched && phoneNumber.invalid ? 'has-danger' : ''}`}>
-                          <input type="text" className="form-control" placeholder="phone Number" {...phoneNumber} />
+                          <label>Phone Number</label>
+                          <input type="text" className="form-control" {...phoneNumber} />
                         </div>
 
                         <div className={`form-group ${email.touched && email.invalid ? 'has-danger' : ''}`}>
-                          <input type="text" className="form-control" placeholder="Email Address" {...email} />
+                          <label>Email Address</label>
+                          <input type="text" className="form-control" {...email} />
                         </div>
 
                         <div className={`form-group ${userName.touched && userName.invalid ? 'has-danger' : ''}`}>
-                          <input type="text" className="form-control" placeholder="Username" {...userName} />
+                          <label>Username</label>
+                          <input type="text" className="form-control" {...userName} />
                         </div>
 
                         <div className={`form-group ${password.touched && password.invalid ? 'has-danger' : ''}`}>
-                          <input type="password" className="form-control" placeholder="Password" {...password} />
+                          <label>Password</label>
+                          <input type="password" className="form-control" {...password} />
                         </div>
 
                       </div>
