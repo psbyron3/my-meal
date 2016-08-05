@@ -11,10 +11,9 @@ class SignIn extends Component {
   }
 
 
-
   render() {
     const { fields: { email,
-                      password
+                      password,
                     }, handleSubmit } = this.props;
 
     return (
@@ -29,12 +28,12 @@ class SignIn extends Component {
                     <div className={`form-group ${email.touched && email.invalid ? 'has-danger' : ''}`}>
                       <input type="text" className="form-control" placeholder="Email Address" {...email} />
                     </div>
-                    
+
 
                     <div className={`form-group ${password.touched && password.invalid ? 'has-danger' : ''}`}>
                       <input type="password" className="form-control" placeholder="Password" {...password} />
                     </div>
-                    
+
                   </div>
                   <button className="btn btn-md btn-primary btn-block" type="submit">Login</button>
                   <div className="pull-right">
@@ -53,21 +52,21 @@ class SignIn extends Component {
 const validate = (values) => {
   const errors = {};
 
-  if(!values.email) {
-    errors.email = 'Please enter valid email'
+  if (!values.email) {
+    errors.email = 'Please enter valid email';
   }
 
-  if(!values.password) {
-    errors.password = 'Please enter password'
+  if (!values.password) {
+    errors.password = 'Please enter password';
   }
 
   return errors;
-}
+};
 
 export default reduxForm({
   form: 'SignInForm',
   fields: ['email',
            'password'],
-           validate
-           
+  validate,
+
 })(SignIn);
