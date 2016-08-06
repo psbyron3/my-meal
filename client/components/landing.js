@@ -33,7 +33,7 @@ export default class Landing extends Component {
             </p>
           </div>
           <div className="col-md-5">
-            <img 
+            <img
               className="featurette-image img-responsive center-block"
               data-src="holder.js/500x500/auto" alt="500x500" src="../images/meal2.png"
               data-holder-rendered="true"
@@ -53,7 +53,7 @@ export default class Landing extends Component {
             vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
           </div>
           <div className="col-md-5">
-            <img 
+            <img
               className="featurette-image img-responsive center-block"
               data-src="holder.js/500x500/auto" alt="500x500" src="../images/meal3.png"
               data-holder-rendered="true"
@@ -73,7 +73,7 @@ export default class Landing extends Component {
             vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
           </div>
           <div className="col-md-5">
-            <img 
+            <img
               className="featurette-image img-responsive center-block"
               data-src="holder.js/500x500/auto" alt="500x500" src="../images/meal1.png"
               data-holder-rendered="true"
