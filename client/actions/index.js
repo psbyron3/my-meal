@@ -12,7 +12,7 @@ export function SignInFunc(props) {
   const password = props.password;
 
   return axios({
-    method: 'GET',
+    method: 'POST',
     url: '/api/auth/login',
     params: {
       email,
@@ -37,7 +37,7 @@ export function SignUpFunc(props) {
   const password = props.password;
 
   return axios({
-    method: 'GET',
+    method: 'POST',
     url: '/api/auth/signup',
     params: {
       firstName,
