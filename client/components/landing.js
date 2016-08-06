@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import Footer from './footer.js';
 
 export default class Landing extends Component {
 
