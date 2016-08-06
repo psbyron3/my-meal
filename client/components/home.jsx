@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Grid, Row, Col } from 'react-bootstrap';
-import MapView from './map.js';
-import MapList from './maplist.js';
-import JoinModal from './join-modal.jsx';
+import MapView from '../containers/map.jsx';
+import MapList from '../containers/maplist.jsx';
+import JoinModal from '../containers/join-modal.jsx';
 
 class Home extends Component {
   constructor(props) {
