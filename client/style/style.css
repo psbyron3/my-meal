@@ -166,7 +166,7 @@ input::-webkit-input-placeholder {
   text-align: center;
 }
 
-.list-entry:hover{
+.list-entry:hover, .selected-entry {
   background-color: gray;
 }
 
