@@ -29,11 +29,6 @@ body {
 }
 
 .marker {
-  width:32px;
-  height: 32px;
-  border-radius:50%;
-  background-image:url('../assets/map-marker.png');
-  background-repeat: no-repeat
   padding: 0;
   margin: 0;
 }
@@ -49,7 +44,7 @@ body {
 
 .nav-logo {
   text-align: left;
-  
+
 }
 
 .nav-search > .search-input {
@@ -159,11 +154,10 @@ input::-webkit-input-placeholder {
   width: 33%;
   height: 100%;
   float : right;
-  position : fixed;
+  /*position : fixed;*/
 }
 
   /*position : absolute;*/
-}
 
 .list-entry {
   width: 250px;
@@ -172,13 +166,12 @@ input::-webkit-input-placeholder {
   text-align: center;
 }
 
-.list-entry:hover{
+.list-entry:hover, .selected-entry {
   background-color: gray;
 }
 
 .event-price {
   display: flex;
   justify-content: space-between;
-  flex-direction: 
+  flex-direction:
 }
-

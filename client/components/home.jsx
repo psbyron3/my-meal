@@ -7,50 +7,39 @@ import JoinModal from './join-modal.jsx';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: false };
-    this.close = this.close.bind(this);
-    this.open = this.open.bind(this);
+    this.state = { showModal: false, hoverEvent: null };
+    this.setHoverEvent = this.setHoverEvent.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
-  close() {
+  setHoverEvent(index) {
     this.setState({
-      showModal: false,
+      hoverEvent: index,
     });
   }
 
-  open() {
+  openModal() {
     this.setState({
       showModal: true,
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      showModal: false,
     });
   }
 
   render() {
     return (
       <div>
-        <div>
-          <Button
-            style={{ position: 'fixed', zIndex: '2' }} onClick={this.open}
-          >Show Modal</Button>
-        </div>
-        <MapView openModal={this.open} />
-        <div id="placeholder">MapList</div>
-        <JoinModal showModal={this.state.showModal} closeModal={this.close} />
+        <MapView setHoverEvent={this.setHoverEvent} openModal={this.openModal} />
+        <MapList hoverEvent={this.state.hoverEvent} openModal={this.openModal} />
+        <JoinModal showModal={this.state.showModal} closeModal={this.closeModal} />
       </div>
     );
   }
 }
 
 export default Home;
-
-
-// <Grid>
-//   <Row>
-//     <Col xs={12} md={8}>
-//       <MapView />
-//     </Col>
-//     <Col xs={12} md={4}>
-//       <MapList />
-//     </Col>
-//     <JoinModal />
-//   </Row>
-// </Grid>

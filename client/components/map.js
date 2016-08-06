@@ -23,14 +23,7 @@ class MapView extends Component {
   }
 
   setCurrent(index) {
-    if (this.state.currentMarker !== index) {
-      return this.setState({
-        currentMarker: index,
-      });
-    }
-    return this.setState({
-      currentMarker: null,
-    });
+    return this.setState({ currentMarker: index });
   }
 
   renderMarkers() {
@@ -50,6 +43,7 @@ class MapView extends Component {
             openModal={this.props.openModal}
             setCurrent={this.setCurrent}
             currentMarker={this.state.currentMarker}
+            setHoverEvent={this.props.setHoverEvent}
           />
         );
       });
@@ -83,7 +77,6 @@ class MapView extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   console.log('state to props :', state.map);
   return {
@@ -91,6 +84,5 @@ function mapStateToProps(state) {
     allEvents: state.allEvents,
   };
 }
-
 
 export default connect(mapStateToProps)(MapView);

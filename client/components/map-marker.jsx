@@ -15,6 +15,8 @@ class MapMarker extends Component {
     };
     this.handleJoinEvent = this.handleJoinEvent.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleOut = this.handleOut.bind(this);
   }
 
   handleJoinEvent(e) {
@@ -22,27 +24,54 @@ class MapMarker extends Component {
     this.props.openModal();
   }
 
-  handleClick(e) {
+  handleEnter(e) {
     e.preventDefault();
     const selectedEvent = this.props.allEvents.find((event) => {
       return event.id === this.props.index;
     });
+    // action creator that sets current selection
     this.props.selectEvent(selectedEvent);
+    // function passed down as props to determine whether infowindow appears
     this.props.setCurrent(this.props.index);
+    // function passed down as props to determine whether maplistentry should highlight
+    this.props.setHoverEvent(this.props.index);
+    // sets the position for the infowindow
     this.setState({
       target: e.target,
     });
   }
 
+  handleOut(e) {
+    e.preventDefault();
+    this.props.setCurrent(null);
+    this.props.setHoverEvent(null);
+    this.setState({
+      target: e.target,
+    });
+  }
+
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.setCurrent(null);
+    this.props.openModal();
+  }
+
   render() {
     return (
       <div style={this.style} >
-        <a href="#" className="marker" onClick={this.handleClick}>
+        <a
+          href="#"
+          className="marker"
+          onClick={this.handleJoinEvent}
+        >
           <img
             src="../assets/map-marker.png"
             role="presentation"
             width="16px"
             height="32px"
+            onMouseEnter={this.handleEnter}
+            onMouseLeave={this.handleOut}
           />
         </a>
         <Overlay
@@ -54,7 +83,6 @@ class MapMarker extends Component {
             <h5>{this.props.eventName}</h5>
             <h6>{this.props.address}</h6>
             <h6>{this.props.startTime} - {this.props.endTime}</h6>
-            <Button onClick={this.handleJoinEvent}>Join</Button>
           </Popover>
         </Overlay>
       </div>
@@ -63,7 +91,7 @@ class MapMarker extends Component {
 }
 
 function mapStateToProps(state) {
-  return { allEvents: state.allEvents };
+  return { allEvents: state.allEvents, selectedEvent: state.selectedEvent };
 }
 
 function mapDispatchToProps(dispatch) {
