@@ -1,17 +1,8 @@
 
   function scaleVideoContainer() {
     const height = $(window).height() + 5;
-    const unitHeight = `${parseInt(height)}px`;
+    const unitHeight = `${parseInt(height, 10)}px`;
     $('.homepage-hero-module').css('height', unitHeight);
-  }
-
-  function initBannerVideoSize(element) {
-    $(element).each(function () {
-      $(this).data('height', $(this).height());
-      $(this).data('width', $(this).width());
-    });
-
-    scaleBannerVideoSize(element);
   }
 
   function scaleBannerVideoSize(element) {
@@ -37,6 +28,15 @@
 
       $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
     });
+  }
+
+  function initBannerVideoSize(element) {
+    $(element).each(function () {
+      $(this).data('height', $(this).height());
+      $(this).data('width', $(this).width());
+    });
+
+    scaleBannerVideoSize(element);
   }
 
   $(document).ready(function () {
