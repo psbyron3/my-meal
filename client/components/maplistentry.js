@@ -1,55 +1,58 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
+import { bindActionCreators } from 'redux';
+import { selectEvent } from '../actions/index.js';
+import { Cell } from 'fixed-data-table';
 
 class MapListEntry extends Component {
+  constructor(props) {
+    super(props);
+    this.handleEnter = this.handleEnter.bind(this);
+    // this.handleOut = this.handleOut.bind(this);
+  }
 
-  renderList() {
-    console.log('type of classNames:', typeof classNames);
-    return this.props.allEvents.map((event) => {
-      const entryClass = classNames({
-        'list-entry': true,
-        'selected-entry': event.id === this.props.hoverEvent,
-      });
-      return (
-        <div className={entryClass} key={event.id}>
-          <div className="event-name">
-            <strong>{event.eventName}</strong>
-          </div>
-          <div className="event-location">
-            {event.address}
-          </div>
-          <div className="event-start-to-end">
-            {event.startDatetime} - {event.endDatetime}
-          </div>
-          <div className="event-description">
-            {event.description}
-          </div>
-          <div className="event-maxGuests">
-            Max Guests: {event.maxGuests}
-          </div>
-          <div className="event-price">
-            $ {event.price}
-            <button className="btn btn-primary">More Info</button>
-          </div>
-        </div>
-
-      );
+  handleEnter(e) {
+    e.preventDefault();
+    const selectedEvent = this.props.allEvents.find((event) => {
+      return event.id === this.props.index;
     });
+    // action creator that sets current selection
+    this.props.selectEvent(selectedEvent);
   }
 
   render() {
     return (
-      <div>
-        {this.renderList()}
-      </div>
-
+      <Cell>
+        <div
+          onClick={this.props.openModal}
+          className={this.props.entryClass}
+          key={this.props.key}
+          index={this.props.index}
+          onMouseEnter={this.handleEnter}
+        >
+          <div className="event-name">
+            <strong>{this.props.eventName}</strong>
+          </div>
+          <div className="event-location">
+            {this.props.address}
+          </div>
+          <div className="event-start-to-end">
+            {this.props.times}
+          </div>
+          <div className="event-description">
+            {this.props.description}
+          </div>
+          <div className="event-maxGuests">
+            Max Guests: {this.props.maxGuests}
+          </div>
+          <div className="event-price">
+            $ {this.props.price}
+          </div>
+        </div>
+      </Cell>
     );
   }
 }
-
-
-// const events = this.props.allEvents;
 
 function mapStateToProps(state) {
   return {
@@ -88,4 +91,8 @@ function mapStateToProps(state) {
 //   </div>
 // }
 
-export default connect(mapStateToProps)(MapListEntry);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ selectEvent }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapListEntry);

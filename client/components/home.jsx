@@ -35,7 +35,7 @@ class Home extends Component {
     return (
       <div>
         <MapView setHoverEvent={this.setHoverEvent} openModal={this.openModal} />
-        <MapList hoverEvent={this.state.hoverEvent} />
+        <MapList hoverEvent={this.state.hoverEvent} openModal={this.openModal} />
         <JoinModal showModal={this.state.showModal} closeModal={this.closeModal} />
       </div>
     );
