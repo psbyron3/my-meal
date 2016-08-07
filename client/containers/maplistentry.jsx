@@ -6,8 +6,6 @@ import moment from 'moment';
 import { Image } from 'react-bootstrap';
 
 
-
-
 class MapListEntry extends Component {
   constructor(props) {
     super(props);
@@ -29,28 +27,28 @@ class MapListEntry extends Component {
     const formattedAddress = address.split(',');
     const streetAddress = formattedAddress.splice(0, 1);
     const cityAddress = formattedAddress.join('');
-    
+
     if (str === 'street') {
       return streetAddress;
     }
     return cityAddress;
   }
-  
+
   // Interprets db time string and breaks into date and time.
   formatTime(time, str) {
     const formattedTime = time.split(',');
     const eventDate = formattedTime.splice(0, 1);
     const eventTime = formattedTime.join('');
-    
+
     if (str === 'time') {
-      return eventTime; 
+      return eventTime;
     }
     return eventDate;
   }
 
   render() {
-    let startTime = moment(this.props.selectedEvent.startDatetime).format('MMMM Do YYYY, h:mm a');
-    let endTime = moment(this.props.selectedEvent.endDatetime).format('MMMM Do YYYY, h:mm a');
+    const startTime = moment(this.props.selectedEvent.startDatetime).format('MMMM Do YYYY, h:mm a');
+    const endTime = moment(this.props.selectedEvent.endDatetime).format('MMMM Do YYYY, h:mm a');
     return (
 
       <div id="f1_container">
@@ -94,7 +92,7 @@ class MapListEntry extends Component {
               {this.formatAddress(this.props.address)}
             </div>
             <div className="event-time">
-              {this.formatTime(startTime, 'time')} - 
+              {this.formatTime(startTime, 'time')} -
               {this.formatTime(endTime, 'time')}
             </div>
             <div className="event-date">
@@ -107,7 +105,7 @@ class MapListEntry extends Component {
               Max Guests: {this.props.maxGuests}
             </div>
             <div className="chef-container">
-              <Image 
+              <Image
                 className="chef-photo"
                 circle="true"
               />

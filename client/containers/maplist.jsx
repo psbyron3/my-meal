@@ -4,7 +4,6 @@ import MapListEntry from './maplistentry';
 import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 
- 
 
 // Table data as a list of array.
 // function rowGetter() {
