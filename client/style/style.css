@@ -154,6 +154,7 @@ input::-webkit-input-placeholder {
   width: 33%;
   height: 100%;
   float : right;
+  background-color: #D3E9EA;
   /*position : fixed;*/
 }
 
@@ -162,8 +163,10 @@ input::-webkit-input-placeholder {
 .list-entry {
   width: 250px;
   margin: 20px;
-  border : solid black 3px;
+  cursor: pointer;
   text-align: center;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0     
+    2.5px 6px rgba(0, 0, 0, 0.2);
 }
 
 .list-entry:hover, .selected-entry {
@@ -175,6 +178,96 @@ input::-webkit-input-placeholder {
   justify-content: space-between;
   flex-direction:
 }
+
+/*********** List Cards ***********/
+#f1_container {
+  display: block;
+  position: relative;
+  margin: 20px auto;
+  width: 350px;
+  height: 300px;
+  z-index: 1;
+
+}
+#f1_container {
+  perspective: 1000;
+}
+#f1_card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 1.0s linear;
+}
+#f1_container:hover #f1_card {
+  transform: rotateY(180deg);
+  box-shadow: -5px 5px 5px #aaa;
+}
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.face.back {
+  display: block;
+  transform: rotateY(180deg);
+  box-sizing: border-box;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  background-color: #aaa;
+}
+
+.list-image {
+  width: 350px;
+  height: 300px;
+}
+
+.price-banner{
+  position: absolute;
+  bottom: 20px;
+  left:0px;
+  width: 20% auto;
+  background-color: black;
+  font-family: 'tahoma';
+  font-size: 24px;
+  color: white;
+  opacity: 0.6;
+  filter: alpha(opacity=60); 
+}
+
+.event-price {
+  padding: 10px;
+  margin: 0px;
+}
+
+.chef-rating-container {
+  position: absolute;
+  bottom: 20px;
+  left: 230px;
+  width: 50% auto;
+  background-color: black;
+  font-size: 24px;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+
+.chef-rating > span:hover:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.chef-rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.chef-rating > span:hover:before,
+.chef-rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+
 
 /***************************   VIDEO   ***********************************/
 
