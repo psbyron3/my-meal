@@ -1,5 +1,4 @@
 var path = require('path');
-var config = require('./envConfig.js');
 
 module.exports = {
 
