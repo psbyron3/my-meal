@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectEvent } from '../actions/index.js';
-import { Cell } from 'fixed-data-table';
-import { Card, CardTitle } from 'react-materialize';
+import moment from 'moment';
+import { Image } from 'react-bootstrap';
+
+
 
 
 class MapListEntry extends Component {
@@ -22,20 +24,33 @@ class MapListEntry extends Component {
     this.props.selectEvent(selectedEvent);
   }
 
-
+  // Interprets db location string and breaks into street and city, state.
   formatAddress(address, str) {
     const formattedAddress = address.split(',');
     const streetAddress = formattedAddress.splice(0, 1);
     const cityAddress = formattedAddress.join('');
-    console.log('street: ', streetAddress);
-    console.log('city: ', cityAddress);
+    
     if (str === 'street') {
       return streetAddress;
     }
     return cityAddress;
   }
+  
+  // Interprets db time string and breaks into date and time.
+  formatTime(time, str) {
+    const formattedTime = time.split(',');
+    const eventDate = formattedTime.splice(0, 1);
+    const eventTime = formattedTime.join('');
+    
+    if (str === 'time') {
+      return eventTime; 
+    }
+    return eventDate;
+  }
 
   render() {
+    let startTime = moment(this.props.selectedEvent.startDatetime).format('MMMM Do YYYY, h:mm a');
+    let endTime = moment(this.props.selectedEvent.endDatetime).format('MMMM Do YYYY, h:mm a');
     return (
 
       <div id="f1_container">
@@ -78,14 +93,33 @@ class MapListEntry extends Component {
             <div className="city-address">
               {this.formatAddress(this.props.address)}
             </div>
-            <div className="event-start-to-end">
-              {this.props.times}
+            <div className="event-time">
+              {this.formatTime(startTime, 'time')} - 
+              {this.formatTime(endTime, 'time')}
+            </div>
+            <div className="event-date">
+              {this.formatTime(startTime)}
             </div>
             <div className="event-description">
               {this.props.description}
             </div>
             <div className="event-maxGuests">
               Max Guests: {this.props.maxGuests}
+            </div>
+            <div className="chef-container">
+              <Image 
+                className="chef-photo"
+                circle="true"
+              />
+              <div className="chef-rating-container">
+                <div className="chef-rating">
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

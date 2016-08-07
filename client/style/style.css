@@ -252,19 +252,41 @@ input::-webkit-input-placeholder {
   filter: alpha(opacity=60);
 }
 
+.chef-container {
+  position: absolute;
+  bottom: 20px;
+  left: 0px;
+  width: 50% auto;
+  background-color: black;
+  font-size: 24px;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+
 .chef-rating > span:hover:before {
    content: "\2605";
    position: absolute;
+   color: yellow;
 }
 
 .chef-rating {
   unicode-bidi: bidi-override;
   direction: rtl;
+  color: yellow;
 }
 .chef-rating > span:hover:before,
 .chef-rating > span:hover ~ span:before {
    content: "\2605";
    position: absolute;
+}
+
+.chef-container > .chef-photo {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  width: 20%;
+  height: 20%;
+  background-color: red;
 }
 
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MapListEntry from './maplistentry';
-import { Table, Column, Cell } from 'fixed-data-table';
 import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
+
+ 
 
 // Table data as a list of array.
 // function rowGetter() {
