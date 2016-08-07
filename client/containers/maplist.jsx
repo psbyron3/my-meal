@@ -29,6 +29,7 @@ class MapList extends Component {
         entryClass={entryClass}
         key={event.id}
         index={event.id}
+        image={event.eventPic}
         eventName={event.eventName}
         address={event.address}
         times={`${event.startDatetime} to ${event.endDatetime}`}
@@ -40,28 +41,15 @@ class MapList extends Component {
   }
 
   render() {
-    let rows = this.state.allEvents ?
+    const rows = this.state.allEvents ?
       this.state.allEvents.length
       :
       1;
     return (
-      <div className="event-list" >
-
-        <Table
-          rowsCount={rows}
-          rowHeight={10}
-          headerHeight={10}
-          width={300}
-          height={10}
-        >
-          <Column
-            columnKey="events"
-            header={<Cell>Events:</Cell>}
-            cell={this.renderList()}
-            width={200}
-          />
-        </Table>
-
+      <div className="event-list">
+        <div>
+          {this.renderList()}
+        </div>
       </div>
     );
   }
