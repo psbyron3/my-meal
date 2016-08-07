@@ -12,9 +12,9 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={Landing} />
     <Route path="home" component={Home} />
-    <Route path="signIn" component={SignIn} />
-    <Route path="signUp" component={SignUp} />
-    <Route path="addEvent" component={AddEvent} />
+    <Route path="signin" component={SignIn} />
+    <Route path="signup" component={SignUp} />
+    <Route path="addevent" component={AddEvent} />
   </Route>
 
 );
