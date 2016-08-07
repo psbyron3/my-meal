@@ -18,17 +18,26 @@ export default class NavBarComp extends Component {
             <Link to="/">Food Now!</Link>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav>
+        <Nav pullLeft>
           <NavItem>
             <SearchBar />
           </NavItem>
         </Nav>
         <Nav pullRight>
+          <NavItem className="add-event">
+            <Link to="addevent">
+              <button className="btn btn-primary">Host Event</button>
+            </Link>
+          </NavItem>
           <NavItem className="sign-up">
-            <button className="btn btn-primary">Sign Up</button>
+            <Link to="signup">
+              <button className="btn btn-primary">Sign Up</button>
+            </Link>
           </NavItem>
           <NavItem className="sign-in">
-            <button className="btn btn-primary">Sign In</button>
+            <Link to="signin">
+              <button className="btn btn-primary">Sign In</button>
+            </Link>
           </NavItem>
         </Nav>
       </Navbar>
