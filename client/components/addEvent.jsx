@@ -7,6 +7,7 @@ class AddEvent extends Component {
 
   onSubmit(props) {
     console.log(props);
+    props.address += ', ';
     createEvent(props);
   }
 
