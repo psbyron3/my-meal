@@ -82,7 +82,7 @@ Dummy.init = function () {
           email: 'mike@gmail.com',
           address: 'Seoul',
           phoneNumber: '3259342787',
-        })
+        }),
       ];
 
       return Promise.all(allUserPromises)
@@ -178,7 +178,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-07T18:00:00',
               endDatetime: '2016-08-07T20:00:00',
               userId: 2,
-            })
+            }),
           ];
 
           return Promise.all(allEventPromises)
@@ -218,7 +218,7 @@ Dummy.init = function () {
                   eventId: 1,
                   hostId: 2,
                   reviewerId: 1,
-                })
+                }),
               ];
 
               return Promise.all(allReviewPromises);

@@ -8,7 +8,7 @@ module.exports.tokenCheck = function (req, res, next) {
   // decode token
   if (token) {
     // verifies secret and checks exp
-    return jwt.verify(token, process.env.secret, function (err, decoded) {
+    return jwt.verify(token, process.env.secret, (err, decoded) => {
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token.' });
       }

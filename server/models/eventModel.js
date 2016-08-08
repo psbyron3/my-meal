@@ -106,9 +106,7 @@ Event.joinEvent = function (eventId, userId) {
             return ([]);
           }
           return db.User.findById(userId)
-            .then((user) => {
-              return event.addUsers([user], { role: 'guest' });
-            });
+            .then((user) => event.addUsers([user], { role: 'guest' }));
         });
     })
     .catch(err => {

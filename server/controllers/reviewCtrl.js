@@ -17,13 +17,13 @@ module.exports = {
       delete newReview.token;
 
       Review.findReviewForEventbyUser(newReview.contentId, newReview.reviewerId)
-        .then(function (review) {
+        .then((review) => {
           if (review) {
             console.log('review for event ', newReview.contentId, ' by user', newReview.reviewerId, 'already exists');
           } else {
             console.log("review doesn't exist, creating now");
             Review.createReview(newReview)
-              .then(function (result) {
+              .then((result) => {
                 console.log('result', result);
 
                 res.send(result);
@@ -49,7 +49,7 @@ module.exports = {
       console.log('getting all reviews for event: ', eventId);
 
       Review.findReviewsByEvent(eventId)
-        .then(function (reviews) {
+        .then((reviews) => {
           console.log('these are the reviews', reviews);
           if (reviews.length === 0) {
             console.log('reviews do not exist');
@@ -75,4 +75,3 @@ module.exports = {
   },
 
 };
-
