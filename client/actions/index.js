@@ -22,9 +22,9 @@ export function SignInFunc(props) {
         password,
       },
     })
-    .then((response) => {
+      .then((response) => {
     // console.log("RESPOOOOOOOONSE: ", response);
-      console.log('HELLLLOOOOOOOOOOO');
+        console.log('HELLLLOOOOOOOOOOO');
     // PAYLOAD =
     // {
     //   "token": "eyJhbGciO.......",
@@ -41,24 +41,26 @@ export function SignInFunc(props) {
     //   }
     // }
 
-      console.log('HELLLLOOOOOOOOOOO', response);
-
-    // save token to localStorage
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('userId', response.data.user.id);
+        console.log('HELLLLOOOOOOOOOOO', response);
 
     // dispatch action to update state to indicate that user is authenticate
-      dispatch({
-        type: AUTH_USER,
+        dispatch({
+          type: AUTH_USER,
+        });
+        browserHistory.push('/');
+
+
+    // save token to localStorage
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userId', response.data.user.id);
+
+      })
+      .catch(() => {
+        dispatch({
+          type: AUTH_ERROR,
+          payload: 'Invalid email or password',
+        });
       });
-      browserHistory.push('/');
-    })
-    .catch(() => {
-      dispatch({
-        type: AUTH_ERROR,
-        payload: 'Invalid email or password',
-      });
-    });
   };
 }
 
@@ -85,9 +87,9 @@ export function SignUpFunc(props) {
         password,
       },
     })
-    .then((response) => {
-      console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
-    // RESPONSE: 
+      .then((response) => {
+        console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
+    // RESPONSE:
     // {
     //   "token": "eyJhbGciO.......",
     //   "result": {
@@ -102,19 +104,19 @@ export function SignUpFunc(props) {
     //     "createdAt": "2016-08-05T18:04:01.000Z"
     //   }
     // }
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('id', response.data.result.id);
-      dispatch({
-        type: AUTH_USER
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('id', response.data.result.id);
+        dispatch({
+          type: AUTH_USER,
+        });
+        browserHistory.push('/');
       })
-      browserHistory.push('/');
-    })
-    .catch((err) => {
-      console.log('ERROR', err);
-      dispatch({
-        type: AUTH_ERROR
+      .catch((err) => {
+        console.log('ERROR', err);
+        dispatch({
+          type: AUTH_ERROR,
+        });
       });
-    });
   };
 }
 
