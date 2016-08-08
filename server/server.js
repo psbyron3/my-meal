@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.use(express.static('../client'));
+app.use(express.static('./client'));
 
 
 // Routing
@@ -35,12 +35,12 @@ app.use('api/dish', routesDish);
 app.use('/api/review', routesReview);
 
 
-app.get('*', function (request, response) {
+app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../client', 'index.html'));
 });
 
 app.set('port', process.env.PORT || 8000);
 
-app.listen(app.get('port'), function () {
+app.listen(app.get('port'), () => {
   console.log(moment().format('h:mm:ss a'), ': Express Server listening on port', app.get('port'));
 });

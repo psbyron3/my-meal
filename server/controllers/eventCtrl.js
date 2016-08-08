@@ -89,14 +89,15 @@ module.exports = {
       const fsImplStyles = s3fsImpl.getPath(file.name);
       const picUrl = `https://s3-us-west-2.amazonaws.com/${fsImplStyles.replace(' ', '')}`;
       // we are sending to s3 the file using this stream
-      s3fsImpl.writeFile(file.originalFilename, stream, { ContentType: 'image/jpeg' }).then(function () {
-        fs.unlink(file.path, function (err) {
-          if (err) {
-            console.error(err);
-          }
+      s3fsImpl.writeFile(file.originalFilename, stream, { ContentType: 'image/jpeg' })
+        .then(() => {
+          fs.unlink(file.path, (err) => {
+            if (err) {
+              console.error(err);
+            }
+          });
+          return res.end(picUrl);
         });
-        return res.end(picUrl);
-      });
     },
     put(req, res) {
       console.log('Received PUT at /api/event/picture');
@@ -176,9 +177,8 @@ module.exports = {
       const eventId = url.parse(req.url, true).path.slice(1);
       console.log('Received PUT at /api/event/:eventId');
       Event.findEventById(eventId)
-        .then((event) => {
-          return event.update(req.body, { fields: Object.keys(req.body) });
-        }).then(() => {
+        .then((event) => event.update(req.body, { fields: Object.keys(req.body) }))
+        .then(() => {
           res.end('Received PUT at /api/event/:eventId');
         });
     },

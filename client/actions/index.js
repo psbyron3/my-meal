@@ -94,7 +94,7 @@ export function getAllInRadius(searchParams) {
   console.log('IN GETALLINRADIUS...searchParams =', searchParams);
   return function (dispatch) {
     convertAddress(searchParams.query)
-      .then(function (response) {
+      .then((response) => {
         console.log('Coming back from map api', response.data);
         const locationObj = {
           latitude: response.data.latitude,
@@ -105,7 +105,7 @@ export function getAllInRadius(searchParams) {
           payload: locationObj,
         });
         getAllEvents(locationObj)
-          .then(function (events) {
+          .then((events) => {
             console.log('here come the events : ', events);
             dispatch({
               type: GET_ALL_EVENTS,
@@ -113,7 +113,7 @@ export function getAllInRadius(searchParams) {
             });
           });
       })
-      .catch(function (err) {
+      .catch((err) => {
         if (err) {
           console.log('error searching location from actions searchLocation', err);
         }
