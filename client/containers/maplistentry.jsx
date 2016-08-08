@@ -51,7 +51,7 @@ class MapListEntry extends Component {
     const endTime = moment(this.props.selectedEvent.endDatetime).format('MMMM Do YYYY, h:mm a');
     return (
 
-      <div 
+      <div
         id="f1_container"
         className={this.props.entryClass}
       >
@@ -109,7 +109,7 @@ class MapListEntry extends Component {
             <div className="chef-container">
               <Image
                 className="chef-photo"
-                src="http://bigpreviews.123rf.com/images/kurhan/kurhan1201/kurhan120100042/11861111-Chef-man--Stock-Photo-chef-cook-happy.jpg"
+                src="../assets/stock-chef.jpg"
                 circle
               />
               <div className="chef-rating-container">

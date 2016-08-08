@@ -16,9 +16,9 @@ export default class NavBarComp extends Component {
         <Navbar.Header className="nav-logo">
           <Navbar.Brand>
             <Link to="/">
-              <img 
+              <img
                 src="../assets/share-eat.png"
-                role="presentation" 
+                role="presentation"
               />
             </Link>
           </Navbar.Brand>
