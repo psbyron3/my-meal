@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-export default function(ComposedComponent) {
+export default function (ComposedComponent) {
   class Authentication extends Component {
     static contextTypes = {
-      router: React.PropTypes.object
+      router: React.PropTypes.object,
     }
 
     componentWillMount() {
@@ -20,7 +20,7 @@ export default function(ComposedComponent) {
     }
 
     render() {
-      return <ComposedComponent {...this.props} />
+      return <ComposedComponent {...this.props} />;
     }
   }
 

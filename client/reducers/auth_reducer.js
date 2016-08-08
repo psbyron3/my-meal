@@ -6,12 +6,12 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case AUTH_USER: return {
       ...state,
-      authenticated: true
+      authenticated: true,
     };
 
     case AUTH_ERROR: return {
       ...state,
-      error: action.payload
+      error: action.payload,
     };
 
     default: return state;
