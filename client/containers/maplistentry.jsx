@@ -51,11 +51,13 @@ class MapListEntry extends Component {
     const endTime = moment(this.props.selectedEvent.endDatetime).format('MMMM Do YYYY, h:mm a');
     return (
 
-      <div id="f1_container">
+      <div 
+        id="f1_container"
+        className={this.props.entryClass}
+      >
         <div
           id="f1_card"
           onClick={this.props.openModal}
-          className={this.props.entryClass}
           key={this.props.key}
           index={this.props.index}
           onMouseEnter={this.handleEnter}
@@ -107,7 +109,8 @@ class MapListEntry extends Component {
             <div className="chef-container">
               <Image
                 className="chef-photo"
-                circle="true"
+                src="http://bigpreviews.123rf.com/images/kurhan/kurhan1201/kurhan120100042/11861111-Chef-man--Stock-Photo-chef-cook-happy.jpg"
+                circle
               />
               <div className="chef-rating-container">
                 <div className="chef-rating">
@@ -121,7 +124,6 @@ class MapListEntry extends Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }
