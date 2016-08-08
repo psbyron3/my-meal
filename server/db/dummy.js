@@ -1,6 +1,7 @@
 const User = require('../models/userModel.js');
 const Event = require('../models/eventModel.js');
 const Review = require('../models/reviewModel.js');
+const Tag = require('../models/tagModel.js');
 
 const Dummy = module.exports;
 
@@ -165,7 +166,12 @@ Dummy.init = function () {
                       console.log(result.eventName);
                       return;
                     }).then(() => {
-    // add dummy reviews
+
+                      //create tags
+
+
+
+                      // add dummy reviews
                       Review.createReview({
                         content: 'Awsome cook',
                         rating: 5,
