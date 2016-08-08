@@ -60,14 +60,14 @@ User.findUserByEmail = function (email) {
   });
 };
 
-User.addHostToEvent = function(event, userId) {
-  return db.User.findById(newEvent.userId)
+User.addHostToEvent = function (event, userId) {
+  return db.User.findById(userId)
     .then((user) => {
       console.log('User = ', user.userName);
       event.setUsers([user], { role: 'host' })
-      .then(() => event);
+        .then(() => event);
     });
-}
+};
 
 User.createUser = function (attr) {
   console.log('creating user', attr);

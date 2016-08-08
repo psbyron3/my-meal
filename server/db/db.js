@@ -101,8 +101,8 @@ const Tag = sequelize.define('Tag', {
   },
   restriction: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
 const Dish = sequelize.define('Dish', {

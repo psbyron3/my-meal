@@ -166,9 +166,7 @@ Dummy.init = function () {
                       console.log(result.eventName);
                       return;
                     }).then(() => {
-
-                      //create tags
-
+                      // create tags
 
 
                       // add dummy reviews

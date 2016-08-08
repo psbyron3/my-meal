@@ -75,10 +75,10 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
   }); // Sequelize query
 };
 
-//expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
+// expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
 Event.findEventByLocationDateAndTag = function (lat, lng, start, end, tags) {
   return;
-}
+};
 
 Event.createEvent = function (newEvent) {
   return db.Event.create(newEvent)
@@ -86,10 +86,10 @@ Event.createEvent = function (newEvent) {
       console.log('result of createEvent', event.eventName);
       console.log('newEvent is:', newEvent);
       return User.addHostToEvent(event, newEvent.userId)
-        .then((event) => {
-          console.log('host added...adding tags', event)
+        .then(() => {
+          console.log('host added...adding tags', event);
           return Tag.addTagsToEvent(event, newEvent.tags)
-          .then((event) => event);
+            .then(() => event);
         });
     });
 };
