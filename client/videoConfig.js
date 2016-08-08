@@ -39,14 +39,14 @@
     scaleBannerVideoSize(element);
   }
 
-  $(document).ready(function () {
+  $(document).ready(() => {
     scaleVideoContainer();
 
     initBannerVideoSize('.video-container .poster img');
     initBannerVideoSize('.video-container .filter');
     initBannerVideoSize('.video-container video');
 
-    $(window).on('resize', function () {
+    $(window).on('resize', () => {
       scaleVideoContainer();
       scaleBannerVideoSize('.video-container .poster img');
       scaleBannerVideoSize('.video-container .filter');
@@ -55,4 +55,3 @@
 
     $('.fillWidth').get(0).play();
   });
-

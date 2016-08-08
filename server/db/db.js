@@ -99,6 +99,10 @@ const Tag = sequelize.define('Tag', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  restriction: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+  },
 });
 
 const Dish = sequelize.define('Dish', {
@@ -181,10 +185,10 @@ User.hasMany(Review, { foreignKey: 'reviewerId' });
 
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log('Created tables from schema');
-    // dummy.init();
+    dummy.init();
   });
 
 exports.User = User;
