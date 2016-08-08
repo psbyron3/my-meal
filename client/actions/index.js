@@ -12,7 +12,6 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export function SignInFunc(props) {
   const email = props.email;
   const password = props.password;
-  console.log('inside actions this is the email and password', email, password);
   return (dispatch) => {
     console.log('PROOOOOOOPS ');
     return axios({
@@ -23,45 +22,43 @@ export function SignInFunc(props) {
         password,
       },
     })
-      .then((response) => {
-      // console.log("RESPOOOOOOOONSE: ", response);
-        console.log('HELLLLOOOOOOOOOOO');
-      // PAYLOAD =
-      // {
-      //   "token": "eyJhbGciO.......",
-      //   "result": {
-      //     "id": 16,
-      //     "userName": "Joe",
-      //     "email": "joe128@gmail.com",
-      //     "firstName": "Joseph",
-      //     "lastName": "italiano",
-      //     "address": "Roma",
-      //     "phoneNumber": "4159305687",
-      //     "updatedAt": "2016-08-05T18:04:01.000Z",
-      //     "createdAt": "2016-08-05T18:04:01.000Z"
-      //   }
-      // }
+    .then((response) => {
+    // console.log("RESPOOOOOOOONSE: ", response);
+      console.log('HELLLLOOOOOOOOOOO');
+    // PAYLOAD =
+    // {
+    //   "token": "eyJhbGciO.......",
+    //   "result": {
+    //     "id": 16,
+    //     "userName": "Joe",
+    //     "email": "joe128@gmail.com",
+    //     "firstName": "Joseph",
+    //     "lastName": "italiano",
+    //     "address": "Roma",
+    //     "phoneNumber": "4159305687",
+    //     "updatedAt": "2016-08-05T18:04:01.000Z",
+    //     "createdAt": "2016-08-05T18:04:01.000Z"
+    //   }
+    // }
 
-        console.log('HELLLLOOOOOOOOOOO', response);
+      console.log('HELLLLOOOOOOOOOOO', response);
 
-      // save token to localStorage
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', response.data.user.id);
+    // save token to localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', response.data.user.id);
 
-      // dispatch action to update state to indicate that user is authenticate
-        dispatch({
-          type: AUTH_USER,
-        });
-        browserHistory.push('/');
-      })
-      .catch(() => {
-        console.log('INSIIIIIIIIDE CATCH');
-        dispatch({
-          type: AUTH_ERROR,
-          payload: 'Invalid email or password',
-        });
-        console.log('after dispatch??');
+    // dispatch action to update state to indicate that user is authenticate
+      dispatch({
+        type: AUTH_USER,
       });
+      browserHistory.push('/');
+    })
+    .catch(() => {
+      dispatch({
+        type: AUTH_ERROR,
+        payload: 'Invalid email or password',
+      });
+    });
   };
 }
 
@@ -74,25 +71,51 @@ export function SignUpFunc(props) {
   const email = props.email;
   const password = props.password;
 
-  return axios({
-    method: 'POST',
-    url: '/api/auth/signup',
-    data: {
-      firstName,
-      lastName,
-      address,
-      phoneNumber,
-      userName,
-      email,
-      password,
-    },
-  })
-    .then((payload) => {
-      console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', payload);
+  return (dispatch) => {
+    return axios({
+      method: 'POST',
+      url: '/api/auth/signup',
+      data: {
+        firstName,
+        lastName,
+        address,
+        phoneNumber,
+        userName,
+        email,
+        password,
+      },
+    })
+    .then((response) => {
+      console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
+    // RESPONSE: 
+    // {
+    //   "token": "eyJhbGciO.......",
+    //   "result": {
+    //     "id": 16,
+    //     "userName": "Joe",
+    //     "email": "joe128@gmail.com",
+    //     "firstName": "Joseph",
+    //     "lastName": "italiano",
+    //     "address": "Roma",
+    //     "phoneNumber": "4159305687",
+    //     "updatedAt": "2016-08-05T18:04:01.000Z",
+    //     "createdAt": "2016-08-05T18:04:01.000Z"
+    //   }
+    // }
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('id', response.data.result.id);
+      dispatch({
+        type: AUTH_USER
+      })
+      browserHistory.push('/');
     })
     .catch((err) => {
       console.log('ERROR', err);
+      dispatch({
+        type: AUTH_ERROR
+      });
     });
+  };
 }
 
 export function convertAddress(address) {

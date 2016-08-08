@@ -34,6 +34,7 @@ class SignUp extends Component {
                   <form className="form-signin" onSubmit={handleSubmit(this.onSubmit)}>
                     <fieldset>
                       <h3 className="form-signin-heading">Sign Up</h3>
+                      <br />
                       <div className="text-help">
                         <div className={`form-group ${firstName.touched && firstName.invalid ? 'has-danger' : ''}`}>
                           <label>First Name</label>
