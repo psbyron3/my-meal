@@ -8,11 +8,25 @@ Event.findAllEvents = function () {
   return db.Event.findAll(); // Sequelize query
 };
 
+Event.findLastEvent = function () {
+  return db.Event.max('id')
+    .then((maxId) => {
+      return db.Event.findAll({
+        where: { id: maxId },
+      });
+    })
+    .catch((err) => {
+      console.log('error in findLastEvent...', err);
+      return err;
+    });
+};
+
 Event.findEventById = function (eventId) {
   return db.Event.findById(eventId); // Sequelize query
 };
 
-Event.findEventsInRadius = function (lat, lng) {
+// expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
+Event.findEventsInRadius = function (lat, lng, tags) {
   console.log('inside events in radius');
   console.log('lat', lat);
   console.log('lng', lng);
@@ -29,7 +43,7 @@ Event.findEventsInRadius = function (lat, lng) {
     .then((results) => {
       console.log('results from findEventsInRadius', results);
       return results;
-    }); // Sequelize query
+    });
 };
 
 Event.findEventsByTime = function (start, end) {
@@ -45,7 +59,7 @@ Event.findEventsByTime = function (start, end) {
         },
       ],
     },
-  }); // Sequelize query `
+  });
 };
 
 Event.findEventByLocation = function (lat, lng) {
@@ -72,12 +86,7 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
         },
       ],
     },
-  }); // Sequelize query
-};
-
-// expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
-Event.findEventByLocationDateAndTag = function (lat, lng, start, end, tags) {
-  return;
+  });
 };
 
 Event.createEvent = function (newEvent) {

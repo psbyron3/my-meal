@@ -185,10 +185,10 @@ User.hasMany(Review, { foreignKey: 'reviewerId' });
 
 
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     console.log('Created tables from schema');
-    dummy.init();
+    // dummy.init();
   });
 
 exports.User = User;
@@ -196,3 +196,4 @@ exports.Event = Event;
 exports.Tag = Tag;
 exports.Dish = Dish;
 exports.Review = Review;
+exports.sequelize = Sequelize;
