@@ -6,25 +6,63 @@ export const MAP_CENTER = 'MAP_CENTER';
 export const SELECT_EVENT = 'SELECT_EVENT';
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
+export const AUTH_USER = 'AUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
 
 export function SignInFunc(props) {
   const email = props.email;
   const password = props.password;
-
-  return axios({
-    method: 'POST',
-    url: '/api/auth/login',
-    params: {
-      email,
-      password,
-    },
-  })
-    .then((payload) => {
-      console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
+  console.log('inside actions this is the email and password', email, password);
+  return (dispatch) => {
+    console.log('PROOOOOOOPS ');
+    return axios({
+      method: 'POST',
+      url: '/api/auth/login',
+      data: {
+        email,
+        password,
+      },
     })
-    .catch((err) => {
-      console.log('ERROR: ', err);
-    });
+      .then((response) => {
+      // console.log("RESPOOOOOOOONSE: ", response);
+        console.log('HELLLLOOOOOOOOOOO');
+      // PAYLOAD =
+      // {
+      //   "token": "eyJhbGciO.......",
+      //   "result": {
+      //     "id": 16,
+      //     "userName": "Joe",
+      //     "email": "joe128@gmail.com",
+      //     "firstName": "Joseph",
+      //     "lastName": "italiano",
+      //     "address": "Roma",
+      //     "phoneNumber": "4159305687",
+      //     "updatedAt": "2016-08-05T18:04:01.000Z",
+      //     "createdAt": "2016-08-05T18:04:01.000Z"
+      //   }
+      // }
+
+        console.log('HELLLLOOOOOOOOOOO', response);
+
+      // save token to localStorage
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userId', response.data.user.id);
+
+      // dispatch action to update state to indicate that user is authenticate
+        dispatch({
+          type: AUTH_USER,
+        });
+        browserHistory.push('/');
+      })
+      .catch(() => {
+        console.log('INSIIIIIIIIDE CATCH');
+        dispatch({
+          type: AUTH_ERROR,
+          payload: 'Invalid email or password',
+        });
+        console.log('after dispatch??');
+      });
+  };
 }
 
 export function SignUpFunc(props) {
@@ -39,7 +77,7 @@ export function SignUpFunc(props) {
   return axios({
     method: 'POST',
     url: '/api/auth/signup',
-    params: {
+    data: {
       firstName,
       lastName,
       address,
@@ -70,7 +108,7 @@ export function convertAddress(address) {
     },
   })
     .then((payload) => {
-    // try console.log payload here
+  // try console.log payload here
       response = payload.data.results[0].geometry.location;
       coordinate = {
         latitude: response.lat,
