@@ -6,15 +6,15 @@ body {
 }
 
 body {
-  padding-top: 50px;
+  padding-top: 100px;
 }
 
 /*ROUTEVIEW*****************/
 
-#routeView {
+/*#routeView {
   margin-top: 50px;
 
-}
+}*/
 
 /*MAP**************************/
 
@@ -35,6 +35,10 @@ body {
 
 /*NavBar***************************************/
 
+.navbar.navbar.navbar-default.navbar-fixed-top {
+  background: #B9E8EA
+}
+
 .navbar > .container {
   display: flex;
   flex-direction: row;
@@ -42,9 +46,11 @@ body {
   justify-content: space-between;
 }
 
-.nav-logo {
-  text-align: left;
+.navbar-brand > img {
 
+  height: 70px;
+  width: 70px;
+  left: 25px;
 }
 
 .nav-search > .search-input {
@@ -139,6 +145,17 @@ input::-webkit-input-placeholder {
   color: #999;
 }
 
+.btn.btn-primary {
+  background-color: #371C11;
+  border-color: #371C11;
+
+}
+
+.btn.btn-primary:hover {
+  background-color: #025aa5;
+  border-color: #01549b
+}
+
 /*MODALS*****************************************/
 
 .modalImage {
@@ -215,7 +232,7 @@ input::-webkit-input-placeholder {
   padding: 10px;
   color: white;
   text-align: center;
-  background-color: #aaa;
+  background-color: #371C11;
 }
 
 .list-image {
@@ -289,6 +306,10 @@ input::-webkit-input-placeholder {
   background-color: red;
 }
 
+.chef-container > .chef-photo {
+  width: 100px;
+  height: 100px;
+}
 
 
 /***************************   VIDEO   ***********************************/
