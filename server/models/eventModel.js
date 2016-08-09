@@ -56,6 +56,18 @@ Event.findEventsInRadius = function (lat, lng, tags) {
       longitude: { $between: [lng - rad, +lng + rad] },
       startDatetime: { $gt: currentDate },
     },
+    include: [
+      {
+        model: db.User,
+        through: {
+          model: db.UsersEvent,
+          where: { role: 'host' },
+        },
+      },
+      {
+        model: db.Tag,
+      },
+    ],
   })
     .then((results) => {
       console.log('results from findEventsInRadius', results);
@@ -76,18 +88,6 @@ Event.findEventsByTime = function (start, end) {
         },
       ],
     },
-    include: [
-      {
-        model: db.User,
-        through: {
-          model: db.UsersEvent,
-          where: { role: 'host' },
-        },
-      },
-      {
-        model: db.Tag,
-      },
-    ],
   });
 };
 
@@ -122,7 +122,11 @@ Event.findEventsByGuest = function (userId) {
   return db.User.findById(userId)
     .then((user) => {
       console.log('user is:', user);
-      return user.getEvents()
+      return user.getEvents({
+        through: {
+          where: { role: 'guest' },
+        },
+      })
         .then((results) => {
           console.log('results of getEvents:', results);
           return results;
@@ -146,23 +150,43 @@ Event.createEvent = function (newEvent) {
 };
 
 Event.joinEvent = function (eventId, userId) {
-  // check to see if user relationship with event exists
   return db.Event.findById(eventId)
     .then((event) => {
-      return event.getUsers({
-        where: { id: userId },
-      })
-        .then((result) => {
-          if (result.length) {
-            return ([]);
-          }
-          return db.User.findById(userId)
-            .then((user) => event.addUsers([user], { role: 'guest' }));
+      if (!event) return {};
+      return db.User.findById(userId)
+        .then((user) => {
+          if (!user) return {};
+          return event.hasUser(user)
+            .then((result) => {
+              if (result) return {};
+              return event.addUsers([user], { role: 'guest' })
+                .then(() => {
+                  return event.increment('attending');
+                });
+            });
         });
     })
-    .catch(err => {
-      console.log('error is:', err);
-    });
+    .catch((err) => err);
+};
+
+Event.quitEvent = function (eventId, userId) {
+  return db.Event.findById(eventId)
+    .then((event) => {
+      if (!event) return {};
+      return db.User.findById(userId)
+        .then((user) => {
+          if (!user) return {};
+          return event.hasUser(user)
+            .then((result) => {
+              if (!result) return {};
+              return event.removeUsers([user])
+                .then(() => {
+                  return event.decrement('attending');
+                });
+            });
+        });
+    })
+    .catch((err) => err);
 };
 
 Event.destroyEvent = function (event) {
