@@ -9,7 +9,7 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const UNAUTH_USER = 'UNAUTH_USER';
 
-/***************** AUTHENTICATIONS *********************/
+/** *************** AUTHENTICATIONS *********************/
 
 export const SignInFunc = (props) => {
   const email = props.email;
@@ -59,7 +59,7 @@ export const SignInFunc = (props) => {
         });
       });
   };
-}
+};
 
 export const SignUpFunc = (props) => {
   const firstName = props.firstName;
@@ -115,30 +115,30 @@ export const SignUpFunc = (props) => {
         });
       });
   };
-}
+};
 
 export const SignOutFunc = () => {
   localStorage.removeItem('token');
   return {
     type: UNAUTH_USER,
   };
-}
+};
 
-/*********************** CHEF DASHBOARD ***********************/
+/** ********************* CHEF DASHBOARD ***********************/
 
 export const PastEventFunc = () => {
   // get request to db to fetch list of past events the user hosts
-}
+};
 
 export const UpcomingEventFunc = () => {
   // get request to db to fetch list of upcoming events the user hosted
-}
+};
 
 export const SelectedChefEvent = () => {
   // selected event in chef dash
-}
+};
 
-/******************** HELPER ********************/
+/** ****************** HELPER ********************/
 
 export const convertAddress = (address) => {
   let response;
@@ -166,15 +166,15 @@ export const convertAddress = (address) => {
     .catch((err) => {
       console.log('ERROR ', err);
     });
-}
+};
 
-/******************* EVENT FUNC ***********************/
+/** ***************** EVENT FUNC ***********************/
 
 export const getAllEvents = (locationObj) => {
   return axios.get('/api/event/location', {
     params: locationObj,
   });
-}
+};
 
 export const getAllInRadius = (searchParams) => {
   console.log('IN GETALLINRADIUS...searchParams =', searchParams);
@@ -206,14 +206,14 @@ export const getAllInRadius = (searchParams) => {
       });
     browserHistory.push('home');
   };
-}
+};
 
 export const selectEvent = (event) => {
   return {
     type: SELECT_EVENT,
     payload: event,
   };
-}
+};
 
 export const createEvent = (props) => {
   console.log('PROOOOOPS: ', props);
@@ -281,4 +281,4 @@ export const createEvent = (props) => {
     // };
         });
     });
-}
+};
