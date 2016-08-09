@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+const authCheck = JSON.parse(localStorage['reduxPersist:auth']);
+console.log('AUTHCHECKER: ', authCheck);
+
 export default function (ComposedComponent) {
   class Authentication extends Component {
     static contextTypes = {
@@ -8,18 +11,31 @@ export default function (ComposedComponent) {
     }
 
     componentWillMount() {
-      if (!this.props.authenticated) {
+      if (!this.props.authenticated && !authCheck.authenticated) {
         this.context.router.push('/');
       }
     }
 
     componentWillUpdate(nextProps) {
-      if (!nextProps.authenticated) {
+      if (!nextProps.authenticated && !authCheck.authenticated) {
         this.context.router.push('/');
       }
     }
 
+    // componentWillMount() {
+    //   if (!this.props.authenticated) {
+    //     this.context.router.push('/');
+    //   }
+    // }
+
+    // componentWillUpdate(nextProps) {
+    //   if (!nextProps.authenticated) {
+    //     this.context.router.push('/');
+    //   }
+    // }
+
     render() {
+      console.log('CHECKHERERRR: ', !authCheck.authenticated);
       return <ComposedComponent {...this.props} />;
     }
   }
