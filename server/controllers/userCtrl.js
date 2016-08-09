@@ -25,7 +25,7 @@ module.exports = {
   '/events/:userId': {
     get(req, res) {
       const userId = url.parse(req.url, true).path.slice(8);
-      console.log('userId is:', userId)
+      console.log('userId is:', userId);
       Event.findEventsByGuest(userId)
         .then((results) => {
           res.send(results);

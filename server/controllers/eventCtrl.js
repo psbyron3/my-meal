@@ -21,6 +21,7 @@ module.exports = {
             res.end('no events exist yet');
           } else {
             console.log('events exist');
+            
             res.send(events);
           }
         })

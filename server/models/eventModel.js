@@ -8,17 +8,20 @@ Event.findAllEvents = function () {
   return db.Event.findAll({
     include: [
       {
-        model: db.User
-
+        model: db.User,
+        through: {
+          model: db.UsersEvent,
+          where: {role: 'host'}
+        }
       },
       {
-        model: db.Tag
-      }
-    ]
+        model: db.Tag,
+      },
+    ],
   })
-  .then((results) => {
-
-  }); // Sequelize query
+    .then((results) => {
+      return results;
+    }); // Sequelize query
 };
 
 Event.findLastEvent = function () {
@@ -111,17 +114,18 @@ Event.findEventsByGuest = function (userId) {
           console.log('results of getEvents:', results);
           return results;
         });
-    })
-}
+    });
+};
 
 Event.createEvent = function (newEvent) {
-  return db.Event.create(newEvent)
+  let newE = Object.assign({}, newEvent, { attending: 0 })
+  return db.Event.create(newE)
     .then((event) => {
       console.log('result of createEvent', event.eventName);
       console.log('newEvent is:', newEvent);
       return User.addHostToEvent(event, newEvent.userId)
         .then(() => {
-          console.log('host added...adding tags', event);
+          console.log('host added...adding tags');
           return Tag.addTagsToEvent(event, newEvent.tags)
             .then(() => event);
         });

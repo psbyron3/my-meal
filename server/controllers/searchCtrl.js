@@ -66,7 +66,7 @@ module.exports = {
     },
   },
   '/test': {
-    get(req,res) {
+    get(req, res) {
       Event.findAllEvents()
         .then((results) => {
           res.send(results);
@@ -84,6 +84,6 @@ module.exports = {
       console.log('Received DELETE at /api/search/location');
       res.end('Received DELETE at /api/search/location');
     },
-  }
+  },
 
 };
