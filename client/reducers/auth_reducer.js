@@ -7,13 +7,13 @@ export default (state = INITIAL_STATE, action) => {
     case AUTH_USER: return {
       ...state,
       authenticated: true,
-      error: ""
+      error: '',
     };
 
     case UNAUTH_USER: return {
       ...state,
       authenticated: false,
-      error: ""
+      error: '',
     };
 
     case AUTH_ERROR: return {
