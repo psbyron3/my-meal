@@ -356,3 +356,56 @@ input::-webkit-input-placeholder {
     width: 100%;
 }
 
+/*************************  User Dash ****************************/
+
+.user-event {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0     
+    2.5px 6px rgba(0, 0, 0, 0.2);
+}
+
+.user-event-basics {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-grow: 8;
+}
+
+.user-event-pic{
+  height: 250px;
+  width: 350px;
+}
+
+.user-event-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-gutter {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-chef-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+}
+
+.user-chef-photo {
+  width: 100px;
+  height:100px;
+}
+
+.user-chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -9,14 +9,12 @@ export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 export function SignInFunc(props) {
   const email = props.email;
   const password = props.password;
+  const params = {email, password};
 
   return axios({
     method: 'POST',
     url: '/api/auth/login',
-    params: {
-      email,
-      password,
-    },
+    data: params
   })
     .then((payload) => {
       console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
