@@ -100,6 +100,7 @@ Dummy.init = function () {
               startDatetime: new Date(),
               endDatetime: new Date(),
               userId: 1,
+              tags: [14]
             }),
             Event.createEvent({
               eventName: 'Tacos Party',
@@ -139,6 +140,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-07T18:00:00',
               endDatetime: '2016-08-07T20:00:00',
               userId: 3,
+              tags: [1, 5, 19]
             }),
             Event.createEvent({
               eventName: 'Hot Dog Async Party (...WUT?)',

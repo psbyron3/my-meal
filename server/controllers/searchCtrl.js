@@ -65,5 +65,25 @@ module.exports = {
       res.end('Received DELETE at /api/search/location');
     },
   },
+  '/test': {
+    get(req,res) {
+      Event.findAllEvents()
+        .then((results) => {
+          res.send(results);
+        });
+    },
+    post(req, res) {
+      console.log('Received POST at /api/search/location');
+      res.end('Received POST at /api/search/location');
+    },
+    put(req, res) {
+      console.log('Received PUT at /api/search/location');
+      res.end('Received PUT at /api/search/location');
+    },
+    delete(req, res) {
+      console.log('Received DELETE at /api/search/location');
+      res.end('Received DELETE at /api/search/location');
+    },
+  }
 
 };

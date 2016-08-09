@@ -5,7 +5,20 @@ const Tag = require('./tagModel.js');
 const Event = module.exports;
 
 Event.findAllEvents = function () {
-  return db.Event.findAll(); // Sequelize query
+  return db.Event.findAll({
+    include: [
+      {
+        model: db.User
+
+      },
+      {
+        model: db.Tag
+      }
+    ]
+  })
+  .then((results) => {
+
+  }); // Sequelize query
 };
 
 Event.findLastEvent = function () {
@@ -88,6 +101,18 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
     },
   });
 };
+
+Event.findEventsByGuest = function (userId) {
+  return db.User.findById(userId)
+    .then((user) => {
+      console.log('user is:', user);
+      return user.getEvents()
+        .then((results) => {
+          console.log('results of getEvents:', results);
+          return results;
+        });
+    })
+}
 
 Event.createEvent = function (newEvent) {
   return db.Event.create(newEvent)

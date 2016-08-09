@@ -89,3 +89,5 @@ User.createUser = function (attr) {
       });
   });
 };
+
+User.findUsersByEvent = function () {};
