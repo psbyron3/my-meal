@@ -12,10 +12,15 @@ export default class NavBarComp extends Component {
 
   render() {
     return (
-      <Navbar fixedTop inverse>
+      <Navbar fixedTop className="navbar">
         <Navbar.Header className="nav-logo">
           <Navbar.Brand>
-            <Link to="/">Food Now!</Link>
+            <Link to="/">
+              <img
+                src="../assets/share-eat.png"
+                role="presentation"
+              />
+            </Link>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullLeft>
@@ -37,6 +42,11 @@ export default class NavBarComp extends Component {
           <NavItem className="sign-in">
             <Link to="signin">
               <button className="btn btn-primary">Sign In</button>
+            </Link>
+          </NavItem>
+          <NavItem className="user-dash">
+            <Link to="dashboard">
+              <button className="btn btn-primary">Dashboard</button>
             </Link>
           </NavItem>
         </Nav>
