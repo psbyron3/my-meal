@@ -5,8 +5,6 @@ import { Tabs, Tab } from 'react-bootstrap';
 export default class UserDash extends Component {
 
 
-
-
   render() {
     return (
       <div>

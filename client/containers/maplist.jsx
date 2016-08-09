@@ -37,7 +37,7 @@ class MapList extends Component {
           description={event.description}
           maxGuests={event.maxGuests}
           price={event.price}
-      />);
+        />);
     });
   }
 
@@ -46,10 +46,10 @@ class MapList extends Component {
       this.state.allEvents.length
       :
       1;
-    return ( 
-        <div className="event-list">
-          {this.renderList()}
-        </div>
+    return (
+      <div className="event-list">
+        {this.renderList()}
+      </div>
     );
   }
 }
