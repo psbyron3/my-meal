@@ -4,6 +4,7 @@ const Tag = require('./tagModel.js');
 
 const Event = module.exports;
 
+//This is to be used for dev testing purposes only
 Event.findAllEvents = function () {
   return db.Event.findAll({
     include: [
@@ -11,8 +12,8 @@ Event.findAllEvents = function () {
         model: db.User,
         through: {
           model: db.UsersEvent,
-          where: {role: 'host'}
-        }
+          where: { role: 'host' },
+        },
       },
       {
         model: db.Tag,
@@ -24,6 +25,7 @@ Event.findAllEvents = function () {
     }); // Sequelize query
 };
 
+//This is to take the place of findAllEvents at route '/api/event/' before deployment
 Event.findLastEvent = function () {
   return db.Event.max('id')
     .then((maxId) => {
@@ -37,8 +39,9 @@ Event.findLastEvent = function () {
     });
 };
 
+
 Event.findEventById = function (eventId) {
-  return db.Event.findById(eventId); // Sequelize query
+  return db.Event.findById(eventId);
 };
 
 // expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
@@ -75,6 +78,18 @@ Event.findEventsByTime = function (start, end) {
         },
       ],
     },
+    include: [
+      {
+        model: db.User,
+        through: {
+          model: db.UsersEvent,
+          where: { role: 'host' },
+        },
+      },
+      {
+        model: db.Tag,
+      },
+    ],
   });
 };
 
@@ -118,7 +133,7 @@ Event.findEventsByGuest = function (userId) {
 };
 
 Event.createEvent = function (newEvent) {
-  let newE = Object.assign({}, newEvent, { attending: 0 })
+  const newE = Object.assign({}, newEvent, { attending: 0 });
   return db.Event.create(newE)
     .then((event) => {
       console.log('result of createEvent', event.eventName);

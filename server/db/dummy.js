@@ -230,7 +230,7 @@ Dummy.init = function () {
                     Event.joinEvent(3, 3),
                     Event.joinEvent(3, 1),
                     Event.joinEvent(1, 2),
-                    Event.joinEvent(1, 4)
+                    Event.joinEvent(1, 4),
                   ];
 
                   return Promise.all(allGuestPromises);

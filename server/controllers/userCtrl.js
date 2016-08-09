@@ -22,23 +22,23 @@ module.exports = {
       res.end('Received DELETE at /api/user/');
     },
   },
-  '/events/:userId': {
+  '/events/:eventId': {
     get(req, res) {
-      const userId = url.parse(req.url, true).path.slice(8);
-      console.log('userId is:', userId);
-      Event.findEventsByGuest(userId)
+      const eventId = url.parse(req.url, true).path.slice(8);
+      const userId = req.query.userId;
+      User.findUsersByEvent(userId, eventId)
         .then((results) => {
+          console.log('Received GET at /api/user/events/:eventId');
           res.send(results);
         });
-      console.log('Received GET at /api/user/events/:userId');
     },
     post(req, res) {
-      console.log('Received POST at /api/user/events/:userId');
-      res.end('Received POST at /api/user/events/:userId');
+      console.log('Received POST at /api/user/events/:eventId');
+      res.end('Received POST at /api/user/events/:eventId');
     },
     put(req, res) {
-      console.log('Received PUT at /api/user/events/:userId');
-      res.end('Received PUT at /api/user/events/:userId');
+      console.log('Received PUT at /api/user/events/:eventId');
+      res.end('Received PUT at /api/user/events/:eventId');
     },
     delete(req, res) {
       console.log('Received DELETE at /api/user/events/:userId');
