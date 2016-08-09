@@ -109,7 +109,7 @@ class MapListEntry extends Component {
             <div className="chef-container">
               <Image
                 className="chef-photo"
-                src=""
+                src="../assets/stock-chef.jpg"
                 circle
               />
               <div className="chef-rating-container">
