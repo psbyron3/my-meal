@@ -9,7 +9,9 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const UNAUTH_USER = 'UNAUTH_USER';
 
-export function SignInFunc(props) {
+/** *************** AUTHENTICATIONS *********************/
+
+export const SignInFunc = (props) => {
   const email = props.email;
   const password = props.password;
   return (dispatch) => {
@@ -22,19 +24,7 @@ export function SignInFunc(props) {
         password,
       },
     })
-    // .then((payload) => {
-    //   console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
-    // })
-
-    // .then((payload) => {
-    //   console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
-    // })
-    // .then((payload) => {
-    //   console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
-
-    // })
       .then((response) => {
-    // console.log("RESPOOOOOOOONSE: ", response);
         console.log('HELLLLOOOOOOOOOOO');
     // PAYLOAD =
     // {
@@ -52,14 +42,11 @@ export function SignInFunc(props) {
     //   }
     // }
 
-        console.log('HELLLLOOOOOOOOOOO', response);
-
     // dispatch action to update state to indicate that user is authenticate
         dispatch({
           type: AUTH_USER,
         });
         browserHistory.push('/');
-
 
     // save token to localStorage
         localStorage.setItem('token', response.data.token);
@@ -72,9 +59,9 @@ export function SignInFunc(props) {
         });
       });
   };
-}
+};
 
-export function SignUpFunc(props) {
+export const SignUpFunc = (props) => {
   const firstName = props.firstName;
   const lastName = props.lastName;
   const address = props.address;
@@ -128,17 +115,32 @@ export function SignUpFunc(props) {
         });
       });
   };
-}
+};
 
-export function SignOutFunc() {
-  // localStorage["reduxPersist:auth"].authenticated = false};
+export const SignOutFunc = () => {
   localStorage.removeItem('token');
   return {
     type: UNAUTH_USER,
   };
-}
+};
 
-export function convertAddress(address) {
+/** ********************* CHEF DASHBOARD ***********************/
+
+export const PastEventFunc = () => {
+  // get request to db to fetch list of past events the user hosts
+};
+
+export const UpcomingEventFunc = () => {
+  // get request to db to fetch list of upcoming events the user hosted
+};
+
+export const SelectedChefEvent = () => {
+  // selected event in chef dash
+};
+
+/** ****************** HELPER ********************/
+
+export const convertAddress = (address) => {
   let response;
   let coordinate;
 
@@ -164,15 +166,17 @@ export function convertAddress(address) {
     .catch((err) => {
       console.log('ERROR ', err);
     });
-}
+};
 
-export function getAllEvents(locationObj) {
+/** ***************** EVENT FUNC ***********************/
+
+export const getAllEvents = (locationObj) => {
   return axios.get('/api/event/location', {
     params: locationObj,
   });
-}
+};
 
-export function getAllInRadius(searchParams) {
+export const getAllInRadius = (searchParams) => {
   console.log('IN GETALLINRADIUS...searchParams =', searchParams);
   return function (dispatch) {
     convertAddress(searchParams.query)
@@ -202,16 +206,16 @@ export function getAllInRadius(searchParams) {
       });
     browserHistory.push('home');
   };
-}
+};
 
-export function selectEvent(event) {
+export const selectEvent = (event) => {
   return {
     type: SELECT_EVENT,
     payload: event,
   };
-}
+};
 
-export function createEvent(props) {
+export const createEvent = (props) => {
   console.log('PROOOOOPS: ', props);
   const targetAddress = props.address + props.city + props.usState;
   return convertAddress(targetAddress)
@@ -277,4 +281,4 @@ export function createEvent(props) {
     // };
         });
     });
-}
+};

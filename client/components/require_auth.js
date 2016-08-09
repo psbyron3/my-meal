@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// let authCheck = JSON.parse(localStorage["reduxPersist:auth"])
-// console.log("AUTHCHECKER: ", authCheck);
-
 export default function (ComposedComponent) {
   class Authentication extends Component {
     static contextTypes = {
@@ -35,9 +32,6 @@ export default function (ComposedComponent) {
     // }
 
     render() {
-      // console.log("CHECKHERERRR: ", !authCheck.authenticated)
-      // console.log("WHAT IS AUTH?? ", this.props.authenticated)
-      // console.log("NEXTTTTT ", nextProps.authenticated)
       return <ComposedComponent {...this.props} />;
     }
   }
