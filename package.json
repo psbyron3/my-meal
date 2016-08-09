@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "axios": "^0.13.1",
+    "babel-preset-stage-0": "^6.5.0",
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
