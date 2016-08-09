@@ -179,7 +179,6 @@ module.exports = {
     },
     post(req, res) {
       // Used to join an event
-      console.log('req.body in post:', req.body);
       const eventId = url.parse(req.url, true).path.slice(1);
       console.log('eventId is:', eventId);
       const userId = req.body.userId;

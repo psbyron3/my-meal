@@ -56,6 +56,18 @@ Event.findEventsInRadius = function (lat, lng, tags) {
       longitude: { $between: [lng - rad, +lng + rad] },
       startDatetime: { $gt: currentDate },
     },
+    include: [
+      {
+        model: db.User,
+        through: {
+          model: db.UsersEvent,
+          where: { role: 'host' },
+        },
+      },
+      {
+        model: db.Tag,
+      },
+    ],
   })
     .then((results) => {
       console.log('results from findEventsInRadius', results);
@@ -76,18 +88,6 @@ Event.findEventsByTime = function (start, end) {
         },
       ],
     },
-    include: [
-      {
-        model: db.User,
-        through: {
-          model: db.UsersEvent,
-          where: { role: 'host' },
-        },
-      },
-      {
-        model: db.Tag,
-      },
-    ],
   });
 };
 
@@ -145,24 +145,20 @@ Event.createEvent = function (newEvent) {
     });
 };
 
+
 Event.joinEvent = function (eventId, userId) {
-  // check to see if user relationship with event exists
-  return db.Event.findById(eventId)
-    .then((event) => {
-      return event.getUsers({
-        where: { id: userId },
+
+    return db.Event.findById(eventId)
+      .then((event) => {
+        return db.User.findById(userId)
+          .then((user) => {
+            return event.hasUser(user)
+              .then((result) => {
+                return result ? [] : event.addUsers([user], { role: 'guest' });
+              });
+          });
       })
-        .then((result) => {
-          if (result.length) {
-            return ([]);
-          }
-          return db.User.findById(userId)
-            .then((user) => event.addUsers([user], { role: 'guest' }));
-        });
-    })
-    .catch(err => {
-      console.log('error is:', err);
-    });
+      .catch((err) => err );
 };
 
 Event.destroyEvent = function (event) {
