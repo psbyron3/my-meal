@@ -7,6 +7,7 @@ import Landing from './components/landing';
 import SignIn from './components/signIn';
 import SignUp from './components/signUp';
 import AddEvent from './components/addEvent';
+import UserDash from './components/userDash';
 
 export default (
   <Route path="/" component={App}>
@@ -15,6 +16,7 @@ export default (
     <Route path="signin" component={SignIn} />
     <Route path="signup" component={SignUp} />
     <Route path="addevent" component={AddEvent} />
+    <Route path="dashboard" component={UserDash} />
   </Route>
 
 );

@@ -23,20 +23,21 @@ class MapList extends Component {
         'list-entry': true,
         'selected-entry': event.id === this.props.hoverEvent,
       });
-      return (<MapListEntry
-        hoverEvent={this.props.hoverEvent}
-        openModal={this.props.openModal}
-        entryClass={entryClass}
-        key={event.id}
-        index={event.id}
-        image={event.eventPic}
-        eventName={event.eventName}
-        address={event.address}
-        times={`${event.startDatetime} to ${event.endDatetime}`}
-        description={event.description}
-        maxGuests={event.maxGuests}
-        price={event.price}
-      />);
+      return (
+        <MapListEntry
+          hoverEvent={this.props.hoverEvent}
+          openModal={this.props.openModal}
+          entryClass={entryClass}
+          key={event.id}
+          index={event.id}
+          image={event.eventPic}
+          eventName={event.eventName}
+          address={event.address}
+          times={`${event.startDatetime} to ${event.endDatetime}`}
+          description={event.description}
+          maxGuests={event.maxGuests}
+          price={event.price}
+        />);
     });
   }
 
@@ -47,9 +48,7 @@ class MapList extends Component {
       1;
     return (
       <div className="event-list">
-        <div>
-          {this.renderList()}
-        </div>
+        {this.renderList()}
       </div>
     );
   }
