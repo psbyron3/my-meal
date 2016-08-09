@@ -169,7 +169,7 @@ Event.joinEvent = function (eventId, userId) {
     .catch((err) => err);
 };
 
-Event.quitEvent = function(eventId, userId) {
+Event.quitEvent = function (eventId, userId) {
   return db.Event.findById(eventId)
     .then((event) => {
       if (!event) return {};

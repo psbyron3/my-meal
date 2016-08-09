@@ -193,7 +193,7 @@ module.exports = {
           console.log(result);
           res.send(result);
         });
-    }
+    },
   },
   '/:eventId': {
     get(req, res) {
