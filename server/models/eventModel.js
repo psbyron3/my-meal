@@ -149,19 +149,39 @@ Event.createEvent = function (newEvent) {
     });
 };
 
-
 Event.joinEvent = function (eventId, userId) {
   return db.Event.findById(eventId)
     .then((event) => {
+      if (!event) return {};
       return db.User.findById(userId)
         .then((user) => {
-          if(!user) return {};
+          if (!user) return {};
           return event.hasUser(user)
             .then((result) => {
               if (result) return {};
               return event.addUsers([user], { role: 'guest' })
                 .then(() => {
                   return event.increment('attending');
+                });
+            });
+        });
+    })
+    .catch((err) => err);
+};
+
+Event.quitEvent = function(eventId, userId) {
+  return db.Event.findById(eventId)
+    .then((event) => {
+      if (!event) return {};
+      return db.User.findById(userId)
+        .then((user) => {
+          if (!user) return {};
+          return event.hasUser(user)
+            .then((result) => {
+              if (!result) return {};
+              return event.removeUsers([user])
+                .then(() => {
+                  return event.decrement('attending');
                 });
             });
         });

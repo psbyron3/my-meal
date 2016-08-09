@@ -59,7 +59,6 @@ module.exports = {
             console.log('event already added');
             return res.send('event already added');
           }
-          console.log('event does not exist');
           return Event.createEvent(newEvent)
             .then((result) => {
               console.log('result...', result);
@@ -147,20 +146,54 @@ module.exports = {
         .then((results) => {
           res.send(results);
         });
-      console.log('Received GET at /api/user/events/:userId');
+      console.log('Received GET at /api/event/users/:userId');
     },
     post(req, res) {
-      console.log('Received POST at /api/user/events/:userId');
-      res.end('Received POST at /api/user/events/:userId');
+      console.log('Received POST at /api/event/users/:userId');
+      res.end('Received POST at /api/event/users/:userId');
     },
     put(req, res) {
-      console.log('Received PUT at /api/user/events/:userId');
-      res.end('Received PUT at /api/user/events/:userId');
+      console.log('Received PUT at /api/event/users/:userId');
+      res.end('Received PUT at /api/event/users/:userId');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/user/events/:userId');
-      res.end('Received DELETE at /api/user/events/:userId');
+      console.log('Received DELETE at /api/event/users/:userId');
+      res.end('Received DELETE at /api/event/users/:userId');
     },
+  },
+  '/join/:eventId': {
+    get(req, res) {
+      console.log('Received GET at /api/event/join/:eventId');
+      res.end('Received GET at /api/event/join/:eventId');
+    },
+    post(req, res) {
+      // Used to join an event
+      const eventId = url.parse(req.url, true).path.slice(6);
+      const userId = req.body.userId;
+      Event.joinEvent(eventId, userId)
+        .then((result) => {
+          if (result.hasOwnProperty('dataValues')) {
+            res.end('Successfully added user as guest');
+          }
+          res.end('Unable to add guest because of prior association');
+        })
+        .catch((err) => {
+          res.end(`Error in attempt to join event #${eventId}`);
+        });
+    },
+    put(req, res) {
+      console.log('Received PUT at /api/event/join/:eventId');
+      res.end('Received PUT at /api/event/join/:eventId');
+    },
+    delete(req, res) {
+      const eventId = url.parse(req.url, true).path.slice(6);
+      const userId = req.body.userId;
+      Event.quitEvent(eventId, userId)
+        .then((result) => {
+          console.log(result);
+          res.send(result);
+        });
+    }
   },
   '/:eventId': {
     get(req, res) {
@@ -178,19 +211,8 @@ module.exports = {
         });
     },
     post(req, res) {
-      // Used to join an event
-      const eventId = url.parse(req.url, true).path.slice(1);
-      const userId = req.body.userId;
-      Event.joinEvent(eventId, userId)
-        .then((result) => {
-          if (result.hasOwnProperty('dataValues')) {
-            res.end('Successfully added user as guest');
-          }
-          res.end('Unable to add guest because of prior association');
-        })
-        .catch((err) => {
-          res.end(`Error in attempt to join event #${eventId}`);
-        });
+      console.log('Received POST at /api/event/:eventId');
+      res.end('Received POST at /api/event/:eventId');
     },
     put(req, res) {
       // Used to edit an event

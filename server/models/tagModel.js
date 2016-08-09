@@ -24,3 +24,7 @@ Tag.addTagsToEvent = function (event, tagIds) {
 Tag.removeTagFromEvent = function (tagId, eventId) {
   return;
 };
+
+Tag.getAllTags = function () {
+  return db.Tag.findAll();
+}
