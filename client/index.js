@@ -12,7 +12,7 @@ import routes from './routes';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-const store = createStoreWithMiddleware(reducers, 
+const store = createStoreWithMiddleware(reducers,
   window.devToolsExtension ? window.devToolsExtension() : f => f, autoRehydrate());
 
 persistStore(store);
