@@ -122,7 +122,11 @@ Event.findEventsByGuest = function (userId) {
   return db.User.findById(userId)
     .then((user) => {
       console.log('user is:', user);
-      return user.getEvents()
+      return user.getEvents({
+        through: {
+          where: { role: 'guest' }
+        }
+      })
         .then((results) => {
           console.log('results of getEvents:', results);
           return results;
@@ -147,18 +151,17 @@ Event.createEvent = function (newEvent) {
 
 
 Event.joinEvent = function (eventId, userId) {
-
-    return db.Event.findById(eventId)
-      .then((event) => {
-        return db.User.findById(userId)
-          .then((user) => {
-            return event.hasUser(user)
-              .then((result) => {
-                return result ? [] : event.addUsers([user], { role: 'guest' });
-              });
-          });
-      })
-      .catch((err) => err );
+  return db.Event.findById(eventId)
+    .then((event) => {
+      return db.User.findById(userId)
+        .then((user) => {
+          return event.hasUser(user)
+            .then((result) => {
+              return result ? [] : event.addUsers([user], { role: 'guest' });
+            });
+        });
+    })
+    .catch((err) => err);
 };
 
 Event.destroyEvent = function (event) {
