@@ -21,7 +21,7 @@ Tag.addTagsToEvent = function (event, tagIds) {
     );
 };
 
-//used by chefs to edit events; event is a row in the table, tags is an array of tag ids
+// used by chefs to edit events; event is a row in the table, tags is an array of tag ids
 Tag.removeTagsFromEvent = function (event, tagIds) {
   return db.Tag.findAll({ where: { id: tagIds } })
     .then((tags) => event.removeTags(tags)

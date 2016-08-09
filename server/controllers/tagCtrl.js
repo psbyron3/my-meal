@@ -35,26 +35,26 @@ module.exports = {
     put(req, res) {
       const eventId = url.parse(req.url, true).path.slice(1);
       const userId = req.body.userId;
-      return Event.findEventById(eventId)
-        .then((event) => Tag.addTagsToEvent(event, userId)
-          .then((result) => {
-            res.send(result);
-          });
-        );
       console.log('Received PUT at /api/tag/:eventId');
-      res.end('Received PUT at /api/tag/:eventId');
+      return Event.findEventById(eventId)
+        .then((event) => {
+          return Tag.addTagsToEvent(event, userId)
+            .then((result) => {
+              res.send(result);
+            });
+        });
     },
     delete(req, res) {
       const eventId = url.parse(req.url, true).path.slice(1);
       const userId = req.body.userId;
-      return Event.findEventById(eventId)
-        .then((event) => Tag.removeTagsFromEvent(event, userId)
-          .then((result) => {
-            res.send(result);
-          });
-        );
       console.log('Received DELETE at /api/tag/:eventId');
-      res.end('Received DELETE at /api/tag/:eventId');
+      return Event.findEventById(eventId)
+        .then((event) => {
+          Tag.removeTagsFromEvent(event, userId)
+            .then((result) => {
+              res.send(result);
+            });
+        });
     },
-  }
-}
+  },
+};
