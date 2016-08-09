@@ -1,4 +1,4 @@
-const controllers = require('../controllers/reviewCtrl.js');
+const controllers = require('../controllers/tagCtrl.js');
 const router = require('express').Router();
 
 for (const route in controllers) {
