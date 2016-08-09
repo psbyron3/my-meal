@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-const authCheck = JSON.parse(localStorage['reduxPersist:auth']);
-console.log('AUTHCHECKER: ', authCheck);
+// let authCheck = JSON.parse(localStorage["reduxPersist:auth"])
+// console.log("AUTHCHECKER: ", authCheck);
 
 export default function (ComposedComponent) {
   class Authentication extends Component {
@@ -10,14 +10,14 @@ export default function (ComposedComponent) {
       router: React.PropTypes.object,
     }
 
-    componentWillMount() {
-      if (!this.props.authenticated && !authCheck.authenticated) {
+    componentDidMount() {
+      if (!this.props.authenticated) {
         this.context.router.push('/');
       }
     }
 
-    componentWillUpdate(nextProps) {
-      if (!nextProps.authenticated && !authCheck.authenticated) {
+    componentDidUpdate(nextProps) {
+      if (!nextProps.authenticated) {
         this.context.router.push('/');
       }
     }
@@ -35,7 +35,9 @@ export default function (ComposedComponent) {
     // }
 
     render() {
-      console.log('CHECKHERERRR: ', !authCheck.authenticated);
+      // console.log("CHECKHERERRR: ", !authCheck.authenticated)
+      // console.log("WHAT IS AUTH?? ", this.props.authenticated)
+      // console.log("NEXTTTTT ", nextProps.authenticated)
       return <ComposedComponent {...this.props} />;
     }
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { SignInFunc } from '../actions/index';
+import { SignInFunc, SignOutFunc } from '../actions/index';
 
 class SignIn extends Component {
   constructor(props) {
@@ -64,9 +64,14 @@ class SignIn extends Component {
                         <Link to="signUp">New user? Sign up here!</Link>
                       </div>
 
+
                     </fieldset>
                   </form>
-
+                  <div>
+                    <button onClick={this.props.SignOutFunc} className="btn btn-md btn-primary btn-block">
+                      log out
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -105,4 +110,4 @@ export default reduxForm({
   fields: ['email',
            'password'],
   validate,
-}, mapStateToProps, { SignInFunc })(SignIn);
+}, mapStateToProps, { SignInFunc, SignOutFunc })(SignIn);

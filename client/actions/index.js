@@ -7,6 +7,7 @@ export const CREATE_EVENT = 'CREATE_EVENT';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const UNAUTH_USER = 'UNAUTH_USER';
 
 export function SignInFunc(props) {
   const email = props.email;
@@ -115,6 +116,14 @@ export function SignUpFunc(props) {
           type: AUTH_ERROR,
         });
       });
+  };
+}
+
+export function SignOutFunc() {
+  // localStorage["reduxPersist:auth"].authenticated = false};
+  localStorage.removeItem('token');
+  return {
+    type: UNAUTH_USER,
   };
 }
 
