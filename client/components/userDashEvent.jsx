@@ -49,3 +49,4 @@ export default class DashEvent extends Component {
     );
   }
 }
+}

@@ -22,6 +22,10 @@ export function SignInFunc(props) {
         password,
       },
     })
+
+    // .then((payload) => {
+    //   console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
+    // })
     // .then((payload) => {
     //   console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
 
