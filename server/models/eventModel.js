@@ -124,8 +124,8 @@ Event.findEventsByGuest = function (userId) {
       console.log('user is:', user);
       return user.getEvents({
         through: {
-          where: { role: 'guest' }
-        }
+          where: { role: 'guest' },
+        },
       })
         .then((results) => {
           console.log('results of getEvents:', results);
@@ -155,9 +155,14 @@ Event.joinEvent = function (eventId, userId) {
     .then((event) => {
       return db.User.findById(userId)
         .then((user) => {
+          if(!user) return {};
           return event.hasUser(user)
             .then((result) => {
-              return result ? [] : event.addUsers([user], { role: 'guest' });
+              if (result) return {};
+              return event.addUsers([user], { role: 'guest' })
+                .then(() => {
+                  return event.increment('attending');
+                });
             });
         });
     })

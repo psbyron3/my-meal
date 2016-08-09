@@ -180,12 +180,10 @@ module.exports = {
     post(req, res) {
       // Used to join an event
       const eventId = url.parse(req.url, true).path.slice(1);
-      console.log('eventId is:', eventId);
       const userId = req.body.userId;
-      console.log('Received POST at /api/event/:eventId');
       Event.joinEvent(eventId, userId)
         .then((result) => {
-          if (result.length > 0) {
+          if (result.hasOwnProperty('dataValues')) {
             res.end('Successfully added user as guest');
           }
           res.end('Unable to add guest because of prior association');
