@@ -5,7 +5,7 @@ const Event = require('./eventModel.js');
 
 const User = module.exports;
 
-//Used to save enscrypted password to database
+// Used to save enscrypted password to database
 function hashPassword(pw) {
   console.log('hashing password', pw);
   return new Promise(function (resolve, reject, next) {
@@ -26,7 +26,7 @@ function hashPassword(pw) {
   });
 }
 
-//Used to compare submitted pw to saved, hashed pw
+// Used to compare submitted pw to saved, hashed pw
 User.comparePasswords = function (hashedPw, attempt) {
   return new Promise(function (resolve, reject) {
     return bcrypt.compare(attempt, hashedPw, function (err, res) {
@@ -63,7 +63,7 @@ User.findUserByEmail = function (email) {
   });
 };
 
-//Used in the Event.createEvent function only
+// Used in the Event.createEvent function only
 User.addHostToEvent = function (event, userId) {
   return db.User.findById(userId)
     .then((user) => {
@@ -94,9 +94,9 @@ User.createUser = function (attr) {
   });
 };
 
-//To be used only by chef in order to see which users are attending.
-//require authentication matching userId to hostId
-//userId parameter is to be used only to check hostId and should be the id of the user making the request
+// To be used only by chef in order to see which users are attending.
+// require authentication matching userId to hostId
+// userId parameter is to be used only to check hostId and should be the id of the user making the request
 User.findUsersByEvent = function (userId, eventId) {
   return db.Event.findById(eventId)
     .then((event) => {

@@ -4,7 +4,7 @@ const Tag = require('./tagModel.js');
 
 const Event = module.exports;
 
-//This is to be used for dev testing purposes only
+// This is to be used for dev testing purposes only
 Event.findAllEvents = function () {
   return db.Event.findAll({
     include: [
@@ -20,12 +20,10 @@ Event.findAllEvents = function () {
       },
     ],
   })
-    .then((results) => {
-      return results;
-    }); // Sequelize query
+    .then((results) => results); // Sequelize query
 };
 
-//This is to take the place of findAllEvents at route '/api/event/' before deployment
+// This is to take the place of findAllEvents at route '/api/event/' before deployment
 Event.findLastEvent = function () {
   return db.Event.max('id')
     .then((maxId) => {
