@@ -14,7 +14,7 @@ export default (
     <Route path="home" component={Home} />
     <Route path="signin" component={SignIn} />
     <Route path="signup" component={SignUp} />
-    <Route path="addevent" component={AddEvent} />
+    <Route path="addevent" component={RequireAuth(AddEvent)} />
   </Route>
 
 );
