@@ -21,6 +21,7 @@ module.exports = {
             res.end('no events exist yet');
           } else {
             console.log('events exist');
+
             res.send(events);
           }
         })
@@ -108,7 +109,6 @@ module.exports = {
       res.end('Received DELETE at /api/event/picture');
     },
   },
-
   '/location/': {
     get(req, res) {
       console.log('Received GET at /api/event/location');
@@ -137,6 +137,29 @@ module.exports = {
     delete(req, res) {
       console.log('Received DELETE at /api/event/location');
       res.end('Received DELETE at /api/event/location');
+    },
+  },
+  '/users/:userId': {
+    get(req, res) {
+      const userId = url.parse(req.url, true).path.slice(7);
+      console.log('userId is:', userId);
+      Event.findEventsByGuest(userId)
+        .then((results) => {
+          res.send(results);
+        });
+      console.log('Received GET at /api/user/events/:userId');
+    },
+    post(req, res) {
+      console.log('Received POST at /api/user/events/:userId');
+      res.end('Received POST at /api/user/events/:userId');
+    },
+    put(req, res) {
+      console.log('Received PUT at /api/user/events/:userId');
+      res.end('Received PUT at /api/user/events/:userId');
+    },
+    delete(req, res) {
+      console.log('Received DELETE at /api/user/events/:userId');
+      res.end('Received DELETE at /api/user/events/:userId');
     },
   },
   '/:eventId': {

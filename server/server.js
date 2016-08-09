@@ -5,16 +5,16 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 
-const dotenv = require('dotenv').config({ path: '../.env' });
+const dotenv = require('dotenv').config();
 
 const db = require('./db/db.js');
-
 
 const routesUser = require('./routes/routesUser.js');
 const routesEvent = require('./routes/routesEvent.js');
 const routesDish = require('./routes/routesDish.js');
 const routesAuth = require('./routes/routesAuth.js');
 const routesReview = require('./routes/routesReview.js');
+const routesSearch = require('./routes/routesSearch.js');
 
 const multiparty = require('connect-multiparty');
 const multipartyMiddleware = multiparty();
@@ -33,6 +33,7 @@ app.use('/api/auth', routesAuth);
 app.use('/api/event', routesEvent);
 app.use('api/dish', routesDish);
 app.use('/api/review', routesReview);
+app.use('/api/search', routesSearch);
 
 
 app.get('*', (request, response) => {

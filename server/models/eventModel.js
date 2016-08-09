@@ -4,15 +4,46 @@ const Tag = require('./tagModel.js');
 
 const Event = module.exports;
 
+// This is to be used for dev testing purposes only
 Event.findAllEvents = function () {
-  return db.Event.findAll(); // Sequelize query
+  return db.Event.findAll({
+    include: [
+      {
+        model: db.User,
+        through: {
+          model: db.UsersEvent,
+          where: { role: 'host' },
+        },
+      },
+      {
+        model: db.Tag,
+      },
+    ],
+  })
+    .then((results) => results); // Sequelize query
 };
+
+// This is to take the place of findAllEvents at route '/api/event/' before deployment
+Event.findLastEvent = function () {
+  return db.Event.max('id')
+    .then((maxId) => {
+      return db.Event.findAll({
+        where: { id: maxId },
+      });
+    })
+    .catch((err) => {
+      console.log('error in findLastEvent...', err);
+      return err;
+    });
+};
+
 
 Event.findEventById = function (eventId) {
-  return db.Event.findById(eventId); // Sequelize query
+  return db.Event.findById(eventId);
 };
 
-Event.findEventsInRadius = function (lat, lng) {
+// expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
+Event.findEventsInRadius = function (lat, lng, tags) {
   console.log('inside events in radius');
   console.log('lat', lat);
   console.log('lng', lng);
@@ -29,7 +60,7 @@ Event.findEventsInRadius = function (lat, lng) {
     .then((results) => {
       console.log('results from findEventsInRadius', results);
       return results;
-    }); // Sequelize query
+    });
 };
 
 Event.findEventsByTime = function (start, end) {
@@ -45,7 +76,19 @@ Event.findEventsByTime = function (start, end) {
         },
       ],
     },
-  }); // Sequelize query `
+    include: [
+      {
+        model: db.User,
+        through: {
+          model: db.UsersEvent,
+          where: { role: 'host' },
+        },
+      },
+      {
+        model: db.Tag,
+      },
+    ],
+  });
 };
 
 Event.findEventByLocation = function (lat, lng) {
@@ -72,22 +115,30 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
         },
       ],
     },
-  }); // Sequelize query
+  });
 };
 
-// expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
-Event.findEventByLocationDateAndTag = function (lat, lng, start, end, tags) {
-  return;
+Event.findEventsByGuest = function (userId) {
+  return db.User.findById(userId)
+    .then((user) => {
+      console.log('user is:', user);
+      return user.getEvents()
+        .then((results) => {
+          console.log('results of getEvents:', results);
+          return results;
+        });
+    });
 };
 
 Event.createEvent = function (newEvent) {
-  return db.Event.create(newEvent)
+  const newE = Object.assign({}, newEvent, { attending: 0 });
+  return db.Event.create(newE)
     .then((event) => {
       console.log('result of createEvent', event.eventName);
       console.log('newEvent is:', newEvent);
       return User.addHostToEvent(event, newEvent.userId)
         .then(() => {
-          console.log('host added...adding tags', event);
+          console.log('host added...adding tags');
           return Tag.addTagsToEvent(event, newEvent.tags)
             .then(() => event);
         });
