@@ -71,6 +71,9 @@ const Event = sequelize.define('Event', {
   maxGuests: {
     type: Sequelize.INTEGER,
   },
+  attending: {
+    type: Sequelize.INTEGER,
+  },
   address: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -183,7 +186,6 @@ User.hasMany(Review, { foreignKey: 'hostId' });
 Review.belongsTo(User, { as: 'reviewer', foreignKey: 'reviewerId' });
 User.hasMany(Review, { foreignKey: 'reviewerId' });
 
-
 sequelize
   .sync({ force: true })
   .then(() => {
@@ -196,3 +198,5 @@ exports.Event = Event;
 exports.Tag = Tag;
 exports.Dish = Dish;
 exports.Review = Review;
+exports.UsersEvent = UsersEvent;
+exports.sequelize = Sequelize;
