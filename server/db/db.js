@@ -205,11 +205,7 @@ sequelize
   .sync({ force: false })
   .then(() => {
     console.log('Created tables from schema');
-<<<<<<< d4a294ac20daae55517e774d07681bf840d09705
     // dummy.init();
-=======
-    //dummy.init();
->>>>>>> [refactor] Fixed static routes and turned off init dummy data for db.
   });
 
 exports.User = User;
