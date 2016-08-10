@@ -118,13 +118,13 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
   });
 };
 
-Event.findEventsByGuest = function (userId) {
+Event.findEventsByUser = function (userId, role) {
   return db.User.findById(userId)
     .then((user) => {
       console.log('user is:', user);
       return user.getEvents({
         through: {
-          where: { role: 'guest' },
+          where: { role },
         },
       })
         .then((results) => {

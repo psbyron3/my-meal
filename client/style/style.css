@@ -28,7 +28,13 @@ body {
   position: fixed;
 }
 
+.marker > img {
+  width: 32px;
+  height: 40px;
+}
+
 .marker {
+
   padding: 0;
   margin: 0;
 }
@@ -48,8 +54,8 @@ body {
 
 .navbar-brand > img {
 
-  height: 70px;
-  width: 70px;
+  height: 90px;
+  width: 72px;
   left: 25px;
 }
 
@@ -59,25 +65,26 @@ body {
 
 }
 
-.nav-search input[type=search] {
+.autoComplete input[type=search] {
   width: 15px;
   color: transparent;
   cursor: pointer;
+  z-index: 2;
 }
-.nav-search input[type=search]:hover {
+.autoComplete input[type=search]:hover {
   background-color: #fff;
 }
-.nav-search input[type=search]:focus {
+.autoComplete input[type=search]:focus {
   width: 150px;
   padding-left: 32px;
   color: #000;
   background-color: #fff;
   cursor: auto;
 }
-.nav-search input:-moz-placeholder {
+.autoComplete input:-moz-placeholder {
   color: transparent;
 }
-.nav-search input::-webkit-input-placeholder {
+.autoComplete input::-webkit-input-placeholder {
   color: transparent;
 }
 
@@ -171,7 +178,7 @@ input::-webkit-input-placeholder {
   width: 33%;
   height: 100%;
   float : right;
-  background-color: #F7F4EF; 
+  background-color: #F7F4EF;
   /*position : fixed;*/
 }
 
@@ -182,7 +189,7 @@ input::-webkit-input-placeholder {
   margin: 20px;
   cursor: pointer;
   text-align: center;
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0     
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0
     2.5px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -250,7 +257,7 @@ input::-webkit-input-placeholder {
   font-size: 24px;
   color: white;
   opacity: 0.6;
-  filter: alpha(opacity=60); 
+  filter: alpha(opacity=60);
 }
 
 .event-price {
@@ -362,7 +369,7 @@ input::-webkit-input-placeholder {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0     
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0
     2.5px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -409,8 +416,6 @@ input::-webkit-input-placeholder {
   justify-content: center;
   align-items: center;
 }
-
-/******************************* message box ***********************************/
 
 .col-md-2, .col-md-10{
     padding:0;
@@ -529,4 +534,3 @@ img {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
 }
-

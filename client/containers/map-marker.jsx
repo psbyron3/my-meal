@@ -66,10 +66,10 @@ class MapMarker extends Component {
           onClick={this.handleJoinEvent}
         >
           <img
-            src="../assets/map-marker.png"
+            src="../assets/soup-marker.png"
             role="presentation"
-            width="16px"
-            height="32px"
+            width="32px"
+            height="40px"
             onMouseEnter={this.handleEnter}
             onMouseLeave={this.handleOut}
           />
