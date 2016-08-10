@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+import moment from 'moment';
 import { Grid, Col, Row, Image } from 'react-bootstrap';
 
-export default class DashEvent extends Component {
+
+class DashEvent extends Component {
+
+  formatTime(time, str) {
+    const formattedTime = time.split(',');
+    const eventDate = formattedTime.splice(0, 1);
+    const eventTime = formattedTime.join('');
+
+    if (str === 'time') {
+      return eventTime;
+    }
+    return eventDate;
+  }
 
   render() {
     return (
@@ -13,20 +27,20 @@ export default class DashEvent extends Component {
             <Row className="user-event-basics">
               <Image
                 className="user-event-pic"
-                src="../assets/bbq.jpg"
+                src={this.props.image}
               />
               <div className="user-event-info">
                 <div className="user-event-title">
-                  Title of event
+                  {this.props.eventName}
                 </div>
                 <div className="user-event-location">
-                  Location
+                  {this.props.address}
                 </div>
                 <div className="user-event-time">
-                  Time
+                  {this.props.times}
                 </div>
                 <div className="user-event-description">
-                  This is a description of this dope-ass event!
+                  {this.props.description}
                 </div>
               </div>
             </Row>
@@ -49,3 +63,13 @@ export default class DashEvent extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  console.log('UD mapStoP Events by User Id : ', state.userHistory);
+  return {
+    userHistory: state.userHistory,
+  };
+}
+
+
+export default connect(mapStateToProps)(DashEvent);
