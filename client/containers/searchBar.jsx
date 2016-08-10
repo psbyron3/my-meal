@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllInRadius } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import Autocomplete from 'react-google-autocomplete';
 
 
 class SearchBar extends Component {
@@ -28,12 +29,17 @@ class SearchBar extends Component {
     return (
       <div className="nav-search">
         <form onSubmit={this.onFormSubmit} className="search-input">
-          <input
-            className="form-control"
-            type="search"
-            placeholder="Search Location"
-            value={this.state.query}
-            onChange={this.onInputChange}
+          <Autocomplete
+            className="autoComplete"
+            style={{width: '90%'}}
+            onPlaceSelected={(place) => {
+              console.log(place);
+            }
+          }
+          type="search"
+          placeholder="Search Location"
+          value={this.state.query}
+          onChange={this.onInputChange}
           />
         </form>
       </div>

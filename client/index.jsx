@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 
 import { persistStore, autoRehydrate } from 'redux-persist';
+
 import App from './components/app';
 import reducers from './reducers';
 import routes from './routes';
