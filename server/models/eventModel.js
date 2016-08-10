@@ -124,7 +124,7 @@ Event.findEventsByUser = function (userId, role) {
       console.log('user is:', user);
       return user.getEvents({
         through: {
-          where: { role: role },
+          where: { role },
         },
       })
         .then((results) => {

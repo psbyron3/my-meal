@@ -206,7 +206,7 @@ Dummy.init = function () {
                   content: 'Hello world',
                   userId: 1,
                   eventId: 1,
-                })
+                }),
               ];
 
               return Promise.all(allMessagePromises)
@@ -247,7 +247,7 @@ Dummy.init = function () {
                       eventId: 1,
                       hostId: 2,
                       reviewerId: 1,
-                    })
+                    }),
                   ];
 
                   return Promise.all(allReviewPromises)
