@@ -8,6 +8,23 @@ export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const UNAUTH_USER = 'UNAUTH_USER';
+export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
+
+
+export function getEventsByUserId(userId) {
+  console.log('before axios in events user id: ', userId);
+  return axios.get(`/api/event/users/${userId}`)
+    .then((response) => {
+      return {
+        type: GET_EVENTS_BY_USER_ID,
+        payload: response,
+      };
+    })
+    .catch((err) => {
+      if (err) { console.log('err getting user events', err); }
+    });
+}
+
 
 export function SignInFunc(props) {
   const email = props.email;
@@ -22,55 +39,31 @@ export function SignInFunc(props) {
         password,
       },
     })
-    // .then((payload) => {
-    //   console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
-    // })
 
-    // .then((payload) => {
-    //   console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
-    // })
-    // .then((payload) => {
-    //   console.log('SIGN IN PAYLOOOOOOOOAAAAD: ', payload);
-
-    // })
-      .then((response) => {
-    // console.log("RESPOOOOOOOONSE: ", response);
-        console.log('HELLLLOOOOOOOOOOO');
-    // PAYLOAD =
-    // {
-    //   "token": "eyJhbGciO.......",
-    //   "result": {
-    //     "id": 16,
-    //     "userName": "Joe",
-    //     "email": "joe128@gmail.com",
-    //     "firstName": "Joseph",
-    //     "lastName": "italiano",
-    //     "address": "Roma",
-    //     "phoneNumber": "4159305687",
-    //     "updatedAt": "2016-08-05T18:04:01.000Z",
-    //     "createdAt": "2016-08-05T18:04:01.000Z"
-    //   }
-    // }
-
-        console.log('HELLLLOOOOOOOOOOO', response);
-
-    // dispatch action to update state to indicate that user is authenticate
-        dispatch({
-          type: AUTH_USER,
-        });
-        browserHistory.push('/');
-
-
-    // save token to localStorage
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', response.data.user.id);
-      })
-      .catch(() => {
-        dispatch({
-          type: AUTH_ERROR,
-          payload: 'Invalid email or password',
-        });
+    .then((response) => {
+      // console.log("RESPOOOOOOOONSE: ", response);
+      console.log('HELLLLOOOOOOOOOOO', response);
+      // dispatch action to update state to indicate that user is authenticate
+      dispatch({
+        type: AUTH_USER,
       });
+      browserHistory.push('/');
+      // save token to localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', response.data.user.id);
+
+      return getEventsByUserId(response.data.user.id)
+        .then((action) => {
+          dispatch(action);
+          browserHistory.push('/dashboard');
+        });
+    })
+    .catch(() => {
+      dispatch({
+        type: AUTH_ERROR,
+        payload: 'Invalid email or password',
+      });
+    });
   };
 }
 
@@ -99,21 +92,7 @@ export function SignUpFunc(props) {
     })
       .then((response) => {
         console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
-    // RESPONSE:
-    // {
-    //   "token": "eyJhbGciO.......",
-    //   "result": {
-    //     "id": 16,
-    //     "userName": "Joe",
-    //     "email": "joe128@gmail.com",
-    //     "firstName": "Joseph",
-    //     "lastName": "italiano",
-    //     "address": "Roma",
-    //     "phoneNumber": "4159305687",
-    //     "updatedAt": "2016-08-05T18:04:01.000Z",
-    //     "createdAt": "2016-08-05T18:04:01.000Z"
-    //   }
-    // }
+
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('id', response.data.result.id);
         dispatch({
@@ -278,3 +257,4 @@ export function createEvent(props) {
         });
     });
 }
+
