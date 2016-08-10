@@ -9,12 +9,14 @@ import AddEvent from './components/addEvent';
 import RequireAuth from './components/require_auth';
 import UserDash from './components/userDash';
 import EventList from './containers/eventList.js';
+import MessageBox from './components/messageBox';
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Landing} />
     <Route path="home" component={Home} />
     <Route path="signin" component={SignIn} />
+    <Route path="messbox" component={MessageBox} />
     <Route path="signup" component={SignUp} />
     <Route path="addevent" component={RequireAuth(AddEvent)} />
     <Route path="addevent" component={AddEvent} />

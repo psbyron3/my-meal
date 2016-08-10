@@ -2,6 +2,7 @@ const User = require('../models/userModel.js');
 const Event = require('../models/eventModel.js');
 const Review = require('../models/reviewModel.js');
 const Tag = require('../models/tagModel.js');
+const Message = require('../models/messageModel.js');
 
 const Dummy = module.exports;
 
@@ -222,6 +223,132 @@ Dummy.init = function () {
                   reviewerId: 1,
                 }),
               ];
+            }).then((result) => {
+              console.log(result.eventName);
+              return;
+            }).then(() => {
+              return Event.createEvent({
+                eventName: 'Carne Asada Cookout',
+                eventPic: 'http://tipsforbbq.com/Include/Images/Recipes/Carne-Asada/AndrewLLoydSriracha.1024.jpg',
+                price: 0.00,
+                maxGuests: 20,
+                description: 'The cookout to end all cookouts',
+                address: '1349 South Redondo Blvd, Los Angeles, CA 90019',
+                latitude: 34.0487404,
+                longitude: -118.3515677,
+                startDatetime: '2016-08-14T18:00:00',
+                endDatetime: '2016-08-14T20:00:00',
+                userId: 2,
+              }).then((result) => {
+                console.log(result.eventName);
+                return;
+              }).then(() => {
+                return Event.createEvent({
+                  eventName: 'Vegetarian Feast',
+                  eventPic: 'http://clv.h-cdn.co/assets/16/02/1452527843-vegetarian-pad-tha-2-2-600x900.jpg',
+                  price: 7.00,
+                  maxGuests: 10,
+                  description: 'The best vegetarian food in southern California',
+                  address: '1289 South Redondo Blvd, Los Angeles, CA 90019',
+                  latitude: 34.0505127,
+                  longitude: -118.3491435,
+                  startDatetime: '2016-08-07T18:00:00',
+                  endDatetime: '2016-08-07T20:00:00',
+                  userId: 3,
+                }).then((result) => {
+                  console.log(result.eventName);
+                  return;
+                }).then(() => {
+                  Event.createEvent({
+                    eventName: 'Hot Dog Async Party (...WUT?)',
+                    eventPic: 'https://a.dilcdn.com/bl/wp-content/uploads/sites/8/2011/05/hot-dogs-chili11-480.jpg',
+                    price: 0.00,
+                    maxGuests: 20,
+                    description: 'PWYW for some gourmet hot dogs in Santa Monica!',
+                    address: '1314 10th Street Santa Monica, CA 90401',
+                    latitude: 34.022006,
+                    longitude: -118.490653,
+                    startDatetime: '2016-08-18T18:00:00',
+                    endDatetime: '2016-08-18T20:00:00',
+                    userId: 1,
+                  });
+
+                  return Event.createEvent({
+                    eventName: 'Hot Dog Eating (No Contest)',
+                    eventPic: 'https://a.dilcdn.com/bl/wp-content/uploads/sites/8/2011/05/hot-dogs-chili11-480.jpg',
+                    price: 0.00,
+                    maxGuests: 20,
+                    description: 'PWYW for some gourmet hot dogs!',
+                    address: '1299 South Sycamore Avenue Los Angeles, CA 90019',
+                    latitude: 34.049940,
+                    longitude: -118.347645,
+                    startDatetime: '2016-08-18T18:00:00',
+                    endDatetime: '2016-08-18T20:00:00',
+                    userId: 1,
+                  }).then((result) => {
+                    console.log(result.eventName);
+                    return;
+                  }).then(() => {
+                    return Event.createEvent({
+                      eventName: 'Biweekly Yum-a-thon',
+                      eventPic: 'http://clv.h-cdn.co/assets/16/02/1452527843-vegetarian-pad-tha-2-2-600x900.jpg',
+                      price: 7.00,
+                      maxGuests: 10,
+                      description: 'Biweekly Yum-a-thon',
+                      address: '1345 South Redondo Boulevard Los Angeles, CA 90019',
+                      latitude: 34.048887,
+                      longitude: -118.349243,
+                      startDatetime: '2016-08-07T18:00:00',
+                      endDatetime: '2016-08-07T20:00:00',
+                      userId: 2,
+                    }).then((result) => {
+                      console.log(result.eventName);
+                      return;
+                    }).then(() => {
+                      // create dummy messages
+                      Message.createMessage({
+                        content: 'Hello world',
+                        userId: 1,
+                        eventId: 1,
+                      }).then((result) => {
+                        console.log(result);
+                      });
+
+                      Message.createMessage({
+                        content: 'Hello world',
+                        userId: 1,
+                        eventId: 1,
+                      }).then((result) => {
+                        console.log(result);
+                      });
+
+                      Message.createMessage({
+                        content: 'Hello world',
+                        userId: 1,
+                        eventId: 1,
+                      }).then((result) => {
+                        console.log(result);
+                      });
+
+                      Message.createMessage({
+                        content: 'Hello world',
+                        userId: 1,
+                        eventId: 1,
+                      }).then((result) => {
+                        console.log(result);
+                      });
+                    })
+                      .then(() => {
+                      // add dummy reviews
+                        Review.createReview({
+                          content: 'Awsome cook',
+                          rating: 5,
+                          eventId: 2,
+                          hostId: 3,
+                          reviewerId: 1,
+                        }).then((result) => {
+                          console.log(result.dataValues.content);
+                        });
 
               return Promise.all(allReviewPromises)
                 .then(() => {
@@ -234,6 +361,50 @@ Dummy.init = function () {
                   ];
 
                   return Promise.all(allGuestPromises);
+                        Review.createReview({
+                          content: 'Great cook',
+                          rating: 5,
+                          eventId: 3,
+                          hostId: 1,
+                          reviewerId: 2,
+                        }).then((result) => {
+                          console.log(result.dataValues.content);
+                        });
+
+
+                        Review.createReview({
+                          content: 'So tasty',
+                          rating: 5,
+                          eventId: 4,
+                          hostId: 1,
+                          reviewerId: 3,
+                        }).then((result) => {
+                          console.log(result.dataValues.content);
+                        });
+
+
+                        Review.createReview({
+                          content: 'Love it',
+                          rating: 5,
+                          eventId: 2,
+                          hostId: 3,
+                          reviewerId: 1,
+                        }).then((result) => {
+                          console.log(result.dataValues.content);
+                        });
+
+
+                        Review.createReview({
+                          content: 'Lovely host',
+                          rating: 5,
+                          eventId: 1,
+                          hostId: 2,
+                          reviewerId: 1,
+                        }).then((result) => {
+                          console.log(result.dataValues.content);
+                        });
+                      });
+                  });
                 });
             });
         });
