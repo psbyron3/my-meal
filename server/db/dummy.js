@@ -186,38 +186,38 @@ Dummy.init = function () {
           return Promise.all(allEventPromises)
             .then(() => {
                       // create dummy messages
-                      const allMessagePromises = [
-                      Message.createMessage({
-                        content: 'Hello world',
-                        userId: 1,
-                        eventId: 1,
-                      }),
-                      Message.createMessage({
-                        content: 'Hello world',
-                        userId: 1,
-                        eventId: 1,
-                      }),
-                      Message.createMessage({
-                        content: 'Hello world',
-                        userId: 1,
-                        eventId: 1,
-                      }),
-                      Message.createMessage({
-                        content: 'Hello world',
-                        userId: 1,
-                        eventId: 1,
-                      })]
+              const allMessagePromises = [
+                Message.createMessage({
+                  content: 'Hello world',
+                  userId: 1,
+                  eventId: 1,
+                }),
+                Message.createMessage({
+                  content: 'Hello world',
+                  userId: 1,
+                  eventId: 1,
+                }),
+                Message.createMessage({
+                  content: 'Hello world',
+                  userId: 1,
+                  eventId: 1,
+                }),
+                Message.createMessage({
+                  content: 'Hello world',
+                  userId: 1,
+                  eventId: 1,
+                })];
 
-                      return Promise.all(allMessagePromises)  
-                      .then(() => {
+              return Promise.all(allMessagePromises)
+                .then(() => {
                       // add dummy reviews
-                        const allReviewPromises = [Review.createReview({
-                          content: 'Awsome cook',
-                          rating: 5,
-                          eventId: 2,
-                          hostId: 3,
-                          reviewerId: 1,
-                        }),
+                  const allReviewPromises = [Review.createReview({
+                    content: 'Awsome cook',
+                    rating: 5,
+                    eventId: 2,
+                    hostId: 3,
+                    reviewerId: 1,
+                  }),
                         Review.createReview({
                           content: 'Great cook',
                           rating: 5,
@@ -245,24 +245,23 @@ Dummy.init = function () {
                           eventId: 1,
                           hostId: 2,
                           reviewerId: 1,
-                        })]
-              
-              return Promise.all(allReviewPromises)
-                .then(() => {
-                  const allGuestPromises = [
-                    Event.joinEvent(7, 1),
-                    Event.joinEvent(3, 3),
-                    Event.joinEvent(3, 1),
-                    Event.joinEvent(1, 2),
-                    Event.joinEvent(1, 4),
-                  ];
+                        })];
 
-                  return Promise.all(allGuestPromises);
-                        
-                      });
-                  });
+                  return Promise.all(allReviewPromises)
+                    .then(() => {
+                      const allGuestPromises = [
+                        Event.joinEvent(7, 1),
+                        Event.joinEvent(3, 3),
+                        Event.joinEvent(3, 1),
+                        Event.joinEvent(1, 2),
+                        Event.joinEvent(1, 4),
+                      ];
+
+                      return Promise.all(allGuestPromises);
+                    });
                 });
             });
+        });
     })
     .catch((err) => {
       console.log(err);
