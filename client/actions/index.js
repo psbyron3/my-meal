@@ -25,7 +25,6 @@ export function getEventsByUserId(userId) {
     });
 }
 
-
 /** *************** AUTHENTICATIONS *********************/
 
 export const SignInFunc = (props) => {
@@ -119,15 +118,20 @@ export const SignOutFunc = () => {
 
 /** ********************* CHEF DASHBOARD ***********************/
 
-export const PastEventFunc = () => {
+export const ChefPastFunc = () => {
   // get request to db to fetch list of past events the user hosts
+  const currentDate = new Date(Date.now());
+
+  // look in db and filter events by users and event date < currentDate
+  // have access to userId in local storage
 };
 
-export const UpcomingEventFunc = () => {
+export const ChefUpcomingFunc = () => {
   // get request to db to fetch list of upcoming events the user hosted
+  const currentDate = new Date(Date.now());
 };
 
-export const SelectedChefEvent = () => {
+export const ChefSelectedEvent = () => {
   // selected event in chef dash
 };
 

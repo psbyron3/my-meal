@@ -6,6 +6,7 @@ import FilteredReducer from './filtered_events_reducer';
 import SelectedEvent from './selected_event_reducer';
 import AllEventsReducer from './all_events_reducer';
 import AuthReducer from './auth_reducer';
+import ChefPastReducer from './chef_past_reducer';
 import { reducer as formReducer } from 'redux-form';
 
 
