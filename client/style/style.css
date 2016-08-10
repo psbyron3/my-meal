@@ -28,7 +28,13 @@ body {
   position: fixed;
 }
 
+.marker > img {
+  width: 32px;
+  height: 40px;
+}
+
 .marker {
+
   padding: 0;
   margin: 0;
 }
