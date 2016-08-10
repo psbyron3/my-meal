@@ -26,6 +26,22 @@ export function getEventsByUserId(userId) {
 }
 
 
+
+export function getEventsByUserId(userId) {
+  console.log('before axios in events user id: ', userId);
+  return axios.get(`/api/event/users/${userId}`)
+    .then((response) => {
+      return {
+        type: GET_EVENTS_BY_USER_ID,
+        payload: response,
+      };
+    })
+    .catch((err) => {
+      if (err) { console.log('err getting user events', err); }
+    });
+}
+
+
 /** *************** AUTHENTICATIONS *********************/
 
 export const SignInFunc = (props) => {
@@ -41,24 +57,6 @@ export const SignInFunc = (props) => {
         password,
       },
     })
-      .then((response) => {
-        console.log('HELLLLOOOOOOOOOOO');
-
-
-    // dispatch action to update state to indicate that user is authenticate
-        dispatch({
-          type: AUTH_USER,
-        });
-        browserHistory.push('/');
-
-    // save token to localStorage
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', response.data.user.id);
-      })
-      .catch(() => {
-        dispatch({
-          type: AUTH_ERROR,
-          payload: 'Invalid email or password',
       .then((response) => {
       // console.log("RESPOOOOOOOONSE: ", response);
       console.log('HELLLLOOOOOOOOOOO', response);
