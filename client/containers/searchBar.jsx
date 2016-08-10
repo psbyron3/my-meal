@@ -31,15 +31,15 @@ class SearchBar extends Component {
         <form onSubmit={this.onFormSubmit} className="search-input">
           <Autocomplete
             className="autoComplete"
-            style={{width: '90%'}}
+            style={{ width: '90%' }}
             onPlaceSelected={(place) => {
               console.log(place);
             }
           }
-          type="search"
-          placeholder="Search Location"
-          value={this.state.query}
-          onChange={this.onInputChange}
+            type="search"
+            placeholder="Search Location"
+            value={this.state.query}
+            onChange={this.onInputChange}
           />
         </form>
       </div>
