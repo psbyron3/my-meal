@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.use(express.static('./client'));
+app.use(express.static('../client'));
 
 
 // Routing
