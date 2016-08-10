@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   userInfo: UserInfoReducer,
   userHistory: UserHistory,
   map: MapReducer,
-  filteredReducer: FilteredReducer,
+  filteredEvents: FilteredReducer,
   selectedEvent: SelectedEvent,
   auth: AuthReducer,
   form: formReducer,
