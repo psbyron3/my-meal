@@ -47,6 +47,8 @@ User.findUserById = function (id) {
     where: {
       id,
     },
+  }).then(function (rows) {
+    return rows[0];
   });
 };
 

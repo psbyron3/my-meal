@@ -150,6 +150,14 @@ const UsersEvent = sequelize.define('UsersEvent', {
   },
 });
 
+const Message = sequelize.define('Message', {
+  content: {
+    type: Sequelize.STRING,
+  },
+  userName: {
+    type: Sequelize.STRING,
+  },
+});
 
 /** ********MANY TO MANY RELATIONSHIPS**********/
 // join tables: events_dishes, users_tags, users_events, events_tags
@@ -179,6 +187,12 @@ User.hasMany(Review, { foreignKey: 'hostId' });
 Review.belongsTo(User, { as: 'reviewer', foreignKey: 'reviewerId' });
 User.hasMany(Review, { foreignKey: 'reviewerId' });
 
+Message.belongsTo(Event, { as: 'event', foreignKey: 'eventId' });
+Event.hasMany(Message, { foreignKey: 'eventId' });
+
+Message.belongsTo(User, { as: 'user', foreignKey: 'userId' });
+User.hasMany(Message, { foreignKey: 'userId' });
+
 
 sequelize
   .sync({ force: false })
@@ -192,3 +206,4 @@ exports.Event = Event;
 exports.Tag = Tag;
 exports.Dish = Dish;
 exports.Review = Review;
+exports.Message = Message;
