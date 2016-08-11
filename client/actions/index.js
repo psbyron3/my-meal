@@ -139,17 +139,22 @@ export const ChefPastFunc = () => {
       chefEventArray = response.data;
       console.log('CHEFEVENTSSSSSSSS: ', chefEventArray);
 
-      return Promise.all(_.map(chefEventArray, (chefEvent) => {
-        const eventId = chefEvent.UsersEvent.eventId;
-        return axios({
-          method: 'GET',
-          url: `/api/review/event/${eventId}`,
-        })
-          .then((reviews) => {
-            chefEvent.reviews = reviews.data;
-            return chefEvent;
-          });
+      return Promise.all(_.filter(chefEventArray, (chefEvent) => {
+        return chefEvent.UsersEvent.role === 'host';
       }))
+        .then((chefEventFiltered) => {
+          return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
+            const eventId = chefEvent.UsersEvent.eventId;
+            return axios({
+              method: 'GET',
+              url: `/api/review/event/${eventId}`,
+            })
+              .then((reviews) => {
+                chefEvent.reviews = reviews.data;
+                return chefEvent;
+              });
+          }));
+        })
         .then((result) => {
           console.log('FIIIIIINALAAAAL RESULLLT: ', result);
         });
@@ -159,10 +164,6 @@ export const ChefPastFunc = () => {
     });
 
   // have access to userId in local storage
-};
-
-export const ChefEventReview = () => {
-  // get request to db to fetch list of reviews for specific event
 };
 
 export const ChefUpcomingFunc = () => {
