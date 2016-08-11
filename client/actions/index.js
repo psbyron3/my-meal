@@ -10,6 +10,8 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
+export const CHEF_PAST_EVENTS = 'CHEF_PAST_EVENTS';
+export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS'
 
 
 export function getEventsByUserId(userId) {
@@ -130,38 +132,44 @@ export const ChefPastFunc = () => {
 
   // look in db and filter events by users and event date < currentDate
 
-  return axios({
-    method: 'GET',
-    url: `/api/event/users/${userId}`,
-  })
-    .then((response) => {
-      console.log('CHEF PAST FUNC REEEES: ', response);
-      chefEventArray = response.data;
-      console.log('CHEFEVENTSSSSSSSS: ', chefEventArray);
-
-      return Promise.all(_.filter(chefEventArray, (chefEvent) => {
-        return Date.parse(chefEvent.startDatetime) < Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
-      }))
-        .then((chefEventFiltered) => {
-          return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
-            const eventId = chefEvent.UsersEvent.eventId;
-            return axios({
-              method: 'GET',
-              url: `/api/review/event/${eventId}`,
-            })
-              .then((reviews) => {
-                chefEvent.reviews = reviews.data;
-                return chefEvent;
-              });
-          }));
-        })
-        .then((result) => {
-          console.log('FIIIIIINALAAAAL RESULLLT: ', result);
-        });
+  return (dispatch) => {
+    return axios({
+      method: 'GET',
+      url: `/api/event/users/${userId}`,
     })
-    .catch((err) => {
-      console.log('ERROR', err);
-    });
+      .then((response) => {
+        console.log('CHEF PAST FUNC REEEES: ', response);
+        chefEventArray = response.data;
+        console.log('CHEFEVENTSSSSSSSS: ', chefEventArray);
+
+        return Promise.all(_.filter(chefEventArray, (chefEvent) => {
+          return Date.parse(chefEvent.startDatetime) < Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
+        }))
+          .then((chefEventFiltered) => {
+            return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
+              const eventId = chefEvent.UsersEvent.eventId;
+              return axios({
+                method: 'GET',
+                url: `/api/review/event/${eventId}`,
+              })
+                .then((reviews) => {
+                  chefEvent.reviews = reviews.data;
+                  return chefEvent;
+                });
+            }));
+          })
+          .then((result) => {
+            console.log('FIIIIIINALAAAAL RESULLLT: ', result);
+            dispatch({
+              type: CHEF_PAST_EVENTS,
+              payload: result
+            })
+          });
+      })
+      .catch((err) => {
+        console.log('ERROR', err);
+      });
+  }
 };
 
 export const ChefUpcomingFunc = () => {
@@ -173,36 +181,42 @@ export const ChefUpcomingFunc = () => {
 
   // look in db and filter events by users and event date < currentDate
 
-  return axios({
-    method: 'GET',
-    url: `/api/event/users/${userId}`,
-  })
-    .then((response) => {
-      chefEventArray = response.data;
-
-      return Promise.all(_.filter(chefEventArray, (chefEvent) => {
-        return Date.parse(chefEvent.startDatetime) > Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
-      }))
-        .then((chefEventFiltered) => {
-          return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
-            const eventId = chefEvent.UsersEvent.eventId;
-            return axios({
-              method: 'GET',
-              url: `/api/review/event/${eventId}`,
-            })
-              .then((reviews) => {
-                chefEvent.reviews = reviews.data;
-                return chefEvent;
-              });
-          }));
-        })
-        .then((result) => {
-          console.log('FIIIIIINALAAAAL RESULLLT: ', result);
-        });
+  return (dispatch) => {
+    return axios({
+      method: 'GET',
+      url: `/api/event/users/${userId}`,
     })
-    .catch((err) => {
-      console.log('ERROR', err);
-    });
+      .then((response) => {
+        chefEventArray = response.data;
+
+        return Promise.all(_.filter(chefEventArray, (chefEvent) => {
+          return Date.parse(chefEvent.startDatetime) > Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
+        }))
+          .then((chefEventFiltered) => {
+            return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
+              const eventId = chefEvent.UsersEvent.eventId;
+              return axios({
+                method: 'GET',
+                url: `/api/review/event/${eventId}`,
+              })
+                .then((reviews) => {
+                  chefEvent.reviews = reviews.data;
+                  return chefEvent;
+                });
+            }));
+          })
+          .then((result) => {
+            console.log('FIIIIIINALAAAAL RESULLLT: ', result);
+            dispatch({
+              type: CHEF_PAST_EVENTS,
+              payload: result
+            })
+          });
+      })
+      .catch((err) => {
+        console.log('ERROR', err);
+      });
+  }
 };
 
 export const ChefSelectedEvent = () => {
