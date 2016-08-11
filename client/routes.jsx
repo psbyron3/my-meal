@@ -8,7 +8,6 @@ import SignUp from './components/signUp';
 import AddEvent from './components/addEvent';
 import RequireAuth from './components/require_auth';
 import UserDash from './components/userDash';
-import EventList from './containers/eventList.js';
 import MessageBox from './components/messageBox';
 import ChefDash from './components/chefDash.js';
 

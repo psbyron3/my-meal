@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 
-// import ChefPast from '../containers/chefPast';
+import ChefPast from '../containers/chefPast';
 
 export default class ChefDash extends Component {
 
@@ -18,6 +18,7 @@ export default class ChefDash extends Component {
 
             <div className="user-feed">
               list of past events
+              <ChefPast />
 
             </div>
 
