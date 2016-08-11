@@ -21,7 +21,7 @@ export function getEventsByUserId(userId) {
       };
     })
     .catch((err) => {
-      if (err) { console.log('err getting user events', err); }
+      if (err) { console.error('err getting user events', err); }
     });
 }
 
