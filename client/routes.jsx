@@ -8,8 +8,8 @@ import SignUp from './components/signUp';
 import AddEvent from './components/addEvent';
 import RequireAuth from './components/require_auth';
 import UserDash from './components/userDash';
-import EventList from './containers/eventList.js';
 import MessageBox from './components/messageBox';
+import ChefDash from './components/chefDash.js';
 
 export default (
   <Route path="/" component={App}>
@@ -21,7 +21,7 @@ export default (
     <Route path="addevent" component={RequireAuth(AddEvent)} />
     <Route path="addevent" component={AddEvent} />
     <Route path="dashboard" component={UserDash} />
-    <Route path="eventlist" component={EventList} />
+    <Route path="chefdash" component={ChefDash} />
   </Route>
 
 );

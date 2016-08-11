@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+const _ = require('lodash');
 
 export const MAP_CENTER = 'MAP_CENTER';
 export const SELECT_EVENT = 'SELECT_EVENT';
@@ -9,6 +10,8 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
+export const CHEF_PAST_EVENTS = 'CHEF_PAST_EVENTS';
+export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS';
 
 
 export function getEventsByUserId(userId) {
@@ -24,7 +27,6 @@ export function getEventsByUserId(userId) {
       if (err) { console.log('err getting user events', err); }
     });
 }
-
 
 /** *************** AUTHENTICATIONS *********************/
 
@@ -113,6 +115,8 @@ export const SignUpFunc = (props) => {
 
 export const SignOutFunc = () => {
   localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('userName');
   return {
     type: UNAUTH_USER,
   };
@@ -120,15 +124,103 @@ export const SignOutFunc = () => {
 
 /** ********************* CHEF DASHBOARD ***********************/
 
-export const PastEventFunc = () => {
+export const ChefPastFunc = () => {
   // get request to db to fetch list of past events the user hosts
+  const currentDate = new Date(Date.now());
+  const userId = localStorage.getItem('userId');
+
+  let chefEventArray;
+
+  // look in db and filter events by users and event date < currentDate
+
+  return (dispatch) => {
+    return axios({
+      method: 'GET',
+      url: `/api/event/users/${userId}`,
+    })
+      .then((response) => {
+        console.log('CHEF PAST FUNC REEEES: ', response);
+        chefEventArray = response.data;
+        console.log('CHEFEVENTSSSSSSSS: ', chefEventArray);
+
+        return Promise.all(_.filter(chefEventArray, (chefEvent) => {
+          return Date.parse(chefEvent.startDatetime) < Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
+        }))
+          .then((chefEventFiltered) => {
+            return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
+              const eventId = chefEvent.UsersEvent.eventId;
+              return axios({
+                method: 'GET',
+                url: `/api/review/event/${eventId}`,
+              })
+                .then((reviews) => {
+                  chefEvent.reviews = reviews.data;
+                  return chefEvent;
+                });
+            }));
+          })
+          .then((result) => {
+            console.log('FIIIIIINALAAAAL RESULLLT: ', result);
+            dispatch({
+              type: CHEF_PAST_EVENTS,
+              payload: result,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log('ERROR', err);
+      });
+  };
 };
 
-export const UpcomingEventFunc = () => {
+export const ChefUpcomingFunc = () => {
   // get request to db to fetch list of upcoming events the user hosted
+  const currentDate = new Date(Date.now());
+  const userId = localStorage.getItem('userId');
+
+  let chefEventArray;
+
+  // look in db and filter events by users and event date < currentDate
+
+  return (dispatch) => {
+    return axios({
+      method: 'GET',
+      url: `/api/event/users/${userId}`,
+    })
+      .then((response) => {
+        chefEventArray = response.data;
+
+        return Promise.all(_.filter(chefEventArray, (chefEvent) => {
+          return Date.parse(chefEvent.startDatetime) > Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
+        }))
+          .then((chefEventFiltered) => {
+            return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
+              const eventId = chefEvent.UsersEvent.eventId;
+              return axios({
+                method: 'GET',
+                url: `/api/review/event/${eventId}`,
+              })
+                .then((reviews) => {
+                  chefEvent.reviews = reviews.data;
+                  return chefEvent;
+                });
+            }));
+          })
+          .then((result) => {
+            console.log('FIIIIIINALAAAAL RESULLLT: ', result);
+            dispatch({
+              type: CHEF_PAST_EVENTS,
+              payload: result,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log('ERROR', err);
+      });
+  };
 };
 
-export const SelectedChefEvent = () => {
+export const ChefSelectedEvent = () => {
   // selected event in chef dash
 };
 
