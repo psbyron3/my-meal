@@ -40,7 +40,7 @@ class DashEvent extends Component {
                 </div>
                 <div className="user-event-time">
                   {this.formatTime(startTime)},
-                  {this.formatTime(startTime, "time")} to
+                  {this.formatTime(startTime, 'time')} to
                   {this.formatTime(endTime, 'time')}
                 </div>
                 <div className="user-event-description">

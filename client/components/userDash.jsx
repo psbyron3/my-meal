@@ -26,7 +26,7 @@ class UserDash extends Component {
     if (!this.props.userHistory.length) {
       return (<div>Join Events to populate this page!</div>);
     }
-    return this.props.userHistory.filter((event) => event.UsersEvent.role === "guest")
+    return this.props.userHistory.filter((event) => event.UsersEvent.role === 'guest')
     .map((event) => {
       return (
         <DashEvent
