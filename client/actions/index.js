@@ -162,13 +162,47 @@ export const ChefPastFunc = () => {
     .catch((err) => {
       console.log('ERROR', err);
     });
-
-  // have access to userId in local storage
 };
 
 export const ChefUpcomingFunc = () => {
   // get request to db to fetch list of upcoming events the user hosted
   const currentDate = new Date(Date.now());
+  const userId = localStorage.getItem('userId');
+
+  let chefEventArray;
+
+  // look in db and filter events by users and event date < currentDate
+
+  return axios({
+    method: 'GET',
+    url: `/api/event/users/${userId}`,
+  })
+    .then((response) => {
+      chefEventArray = response.data;
+
+      return Promise.all(_.filter(chefEventArray, (chefEvent) => {
+        return Date.parse(chefEvent.startDatetime) > Date.parse(currentDate) && chefEvent.UsersEvent.role === "host";
+      }))
+        .then((chefEventFiltered) => {
+          return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
+            const eventId = chefEvent.UsersEvent.eventId;
+            return axios({
+              method: 'GET',
+              url: `/api/review/event/${eventId}`,
+            })
+              .then((reviews) => {
+                chefEvent.reviews = reviews.data;
+                return chefEvent;
+              });
+          }));
+        })
+        .then((result) => {
+          console.log('FIIIIIINALAAAAL RESULLLT: ', result);
+        });
+    })
+    .catch((err) => {
+      console.log('ERROR', err);
+    });
 };
 
 export const ChefSelectedEvent = () => {
