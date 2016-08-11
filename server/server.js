@@ -65,9 +65,6 @@ io.on('connection', function (socket) {
   socket.on('message', function (body) {
     console.log('BOOODY', body);
     // emit this message to all other client that are listenning (if I want to exclude myself use broadcast)
-    socket.broadcast.emit('message', {
-      body,
-      from: socket.id.slice(8),
-    });
+    socket.broadcast.emit('message', body);
   });
 });

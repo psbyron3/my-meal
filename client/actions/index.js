@@ -52,6 +52,7 @@ export const SignInFunc = (props) => {
       // save token to localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user.id);
+        localStorage.setItem('userName', response.data.user.userName);
 
         return getEventsByUserId(response.data.user.id)
           .then((action) => {

@@ -23,8 +23,11 @@ class MessageBox extends Component {
     const eventId = 1;
     axios.get(`/api/message/${eventId}`).then((result) => {
       const messages = result.data;
-      console.log(messages, 'MESSAGEEEES');
-      this.setState({ messages: [...this.state.messages, ...messages] });
+      this.setState({ messages: [...this.state.messages, ...messages] }, () => {
+        // Keep scrollBAr down
+        const msgbox = document.getElementsByClassName('panel-body msg_container_base');
+        msgbox[0].scrollTop = msgbox[0].scrollHeight;
+      });
     });
   }
 
@@ -32,7 +35,7 @@ class MessageBox extends Component {
     // connect the io lib. to the root of our webserver;
     this.socket = io('/'); // that trigger the on connection event server side
     // set up a listenner for new messages that coming in
-    this.socket.on('message', message => {
+    this.socket.on('message', (message) => {
       this.setState({ messages: [...this.state.messages, message] });
     });
   }
@@ -66,16 +69,16 @@ class MessageBox extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.message, 'inside forms');
+
     const content = this.state.message;
-    // const userName = localStorage.getItem('userName')
-    // const userId = localStorage.getItem('userId')
+    const userName = localStorage.getItem('userName');
+    const userId = localStorage.getItem('userId');
     // const eventId = this.props.selectedEvent.eventId
     const msg = {
       content,
-      userName: 'Joe',
+      userName,
       createdAt: new Date(),
-      userId: 1,
+      userId,
       eventId: 1,
     };
 
@@ -83,7 +86,14 @@ class MessageBox extends Component {
     axios.post('/api/message/1', msg);
 
     // put the new message in the bottom of the list and add the old ones
-    this.setState({ messages: [...this.state.messages, msg] }, () => { this.setState({ message: '' }); });
+    this.setState({ messages: [...this.state.messages, msg] }, () => {
+      // delete input
+      this.setState({ message: '' });
+      // Keep scrollBAr down
+      const msgbox = document.getElementsByClassName('panel-body msg_container_base');
+      msgbox[0].scrollTop = msgbox[0].scrollHeight;
+    });
+
     this.socket.emit('message', msg); // trigger on message event server side
   }
 
@@ -94,7 +104,6 @@ class MessageBox extends Component {
         body={message}
       />);
     });
-
     return msges;
   }
 
@@ -159,7 +168,6 @@ class MessageBox extends Component {
           </div>
 
         </div>
-
 
       </div>
 
