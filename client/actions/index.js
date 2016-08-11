@@ -11,7 +11,7 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
 export const CHEF_PAST_EVENTS = 'CHEF_PAST_EVENTS';
-export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS'
+export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS';
 
 
 export function getEventsByUserId(userId) {
@@ -162,14 +162,14 @@ export const ChefPastFunc = () => {
             console.log('FIIIIIINALAAAAL RESULLLT: ', result);
             dispatch({
               type: CHEF_PAST_EVENTS,
-              payload: result
-            })
+              payload: result,
+            });
           });
       })
       .catch((err) => {
         console.log('ERROR', err);
       });
-  }
+  };
 };
 
 export const ChefUpcomingFunc = () => {
@@ -209,14 +209,14 @@ export const ChefUpcomingFunc = () => {
             console.log('FIIIIIINALAAAAL RESULLLT: ', result);
             dispatch({
               type: CHEF_PAST_EVENTS,
-              payload: result
-            })
+              payload: result,
+            });
           });
       })
       .catch((err) => {
         console.log('ERROR', err);
       });
-  }
+  };
 };
 
 export const ChefSelectedEvent = () => {
