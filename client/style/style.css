@@ -90,7 +90,7 @@ body {
 }
 
 a {
-  color: #69C;
+  color: #371C11;
   text-decoration: none;
 }
 a:hover {
@@ -533,5 +533,5 @@ img {
 .msg_container_base::-webkit-scrollbar-thumb
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
+    background-color: #ff9900;
 }
