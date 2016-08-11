@@ -26,8 +26,8 @@ class UserDash extends Component {
     if (!this.props.userHistory.length) {
       return (<div>Join Events to populate this page!</div>);
     }
-
-    return this.props.userHistory.map((event) => {
+    return this.props.userHistory.filter((event) => event.UsersEvent.role === "guest")
+    .map((event) => {
       return (
         <DashEvent
           key={event.id}
@@ -49,13 +49,17 @@ class UserDash extends Component {
           defaultActiveKey={1}
           animation={false} id="noanim-tab-example"
         >
-          <Tab eventKey={1} title="Event Feed">
-            <div className="user-feed">
-              {this.renderList()}
-            </div>
+          <Tab eventKey={1} title="Dashboard">
+            This is where the user will have their pic and events they need to
+            still comment on.
           </Tab>
           <Tab eventKey={2} title="Preferences">
             This is where the users manage their preferences
+          </Tab>
+          <Tab eventKey={3} title="Your Meals">
+            <div className="user-feed">
+            {this.renderList()}
+            </div>
           </Tab>
         </Tabs>
       </div>
