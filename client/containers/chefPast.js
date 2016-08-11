@@ -8,7 +8,7 @@ class ChefPast extends Component {
   // this.props.ChefPastFunc();
 
   renderList() {
-    console.log("PROOOOOOOOPS: ", this.props);
+    console.log('PROOOOOOOOPS: ', this.props);
     return this.props.chefPastEvents.map((pastEvent) => {
       return (
         <div>
@@ -18,7 +18,6 @@ class ChefPast extends Component {
       );
     });
   }
-  
 
 
   render() {
@@ -32,8 +31,8 @@ class ChefPast extends Component {
 
 function mapStateToProps(state) {
   return {
-    chefPastEvents: state.chefEvents
+    chefPastEvents: state.chefEvents,
   };
-};
+}
 
 export default connect(mapStateToProps, { ChefPastFunc })(ChefPast);
