@@ -4,7 +4,9 @@ const INITIAL_STATE = {};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CHEF_PAST_EVENTS: return {
+    case CHEF_PAST_EVENTS:
+    console.log("INSIDE CHEF PAST EVENTS!!!!!", action.payload)
+     return {
       ...state,
       chefPastEvents: action.payload,
     };
@@ -17,6 +19,3 @@ export default (state = INITIAL_STATE, action) => {
     default: return state;
   }
 };
-
-// return list of events with reviews into state
-

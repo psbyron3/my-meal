@@ -3,39 +3,37 @@ import { connect } from 'react-redux';
 import ChefPastEntry from './chefPastEntry';
 import { ChefPastFunc } from '../actions/index';
 
-export default class ChefPast extends Component {
+class ChefPast extends Component {
 
-  // renderList() {
-  //   return this.props.chefPast.map((pastEvent) => {
-  //     return (
-  //       <div>
-  //         <ChefPastEntry />
-  //       </div>
-  //     );
-  //   });
-  // }
-  //
-  //
-  //
-  // {this.renderList()}
+  // this.props.ChefPastFunc();
 
-  Clicked() {
-    ChefPastFunc();
+  renderList() {
+    console.log("PROOOOOOOOPS: ", this.props);
+    return this.props.chefPastEvents.map((pastEvent) => {
+      return (
+        <div>
+          {pastEvent.id}
+          {pastEvent.eventName}
+        </div>
+      );
+    });
   }
+  
+
 
   render() {
     return (
       <div>
-        <button onCLick={this.Clicked()}>CHEFPASTFUNC</button>
+        hello
       </div>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     chefPast: state.chefPast
-//   };
-// };
-//
-// export default connect(mapStateToProps)(ChefPast);
+function mapStateToProps(state) {
+  return {
+    chefPastEvents: state.chefEvents
+  };
+};
+
+export default connect(mapStateToProps, { ChefPastFunc })(ChefPast);
