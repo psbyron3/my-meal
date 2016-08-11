@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+const _ = require('lodash');
 
 export const MAP_CENTER = 'MAP_CENTER';
 export const SELECT_EVENT = 'SELECT_EVENT';
@@ -111,6 +112,8 @@ export const SignUpFunc = (props) => {
 
 export const SignOutFunc = () => {
   localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('userName');
   return {
     type: UNAUTH_USER,
   };
@@ -121,9 +124,45 @@ export const SignOutFunc = () => {
 export const ChefPastFunc = () => {
   // get request to db to fetch list of past events the user hosts
   const currentDate = new Date(Date.now());
+  const userId = localStorage.getItem('userId');
+
+  let chefEventArray;
 
   // look in db and filter events by users and event date < currentDate
+
+  return axios({
+    method: 'GET',
+    url: `/api/event/users/${userId}`,
+  })
+    .then((response) => {
+      console.log('CHEF PAST FUNC REEEES: ', response);
+      chefEventArray = response.data;
+      console.log('CHEFEVENTSSSSSSSS: ', chefEventArray);
+
+      return Promise.all(_.map(chefEventArray, (chefEvent) => {
+        const eventId = chefEvent.UsersEvent.eventId;
+        return axios({
+          method: 'GET',
+          url: `/api/review/event/${eventId}`,
+        })
+          .then((reviews) => {
+            chefEvent.reviews = reviews.data;
+            return chefEvent;
+          });
+      }))
+        .then((result) => {
+          console.log('FIIIIIINALAAAAL RESULLLT: ', result);
+        });
+    })
+    .catch((err) => {
+      console.log('ERROR', err);
+    });
+
   // have access to userId in local storage
+};
+
+export const ChefEventReview = () => {
+  // get request to db to fetch list of reviews for specific event
 };
 
 export const ChefUpcomingFunc = () => {

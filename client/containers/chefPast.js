@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ChefPastEntry from './chefPastEntry';
+import { ChefPastFunc } from '../actions/index';
 
 export default class ChefPast extends Component {
 
@@ -18,10 +19,14 @@ export default class ChefPast extends Component {
   //
   // {this.renderList()}
 
+  Clicked() {
+    ChefPastFunc();
+  }
+
   render() {
     return (
       <div>
-        CHEFPAST
+        <button onCLick={this.Clicked()}>CHEFPASTFUNC</button>
       </div>
     );
   }
