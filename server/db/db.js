@@ -205,7 +205,7 @@ sequelize
   .sync({ force: false })
   .then(() => {
     console.log('Created tables from schema');
-    //dummy.init();
+    // dummy.init();
   });
 
 exports.User = User;
