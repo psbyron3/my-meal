@@ -13,6 +13,36 @@ Tag.findTagById = function (tagId) {
   return db.Tag.findById(tagId);
 };
 
+Tag.getAllTags = function () {
+  return db.Tag.findAll();
+};
+
+// tagIds should be an array of integers
+Tag.addTagsToUser = function (tagIds, userId) {
+  return db.User.findById(userId)
+    .then((user) => {
+      return user.setTags(tagIds);
+    });
+};
+
+Tag.removeTagsFromUser = function (tagIds, userId) {
+  return db.User.findById(userId)
+    .then((user) => {
+      return user.removeTags(tagIds);
+    });
+};
+
+Tag.getTagsByUser = function (userId) {
+  return db.User.findById(userId)
+    .then((user) => {
+      return user.getTags()
+        .then((results) => {
+          console.log('results of getTagsByUser:', results);
+          return results;
+        });
+    });
+};
+
 // event is a row in the table, tags is an array of tag ids
 Tag.addTagsToEvent = function (event, tagIds) {
   return db.Tag.findAll({ where: { id: tagIds } })
@@ -27,8 +57,4 @@ Tag.removeTagsFromEvent = function (event, tagIds) {
     .then((tags) => event.removeTags(tags)
       .then(() => event)
     );
-};
-
-Tag.getAllTags = function () {
-  return db.Tag.findAll();
 };

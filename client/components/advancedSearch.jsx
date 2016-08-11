@@ -1,25 +1,43 @@
 import React, { Component } from 'react';
-import { FormGroup } from 'react-bootstrap';
+import { FormGroup, Popover } from 'react-bootstrap';
+import connect from 'react-redux';
 
 class AdvancedSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  // this.props.restrictions
+  renderRestrictions() {
+    return;
+  }
+
+  // this.props.genres
+  renderGenres() {
+    return;
+  }
 
   render() {
+    console.log(this.props);
     return (
-      <div>
+      <div id="advancedSearch">
         <p>The advanced search goes here</p>
         <FormGroup>
-          Restrictions
+          <p>Restrictions</p>
         </FormGroup>
         <FormGroup>
-          Cuisine Dropdown
+          <p>Cuisine Dropdown</p>
         </FormGroup>
       </div>
     );
   }
 }
 
-export default AdvancedSearch;
+function mapStateToProps(state) {
+  return {
+    restrictions: state.tags.restrictions,
+    genres: state.tags.genres,
+  };
+}
+
+export default connect(mapStateToProps)(AdvancedSearch);

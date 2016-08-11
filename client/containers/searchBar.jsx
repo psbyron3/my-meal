@@ -51,7 +51,7 @@ class SearchBar extends Component {
               placeholder="Search Location"
             />
           </div>
-          <Button ref="target" onClick={this.toggle}>
+          <Button id="searchButton" ref="target" onClick={this.toggle}>
             &gt;
           </Button>
           <Overlay
@@ -61,7 +61,7 @@ class SearchBar extends Component {
             container={this}
             target={() => ReactDOM.findDOMNode(this.refs.target)}
           >
-            <AdvancedSearch />
+            <AdvancedSearch {...restrictions} {...genre} />
           </Overlay>
 
         </form>

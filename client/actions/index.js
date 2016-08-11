@@ -9,6 +9,8 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
+export const ALL_GENRES = 'ALL_GENRES';
+export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
 
 
 export function getEventsByUserId(userId) {
@@ -275,3 +277,29 @@ export const createEvent = (props) => {
         });
     });
 };
+
+/** **********Tags*******************/
+
+export function getAllTags() {
+  return function (dispatch) {
+    return axios.get('/api/tag')
+      .then((tags) => {
+        console.log('tags are:', tags);
+        const restrictions = tags.filter(tag => tag.restriction);
+        const genres = tags.filter(tag => !tag.restriction);
+        console.log('restrictions: ', restrictions);
+        console.log('genres:', genres);
+        dispatch({
+          type: ALL_RESTRICTIONS,
+          payload: restrictions,
+        });
+        dispatch({
+          type: ALL_GENRES,
+          payload: genres,
+        });
+      })
+      .catch((err) => {
+        console.log('error in getAllTags:', err);
+      });
+  };
+}

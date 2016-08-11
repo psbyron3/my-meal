@@ -160,7 +160,20 @@ input::-webkit-input-placeholder {
   background-color: #025aa5;
   border-color: #01549b
 }
-/**Styles for Google Places dropdown***/
+
+/*******Advanced Search Popover*************/
+
+#searchButton {
+  
+}
+
+#advancedSearch {
+  background-color: #F7F4EF;
+  position:absolute;
+  borderRadius:10px;
+}
+
+/****Styles for Google Places dropdown******/
 .pac-container {
     top: 20px;
     z-index: 1051;

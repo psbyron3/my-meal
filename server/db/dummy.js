@@ -185,7 +185,7 @@ Dummy.init = function () {
           ];
           return Promise.all(allEventPromises)
             .then(() => {
-                      // create dummy messages
+              // create dummy messages
               const allMessagePromises = [
                 Message.createMessage({
                   content: 'Hello world',
