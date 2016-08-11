@@ -140,7 +140,7 @@ export const ChefPastFunc = () => {
       console.log('CHEFEVENTSSSSSSSS: ', chefEventArray);
 
       return Promise.all(_.filter(chefEventArray, (chefEvent) => {
-        return Date.parse(chefEvent.startDatetime) < Date.parse(currentDate) && chefEvent.UsersEvent.role === "host";
+        return Date.parse(chefEvent.startDatetime) < Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
       }))
         .then((chefEventFiltered) => {
           return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
@@ -181,7 +181,7 @@ export const ChefUpcomingFunc = () => {
       chefEventArray = response.data;
 
       return Promise.all(_.filter(chefEventArray, (chefEvent) => {
-        return Date.parse(chefEvent.startDatetime) > Date.parse(currentDate) && chefEvent.UsersEvent.role === "host";
+        return Date.parse(chefEvent.startDatetime) > Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
       }))
         .then((chefEventFiltered) => {
           return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
