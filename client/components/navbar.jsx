@@ -12,8 +12,9 @@ export default class NavBarComp extends Component {
 
   render() {
     return (
-      <Navbar fixedTop className="navbar">
+      <Navbar fixedTop fluid className="navbar">
         <Navbar.Header className="nav-logo">
+
           <Navbar.Brand>
             <Link to="/">
               <img
@@ -22,6 +23,7 @@ export default class NavBarComp extends Component {
               />
             </Link>
           </Navbar.Brand>
+
         </Navbar.Header>
         <Nav pullLeft>
           <NavItem>

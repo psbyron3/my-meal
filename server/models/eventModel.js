@@ -118,15 +118,11 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
   });
 };
 
-Event.findEventsByUser = function (userId, role) {
+Event.findEventsByUser = function (userId) {
   return db.User.findById(userId)
     .then((user) => {
       console.log('user is:', user);
-      return user.getEvents({
-        through: {
-          where: { role },
-        },
-      })
+      return user.getEvents()
         .then((results) => {
           console.log('results of getEvents:', results);
           return results;

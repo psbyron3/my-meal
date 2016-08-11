@@ -141,9 +141,8 @@ module.exports = {
   '/users/:userId': {
     get(req, res) {
       const userId = url.parse(req.url, true).path.slice(7);
-      const role = req.query.role;
       console.log('userId is:', userId);
-      Event.findEventsByUser(userId, role)
+      Event.findEventsByUser(userId)
         .then((results) => {
           res.send(results);
         });

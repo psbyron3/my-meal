@@ -54,17 +54,17 @@ export const SignInFunc = (props) => {
         localStorage.setItem('userId', response.data.user.id);
 
         return getEventsByUserId(response.data.user.id)
-        .then((action) => {
-          dispatch(action);
-          browserHistory.push('/dashboard');
-        });
+          .then((action) => {
+            dispatch(action);
+            browserHistory.push('/dashboard');
+          });
       })
-    .catch(() => {
-      dispatch({
-        type: AUTH_ERROR,
-        payload: 'Invalid email or password',
+      .catch(() => {
+        dispatch({
+          type: AUTH_ERROR,
+          payload: 'Invalid email or password',
+        });
       });
-    });
   };
 };
 
@@ -275,4 +275,3 @@ export const createEvent = (props) => {
         });
     });
 };
-

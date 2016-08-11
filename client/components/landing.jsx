@@ -25,7 +25,7 @@ export default class Landing extends Component {
         <div className="row featurette">
           <div className="col-md-7">
             <h2 className="featurette-heading">First featurette heading.
-              <span className="text-muted">It'll blow your mind.</span>
+              <span className="text-muted"> It&#39;ll blow your mind.</span>
             </h2>
             <p className="lead">Donec ullamcorper nulla non metus auctor fringilla.
             Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna,
@@ -46,7 +46,7 @@ export default class Landing extends Component {
         <div className="row featurette">
           <div className="col-md-7">
             <h2 className="featurette-heading">First featurette heading.
-              <span className="text-muted">It'll blow your mind.</span>
+              <span className="text-muted"> It&#39;ll blow your mind. </span>
             </h2>
             <p className="lead">Donec ullamcorper nulla non metus auctor fringilla.
             Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna,
@@ -66,7 +66,7 @@ export default class Landing extends Component {
         <div className="row featurette">
           <div className="col-md-7">
             <h2 className="featurette-heading">First featurette heading.
-              <span className="text-muted">It'll blow your mind.</span>
+              <span className="text-muted"> It&#39;ll blow your mind.</span>
             </h2>
             <p className="lead">Donec ullamcorper nulla non metus auctor fringilla.
             Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna,

@@ -34,7 +34,8 @@ body {
 }
 
 .marker {
-
+  height: 40px;
+  width: 32px;
   padding: 0;
   margin: 0;
 }
@@ -52,7 +53,7 @@ body {
   justify-content: space-between;
 }
 
-.navbar-brand > img {
+.navbar-header img {
 
   height: 90px;
   width: 72px;
