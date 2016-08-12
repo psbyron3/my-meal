@@ -6,33 +6,54 @@ import { bindActionCreators } from 'redux';
 import { Col, FormControl, textarea, Image } from 'react-bootstrap';
 import StarRating from 'react-star-rating';
 
-var userId = window.localStorage.userId
+const userId = window.localStorage.userId;
 
 class UserReview extends Component {
   constructor(props) {
-    super(props)
-    
+    super(props);
+
     this.state = {
       content: '',
-      rating : null,
+      rating: null,
       eventId: 2,
-      reviewerId : userId,
-      hostId: 4
+      reviewerId: userId,
+      hostId: 4,
     };
     this.onCommentChange = this.onCommentChange.bind(this);
     this.onReviewSubmit = this.onReviewSubmit.bind(this);
-
+    this.setRating = this.setRating.bind(this);
   }
 
   componentDidMount() {
     this.initStars();
   }
 
+  onCommentChange(event) {
+    this.setState({
+      content: event.target.value,
+    });
+  }
+
+  onReviewSubmit(event) {
+    event.preventDefault();
+
+    this.props.postUserReviewOfChef(this.state);
+  }
+
+  // Responsible for recording the star rating of the review
+  setRating(event) {
+    const rating = event.target.getAttribute('value');
+
+    this.setState({
+      rating,
+    }, () => { console.log('This is the state ', this.state.rating); });
+  }
+
   initStars = () => {
     this.stars = document.querySelectorAll('.review-rating span');
-    for (var i = 0; i < this.stars.length; i++) {
+    for (let i = 0; i < this.stars.length; i++) {
       this.stars[i].setAttribute('data_count', i);
-      console.log("data-count for stars: ", this.stars[i].data_count)
+      console.log('data-count for stars: ', this.stars[i].data_count);
       this.stars[i].addEventListener('mouseenter', this.enterStarListener.bind(this));
     }
     document.querySelector('.review-rating').addEventListener('mouseleave',
@@ -49,7 +70,7 @@ class UserReview extends Component {
 
   fillStarsUpToElement = (element) => {
     // remove the hover states
-    for (var i = 0; i < this.stars.length; i++) {
+    for (let i = 0; i < this.stars.length; i++) {
       if (element === null || this.stars[i].getAttribute('data_count') > element.getAttribute('data_count')) {
         this.stars[i].classList.remove('hover');
       } else {
@@ -58,33 +79,8 @@ class UserReview extends Component {
     }
   }
 
-  // Responsible for recording the star rating of the review
-  setRating = (event) => {
-    var rating = event.target.getAttribute('value');
-
-    this.setState({
-      rating : rating
-    }, () => {console.log("This is the state ", this.state.rating)})
-    
-  }
-
-  onCommentChange(event) {
-
-    this.setState({
-      content : event.target.value
-    })
-  }
-
-  onReviewSubmit(event) {
-    event.preventDefault();
-
-    this.props.postUserReviewOfChef(this.state)
-  }
-
-
 
   render() {
-
     return (
       <div>
         <Col className="review-gutter" md={2} />
@@ -107,7 +103,7 @@ class UserReview extends Component {
             </div>
           </div>
           <form className="review-rating-container">
-            <div className="review-rating" onClick={this.setRating.bind(this)}>
+            <div className="review-rating" onClick={this.setRating()}>
               <span value={1}>☆</span>
               <span value={2}>☆</span>
               <span value={3}>☆</span>
@@ -115,12 +111,13 @@ class UserReview extends Component {
               <span value={5}>☆</span>
             </div>
             <div className="review-comments">
-              <textarea onChange={this.onCommentChange.bind(this)}/>
+              <textarea onChange={this.onCommentChange()} />
             </div>
-            <button 
+            <button
               type="submit"
-              onClick={this.onReviewSubmit.bind(this)} 
-              className="btn btn-primary">Submit Rating
+              onClick={this.onReviewSubmit()}
+              className="btn btn-primary"
+            >Submit Rating
             </button>
           </form>
         </Col>

@@ -371,6 +371,6 @@ export const createEvent = (props) => {
 };
 
 export const postUserReviewOfChef = (reviewData) => {
-  console.log("in post review action :", reviewData)
+  console.log('in post review action :', reviewData);
   return axios.post('/api/review/', reviewData);
 };
