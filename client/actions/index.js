@@ -12,6 +12,7 @@ export const UNAUTH_USER = 'UNAUTH_USER';
 export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
 export const CHEF_PAST_EVENTS = 'CHEF_PAST_EVENTS';
 export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS';
+export const POST_USER_REVIEW_OF_CHEF = 'POST_USER_REVIEW_OF_CHEF';
 
 
 export function getEventsByUserId(userId) {
@@ -367,4 +368,8 @@ export const createEvent = (props) => {
     // };
         });
     });
+};
+
+export const postUserReviewOfChef = (reviewParams) => {
+  return axios.post('/api/event', { params: reviewParams });
 };
