@@ -5,14 +5,26 @@ import { ChefPastFunc } from '../actions/index';
 
 class ChefPast extends Component {
 
-  // this.props.ChefPastFunc();
+  componentDidMount() {
+    this.props.ChefPastFunc();
+  }
 
   renderList() {
     console.log('PROOOOOOOOPS: ', this.props);
+    if (this.props.chefPastEvents === undefined) {
+      return (
+        <div>
+        </div>
+      );
+    }
     return this.props.chefPastEvents.map((pastEvent) => {
       return (
         <div>
+          <div>
+            <button> chat </button>
+          </div>
           {pastEvent.id}
+          <br />
           {pastEvent.eventName}
         </div>
       );
@@ -23,7 +35,7 @@ class ChefPast extends Component {
   render() {
     return (
       <div>
-        hello
+        {this.renderList()}
       </div>
     );
   }
@@ -31,7 +43,7 @@ class ChefPast extends Component {
 
 function mapStateToProps(state) {
   return {
-    chefPastEvents: state.chefEvents,
+    chefPastEvents: state.chefEvents.chefPastEvents,
   };
 }
 
