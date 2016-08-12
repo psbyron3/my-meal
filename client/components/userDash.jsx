@@ -62,6 +62,9 @@ class UserDash extends Component {
             {this.renderList()}
             </div>
           </Tab>
+          <Tab eventKey={4} title="Your Reviews">
+            This is where the reviews a user already created will go
+          </Tab>
         </Tabs>
       </div>
     );

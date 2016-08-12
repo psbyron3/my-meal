@@ -370,6 +370,7 @@ export const createEvent = (props) => {
     });
 };
 
-export const postUserReviewOfChef = (reviewParams) => {
-  return axios.post('/api/event', { params: reviewParams });
+export const postUserReviewOfChef = (reviewData) => {
+  console.log("in post review action :", reviewData)
+  return axios.post('/api/review/', reviewData);
 };
