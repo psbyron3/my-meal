@@ -67,7 +67,11 @@ module.exports = {
     },
     post(req, res) {
       console.log('Received POST at /api/search');
-      res.end('Received POST at /api/search');
+      const userId = url.parse(req.url, true).path.slice(7);
+      return Tag.addTagsToUser(req.body.tags, userId)
+        .then((results) => {
+          res.send(results);
+        });
     },
     put(req, res) {
       console.log('Received PUT at /api/search');

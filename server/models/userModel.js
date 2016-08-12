@@ -91,12 +91,12 @@ User.createUser = function (attr, tags = []) {
             return result.setTags(tags)
               .then((x) => {
                 return db.User.findById(output.id, {
-                  include: db.Tag
+                  include: db.Tag,
                 })
-                .then((user)  => {
-                  console.log('user - - - - - - -', user);
-                  resolve(user.dataValues);
-                })
+                  .then((user) => {
+                    console.log('user - - - - - - -', user);
+                    resolve(user.dataValues);
+                  });
               });
           });
       });

@@ -21,7 +21,7 @@ Tag.getAllTags = function () {
 Tag.addTagsToUser = function (tagIds, userId) {
   return db.User.findById(userId)
     .then((user) => {
-      return user.setTags(tagIds);
+      return user.addTags(tagIds);
     });
 };
 
@@ -37,7 +37,6 @@ Tag.getTagsByUser = function (userId) {
     .then((user) => {
       return user.getTags()
         .then((results) => {
-          console.log('results of getTagsByUser:', results);
           return results;
         });
     });

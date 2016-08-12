@@ -74,7 +74,7 @@ Dummy.init = function () {
           email: 'phil@gmail.com',
           address: 'Santa',
           phoneNumber: '3259345687',
-        },[8]),
+        }, [8]),
         User.createUser({
           userName: 'Mike',
           password: 'test4',
