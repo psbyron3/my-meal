@@ -382,14 +382,14 @@ input::-webkit-input-placeholder {
 }
 
 .user-event-pic{
-  height: 250px;
-  width: 350px;
+  height: 50%;
+  width: 50%;
+  padding: 15px;
 }
 
 .user-event-info {
   display: flex;
   flex-direction: column;
-  flex: 1;
   justify-content: center;
   align-items: center;
 }
@@ -404,6 +404,7 @@ input::-webkit-input-placeholder {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
+  padding: 25px;
 
 }
 
@@ -534,4 +535,62 @@ img {
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #ff9900;
+}
+
+
+/***************** User Dash (Reviews) ****************/
+
+
+.review-container {
+  margin-top: 100px;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0
+    2.5px 6px rgba(0, 0, 0, 0.2);
+}
+
+.review-event-basics {
+  display: flex;
+  flex-direction: row;
+  justify-content: 
+}
+
+.review-event-image {
+  height: 175px;
+  width: 125px;
+}
+
+.review-gutter {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-rating-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50% auto;
+  background-color: black;
+  font-size: 24px;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+
+.review-rating > span:hover:before {
+   content: "\2605";
+   position: absolute;
+   color: yellow;
+}
+
+.review-rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  color: yellow;
+}
+.review-rating > span:hover:before,
+.review-rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.review-comments {
+  width: 75%;
 }
