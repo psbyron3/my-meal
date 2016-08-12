@@ -12,9 +12,9 @@ class RestrictionMenu extends Component {
 
   render() {
     console.log('...........', this.props);
-    return(
+    return (
       <div>restrictions</div>
-    )
+    );
   }
 }
 

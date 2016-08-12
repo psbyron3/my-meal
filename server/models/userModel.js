@@ -85,12 +85,19 @@ User.createUser = function (attr, tags = []) {
       })
       .then(() => {
         console.log('password hashed');
-        console.log('this is the pre inserted attr', attr);
         db.User.create(attr)
           .then(function (result) {
             const output = result.dataValues;
-            console.log(output, 'aaaaaattttribut');
-            resolve(output);
+            return result.setTags(tags)
+              .then((x) => {
+                return db.User.findById(output.id, {
+                  include: db.Tag
+                })
+                .then((user)  => {
+                  console.log('user - - - - - - -', user);
+                  resolve(user.dataValues);
+                })
+              });
           });
       });
   });

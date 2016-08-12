@@ -25,7 +25,7 @@ export const getEventsByUserId = (userId) => {
     .catch((err) => {
       if (err) { console.log('err getting user events', err); }
     });
-}
+};
 
 
 /** *************** AUTHENTICATIONS *********************/
@@ -275,28 +275,27 @@ export const createEvent = (props) => {
     });
 };
 
-/*************Tags*******************/
+/** ***********Tags*******************/
 
 export const getAllTags = () => {
   console.log('inside getAllTags....');
-    return axios.get('/api/tag')
-      .then((tags) => {
-        console.log('tags=====', tags);
-        const restrictions = tags.data.filter(tag => tag.restriction);
-        const genres = tags.data.filter(tag => !tag.restriction);
-        return function(dispatch) {
-          dispatch({
-            type: ALL_RESTRICTIONS,
-            payload: restrictions,
-          });
-          dispatch({
-            type: ALL_GENRES,
-            payload: genres,
-          });
-
-        }
-      })
-      .catch((err) => {
-        console.log('error in getAllTags:', err);
-      });
-}
+  return axios.get('/api/tag')
+    .then((tags) => {
+      console.log('tags=====', tags);
+      const restrictions = tags.data.filter(tag => tag.restriction);
+      const genres = tags.data.filter(tag => !tag.restriction);
+      return function (dispatch) {
+        dispatch({
+          type: ALL_RESTRICTIONS,
+          payload: restrictions,
+        });
+        dispatch({
+          type: ALL_GENRES,
+          payload: genres,
+        });
+      };
+    })
+    .catch((err) => {
+      console.log('error in getAllTags:', err);
+    });
+};

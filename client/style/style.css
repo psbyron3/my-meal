@@ -173,7 +173,7 @@ input::-webkit-input-placeholder {
   background-color: #F7F4EF;
   position:absolute;
   borderRadius:10px;
-  margin-left:100px;
+  margin-left:10px;
 }
 
 /****Styles for Google Places dropdown******/

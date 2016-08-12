@@ -14,7 +14,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = { show: false,
-                   query: ''
+                   query: '',
                  };
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -52,7 +52,7 @@ class SearchBar extends Component {
             <Autocomplete
               className="autoComplete"
               style={{ width: '90%' }}
-              onPlaceSelected={ (place) => { console.log(place); } }
+              onPlaceSelected={(place) => { console.log(place); }}
               type="search"
               placeholder="Search Location"
               value={this.state.query}
@@ -94,8 +94,8 @@ class SearchBar extends Component {
 function mapStateToProps(state) {
   return {
     restrictions: state.tags.restrictions,
-    genres: state.tags.genres
-  }
+    genres: state.tags.genres,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
