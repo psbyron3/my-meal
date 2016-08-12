@@ -23,10 +23,11 @@ class ChefPast extends Component {
     }
     return this.props.chefPastEvents.map((pastEvent) => {
       return (
-        <ChefPastEntry 
+        <ChefPastEntry
           eventName={pastEvent.eventName}
           eventId={pastEvent.id}
-          clicked={this.props.EventIdFunc} />
+          clicked={this.props.EventIdFunc}
+        />
       );
     });
   }
