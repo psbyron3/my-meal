@@ -163,14 +163,17 @@ input::-webkit-input-placeholder {
 
 /*******Advanced Search Popover*************/
 
-#searchButton {
-  
+#searchButton, #searchButton:focus, #searchButton:visited, #searchButton:hover {
+  border-radius: 100%;
+  margin-left: 25px;
+  border: none;
 }
 
 #advancedSearch {
   background-color: #F7F4EF;
   position:absolute;
   borderRadius:10px;
+  margin-left:100px;
 }
 
 /****Styles for Google Places dropdown******/

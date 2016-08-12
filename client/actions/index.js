@@ -13,7 +13,7 @@ export const ALL_GENRES = 'ALL_GENRES';
 export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
 
 
-export function getEventsByUserId(userId) {
+export const getEventsByUserId = (userId) => {
   console.log('before axios in events user id: ', userId);
   return axios.get(`/api/event/users/${userId}`)
     .then((response) => {
@@ -94,8 +94,6 @@ export const SignUpFunc = (props) => {
       },
     })
       .then((response) => {
-        console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
-
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('id', response.data.result.id);
         dispatch({
@@ -171,12 +169,12 @@ export const getAllEvents = (locationObj) => {
   });
 };
 
-export const getAllInRadius = (searchParams) => {
-  console.log('IN GETALLINRADIUS...searchParams =', searchParams);
+export const getAllInRadius = (query, params) => {
+  console.log('IN GETALLINRADIUS...searchParams =', params);
+  console.log('IN GETALLINRADIUS...query =', query);
   return function (dispatch) {
-    convertAddress(searchParams.query)
+    convertAddress(query)
       .then((response) => {
-        console.log('Coming back from map api', response.data);
         const locationObj = {
           latitude: response.data.latitude,
           longitude: response.data.longitude,
@@ -187,7 +185,6 @@ export const getAllInRadius = (searchParams) => {
         });
         getAllEvents(locationObj)
           .then((events) => {
-            console.log('here come the events : ', events);
             dispatch({
               type: GET_ALL_EVENTS,
               payload: events.data,
@@ -278,28 +275,28 @@ export const createEvent = (props) => {
     });
 };
 
-/** **********Tags*******************/
+/*************Tags*******************/
 
-export function getAllTags() {
-  return function (dispatch) {
+export const getAllTags = () => {
+  console.log('inside getAllTags....');
     return axios.get('/api/tag')
       .then((tags) => {
-        console.log('tags are:', tags);
-        const restrictions = tags.filter(tag => tag.restriction);
-        const genres = tags.filter(tag => !tag.restriction);
-        console.log('restrictions: ', restrictions);
-        console.log('genres:', genres);
-        dispatch({
-          type: ALL_RESTRICTIONS,
-          payload: restrictions,
-        });
-        dispatch({
-          type: ALL_GENRES,
-          payload: genres,
-        });
+        console.log('tags=====', tags);
+        const restrictions = tags.data.filter(tag => tag.restriction);
+        const genres = tags.data.filter(tag => !tag.restriction);
+        return function(dispatch) {
+          dispatch({
+            type: ALL_RESTRICTIONS,
+            payload: restrictions,
+          });
+          dispatch({
+            type: ALL_GENRES,
+            payload: genres,
+          });
+
+        }
       })
       .catch((err) => {
         console.log('error in getAllTags:', err);
       });
-  };
 }

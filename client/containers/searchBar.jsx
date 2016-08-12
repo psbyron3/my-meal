@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllInRadius } from '../actions/index';
+import { getAllInRadius, getAllTags } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import Autocomplete from 'react-google-autocomplete';
-import AdvancedSearch from '../components/advancedSearch.jsx';
+import RestrictionMenu from '../components/restrictions.jsx';
+import GenreMenu from '../components/genres.jsx';
 import ReactDOM from 'react-dom';
 import { Button, Overlay } from 'react-bootstrap';
 
@@ -12,21 +13,27 @@ import { Button, Overlay } from 'react-bootstrap';
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false };
-    // this.onInputChange = this.onInputChange.bind(this);
+    this.state = { show: false,
+                   query: ''
+                 };
+    this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
-  // onInputChange(event) {
-  //   console.log('inputChange: ', event.target.value);
-  //   this.setState({ query: event.target.value });
-  // }
+  componentDidMount() {
+    this.props.getAllTags();
+  }
 
-  onFormSubmit(event) {
-    event.preventDefault();
-    this.props.getAllInRadius(this.state);
-    console.log('state.query: ', this.state.query);
+  onInputChange(event) {
+    console.log('inputChange: ', event.target.value);
+    this.setState({ query: event.target.value });
+  }
+
+  onFormSubmit(params) {
+    this.props.getAllInRadius(this.state.query, params);
+    console.log('params: ', params);
+    console.log('query:', this.state.query);
     this.setState({ query: '' });
   }
 
@@ -37,21 +44,26 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { fields: { searchbar, restrictions, genre }, handleSubmit } = this.props;
+    const { fields: { restriction, genre }, handleSubmit } = this.props;
     return (
       <div className="nav-search">
-        <form onSubmit={handleSubmit(this.props.getAllInRadius)} className="search-input">
+        <form onSubmit={handleSubmit(this.onFormSubmit)} className="search-input">
           <div style={{ display: 'inline-block' }}>
             <Autocomplete
-              {...searchbar}
               className="autoComplete"
               style={{ width: '90%' }}
-              onPlaceSelected={(place) => { console.log(place); }}
+              onPlaceSelected={ (place) => { console.log(place); } }
               type="search"
               placeholder="Search Location"
+              value={this.state.query}
+              onChange={this.onInputChange}
             />
           </div>
-          <Button id="searchButton" ref="target" onClick={this.toggle}>
+          <Button
+            id="searchButton"
+            ref="target"
+            onClick={this.toggle}
+          >
             &gt;
           </Button>
           <Overlay
@@ -61,7 +73,16 @@ class SearchBar extends Component {
             container={this}
             target={() => ReactDOM.findDOMNode(this.refs.target)}
           >
-            <AdvancedSearch {...restrictions} {...genre} />
+            <div id="advancedSearch">
+              <RestrictionMenu
+                {...restriction}
+                restrictions={this.props.restrictions}
+              />
+              <GenreMenu
+                {...genre}
+                genres={this.props.genres}
+              />
+            </div>
           </Overlay>
 
         </form>
@@ -70,22 +91,18 @@ class SearchBar extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    restrictions: state.tags.restrictions,
+    genres: state.tags.genres
+  }
+}
+
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getAllInRadius }, dispatch);
+  return bindActionCreators({ getAllInRadius, getAllTags }, dispatch);
 }
 
 export default reduxForm({
   form: 'SearchBarForm',
-  fields: ['searchbar', 'restrictions', 'genre'],
-}, null, mapDispatchToProps)(SearchBar);
-
-// <Autocomplete
-//   {...searchbar}
-//   className="autoComplete"
-//   style={{ width: '90%' }}
-//   onPlaceSelected={ (place) => { console.log(place); } }
-//   type="search"
-//   placeholder="Search Location"
-//   value={this.state.query}
-//   onChange={this.onInputChange}
-// />
+  fields: ['searchbar', 'restriction', 'genre'],
+}, mapStateToProps, mapDispatchToProps)(SearchBar);
