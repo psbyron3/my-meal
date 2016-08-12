@@ -21,15 +21,46 @@ class ChefPast extends Component {
         </div>
       );
     }
-    return this.props.chefPastEvents.map((pastEvent) => {
-      return (
-        <ChefPastEntry
-          eventName={pastEvent.eventName}
-          eventId={pastEvent.id}
-          clicked={this.props.EventIdFunc}
-        />
-      );
-    });
+    // return this.props.chefPastEvents.map((pastEvent) => {
+    //   return (
+    //     <ChefPastEntry
+    //       eventName={pastEvent.eventName}
+    //       eventId={pastEvent.id}
+    //       clicked={this.props.EventIdFunc}
+    //     />
+    //   );
+    // });
+
+    return (
+      <div>
+        <div className="col-md-4">
+          {this.props.chefPastEvents[0].id}
+          <br />
+          {this.props.chefPastEvents[0].eventName}
+          <div>
+            <button onClick={() => { this.clicked("HELLOOO 1"); }}> chat </button>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          {this.props.chefPastEvents[0].id}
+          <br />
+          {this.props.chefPastEvents[0].eventName}
+          <div>
+            <button onClick={() => { this.clicked("HELLOOO 2"); }}> chat </button>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          {this.props.chefPastEvents[0].id}
+          <br />
+          {this.props.chefPastEvents[0].eventName}
+          <div>
+            <button onClick={() => { this.clicked("HELLOOO 3"); }}> chat </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   render() {
