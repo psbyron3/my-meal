@@ -13,6 +13,7 @@ export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
 export const CHEF_PAST_EVENTS = 'CHEF_PAST_EVENTS';
 export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS';
 export const POST_USER_REVIEW_OF_CHEF = 'POST_USER_REVIEW_OF_CHEF';
+export const SEND_EVENT_ID = 'SEND_EVENT_ID';
 
 
 export function getEventsByUserId(userId) {
@@ -130,7 +131,7 @@ export const ChefPastFunc = () => {
   const currentDate = new Date(Date.now());
   const userId = localStorage.getItem('userId');
 
-  let chefEventArray;
+  let chefPastArray;
 
   // look in db and filter events by users and event date < currentDate
 
@@ -141,10 +142,9 @@ export const ChefPastFunc = () => {
     })
       .then((response) => {
         console.log('CHEF PAST FUNC REEEES: ', response);
-        chefEventArray = response.data;
-        console.log('CHEFEVENTSSSSSSSS: ', chefEventArray);
+        chefPastArray = response.data;
 
-        return Promise.all(_.filter(chefEventArray, (chefEvent) => {
+        return Promise.all(_.filter(chefPastArray, (chefEvent) => {
           return Date.parse(chefEvent.startDatetime) < Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
         }))
           .then((chefEventFiltered) => {
@@ -179,7 +179,7 @@ export const ChefUpcomingFunc = () => {
   const currentDate = new Date(Date.now());
   const userId = localStorage.getItem('userId');
 
-  let chefEventArray;
+  let chefUpcomingArray;
 
   // look in db and filter events by users and event date < currentDate
 
@@ -189,9 +189,10 @@ export const ChefUpcomingFunc = () => {
       url: `/api/event/users/${userId}`,
     })
       .then((response) => {
-        chefEventArray = response.data;
+        console.log('CHEF UPCOMING FUNC REEEES: ', response);
+        chefUpcomingArray = response.data;
 
-        return Promise.all(_.filter(chefEventArray, (chefEvent) => {
+        return Promise.all(_.filter(chefUpcomingArray, (chefEvent) => {
           return Date.parse(chefEvent.startDatetime) > Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
         }))
           .then((chefEventFiltered) => {
@@ -210,7 +211,7 @@ export const ChefUpcomingFunc = () => {
           .then((result) => {
             console.log('FIIIIIINALAAAAL RESULLLT: ', result);
             dispatch({
-              type: CHEF_PAST_EVENTS,
+              type: CHEF_UPCOMING_EVENTS,
               payload: result,
             });
           });
@@ -373,3 +374,13 @@ export const createEvent = (props) => {
 export const postUserReviewOfChef = (reviewParams) => {
   return axios.post('/api/event', { params: reviewParams });
 };
+
+/** ******************** CHAT **************************/
+
+export const EventIdFunc = (eventId) => {
+  return {
+    type: SEND_EVENT_ID,
+    payload: eventId,
+  };
+};
+
