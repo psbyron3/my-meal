@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import DashEvent from './userDashEvent.jsx';
+import UserDashView from './userDashView';
+
 import { getEventsByUserId } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -50,8 +52,7 @@ class UserDash extends Component {
           animation={false} id="noanim-tab-example"
         >
           <Tab eventKey={1} title="Dashboard">
-            This is where the user will have their pic and events they need to
-            still comment on.
+            <UserDashView />
           </Tab>
           <Tab eventKey={2} title="Preferences">
             This is where the users manage their preferences

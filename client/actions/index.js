@@ -9,7 +9,7 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
-
+export const POST_USER_REVIEW_OF_CHEF = 'POST_USER_REVIEW_OF_CHEF';
 
 export function getEventsByUserId(userId) {
   console.log('before axios in events user id: ', userId);
@@ -274,4 +274,8 @@ export const createEvent = (props) => {
     // };
         });
     });
+};
+
+export const postUserReviewOfChef = (reviewParams) => {
+  return axios.post('/api/event', { params: reviewParams });
 };

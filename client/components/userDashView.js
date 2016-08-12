@@ -13,6 +13,5 @@ export default class userDashView extends Component {
       </div>
 
     );
-
   }
 }

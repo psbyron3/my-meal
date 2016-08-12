@@ -4,8 +4,8 @@ import { Col, FormControl, textarea } from 'react-bootstrap';
 
 export default class userReview extends Component {
 
-  setRating () => {
-    
+  setRating = () => {
+
   }
 
   render() {
@@ -15,7 +15,10 @@ export default class userReview extends Component {
         <Col className="review-container" md={8}>
           <div className="review-event-basics">
             <div className="review-event-image">
-              <img src="../assets/stock-chef.jpg" /> 
+              <img
+                src="../assets/stock-chef.jpg"
+                role="presentation"
+              />
             </div>
             <div className="review-event-details">
               <div className="review-event-title">
@@ -39,7 +42,7 @@ export default class userReview extends Component {
             <textarea />
           </div>
         </Col>
-        <Col className="review-gutter" md={2}/>
+        <Col className="review-gutter" md={2} />
       </div>
 
     );
