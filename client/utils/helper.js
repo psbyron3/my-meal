@@ -40,6 +40,6 @@ export const eventSort = (events) => {
       events[j] = temp;
     }
   }
-   
+
   return events;
-}
+};

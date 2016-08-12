@@ -38,7 +38,7 @@ class ChefPast extends Component {
           <br />
           {this.props.chefPastEvents[0].eventName}
           <div>
-            <button onClick={() => { this.clicked("HELLOOO 1"); }}> chat </button>
+            <button onClick={() => { this.clicked('HELLOOO 1'); }}> chat </button>
           </div>
         </div>
 
@@ -47,7 +47,7 @@ class ChefPast extends Component {
           <br />
           {this.props.chefPastEvents[0].eventName}
           <div>
-            <button onClick={() => { this.clicked("HELLOOO 2"); }}> chat </button>
+            <button onClick={() => { this.clicked('HELLOOO 2'); }}> chat </button>
           </div>
         </div>
 
@@ -56,7 +56,7 @@ class ChefPast extends Component {
           <br />
           {this.props.chefPastEvents[0].eventName}
           <div>
-            <button onClick={() => { this.clicked("HELLOOO 3"); }}> chat </button>
+            <button onClick={() => { this.clicked('HELLOOO 3'); }}> chat </button>
           </div>
         </div>
       </div>
