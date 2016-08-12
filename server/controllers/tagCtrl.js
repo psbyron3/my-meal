@@ -79,7 +79,11 @@ module.exports = {
     },
     delete(req, res) {
       console.log('Received DELETE at /api/search');
-      res.end('Received DELETE at /api/search');
+      const userId = url.parse(req.url, true).path.slice(7);
+      Tag.removeTagsFromUser(req.body.tags, userId)
+        .then((results) => {
+          res.end('Received DELETE at /api/search');
+        })
     },
   },
 };
