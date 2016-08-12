@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ChefPastEntry from './chefPastEntry';
-import { ChefPastFunc } from '../actions/index';
+import { ChefPastFunc, EventIdFunc } from '../actions/index';
 
 class ChefPast extends Component {
 
   componentDidMount() {
     this.props.ChefPastFunc();
+  }
+
+  clicked(asdf) {
+    console.log(asdf);
   }
 
   renderList() {
@@ -19,21 +23,17 @@ class ChefPast extends Component {
     }
     return this.props.chefPastEvents.map((pastEvent) => {
       return (
-        <div>
-          <div>
-            <button> chat </button>
-          </div>
-          {pastEvent.id}
-          <br />
-          {pastEvent.eventName}
-        </div>
+        <ChefPastEntry 
+          eventName={pastEvent.eventName}
+          eventId={pastEvent.id}
+          clicked={this.props.EventIdFunc} />
       );
     });
   }
 
   render() {
     return (
-      <div>
+      <div className="row">
         {this.renderList()}
       </div>
     );
@@ -46,4 +46,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { ChefPastFunc })(ChefPast);
+export default connect(mapStateToProps, { ChefPastFunc, EventIdFunc })(ChefPast);

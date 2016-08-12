@@ -43,6 +43,7 @@ class ChefUpcoming extends Component {
 function mapStateToProps(state) {
   return {
     chefUpcomingEvents: state.chefEvents.chefUpcomingEvents,
+    eventId: state.eventId.id,
   };
 }
 
