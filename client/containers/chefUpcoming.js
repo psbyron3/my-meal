@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ChefPastEntry from './chefPastEntry';
-import { ChefPastFunc } from '../actions/index';
+import ChefUpcomingEntry from './chefUpcomingEntry';
+import { ChefUpcomingFunc } from '../actions/index';
 
-class ChefPast extends Component {
+class ChefUpcoming extends Component {
 
   componentDidMount() {
-    this.props.ChefPastFunc();
+    this.props.ChefUpcomingFunc();
   }
 
   renderList() {
     console.log('PROOOOOOOOPS: ', this.props);
-    if (this.props.chefPastEvents === undefined) {
+    if (this.props.chefUpcomingEvents === undefined) {
       return (
         <div>
         </div>
       );
     }
-    return this.props.chefPastEvents.map((pastEvent) => {
+    return this.props.chefUpcomingEvents.map((upcomingEvent) => {
       return (
         <div>
           <div>
             <button> chat </button>
           </div>
-          {pastEvent.id}
+          {upcomingEvent.id}
           <br />
-          {pastEvent.eventName}
+          {upcomingEvent.eventName}
         </div>
       );
     });
@@ -42,8 +42,8 @@ class ChefPast extends Component {
 
 function mapStateToProps(state) {
   return {
-    chefPastEvents: state.chefEvents.chefPastEvents,
+    chefUpcomingEvents: state.chefEvents.chefUpcomingEvents,
   };
 }
 
-export default connect(mapStateToProps, { ChefPastFunc })(ChefPast);
+export default connect(mapStateToProps, { ChefUpcomingFunc })(ChefUpcoming);

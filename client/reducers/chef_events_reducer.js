@@ -11,10 +11,12 @@ export default (state = INITIAL_STATE, action) => {
         chefPastEvents: action.payload,
       };
 
-    case CHEF_UPCOMING_EVENTS: return {
-      ...state,
-      chefUpcomingEvents: action.payload,
-    };
+    case CHEF_UPCOMING_EVENTS:
+      console.log('INSIDE CHEF UPCOMING EVENTS:::: ', action.payload);
+      return {
+        ...state,
+        chefUpcomingEvents: action.payload,
+      };
 
     default: return state;
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 
 import ChefPast from '../containers/chefPast';
+import ChefUpcoming from '../containers/chefUpcoming';
 
 export default class ChefDash extends Component {
 
@@ -28,7 +29,7 @@ export default class ChefDash extends Component {
 
             <div>
               list of future events
-
+              <ChefUpcoming />
             </div>
 
           </Tab>
