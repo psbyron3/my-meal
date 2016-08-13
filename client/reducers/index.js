@@ -7,6 +7,7 @@ import SelectedEvent from './selected_event_reducer';
 import AllEventsReducer from './all_events_reducer';
 import AuthReducer from './auth_reducer';
 import TagReducer from './tag_reducer';
+import SearchTagReducer from './search_tags_reducer';
 import { reducer as formReducer } from 'redux-form';
 
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   auth: AuthReducer,
   form: formReducer,
   tags: TagReducer,
+  searchTags: SearchTagReducer,
 });
 
 export default rootReducer;

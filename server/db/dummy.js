@@ -101,7 +101,7 @@ Dummy.init = function () {
               startDatetime: new Date(),
               endDatetime: new Date(),
               userId: 1,
-              tags: [14],
+              tags: [12],
             }),
             Event.createEvent({
               eventName: 'Tacos Party',
@@ -115,6 +115,7 @@ Dummy.init = function () {
               startDatetime: new Date(),
               endDatetime: new Date(),
               userId: 2,
+              tags: [10],
             }),
             Event.createEvent({
               eventName: 'Carne Asada Cookout',
@@ -128,6 +129,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-14T18:00:00',
               endDatetime: '2016-08-14T20:00:00',
               userId: 2,
+              tags: [10],
             }),
             Event.createEvent({
               eventName: 'Vegetarian Feast',
@@ -155,6 +157,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-18T18:00:00',
               endDatetime: '2016-08-18T20:00:00',
               userId: 1,
+              tags: [28],
             }),
             Event.createEvent({
               eventName: 'Hot Dog Eating (No Contest)',
@@ -168,6 +171,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-18T18:00:00',
               endDatetime: '2016-08-18T20:00:00',
               userId: 1,
+              tags: [28],
             }),
             Event.createEvent({
               eventName: 'Biweekly Yum-a-thon',
@@ -181,6 +185,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-07T18:00:00',
               endDatetime: '2016-08-07T20:00:00',
               userId: 2,
+              tags: [4, 8, 19],
             }),
           ];
           return Promise.all(allEventPromises)

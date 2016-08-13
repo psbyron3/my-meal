@@ -83,7 +83,7 @@ module.exports = {
       Tag.removeTagsFromUser(req.body.tags, userId)
         .then((results) => {
           res.end('Received DELETE at /api/search');
-        })
+        });
     },
   },
 };

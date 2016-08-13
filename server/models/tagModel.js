@@ -20,25 +20,19 @@ Tag.getAllTags = function () {
 // tagIds should be an array of integers
 Tag.addTagsToUser = function (tagIds, userId) {
   return db.User.findById(userId)
-    .then((user) => {
-      return user.addTags(tagIds);
-    });
+    .then((user) => user.addTags(tagIds));
 };
 
 Tag.removeTagsFromUser = function (tagIds, userId) {
   return db.User.findById(userId)
-    .then((user) => {
-      return user.removeTags(tagIds);
-    });
+    .then((user) => user.removeTags(tagIds));
 };
 
 Tag.getTagsByUser = function (userId) {
   return db.User.findById(userId)
     .then((user) => {
       return user.getTags()
-        .then((results) => {
-          return results;
-        });
+        .then((results) => results);
     });
 };
 

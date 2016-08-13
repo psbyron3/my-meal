@@ -7,7 +7,7 @@ class GenreMenu extends Component {
     this.renderGenres = this.renderGenres.bind(this);
   }
   renderGenres() {
-    return;
+    return this.props;
   }
 
   render() {

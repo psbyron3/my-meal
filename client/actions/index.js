@@ -11,6 +11,8 @@ export const UNAUTH_USER = 'UNAUTH_USER';
 export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
 export const ALL_GENRES = 'ALL_GENRES';
 export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
+export const UPDATE_RESTRICTIONS = 'UPDATE_RESTRICTIONS';
+export const UPDATE_GENRE = 'UPDATE_GENRE';
 
 
 export const getEventsByUserId = (userId) => {
@@ -27,6 +29,19 @@ export const getEventsByUserId = (userId) => {
     });
 };
 
+export const updateRestrictions = (restrictions) => {
+  return {
+    type: UPDATE_RESTRICTIONS,
+    payload: restrictions,
+  };
+};
+
+export const updateGenre = (genre) => {
+  return {
+    type: UPDATE_GENRE,
+    payload: genre,
+  };
+};
 
 /** *************** AUTHENTICATIONS *********************/
 
