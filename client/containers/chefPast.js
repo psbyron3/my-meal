@@ -33,7 +33,7 @@ class ChefPast extends Component {
 
     return (
       <div>
-        <div className="col-md-4">
+        <div className="map-mc">
           {this.props.chefPastEvents[0].id}
           <br />
           {this.props.chefPastEvents[0].eventName}
@@ -42,7 +42,7 @@ class ChefPast extends Component {
           </div>
         </div>
 
-        <div className="col-md-4">
+        <div className="map-mc">
           {this.props.chefPastEvents[0].id}
           <br />
           {this.props.chefPastEvents[0].eventName}
@@ -51,7 +51,25 @@ class ChefPast extends Component {
           </div>
         </div>
 
-        <div className="col-md-4">
+        <div className="map-mc">
+          {this.props.chefPastEvents[0].id}
+          <br />
+          {this.props.chefPastEvents[0].eventName}
+          <div>
+            <button onClick={() => { this.clicked('HELLOOO 3'); }}> chat </button>
+          </div>
+        </div>
+
+        <div className="map-mc">
+          {this.props.chefPastEvents[0].id}
+          <br />
+          {this.props.chefPastEvents[0].eventName}
+          <div>
+            <button onClick={() => { this.clicked('HELLOOO 2'); }}> chat </button>
+          </div>
+        </div>
+
+        <div className="map-mc">
           {this.props.chefPastEvents[0].id}
           <br />
           {this.props.chefPastEvents[0].eventName}
@@ -65,7 +83,7 @@ class ChefPast extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div>
         {this.renderList()}
       </div>
     );
