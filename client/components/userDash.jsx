@@ -49,7 +49,7 @@ class UserDash extends Component {
       <div>
         <Tabs
           defaultActiveKey={1}
-          animation={false} 
+          animation={false}
           id="noanim-tab-example"
         >
           <Tab eventKey={1} title="Dashboard">

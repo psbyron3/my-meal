@@ -374,13 +374,13 @@ export const postUserReviewOfChef = (reviewData) => {
   console.log('in post review action :', reviewData);
   return axios.post('/api/review/', reviewData)
     .then((response) => {
-      console.log("action review response: ", response)
-      return { 
+      console.log('action review response: ', response);
+      return {
         type: POST_USER_REVIEW_OF_CHEF,
-        payload: response 
-      }
+        payload: response,
+      };
     })
-    .catch((err) => { 
-      if (err) { console.error("Could not post event review: ", err); }
-    })
+    .catch((err) => {
+      if (err) { console.error('Could not post event review: ', err); }
+    });
 };
