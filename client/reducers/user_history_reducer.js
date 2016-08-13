@@ -1,4 +1,8 @@
-import { GET_EVENTS_BY_USER_ID } from '../actions/index';
+import {
+  GET_EVENTS_BY_USER_ID,
+  POST_USER_REVIEW_OF_CHEF,
+} from '../actions/index';
+
 
 const INITIAL_STATE = {};
 
@@ -7,6 +11,9 @@ export default function (state = [], action) {
     case GET_EVENTS_BY_USER_ID :
       console.log('In filtered reducer: ', action.payload.data);
       return action.payload.data;
+    case POST_USER_REVIEW_OF_CHEF :
+      console.log('In reducer for event review');
+      return action.payload;
     default:
       return state;
   }

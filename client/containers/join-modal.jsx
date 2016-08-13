@@ -4,6 +4,9 @@ import axios from 'axios';
 import { Modal, Button, Grid, Row, Col, Image } from 'react-bootstrap';
 import moment from 'moment';
 
+const userId = window.localStorage.userId;
+console.log('user id in join: ', userId);
+
 class JoinModal extends Component {
   constructor(props) {
     super(props);
@@ -15,9 +18,7 @@ class JoinModal extends Component {
 
   handleJoinEvent() {
     console.log('eventId is:', this.props.selectedEvent.id);
-    axios.post(`api/event/join/${this.props.selectedEvent.id}`, {
-      userId: 1,
-    })
+    axios.post(`api/event/join/${this.props.selectedEvent.id}`, { userId })
       .then(() => {
         this.props.closeModal();
       });

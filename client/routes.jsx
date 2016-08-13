@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
+
 import App from './components/app';
 import Home from './components/home.jsx';
 import Landing from './components/landing';
@@ -18,7 +19,6 @@ export default (
     <Route path="signin" component={SignIn} />
     <Route path="messbox" component={MessageBox} />
     <Route path="signup" component={SignUp} />
-    <Route path="addevent" component={RequireAuth(AddEvent)} />
     <Route path="addevent" component={AddEvent} />
     <Route path="dashboard" component={UserDash} />
     <Route path="chefdash" component={ChefDash} />

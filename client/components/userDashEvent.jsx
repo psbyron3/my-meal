@@ -69,7 +69,7 @@ class DashEvent extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('UD mapStoP Events by User Id : ', state.userHistory);
+  console.log('UD mapStoP Events by User Id : ', state.userHistory.data);
   return {
     userHistory: state.userHistory,
   };
