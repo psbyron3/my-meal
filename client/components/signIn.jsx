@@ -64,14 +64,8 @@ class SignIn extends Component {
                         <Link to="signUp">New user? Sign up here!</Link>
                       </div>
 
-
                     </fieldset>
                   </form>
-                  <div>
-                    <button onClick={this.props.SignOutFunc} className="btn btn-md btn-primary btn-block">
-                      log out
-                    </button>
-                  </div>
                 </div>
               </div>
 
