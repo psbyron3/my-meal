@@ -26,7 +26,7 @@ module.exports = {
               .then((result) => {
                 console.log('result', result);
 
-                res.send(result);
+                res.status(201).json({success: "true"});
               });
           }
         });

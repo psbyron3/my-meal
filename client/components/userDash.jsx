@@ -49,7 +49,8 @@ class UserDash extends Component {
       <div>
         <Tabs
           defaultActiveKey={1}
-          animation={false} id="noanim-tab-example"
+          animation={false} 
+          id="noanim-tab-example"
         >
           <Tab eventKey={1} title="Dashboard">
             <UserDashView />
@@ -62,7 +63,7 @@ class UserDash extends Component {
             {this.renderList()}
             </div>
           </Tab>
-          <Tab eventKey={4} title="Your Reviews">
+          <Tab eventKey={4} title="Your Reviews">q
             This is where the reviews a user already created will go
           </Tab>
         </Tabs>
@@ -72,7 +73,7 @@ class UserDash extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('Events by User Id : ', state.userHistory);
+  console.log('mapStoP Events by User Id : ', state.userHistory.data);
   return {
     userHistory: state.userHistory,
   };

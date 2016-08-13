@@ -7,9 +7,7 @@ export default class userDashView extends Component {
   render() {
     return (
       <div>
-
         <UserReview />
-
       </div>
 
     );

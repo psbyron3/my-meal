@@ -4,7 +4,6 @@ import { postUserReviewOfChef } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 import { Col, FormControl, textarea, Image } from 'react-bootstrap';
-import StarRating from 'react-star-rating';
 
 const userId = window.localStorage.userId;
 
@@ -103,7 +102,7 @@ class UserReview extends Component {
             </div>
           </div>
           <form className="review-rating-container">
-            <div className="review-rating" onClick={this.setRating()}>
+            <div className="review-rating" onClick={this.setRating}>
               <span value={1}>☆</span>
               <span value={2}>☆</span>
               <span value={3}>☆</span>
@@ -111,11 +110,11 @@ class UserReview extends Component {
               <span value={5}>☆</span>
             </div>
             <div className="review-comments">
-              <textarea onChange={this.onCommentChange()} />
+              <textarea onChange={this.onCommentChange} />
             </div>
             <button
               type="submit"
-              onClick={this.onReviewSubmit()}
+              onClick={this.onReviewSubmit}
               className="btn btn-primary"
             >Submit Rating
             </button>
