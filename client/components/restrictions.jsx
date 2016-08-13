@@ -8,31 +8,8 @@ class RestrictionMenu extends Component {
     this.state = {};
   }
 
-  // componentDidMount(){
-  //   // this.getDOMNode().querySelector('input').checked = "false"
-  //   // this.props.selectedRestrictions.forEach((id) => {
-  //   //   let node = 'this.refs' + `idis${id}`;
-  //   //
-  //   //
-  //   //   console.log('input element is: ', ReactDOM.findDOMNode(node));
-  //   //   ReactDOM.findDOMNode(node).checked = "true";
-  //   //
-  //   // })
-  //
-  //   // console.log('mounted:', ReactDOM.findDOMNode(this.refs));
-  //   console.log('mounted:', this.refs.idis1);
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     localRestrictions: nextProps.selectedRestrictions
-  //   })
-  // }
-
   renderRestrictions() {
     return this.props.restrictions.map((restriction) => {
-      console.log(`${restriction.id} should be checked:`, this.props.selectedRestrictions.indexOf(restriction.id) > -1);
-
       return (
         <div style={{ display: 'inline-block' }}>
           <label key={restriction.id} className="checkboxLabel">
@@ -42,9 +19,7 @@ class RestrictionMenu extends Component {
               checked={this.props.selectedRestrictions.indexOf(restriction.id) > -1}
               onFocus={this.props.onCheckChange}
             />
-
           {restriction.tagName}
-
           </label>
         </div>
       );
@@ -52,9 +27,6 @@ class RestrictionMenu extends Component {
   }
 
   render() {
-    // console.log('props in restriction menu:', this.props);
-    console.log('...........', this.props.selectedRestrictions);
-
     return (
       <div id="checkboxes">{this.renderRestrictions()}</div>
     );

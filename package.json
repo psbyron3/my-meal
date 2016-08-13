@@ -55,7 +55,6 @@
     "react": "^15.2.1",
     "react-bootstrap": "^0.30.1",
     "react-bootstrap-datetimepicker": "0.0.22",
-    "react-checkbox-group": "^3.0.0",
     "react-dom": "^15.2.1",
     "react-file-input": "^0.2.5",
     "react-google-autocomplete": "^1.0.3",

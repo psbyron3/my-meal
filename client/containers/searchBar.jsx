@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Autocomplete from 'react-google-autocomplete';
 import RestrictionMenu from '../components/restrictions.jsx';
 import GenreMenu from '../components/genres.jsx';
+import DistanceMenu from '../components/distances.jsx';
 import ReactDOM from 'react-dom';
 import { Button, Overlay } from 'react-bootstrap';
 
@@ -16,11 +17,13 @@ class SearchBar extends Component {
                    query: '',
                    restrictions: [],
                    genre: [],
+                   distance: 5,
                  };
     this.onTextChange = this.onTextChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onCheckChange = this.onCheckChange.bind(this);
     this.onGenreChange = this.onGenreChange.bind(this);
+    this.onDistanceChange = this.onDistanceChange.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
@@ -34,7 +37,6 @@ class SearchBar extends Component {
   }
 
   onCheckChange(event) {
-    // console.log('checkChange:', typeof event.target.value);
     event.target.blur();
     const index = this.state.restrictions.indexOf(Number(event.target.value));
     const copy = this.state.restrictions.slice();
@@ -43,18 +45,25 @@ class SearchBar extends Component {
     } else {
       copy.push(Number(event.target.value));
     }
-    // if yes, splice it out of copy
-    // if no, push it into copy
-    // then replace state with new array
     this.setState({ restrictions: copy }, () => {
-      console.log('current restrictions-_-_-_-_->:', this.state.restrictions);
+      console.log('this.state = ', this.state);
     });
   }
 
   onGenreChange(event) {
-    console.log('genreChange:', event.target.value);
-    // simply replace state with event.target.value ([event.target.value]);
-    this.setState({});
+    this.setState({
+      genre: [event.target.value],
+    }, () => {
+      console.log('this.state =', this.state);
+    });
+  }
+
+  onDistanceChange(event) {
+    this.setState({
+      distance: event.target.value,
+    }, () => {
+      console.log('this.state =', this.state);
+    });
   }
 
   // when state is reset in last line, make sure to reset restrictions to user preferences
@@ -62,7 +71,8 @@ class SearchBar extends Component {
     console.log('params: ', this.state.tags);
     console.log('query:', this.state.query);
     const tags = [...this.state.restrictions, ...this.state.genre];
-    this.props.getAllInRadius(this.state.query, tags);
+    const distance = this.state.distance;
+    this.props.getAllInRadius(this.state.query, tags, distance);
     this.setState({ query: '', restrictions: [], genre: [] });
   }
 
@@ -106,8 +116,11 @@ class SearchBar extends Component {
               />
               <GenreMenu
                 onGenreChange={this.onGenreChange}
-                selectedGenres={this.state.genres}
+                selectedGenre={this.state.genres}
                 genres={this.props.genres}
+              />
+              <DistanceMenu
+                onDistanceChange={this.onDistanceChange}
               />
             </div>
           </Overlay>
