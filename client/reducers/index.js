@@ -8,6 +8,7 @@ import AllEventsReducer from './all_events_reducer';
 import AuthReducer from './auth_reducer';
 import ChefEventsReducer from './chef_events_reducer';
 import EventIdReducer from './event_id_reducer';
+import TagReducer from './tag_reducer';
 import { reducer as formReducer } from 'redux-form';
 
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   chefEvents: ChefEventsReducer,
   eventId: EventIdReducer,
   form: formReducer,
+  tags: TagReducer,
 });
 
 export default rootReducer;

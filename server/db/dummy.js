@@ -56,7 +56,7 @@ Dummy.init = function () {
           email: 'joe@gmail.com',
           address: 'Roma',
           phoneNumber: '4159305687',
-        }),
+        }, [4, 6]),
         User.createUser({
           userName: 'Nizz',
           password: 'test2',
@@ -74,7 +74,7 @@ Dummy.init = function () {
           email: 'phil@gmail.com',
           address: 'Santa',
           phoneNumber: '3259345687',
-        }),
+        }, [8]),
         User.createUser({
           userName: 'Mike',
           password: 'test4',
@@ -101,7 +101,7 @@ Dummy.init = function () {
               startDatetime: new Date(),
               endDatetime: new Date(),
               userId: 1,
-              tags: [14],
+              tags: [12],
             }),
             Event.createEvent({
               eventName: 'Tacos Party',
@@ -115,6 +115,7 @@ Dummy.init = function () {
               startDatetime: new Date(),
               endDatetime: new Date(),
               userId: 2,
+              tags: [10],
             }),
             Event.createEvent({
               eventName: 'Carne Asada Cookout',
@@ -128,6 +129,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-14T18:00:00',
               endDatetime: '2016-08-14T20:00:00',
               userId: 2,
+              tags: [10],
             }),
             Event.createEvent({
               eventName: 'Vegetarian Feast',
@@ -155,6 +157,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-18T18:00:00',
               endDatetime: '2016-08-18T20:00:00',
               userId: 1,
+              tags: [28],
             }),
             Event.createEvent({
               eventName: 'Hot Dog Eating (No Contest)',
@@ -168,6 +171,7 @@ Dummy.init = function () {
               startDatetime: '2016-08-18T18:00:00',
               endDatetime: '2016-08-18T20:00:00',
               userId: 1,
+              tags: [28],
             }),
             Event.createEvent({
               eventName: 'Biweekly Yum-a-thon',
@@ -181,11 +185,12 @@ Dummy.init = function () {
               startDatetime: '2016-08-07T18:00:00',
               endDatetime: '2016-08-07T20:00:00',
               userId: 2,
+              tags: [4, 8, 19],
             }),
           ];
           return Promise.all(allEventPromises)
             .then(() => {
-                      // create dummy messages
+              // create dummy messages
               const allMessagePromises = [
                 Message.createMessage({
                   content: 'Hello world',

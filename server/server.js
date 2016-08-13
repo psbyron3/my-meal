@@ -42,8 +42,8 @@ app.use('/api/auth', routesAuth);
 app.use('/api/event', routesEvent);
 app.use('api/dish', routesDish);
 app.use('/api/review', routesReview);
-app.use('/api/search', routesSearch);
 app.use('/api/tag', routesTag);
+app.use('/api/search', routesSearch);
 app.use('/api/message', routesMessage);
 
 

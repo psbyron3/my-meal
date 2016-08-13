@@ -75,7 +75,7 @@ User.addHostToEvent = function (event, userId) {
     });
 };
 
-User.createUser = function (attr) {
+User.createUser = function (attr, tags = []) {
   console.log('creating user', attr);
   return new Promise(function (resolve, reject) {
     return hashPassword(attr.password)
@@ -83,14 +83,21 @@ User.createUser = function (attr) {
         attr.password = hashObj.hash;
         attr.salt = hashObj.salt;
       })
-      .then(function () {
+      .then(() => {
         console.log('password hashed');
-        console.log('this is the pre inserted attr', attr);
         db.User.create(attr)
           .then(function (result) {
             const output = result.dataValues;
-            console.log(output, 'aaaaaattttribut');
-            resolve(output);
+            return result.setTags(tags)
+              .then((x) => {
+                return db.User.findById(output.id, {
+                  include: db.Tag,
+                })
+                  .then((user) => {
+                    console.log('user - - - - - - -', user);
+                    resolve(user.dataValues);
+                  });
+              });
           });
       });
   });

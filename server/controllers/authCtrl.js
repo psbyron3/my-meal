@@ -20,6 +20,7 @@ module.exports = {
         address: req.body.address,
         phoneNumber: req.body.phoneNumber,
       };
+      const tags = req.body.tags || [];
 
       User.findUserByEmail(newAccount.email)
         .then(function (user) {
@@ -31,7 +32,7 @@ module.exports = {
             });
           } else {
             console.log('user does not exist');
-            User.createUser(newAccount)
+            User.createUser(newAccount, tags)
               .then((result) => {
                 console.log('result of creationUser', result);
                 console.log(process.env.secret, 'process');
