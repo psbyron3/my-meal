@@ -462,6 +462,8 @@ input::-webkit-input-placeholder {
   height:100px;
 }
 
+/**************** CHAT FEATURE ************************/
+
 .user-chat {
   display: flex;
   justify-content: center;
@@ -604,7 +606,7 @@ img {
 
 .review-event-image {
   height: 175px;
-  width: 125px;
+  width: 175px;
 }
 
 .review-gutter {
@@ -613,33 +615,56 @@ img {
 }
 
 .review-rating-container {
-  position: absolute;
+  background: #333;
   top: 20px;
   right: 20px;
-  width: 50% auto;
-  background-color: black;
-  font-size: 24px;
-  opacity: 0.6;
-  filter: alpha(opacity=60);
-}
-
-.review-rating > span:hover:before {
-   content: "\2605";
-   position: absolute;
-   color: yellow;
+  position: absolute;
+  overflow: hidden;
 }
 
 .review-rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  color: yellow;
+  text-align: center;
+  perspective: 250px;
+  top: 40%;
+  width: 100%;
 }
-.review-rating > span:hover:before,
-.review-rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
+
+.review-rating span {
+  cursor: pointer;
+  padding: 0 10px;
+  color: #fff;
+  opacity: .5;
+  transition: all 150ms;
+  display: inline-block;
+  transform: rotateX(45deg);
+  transform-origin: center bottom;
+}
+
+.review-rating span.hover {
+  color: #ff0;
+  opacity: 1;
+  transform: rotateX(0deg);
+  text-shadow: 0 0 30px #ffc;
+}
+
+.review-rating span :active {
+  color: #ff0;
+  opacity: 1;
+  transform: rotateX(0deg);
+  text-shadow: 0 0 30px #ffc;
 }
 
 .review-comments {
   width: 75%;
 }
+
+/*.chef-rating-container {
+  position: absolute;
+  bottom: 20px;
+  left: 230px;
+  width: 50% auto;
+  background-color: black;
+  font-size: 24px;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}*/
