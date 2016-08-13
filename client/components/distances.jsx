@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-const DistanceMenu = ({onDistanceChange}) => {
-
+const DistanceMenu = ({ onDistanceChange }) => {
   return (
     <select onChange={onDistanceChange}>
       <option selected disabled>Select a radius</option>
@@ -12,7 +11,7 @@ const DistanceMenu = ({onDistanceChange}) => {
       <option value={20}>20 miles</option>
       <option value={25}>25 miles</option>
     </select>
-  )
-}
+  );
+};
 
 export default DistanceMenu;

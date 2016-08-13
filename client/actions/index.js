@@ -241,12 +241,12 @@ export const getAllEvents = (locationObj, tags, distance) => {
     params: {
       locationObj,
       tags,
-      distance
-    }
+      distance,
+    },
   });
 };
 
-export const getAllInRadius = (query, tags=[], distance = 5) => {
+export const getAllInRadius = (query, tags = [], distance = 5) => {
   console.log('IN GETALLINRADIUS...searchParams =', tags, distance);
   console.log('IN GETALLINRADIUS...query =', query);
   return function (dispatch) {

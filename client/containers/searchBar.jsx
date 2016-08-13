@@ -17,7 +17,7 @@ class SearchBar extends Component {
                    query: '',
                    restrictions: [],
                    genre: [],
-                   distance: 5
+                   distance: 5,
                  };
     this.onTextChange = this.onTextChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -52,7 +52,7 @@ class SearchBar extends Component {
 
   onGenreChange(event) {
     this.setState({
-      genre: [event.target.value]
+      genre: [event.target.value],
     }, () => {
       console.log('this.state =', this.state);
     });
@@ -60,7 +60,7 @@ class SearchBar extends Component {
 
   onDistanceChange(event) {
     this.setState({
-      distance: event.target.value
+      distance: event.target.value,
     }, () => {
       console.log('this.state =', this.state);
     });

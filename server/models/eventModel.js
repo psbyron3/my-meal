@@ -43,7 +43,7 @@ Event.findEventById = function (eventId) {
 };
 
 // expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
-Event.findEventsInRadius = function (lat, lng, tags) {
+Event.findEventsInRadius = function (lat, lng) {
   console.log('inside events in radius');
   console.log('lat', lat);
   console.log('lng', lng);
@@ -74,6 +74,60 @@ Event.findEventsInRadius = function (lat, lng, tags) {
       return results;
     });
 };
+
+Event.findEventsByParams = function(lat, lng, distance, tags=[]) {
+  console.log('inside events in params');
+  console.log('lat', lat);
+  console.log('lng', lng);
+  console.log('distance =', distance);
+  const radx = +(Math.abs(distance * (1 / (Math.cos(lat) * 69.172)))).toFixed(7);
+  const rady = +(distance * (1 / 69.172)).toFixed(7);
+  const currentDate = new Date();
+  console.log('radx =', radx);
+  console.log('rady =', rady);
+  return db.Event.findAll({
+    where: {
+      latitude: { $between: [lat - rady, +lat + rady] },
+      longitude: { $between: [lng - radx, +lng + radx] },
+      startDatetime: { $gt: currentDate },
+      include: {
+        model: db.Tag,
+        through: {
+          model: db.TagsEvents,
+          where: {
+            tagId: {
+              $in: tags
+            }
+          }
+        }
+      }
+    },
+    include: [
+      {
+        model: db.User,
+        through: {
+          model: db.UsersEvent,
+          where: { role: 'host' },
+        },
+      },
+      {
+        model: db.Tag,
+      },
+    ],
+  })
+  .then((results) => {
+    console.log('results from findEventsInRadius', results);
+    return results;
+  });
+
+
+}
+
+Event.findEventsByTags = function(tag) {
+  return db.Event.findAll({
+
+  })
+}
 
 Event.findEventsByTime = function (start, end) {
   const eventStart = new Date(start);
@@ -155,7 +209,7 @@ Event.joinEvent = function (eventId, userId) {
           return event.hasUser(user)
             .then((result) => {
               if (result) return {};
-              return event.addUsers([user], { role: 'guest' })
+              return event.addUsers([user], { role: 'guest', wasReviewed: false })
                 .then(() => {
                   return event.increment('attending');
                 });
