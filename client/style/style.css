@@ -54,10 +54,9 @@ body {
 }
 
 .navbar-header img {
-
   height: 90px;
   width: 72px;
-  left: 25px;
+  margin-left: 15px;
 }
 
 .nav-search > .search-input {
@@ -80,6 +79,7 @@ body {
   padding-left: 32px;
   color: #000;
   background-color: #fff;
+  border-color: #F7F4EF;
   cursor: auto;
 }
 .autoComplete input:-moz-placeholder {
@@ -120,7 +120,6 @@ input::-webkit-search-cancel-button {
   display: none;
 }
 
-
 input[type=search] {
   background: #ededed url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
   border: solid 1px #ccc;
@@ -138,13 +137,12 @@ input[type=search] {
 input[type=search]:focus {
   width: 130px;
   background-color: #fff;
-  border-color: #66CC75;
+  border-color: #F7F4EF;
 
   -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
   -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
   box-shadow: 0 0 5px rgba(109,207,246,.5);
 }
-
 
 input:-moz-placeholder {
   color: #999;
@@ -156,12 +154,45 @@ input::-webkit-input-placeholder {
 .btn.btn-primary {
   background-color: #371C11;
   border-color: #371C11;
-
 }
 
 .btn.btn-primary:hover {
   background-color: #025aa5;
   border-color: #01549b
+}
+
+/*******Advanced Search Popover*************/
+
+#searchButton, #searchButton:focus, #searchButton:visited, #searchButton:hover {
+  border-radius: 100%;
+  margin-left: 25px;
+  border: none;
+}
+
+#advancedSearch {
+  background-color: #F7F4EF;
+  position:absolute;
+  borderRadius:10px;
+  margin-left:10px;
+}
+
+/****Styles for Google Places dropdown******/
+.pac-container {
+    top: 20px;
+    z-index: 1051;
+    border-radius: 15px;
+}
+
+.pac-item {
+
+}
+
+.pac-selected {
+
+}
+
+.pac-container:after {
+  background-position: 15px;
 }
 
 /*MODALS*****************************************/
@@ -337,7 +368,7 @@ input::-webkit-input-placeholder {
 }
 .video-container {
     position: relative;
-    bottom: 0%;
+    top:-15px;
     left: 0%;
     height: 100%;
     width: 100%;

@@ -23,7 +23,7 @@ module.exports = {
       res.end('Received DELETE at /api/search');
     },
   },
-  '/:eventId': {
+  '/event/:eventId': {
     get(req, res) {
       console.log('Received GET at /api/tag/:eventId');
       res.end('Received GET at /api/tag/:eventId');
@@ -33,7 +33,7 @@ module.exports = {
       res.end('Received POST at /api/tag/:eventId');
     },
     put(req, res) {
-      const eventId = url.parse(req.url, true).path.slice(1);
+      const eventId = url.parse(req.url, true).path.slice(7);
       const userId = req.body.userId;
       console.log('Received PUT at /api/tag/:eventId');
       return Event.findEventById(eventId)
@@ -45,7 +45,7 @@ module.exports = {
         });
     },
     delete(req, res) {
-      const eventId = url.parse(req.url, true).path.slice(1);
+      const eventId = url.parse(req.url, true).path.slice(7);
       const userId = req.body.userId;
       console.log('Received DELETE at /api/tag/:eventId');
       return Event.findEventById(eventId)
@@ -54,6 +54,35 @@ module.exports = {
             .then((result) => {
               res.send(result);
             });
+        });
+    },
+  },
+  '/users/:userId': {
+    get(req, res) {
+      const userId = url.parse(req.url, true).path.slice(7);
+      return Tag.getTagsByUser(userId)
+        .then((result) => {
+          res.send(result);
+        });
+    },
+    post(req, res) {
+      console.log('Received POST at /api/search');
+      const userId = url.parse(req.url, true).path.slice(7);
+      return Tag.addTagsToUser(req.body.tags, userId)
+        .then((results) => {
+          res.send(results);
+        });
+    },
+    put(req, res) {
+      console.log('Received PUT at /api/search');
+      res.end('Received PUT at /api/search');
+    },
+    delete(req, res) {
+      console.log('Received DELETE at /api/search');
+      const userId = url.parse(req.url, true).path.slice(7);
+      Tag.removeTagsFromUser(req.body.tags, userId)
+        .then((results) => {
+          res.end('Received DELETE at /api/search');
         });
     },
   },
