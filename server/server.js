@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const path = require('path');
 const socketIo = require('socket.io');
 
-const dotenv = require('dotenv').config({path: '../.env'});
+const dotenv = require('dotenv').config({ path: '../.env' });
 
 const db = require('./db/db.js');
 
