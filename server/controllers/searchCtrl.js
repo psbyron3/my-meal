@@ -36,7 +36,6 @@ module.exports = {
         res.end('Error! No latitude and/or longitude supplied!');
         return;
       }
-
       const loc = {
         lat: req.query.latitude,
         lng: req.query.longitude,
@@ -67,9 +66,19 @@ module.exports = {
   },
   '/test': {
     get(req, res) {
-      Event.findAllEvents()
+      const lat = req.query.latitude;
+      const lng = req.query.longitude;
+      const tags = req.query.tags || [27];
+      const distance = req.query.distance || 5;
+      console.log('req.query.latitude.....', req.query.latitude);
+      console.log('req.query.tags.....', req.query.tags);
+      Event.findEventsByParams(lat, lng, distance, tags)
         .then((results) => {
           res.send(results);
+        })
+        .catch((err) => {
+          console.log('Error in api/search/test', err);
+          res.send(err);
         });
     },
     post(req, res) {

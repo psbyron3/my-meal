@@ -294,14 +294,18 @@ export const ChefSelectedEvent = () => {
 
 /** ***************** EVENT FUNC ***********************/
 
-export const getAllEvents = (locationObj) => {
+export const getAllEvents = (locationObj, tags, distance) => {
   return axios.get('/api/event/location', {
-    params: locationObj,
+    params: {
+      locationObj,
+      tags,
+      distance,
+    },
   });
 };
 
-export const getAllInRadius = (query, params) => {
-  console.log('IN GETALLINRADIUS...searchParams =', params);
+export const getAllInRadius = (query, tags = [], distance = 5) => {
+  console.log('IN GETALLINRADIUS...searchParams =', tags, distance);
   console.log('IN GETALLINRADIUS...query =', query);
   return function (dispatch) {
     convertAddress(query)
@@ -314,7 +318,7 @@ export const getAllInRadius = (query, params) => {
           type: MAP_CENTER,
           payload: locationObj,
         });
-        getAllEvents(locationObj)
+        getAllEvents(locationObj, tags, distance)
           .then((events) => {
             dispatch({
               type: GET_ALL_EVENTS,

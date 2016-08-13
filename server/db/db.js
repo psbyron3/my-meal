@@ -47,6 +47,17 @@ const User = sequelize.define('User', {
   password: {
     type: Sequelize.STRING,
   },
+  userPic: {
+    type: Sequelize.STRING,
+    validate: {
+      isUrl: {
+        msg: 'Must be a valid URL',
+      },
+    },
+  },
+  avgRating: {
+    type: Sequelize.DECIMAL(5, 4),
+  },
 });
 
 const Event = sequelize.define('Event', {
@@ -94,10 +105,14 @@ const Event = sequelize.define('Event', {
     type: Sequelize.DATE,
     allowNull: false,
   },
-
 });
 
 const Tag = sequelize.define('Tag', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+  },
   tagName: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -154,6 +169,9 @@ const UsersEvent = sequelize.define('UsersEvent', {
     validate: {
       isIn: [['guest', 'host']],
     },
+  },
+  wasReviewed: {
+    type: Sequelize.BOOLEAN,
   },
 });
 

@@ -7,13 +7,25 @@ class GenreMenu extends Component {
     this.renderGenres = this.renderGenres.bind(this);
   }
   renderGenres() {
-    return this.props;
+    console.log('current genre:', this.props.selectedGenre);
+    return this.props.genres.map((genre) => {
+      return (
+        <option key={genre.id} value={genre.id}>
+          {genre.tagName}
+        </option>
+      );
+    });
   }
 
   render() {
     console.log('...........', this.props);
     return (
-      <div>genres</div>
+      <div>
+        <select onChange={this.props.onGenreChange}>
+          <option selected disabled>Select a type of food</option>
+          {this.renderGenres()}
+        </select>
+      </div>
     );
   }
 }
