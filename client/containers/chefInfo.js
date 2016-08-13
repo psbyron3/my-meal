@@ -8,13 +8,13 @@ class ChefInfo extends Component {
 
 
   render() {
-    let chefRatingArray = [];
+    const chefRatingArray = [];
 
     _.each(this.props.chefEvents, (event) => {
-      if(typeof event.rating === 'number') {
+      if (typeof event.rating === 'number') {
         chefRatingArray.push(event.rating);
       }
-    })
+    });
 
     let chefRating = reviewAverage(chefRatingArray);
 
