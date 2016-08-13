@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const _ = require('lodash');
 
 export const convertAddress = (address) => {
@@ -28,5 +27,11 @@ export const convertAddress = (address) => {
     .catch((err) => {
       console.log('ERROR ', err);
     });
+};
+
+export const reviewAverage = (reviews) => {
+  return _.reduce(reviews, function (sum, current) {
+    return sum + current.rating;
+  }, 0) / reviews.length;
 };
 

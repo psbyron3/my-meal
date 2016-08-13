@@ -9,6 +9,24 @@ body {
   padding-top: 100px;
 }
 
+
+
+.map-mc {
+  position: relative;
+  min-height: 1px;
+  max-height: 100px;
+  padding: 15px;
+  float: left;
+  width: 32.9%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin: 3px;
+}
+
+.center-mc {
+  margin: auto;
+}
+
 /*ROUTEVIEW*****************/
 
 /*#routeView {
