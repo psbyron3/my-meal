@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+import { convertAddress } from '../utils/helper';
 const _ = require('lodash');
 
 export const MAP_CENTER = 'MAP_CENTER';
@@ -161,7 +162,10 @@ export const ChefPastFunc = () => {
             }));
           })
           .then((result) => {
-            console.log('FIIIIIINALAAAAL RESULLLT: ', result);
+            result.sort((a, b) => {
+              return Date.parse(a.startDatetime) - Date.parse(b.startDatetime);
+            });
+
             dispatch({
               type: CHEF_PAST_EVENTS,
               payload: result,
@@ -209,7 +213,10 @@ export const ChefUpcomingFunc = () => {
             }));
           })
           .then((result) => {
-            console.log('FIIIIIINALAAAAL RESULLLT: ', result);
+            result.sort((a, b) => {
+              return Date.parse(b.startDatetime) - Date.parse(a.startDatetime);
+            });
+
             dispatch({
               type: CHEF_UPCOMING_EVENTS,
               payload: result,
@@ -224,36 +231,6 @@ export const ChefUpcomingFunc = () => {
 
 export const ChefSelectedEvent = () => {
   // selected event in chef dash
-};
-
-/** ****************** HELPER ********************/
-
-export const convertAddress = (address) => {
-  let response;
-  let coordinate;
-
-  return axios({
-    method: 'GET',
-    url: 'https://maps.googleapis.com/maps/api/geocode/json',
-    params: {
-      address,
-      key: 'AIzaSyDXLvbYh4moubEU_ChyobbXbC8b6EMSrKs',
-    },
-  })
-    .then((payload) => {
-      response = payload.data.results[0].geometry.location;
-      coordinate = {
-        latitude: response.lat,
-        longitude: response.lng,
-        address,
-      };
-      return {
-        data: coordinate,
-      };
-    })
-    .catch((err) => {
-      console.log('ERROR ', err);
-    });
 };
 
 /** ***************** EVENT FUNC ***********************/
