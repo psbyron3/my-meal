@@ -8,10 +8,10 @@ import ChefInfo from '../containers/chefInfo';
 import { ChefEventsFunc } from '../actions/index';
 
 
-export default class ChefDash extends Component {
+class ChefDash extends Component {
 
   componentDidMount() {
-    ChefEventsFunc();
+    this.props.ChefEventsFunc();
   }
 
 
@@ -56,3 +56,9 @@ export default class ChefDash extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(mapStateToProps, { ChefEventsFunc })(ChefDash);

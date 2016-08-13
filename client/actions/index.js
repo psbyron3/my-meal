@@ -132,16 +132,20 @@ export const SignOutFunc = () => {
 export const ChefEventsFunc = () => {
   const currentDate = new Date(Date.now());
   const userId = localStorage.getItem('userId');
+  console.log('INITIAL LOGGING');
 
   let chefEventsArray;
 
+  console.log('SOMETHING WRONG HERE???');
+
   return (dispatch) => {
+    console.log('INSIDE CHEFEVENTSFUNC DISPATCH');
     return axios({
-      metho: 'GET',
+      method: 'GET',
       url: `/api/event/users/${userId}`,
     })
       .then((response) => {
-        console.log('EVEEEEEEEEEENTS: ', response);
+        console.log('AFTER DISPATCH RESPONSE ', response);
         chefEventsArray = response.data;
 
         return Promise.all(_.filter(chefEventsArray, (event) => {
@@ -156,7 +160,14 @@ export const ChefEventsFunc = () => {
               })
                 .then((reviews) => {
                   event.reviews = reviews.data;
-                  event.rating = reviewAverage(event.reviews);
+                  console.log('EVEEEEENT REVIEEEWSSSS: ', event.reviews);
+                  const ratingArray = [];
+                  _.each(event.reviews, (review) => {
+                    if(typeof review.rating === "number") {
+                      ratingArray.push(review.rating);
+                    }
+                  });
+                  event.rating = reviewAverage(ratingArray);
                   return event;
                 });
             }));
@@ -184,6 +195,7 @@ export const ChefPastFunc = () => {
   // look in db and filter events by users and event date < currentDate
 
   return (dispatch) => {
+    console.log('INSIDE CHEFPAST DISPATCH');
     return axios({
       method: 'GET',
       url: `/api/event/users/${userId}`,

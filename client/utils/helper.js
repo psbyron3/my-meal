@@ -30,8 +30,11 @@ export const convertAddress = (address) => {
 };
 
 export const reviewAverage = (reviews) => {
+  if (reviews.length === 0) {
+    return 'n/a';
+  }
   return _.reduce(reviews, function (sum, current) {
-    return sum + current.rating;
+    return sum + current;
   }, 0) / reviews.length;
 };
 

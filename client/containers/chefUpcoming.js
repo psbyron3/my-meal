@@ -4,6 +4,7 @@ import ChefUpcomingEntry from './chefUpcomingEntry';
 
 const _ = require('lodash');
 
+
 class ChefUpcoming extends Component {
 
   organizeEvents(allEvents) {
@@ -32,8 +33,8 @@ class ChefUpcoming extends Component {
         </div>
       );
     }
-    return this.organizeEvents(this.props.chefEvents).map((event) => {
-      console.log('EVEEEEEEEEEEEEEENT: ', event);
+    return this.props.chefEvents.map((event) => {
+      console.log('INSIDE RENDERLIST RETURN ', event);
       return (
         <div>
           <div>
@@ -42,6 +43,8 @@ class ChefUpcoming extends Component {
           {event.id}
           <br />
           {event.eventName}
+          <br />
+          rating: {event.rating}
         </div>
       );
     });
