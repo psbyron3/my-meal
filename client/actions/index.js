@@ -163,7 +163,7 @@ export const ChefEventsFunc = () => {
                   console.log('EVEEEEENT REVIEEEWSSSS: ', event.reviews);
                   const ratingArray = [];
                   _.each(event.reviews, (review) => {
-                    if(typeof review.rating === "number") {
+                    if (typeof review.rating === 'number') {
                       ratingArray.push(review.rating);
                     }
                   });
