@@ -163,8 +163,8 @@ export const ChefPastFunc = () => {
           })
           .then((result) => {
             result.sort((a, b) => {
-              return Date.parse(a.startDatetime) - Date.parse(b.startDatetime)
-            })
+              return Date.parse(a.startDatetime) - Date.parse(b.startDatetime);
+            });
 
             dispatch({
               type: CHEF_PAST_EVENTS,
@@ -214,8 +214,8 @@ export const ChefUpcomingFunc = () => {
           })
           .then((result) => {
             result.sort((a, b) => {
-              return Date.parse(b.startDatetime) - Date.parse(a.startDatetime)
-            })
+              return Date.parse(b.startDatetime) - Date.parse(a.startDatetime);
+            });
 
             dispatch({
               type: CHEF_UPCOMING_EVENTS,
