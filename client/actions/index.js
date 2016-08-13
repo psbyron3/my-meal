@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { convertAddress, eventSort } from '../utils/helper';
+import { convertAddress } from '../utils/helper';
 const _ = require('lodash');
 
 export const MAP_CENTER = 'MAP_CENTER';
@@ -162,11 +162,13 @@ export const ChefPastFunc = () => {
             }));
           })
           .then((result) => {
-            const sortedResult = eventSort(result);
+            result.sort((a, b) => {
+              return Date.parse(a.startDatetime) - Date.parse(b.startDatetime)
+            })
 
             dispatch({
               type: CHEF_PAST_EVENTS,
-              payload: sortedResult,
+              payload: result,
             });
           });
       })
@@ -211,11 +213,13 @@ export const ChefUpcomingFunc = () => {
             }));
           })
           .then((result) => {
-            const sortedResult = eventSort(result);
+            result.sort((a, b) => {
+              return Date.parse(b.startDatetime) - Date.parse(a.startDatetime)
+            })
 
             dispatch({
               type: CHEF_UPCOMING_EVENTS,
-              payload: sortedResult,
+              payload: result,
             });
           });
       })

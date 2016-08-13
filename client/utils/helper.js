@@ -30,16 +30,3 @@ export const convertAddress = (address) => {
     });
 };
 
-export const eventSort = (events) => {
-  let temp;
-
-  for (let i = 1; i < events.length; i++) {
-    temp = events[i];
-    for (let j = i - 1; j >= 0 && (Date.parse(events[j].startDatetime) < Date.parse(temp.startDatetime)); j--) {
-      events[j + 1] = events[j];
-      events[j] = temp;
-    }
-  }
-
-  return events;
-};
