@@ -51,13 +51,13 @@ const User = sequelize.define('User', {
     type: Sequelize.STRING,
     validate: {
       isUrl: {
-        msg: 'Must be a valid URL'
-      }
-    }
+        msg: 'Must be a valid URL',
+      },
+    },
   },
   avgRating: {
-    type: Sequelize.DECIMAL(5,4)
-  }
+    type: Sequelize.DECIMAL(5, 4),
+  },
 });
 
 const Event = sequelize.define('Event', {
@@ -111,7 +111,7 @@ const Tag = sequelize.define('Tag', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    allowNull: false
+    allowNull: false,
   },
   tagName: {
     type: Sequelize.STRING,
@@ -171,8 +171,8 @@ const UsersEvent = sequelize.define('UsersEvent', {
     },
   },
   wasReviewed: {
-    type: Sequelize.BOOLEAN
-  }
+    type: Sequelize.BOOLEAN,
+  },
 });
 
 const Message = sequelize.define('Message', {
@@ -223,7 +223,7 @@ sequelize
   .sync({ force: false })
   .then(() => {
     console.log('Created tables from schema');
-    //dummy.init();
+    // dummy.init();
   });
 
 exports.User = User;

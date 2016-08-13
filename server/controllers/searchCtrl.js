@@ -77,7 +77,7 @@ module.exports = {
           res.send(results);
         })
         .catch((err) => {
-          console.log('Error in api/search/test',err)
+          console.log('Error in api/search/test', err);
           res.send(err);
         });
     },

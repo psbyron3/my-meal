@@ -75,7 +75,7 @@ Event.findEventsInRadius = function (lat, lng) {
     });
 };
 
-Event.findEventsByParams = function(lat, lng, distance, tags=[]) {
+Event.findEventsByParams = function (lat, lng, distance, tags = []) {
   console.log('inside events in params');
   console.log('lat', lat);
   console.log('lng', lng);
@@ -96,11 +96,11 @@ Event.findEventsByParams = function(lat, lng, distance, tags=[]) {
           model: db.TagsEvents,
           where: {
             tagId: {
-              $in: tags
-            }
-          }
-        }
-      }
+              $in: tags,
+            },
+          },
+        },
+      },
     },
     include: [
       {
@@ -115,19 +115,17 @@ Event.findEventsByParams = function(lat, lng, distance, tags=[]) {
       },
     ],
   })
-  .then((results) => {
-    console.log('results from findEventsInRadius', results);
-    return results;
-  });
+    .then((results) => {
+      console.log('results from findEventsInRadius', results);
+      return results;
+    });
+};
 
-
-}
-
-Event.findEventsByTags = function(tag) {
+Event.findEventsByTags = function (tag) {
   return db.Event.findAll({
 
-  })
-}
+  });
+};
 
 Event.findEventsByTime = function (start, end) {
   const eventStart = new Date(start);
