@@ -67,7 +67,8 @@ class SearchBar extends Component {
   }
 
   // when state is reset in last line, make sure to reset restrictions to user preferences
-  onFormSubmit() {
+  onFormSubmit(event) {
+    event.preventDefault();
     console.log('params: ', this.state.tags);
     console.log('query:', this.state.query);
     const tags = [...this.state.restrictions, ...this.state.genre];

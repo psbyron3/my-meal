@@ -20,7 +20,8 @@ Event.findAllEvents = function () {
       },
     ],
   })
-    .then((results) => results); // Sequelize query
+    .then((results) => results)
+    .catch((err) => err); // Sequelize query
 };
 
 // This is to take the place of findAllEvents at route '/api/event/' before deployment
@@ -44,63 +45,16 @@ Event.findEventById = function (eventId) {
 
 // expect lat and lng to be decimals, start & end to be times formatted as strings, tags to be an array of ids
 Event.findEventsInRadius = function (lat, lng) {
-  console.log('inside events in radius');
-  console.log('lat', lat);
-  console.log('lng', lng);
-  const rad = 0.075;
-  const currentDate = new Date();
-
-  return db.Event.findAll({
-    where: {
-      latitude: { $between: [lat - rad, +lat + rad] },
-      longitude: { $between: [lng - rad, +lng + rad] },
-      startDatetime: { $gt: currentDate },
-    },
-    include: [
-      {
-        model: db.User,
-        through: {
-          model: db.UsersEvent,
-          where: { role: 'host' },
-        },
-      },
-      {
-        model: db.Tag,
-      },
-    ],
-  })
-    .then((results) => {
-      console.log('results from findEventsInRadius', results);
-      return results;
-    });
-};
-
-Event.findEventsByParams = function (lat, lng, distance, tags = []) {
-  console.log('inside events in params');
-  console.log('lat', lat);
-  console.log('lng', lng);
-  console.log('distance =', distance);
+  const distance = 5;
   const radx = +(Math.abs(distance * (1 / (Math.cos(lat) * 69.172)))).toFixed(7);
   const rady = +(distance * (1 / 69.172)).toFixed(7);
   const currentDate = new Date();
-  console.log('radx =', radx);
-  console.log('rady =', rady);
+
   return db.Event.findAll({
     where: {
       latitude: { $between: [lat - rady, +lat + rady] },
       longitude: { $between: [lng - radx, +lng + radx] },
       startDatetime: { $gt: currentDate },
-      include: {
-        model: db.Tag,
-        through: {
-          model: db.TagsEvents,
-          where: {
-            tagId: {
-              $in: tags,
-            },
-          },
-        },
-      },
     },
     include: [
       {
@@ -118,14 +72,64 @@ Event.findEventsByParams = function (lat, lng, distance, tags = []) {
     .then((results) => {
       console.log('results from findEventsInRadius', results);
       return results;
+    })
+    .catch((err) => {
+      console.log('error in findEventsInRadius', err);
+      return err;
     });
 };
 
-Event.findEventsByTags = function (tag) {
-  return db.Event.findAll({
+Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
+  const radx = +(Math.abs(distance * (1 / (Math.cos(lat) * 69.172)))).toFixed(7);
+  const rady = +(distance * (1 / 69.172)).toFixed(7);
+  const currentDate = new Date();
 
-  });
+  console.log('inside events by params..', 'lat:', lat, 'lng:', lng);
+  console.log('distance =', distance);
+  console.log('radx =', radx, 'rady = ', rady);
+  console.log('tags======', tags);
+
+  return db.Event.findAll({
+    where: {
+      latitude: { $between: [lat - rady, +lat + rady] },
+      longitude: { $between: [lng - radx, +lng + radx] },
+      startDatetime: { $gt: currentDate },
+    },
+    include: [
+      {
+        model: db.User,
+        through: {
+          model: db.UsersEvent,
+          where: { role: 'host' },
+        },
+      },
+      {
+        model: db.Tag,
+        attributes: ['id', 'tagName'],
+      },
+    ],
+  })
+    .then((events) => {
+      return events.filter((event, index) => {
+        let tagMatch = 0;
+        let lastIndex = 0;
+        if (tags.length <= event.Tags.length) {
+          tags.forEach((tag) => {
+            for (let i = lastIndex; i < event.Tags.length || tagMatch === tags.length; i++) {
+              if (event.Tags[i].id === +tag) {
+                lastIndex = i + 1;
+                tagMatch++;
+                return;
+              }
+            }
+          });
+        }
+        return tagMatch === tags.length;
+      });
+    })
+    .catch((err) => err);
 };
+
 
 Event.findEventsByTime = function (start, end) {
   const eventStart = new Date(start);
@@ -152,6 +156,7 @@ Event.findEventByLocation = function (lat, lng) {
   });
 };
 
+// Used in joinEvent to check for double-booking
 Event.findEventByLocationAndDate = function (lat, lng, start, end) {
   const eventStart = new Date(start);
   const eventEnd = new Date(end);
@@ -167,9 +172,11 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
         },
       ],
     },
-  });
+  })
+    .catch((err) => err);
 };
 
+// Used to populate user dashboard
 Event.findEventsByUser = function (userId) {
   return db.User.findById(userId)
     .then((user) => {
@@ -237,6 +244,7 @@ Event.quitEvent = function (eventId, userId) {
     .catch((err) => err);
 };
 
+// To be used only by chefs
 Event.destroyEvent = function (event) {
   console.log('typeof event receieved in destroyEvent:', typeof event);
   return event.destroy();
