@@ -17,11 +17,11 @@ export default (
     <IndexRoute component={Landing} />
     <Route path="home" component={Home} />
     <Route path="signin" component={SignIn} />
-    <Route path="messbox" component={MessageBox} />
     <Route path="signup" component={SignUp} />
-    <Route path="addevent" component={AddEvent} />
-    <Route path="dashboard" component={UserDash} />
-    <Route path="chefdash" component={ChefDash} />
+    <Route path="messbox" component={MessageBox} />
+    <Route path="addevent" component={RequireAuth(AddEvent)} />
+    <Route path="dashboard" component={RequireAuth(UserDash)} />
+    <Route path="chefdash" component={RequireAuth(ChefDash)} />
   </Route>
 
 );
