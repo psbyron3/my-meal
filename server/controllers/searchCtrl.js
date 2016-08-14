@@ -32,22 +32,17 @@ module.exports = {
   '/location': {
     get(req, res) {
       console.log('Received GET at /api/event/location');
-      if (!req.query.latitude || !req.query.longitude) {
-        res.end('Error! No latitude and/or longitude supplied!');
-        return;
-      }
-      const loc = {
-        lat: req.query.latitude,
-        lng: req.query.longitude,
-      };
+      const latitude = req.query.latitude;
+      const longitude = req.query.longitude;
+      const tags = req.query.tags.split(',') || [27];
+      const distance = req.query.distance || 5;
 
-      Event.findEventsInRadius(loc.lat, loc.lng)
-        .then((result) => {
-          console.log('returned radius stuff');
-          res.send(result);
+      Event.findEventsByParams(latitude, longitude, distance, tags)
+        .then((results) => {
+          res.send(results);
         })
         .catch((err) => {
-          console.log('error in findEventsInRadius...');
+          console.log('Error in api/search/test', err);
           res.send(err);
         });
     },
@@ -66,13 +61,15 @@ module.exports = {
   },
   '/test': {
     get(req, res) {
-      const lat = req.query.latitude;
-      const lng = req.query.longitude;
-      const tags = req.query.tags || [27];
+      const latitude = req.query.latitude;
+      const longitude = req.query.longitude;
+      const tags = req.query.tags.split(',') || [27];
       const distance = req.query.distance || 5;
       console.log('req.query.latitude.....', req.query.latitude);
-      console.log('req.query.tags.....', req.query.tags);
-      Event.findEventsByParams(lat, lng, distance, tags)
+      console.log('typeof req.query.tags.....', typeof req.query.tags);
+      console.log('TAGS TAGS TAGS', tags);
+      
+      Event.findEventsByParams(latitude, longitude, distance, tags)
         .then((results) => {
           res.send(results);
         })
