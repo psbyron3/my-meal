@@ -68,7 +68,7 @@ module.exports = {
       console.log('req.query.latitude.....', req.query.latitude);
       console.log('typeof req.query.tags.....', typeof req.query.tags);
       console.log('TAGS TAGS TAGS', tags);
-      
+
       Event.findEventsByParams(latitude, longitude, distance, tags)
         .then((results) => {
           res.send(results);

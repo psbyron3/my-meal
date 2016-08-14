@@ -84,7 +84,7 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
   const rady = +(distance * (1 / 69.172)).toFixed(7);
   const currentDate = new Date();
 
-  console.log('inside events by params..', 'lat:', lat,'lng:', lng);
+  console.log('inside events by params..', 'lat:', lat, 'lng:', lng);
   console.log('distance =', distance);
   console.log('radx =', radx, 'rady = ', rady);
   console.log('tags======', tags);
@@ -105,7 +105,7 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
       },
       {
         model: db.Tag,
-        attributes: ['id', 'tagName']
+        attributes: ['id', 'tagName'],
       },
     ],
   })
@@ -113,10 +113,10 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
       return events.filter((event, index) => {
         let tagMatch = 0;
         let lastIndex = 0;
-        if(tags.length <= event.Tags.length){
+        if (tags.length <= event.Tags.length) {
           tags.forEach((tag) => {
             for (let i = lastIndex; i < event.Tags.length || tagMatch === tags.length; i++) {
-              if(event.Tags[i].id === +tag) {
+              if (event.Tags[i].id === +tag) {
                 lastIndex = i + 1;
                 tagMatch++;
                 return;
@@ -129,7 +129,6 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
     })
     .catch((err) => err);
 };
-
 
 
 Event.findEventsByTime = function (start, end) {
@@ -157,7 +156,7 @@ Event.findEventByLocation = function (lat, lng) {
   });
 };
 
-//Used in joinEvent to check for double-booking
+// Used in joinEvent to check for double-booking
 Event.findEventByLocationAndDate = function (lat, lng, start, end) {
   const eventStart = new Date(start);
   const eventEnd = new Date(end);
@@ -177,7 +176,7 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
     .catch((err) => err);
 };
 
-//Used to populate user dashboard
+// Used to populate user dashboard
 Event.findEventsByUser = function (userId) {
   return db.User.findById(userId)
     .then((user) => {
@@ -245,7 +244,7 @@ Event.quitEvent = function (eventId, userId) {
     .catch((err) => err);
 };
 
-//To be used only by chefs
+// To be used only by chefs
 Event.destroyEvent = function (event) {
   console.log('typeof event receieved in destroyEvent:', typeof event);
   return event.destroy();
