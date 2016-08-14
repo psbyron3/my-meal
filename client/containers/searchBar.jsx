@@ -67,7 +67,8 @@ class SearchBar extends Component {
   }
 
   // when state is reset in last line, make sure to reset restrictions to user preferences
-  onFormSubmit() {
+  onFormSubmit(event) {
+    event.preventDefault();
     console.log('params: ', this.state.tags);
     console.log('query:', this.state.query);
     const tags = [...this.state.restrictions, ...this.state.genre];
@@ -84,8 +85,8 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="nav-search">
-        <form onSubmit={this.onFormSubmit} className="search-input">
+      <div className="nav-search" onSubmit={this.onFormSubmit}>
+        <form className="search-input">
           <div style={{ display: 'inline-block' }}>
             <Autocomplete
               className="autoComplete"

@@ -292,13 +292,13 @@ export const ChefSelectedEvent = () => {
   // selected event in chef dash
 };
 
+
 /** ***************** EVENT FUNC ***********************/
 
 export const getAllEvents = (locationObj, tags, distance) => {
   return axios.get('/api/event/location', {
     params: {
       locationObj,
-      tags,
       distance,
     },
   });
