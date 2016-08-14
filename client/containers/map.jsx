@@ -15,7 +15,7 @@ class MapView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: { lat: 34.0195, lng: -118.4912 },
+      center: { lat: null, lng: null },
       zoom: 13,
       currentMarker: null,
     };
@@ -78,7 +78,7 @@ class MapView extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state to props :', state.map);
+  console.log('Map: state to props :', state.map);
   return {
     location: state.map,
     allEvents: state.allEvents,
