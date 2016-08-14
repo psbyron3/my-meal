@@ -122,6 +122,7 @@ export const SignOutFunc = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('userId');
   localStorage.removeItem('userName');
+  browserHistory.push('/');
   return {
     type: UNAUTH_USER,
   };
