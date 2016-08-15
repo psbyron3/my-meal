@@ -181,7 +181,19 @@ Event.findEventsByUser = function (userId) {
   return db.User.findById(userId)
     .then((user) => {
       console.log('user is:', user);
-      return user.getEvents()
+      return user.getEvents({
+        include: [
+          {
+            model: db.User,
+            through: {
+              model: db.UsersEvent,
+              where: {
+                userId,
+              },
+            },
+          },
+        ],
+      })
         .then((results) => {
           console.log('results of getEvents:', results);
           return results;
