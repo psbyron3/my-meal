@@ -29,19 +29,19 @@ class UserDash extends Component {
       return (<div>Join Events to populate this page!</div>);
     }
     return this.props.userHistory.filter((event) => event.UsersEvent.role === 'guest')
-    .map((event) => {
-      return (
-        <DashEvent
-          key={event.id}
-          index={event.id}
-          image={event.eventPic}
-          eventName={event.eventName}
-          address={event.address}
-          times={`${startTime} to ${endTime}`}
-          description={event.description}
-        />
-      );
-    });
+      .map((event) => {
+        return (
+          <DashEvent
+            key={event.id}
+            index={event.id}
+            image={event.eventPic}
+            eventName={event.eventName}
+            address={event.address}
+            times={`${startTime} to ${endTime}`}
+            description={event.description}
+          />
+        );
+      });
   }
 
   render() {

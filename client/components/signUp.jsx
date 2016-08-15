@@ -2,17 +2,35 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { SignUpFunc } from '../actions/index';
+import $ from 'jquery';
+import { fileinput } from 'bootstrap-fileinput';
+import ProfilePic from './profilePic';
 
 class SignUp extends Component {
 
-  onSubmit(props) {
-    console.log(props);
-    SignUpFunc(props);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      file: null,
+    };
+
+    this.onHandleSubmit = this.onHandleSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
+  onSubmit(props) {
+    console.log('ON SUBMIT');
+    SignUpFunc(props, this.state.file);
+  }
+
+  onHandleSubmit(e) {
+    this.setState({ file: e });
+  }
 
   render() {
-    const { fields: { firstName,
+    const { fields: {
+                      firstName,
                       lastName,
                       address,
                       phoneNumber,
@@ -22,6 +40,7 @@ class SignUp extends Component {
                     }, handleSubmit } = this.props;
 
     return (
+
       <div className="top-margin">
         <div className="container">
 
@@ -35,6 +54,9 @@ class SignUp extends Component {
                     <fieldset>
                       <h3 className="form-signin-heading">Sign Up</h3>
                       <br />
+
+                      <ProfilePic onValueChange={this.onHandleSubmit} />
+
                       <div className="text-help">
                         <div className={`form-group ${firstName.touched && firstName.invalid ? 'has-danger' : ''}`}>
                           <label>First Name</label>
@@ -127,12 +149,13 @@ const validate = (values) => {
 
 export default reduxForm({
   form: 'SignUpForm',
-  fields: ['firstName',
-           'lastName',
-           'address',
-           'phoneNumber',
-           'email',
-           'userName',
-           'password'],
+  fields: [
+    'firstName',
+    'lastName',
+    'address',
+    'phoneNumber',
+    'email',
+    'userName',
+    'password'],
   validate,
 })(SignUp);
