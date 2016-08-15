@@ -48,7 +48,15 @@ module.exports = {
   '/:userId': {
     get(req, res) {
       console.log('Received GET at /api/:userId');
-      res.end('Received GET at /api/:userId');
+      const userId = url.parse(req.url, true).path.slice(1);
+      User.findUserById(userId)
+        .then((results) => {
+          console.log('results are................... ....... . . . ....', results);
+          res.send(results);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
     },
     post(req, res) {
       console.log('Received POST at /api/:userId');

@@ -86,7 +86,7 @@ function mapStateToProps(state) {
 // }
 
 UserDash.propTypes = {
-  userHistory: PropTypes.array,
+  userHistory: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(UserDash);
