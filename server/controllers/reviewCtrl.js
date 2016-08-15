@@ -35,7 +35,7 @@ module.exports = {
                             .then((confirm) => {
                               return event.addUsers([reviewerId], {
                                 role: 'guest',
-                                wasReviewed: true
+                                wasReviewed: true,
                               })
                                 .then((reslt) => {
                                   console.log('RESULT RESULT RESULT::::::', reslt);
