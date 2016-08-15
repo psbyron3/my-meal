@@ -85,8 +85,8 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="nav-search">
-        <form onSubmit={this.onFormSubmit} className="search-input">
+      <div className="nav-search" onSubmit={this.onFormSubmit}>
+        <form className="search-input">
           <div style={{ display: 'inline-block' }}>
             <Autocomplete
               className="autoComplete"
