@@ -1,6 +1,7 @@
 const Review = require('../models/reviewModel.js');
 const Event = require('../models/eventModel.js');
 const url = require('url');
+const db = require('../db/db.js');
 
 module.exports = {
   '/': {
@@ -16,10 +17,10 @@ module.exports = {
 
       Review.findReviewForEventbyUser(eventId, reviewerId)
         .then((review) => {
-          if (review) {
-            console.log('review for event ', eventId, ' by user', reviewerId, 'already exists');
-            return res.end('A review for this user and event already exists');
-          }
+          // if (review) {
+          //   console.log('review for event ', eventId, ' by user', reviewerId, 'already exists');
+          //   return res.end('A review for this user and event already exists');
+          // }
           console.log("review doesn't exist, creating now");
           return Review.createReview(newReview)
             .then((result) => {
@@ -29,16 +30,24 @@ module.exports = {
                     .then((user) => {
                       return Event.findEventById(eventId)
                         .then((event) => {
-                          return event.setUsers([reviewerId], { wasReviewed: true })
-                            .then((results) => {
-                              return res.status(201).json({ success: 'true' });
+                          console.log('~~~~~event event event~~~~~~~', event);
+                          return event.removeUsers([reviewerId])
+                            .then((confirm) => {
+                              return event.addUsers([reviewerId], {
+                                role: 'guest',
+                                wasReviewed: true
+                              })
+                                .then((reslt) => {
+                                  console.log('RESULT RESULT RESULT::::::', reslt);
+                                  res.send(reslt);
+                                });
                             });
                         });
                     });
                 });
             })
             .catch((err) => {
-              console.log('error in POST at /api/review');
+              console.log('error in POST at /api/review', err);
               res.send(err);
             });
         });
