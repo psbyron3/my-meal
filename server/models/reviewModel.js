@@ -1,5 +1,5 @@
 const db = require('../db/db.js');
-
+const User = require('./userModel.js');
 const Review = module.exports;
 
 
@@ -20,11 +20,24 @@ Review.findReviewById = function (reviewId) {
     });
 };
 
-// find all reviews by a given reviwer id
+// find all reviews by a given reviewer id
 Review.findReviewsByUser = function (reviewerId) {
-  return db.Review.findAll({ where: { reviwerId: reviewerId } })
+  return db.Review.findAll({ where: { reviewerId } })
     .then(function (rows) {
       return rows;
+    });
+};
+
+// find all reviews for a chef
+Review.findReviewsByChef = function (chefId) {
+  return db.Review.findAll({
+    where: {
+      hostId: chefId,
+    },
+  })
+    .then((results) => {
+      console.log('results of findReviewsByChef:', results);
+      return results;
     });
 };
 
@@ -42,5 +55,23 @@ Review.findReviewForEventbyUser = function (eventId, reviewerId) {
   return db.Review.findAll({ where: { eventId, reviewerId } })
     .then(function (rows) {
       return rows[0];
+    });
+};
+
+Review.updateAverage = function (reviews) {
+  const hostId = reviews[0].dataValues.hostId;
+  console.log('hostId in updateAverage is--------->', hostId);
+  const sum = reviews.reduce((total, curr) => {
+    return total + curr.dataValues.rating;
+  }, 0);
+  console.log('sum in updateAverage is....', sum);
+  const avg = sum / reviews.length;
+  console.log('avg in updateAverage is...', avg);
+  return db.User.findById(hostId)
+    .then((user) => {
+      console.log('updating average on this user...', user.dataValues);
+      return user.update({
+        avgRating: avg,
+      });
     });
 };

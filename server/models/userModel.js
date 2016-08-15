@@ -46,6 +46,7 @@ User.findUserByUsername = function (userName) {
 };
 
 User.findUserById = function (id) {
+  console.log('user id is......******.....', id);
   return db.User.findAll({
     where: {
       id,
