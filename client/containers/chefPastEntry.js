@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const ChefPastEntry = (props) => {
   return (
@@ -11,6 +11,12 @@ const ChefPastEntry = (props) => {
       </div>
     </div>
   );
+};
+
+ChefPastEntry.propTypes = {
+  eventId: PropTypes.number,
+  eventName: PropTypes.string,
+  clicked: PropTypes.func,
 };
 
 export default ChefPastEntry;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Modal, Button, Grid, Row, Col, Image } from 'react-bootstrap';
@@ -84,5 +84,11 @@ class JoinModal extends Component {
 function mapStateToProps(state) {
   return { selectedEvent: state.selectedEvent };
 }
+
+JoinModal.propTypes = {
+  selectedEvent: PropTypes.object,
+  closeModal: PropTypes.func,
+  showModal: PropTypes.bool,
+};
 
 export default connect(mapStateToProps)(JoinModal);

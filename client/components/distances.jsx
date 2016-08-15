@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const DistanceMenu = ({ onDistanceChange }) => {
   return (
@@ -12,6 +12,10 @@ const DistanceMenu = ({ onDistanceChange }) => {
       <option value={25}>25 miles</option>
     </select>
   );
+};
+
+DistanceMenu.propTypes = {
+  onDistanceChange: PropTypes.func,
 };
 
 export default DistanceMenu;

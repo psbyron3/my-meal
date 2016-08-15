@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { reviewAverage } from '../utils/helper';
 
@@ -31,5 +31,9 @@ function mapStateToProps(state) {
     chefEvents: state.chefEvents.allChefEvents,
   };
 }
+
+ChefInfo.propTypes = {
+  chefEvents: PropTypes.array,
+};
 
 export default connect(mapStateToProps)(ChefInfo);

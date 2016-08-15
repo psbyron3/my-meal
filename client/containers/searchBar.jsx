@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { getAllInRadius, getAllTags } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -69,9 +69,9 @@ class SearchBar extends Component {
   // when state is reset in last line, make sure to reset restrictions to user preferences
   onFormSubmit(event) {
     event.preventDefault();
-    console.log('params: ', this.state.tags);
     console.log('query:', this.state.query);
     const tags = [...this.state.restrictions, ...this.state.genre];
+    console.log('params: ', tags);
     const distance = this.state.distance;
     this.props.getAllInRadius(this.state.query, tags, distance);
     this.setState({ query: '', restrictions: [], genre: [] });
@@ -85,8 +85,9 @@ class SearchBar extends Component {
 
   render() {
     return (
+
       <div className="nav-search" onSubmit={this.onFormSubmit}>
-        <form className="search-input">
+        <form  className="search-input">
           <div style={{ display: 'inline-block' }}>
             <Autocomplete
               className="autoComplete"
@@ -117,7 +118,7 @@ class SearchBar extends Component {
               />
               <GenreMenu
                 onGenreChange={this.onGenreChange}
-                selectedGenre={this.state.genres}
+                selectedGenre={this.state.genre}
                 genres={this.props.genres}
               />
               <DistanceMenu
@@ -146,13 +147,11 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getAllInRadius, getAllTags }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+SearchBar.propTypes = {
+  restrictions: PropTypes.array,
+  genres: PropTypes.array,
+  getAllInRadius: PropTypes.func,
+  getAllTags: PropTypes.func,
+};
 
-// <Overlay
-//   show={this.state.show}
-//   onHide={() => this.setState({ show: false })}
-//   placement="right"
-//   container={this}
-//   rootClose={true}
-//   target={() => ReactDOM.findDOMNode(this.refs.target)}
-// >
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Popover, Button, Overlay } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -43,8 +43,8 @@ class MapMarker extends Component {
 
   handleOut(e) {
     e.preventDefault();
-    this.props.setCurrent(null);
-    this.props.setHoverEvent(null);
+    this.props.setCurrent(0);
+    this.props.setHoverEvent(0);
     this.setState({
       target: e.target,
     });
@@ -58,6 +58,7 @@ class MapMarker extends Component {
   }
 
   render() {
+    console.log('type of this.props.startTime:', typeof this.props.startTime);
     return (
       <div style={this.style} >
         <a
@@ -97,5 +98,20 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ selectEvent }, dispatch);
 }
+
+MapMarker.propTypes = {
+  allEvents: PropTypes.array,
+  openModal: PropTypes.func,
+  index: PropTypes.number,
+  selectEvent: PropTypes.func,
+  setCurrent: PropTypes.func,
+  setHoverEvent: PropTypes.func,
+  location: PropTypes.object,
+  currentMarker: PropTypes.number,
+  eventName: PropTypes.string,
+  address: PropTypes.string,
+  startTime: PropTypes.string,
+  endTime: PropTypes.string,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapMarker);

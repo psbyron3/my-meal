@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -60,5 +60,7 @@ class ChefDash extends Component {
 function mapStateToProps(state) {
   return {};
 }
+
+ChefDash.propTypes = { ChefEventsFunc: PropTypes.func };
 
 export default connect(mapStateToProps, { ChefEventsFunc })(ChefDash);

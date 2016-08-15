@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import SearchBar from '../containers/searchBar';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
@@ -14,6 +14,7 @@ class NavBarComp extends Component {
   // }
 
   authRender() {
+    console.log('typeof authenticated == = = = ', typeof this.props.authenticated);
     if (!this.props.authenticated) {
       return (
         <Nav pullRight>
@@ -83,5 +84,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { SignOutFunc })(NavBarComp);
+NavBarComp.propTypes = {
+  authenticated: PropTypes.bool,
+  SignOutFunc: PropTypes.func,
+};
 
+export default connect(mapStateToProps, { SignOutFunc })(NavBarComp);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectEvent } from '../actions/index.js';
@@ -139,5 +139,21 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ selectEvent }, dispatch);
 }
+
+MapListEntry.propTypes = {
+  allEvents: PropTypes.array,
+  selectEvent: PropTypes.func,
+  selectedEvent: PropTypes.object,
+  entryClass: PropTypes.string,
+  openModal: PropTypes.func,
+  key: PropTypes.number,
+  index: PropTypes.number,
+  image: PropTypes.string,
+  price: PropTypes.number,
+  eventName: PropTypes.string,
+  address: PropTypes.string,
+  description: PropTypes.string,
+  maxGuests: PropTypes.number,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapListEntry);

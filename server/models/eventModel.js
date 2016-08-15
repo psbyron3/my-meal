@@ -84,10 +84,10 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
   const rady = +(distance * (1 / 69.172)).toFixed(7);
   const currentDate = new Date();
 
-  console.log('inside events by params..', 'lat:', lat, 'lng:', lng);
-  console.log('distance =', distance);
-  console.log('radx =', radx, 'rady = ', rady);
-  console.log('tags======', tags);
+  // console.log('inside events by params..', 'lat:', typeof lat, 'lng:', typeof lng);
+  // console.log('distance =', distance);
+  // console.log('radx =', typeof radx, 'rady = ', typeof rady);
+  // console.log('tags======', tags);
 
   return db.Event.findAll({
     where: {

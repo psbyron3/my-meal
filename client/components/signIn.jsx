@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -29,6 +29,7 @@ class SignIn extends Component {
 
 
   render() {
+    console.log('typeof this.props.errorMessage::::::', typeof this.props.errorMessage);
     const { fields: { email,
                       password,
                     }, handleSubmit } = this.props;
@@ -93,11 +94,18 @@ const validate = (values) => {
   return errors;
 };
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error, // from rootReducer (index.js in reducers),
     signIn: state.auth,
   };
+}
+
+SignIn.propTypes = {
+  SignInFunc: PropTypes.func,
+  errorMessage: PropTypes.string,
+  fields: PropTypes.object,
+  handleSubmit: PropTypes.func,
 };
 
 export default reduxForm({
