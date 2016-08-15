@@ -25,6 +25,7 @@ class SearchBar extends Component {
     this.onGenreChange = this.onGenreChange.bind(this);
     this.onDistanceChange = this.onDistanceChange.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.onEnter = this.onEnter.bind(this);
   }
 
   componentDidMount() {
@@ -33,7 +34,7 @@ class SearchBar extends Component {
 
   onTextChange(event) {
     console.log('textChange: ', event.target.value);
-    this.setState({ query: event.target.value });
+    this.setState({ query: event.target.value }, () => { console.log('changed text'); });
   }
 
   onCheckChange(event) {
@@ -66,14 +67,25 @@ class SearchBar extends Component {
     });
   }
 
+  onEnter(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  }
+
   // when state is reset in last line, make sure to reset restrictions to user preferences
-  onFormSubmit(event) {
-    event.preventDefault();
+  onFormSubmit(place) {
+    this.setState({
+      query: place.formatted_address || this.state.query,
+    });
+
     console.log('query:', this.state.query);
     const tags = [...this.state.restrictions, ...this.state.genre];
     console.log('params: ', tags);
     const distance = this.state.distance;
+    console.log('trying to getAllInRadius with query:', this.state.query);
     this.props.getAllInRadius(this.state.query, tags, distance);
+    // do we want to reset the state though?
     this.setState({ query: '', restrictions: [], genre: [] });
   }
 
@@ -86,17 +98,18 @@ class SearchBar extends Component {
   render() {
     return (
 
-      <div className="nav-search" onSubmit={this.onFormSubmit}>
-        <form  className="search-input">
+      <div className="nav-search" >
+        <form className="search-input">
           <div style={{ display: 'inline-block' }}>
             <Autocomplete
               className="autoComplete"
               style={{ width: '90%' }}
-              onPlaceSelected={(place) => { console.log(place); }}
+              onPlaceSelected={(place) => this.onFormSubmit(place)}
               type="search"
               placeholder="Search Location"
               value={this.state.query}
               onChange={this.onTextChange}
+              onKeyDown={this.onEnter}
             />
           </div>
           <Button id="searchButton" ref="target" onClick={this.toggle}>
