@@ -17,7 +17,7 @@ class MapList extends Component {
   }
 
   renderList() {
-    console.log('openModal:', typeof this.props.openModal);
+    console.log('hoverEvent:', this.props.hoverEvent);
     console.log('allEvents:', this.props.allEvents);
     return this.props.allEvents.map((event) => {
       const entryClass = classNames({
@@ -60,8 +60,14 @@ function mapStateToProps(state) {
   return {
     allEvents: state.allEvents,
     selectedEvent: state.selectedEvent,
+
   };
 }
 
+MapList.propTypes = {
+  allEvents: PropTypes.array,
+  openModal: PropTypes.func,
+  hoverEvent: PropTypes.number,
+};
 
 export default connect(mapStateToProps)(MapList);

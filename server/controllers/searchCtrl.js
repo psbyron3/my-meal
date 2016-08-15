@@ -45,8 +45,9 @@ module.exports = {
           res.send(results);
         })
         .catch((err) => {
-          console.log('Error in api/search/test', err);
-          res.send(err);
+          console.log('Error in api/search/location', err);
+          // err is put in array in response to satisfy proptypes on client side
+          res.send([err]);
         });
     },
     post(req, res) {
@@ -78,7 +79,8 @@ module.exports = {
         })
         .catch((err) => {
           console.log('Error in api/search/test', err);
-          res.send(err);
+          // err is put in array in response to satisfy proptypes on client side
+          res.send([err]);
         });
     },
     post(req, res) {

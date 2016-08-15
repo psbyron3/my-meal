@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { postUserReviewOfChef } from '../actions/index';
 import { bindActionCreators } from 'redux';
@@ -130,5 +130,9 @@ class UserReview extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ postUserReviewOfChef }, dispatch);
 }
+
+UserReview.propTypes = {
+  postUserReviewOfChef: PropTypes.func,
+};
 
 export default connect(null, mapDispatchToProps)(UserReview);

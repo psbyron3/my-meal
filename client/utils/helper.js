@@ -34,7 +34,7 @@ export const reviewAverage = (reviews) => {
   if (reviews.length === 0) {
     return 'n/a';
   }
-  return _.reduce(reviews, function (sum, current) {
+  return _.reduce(reviews, (sum, current) => {
     return sum + current;
   }, 0) / reviews.length;
 };

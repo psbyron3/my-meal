@@ -306,7 +306,7 @@ export const getAllEvents = (latitude, longitude, tags, distance) => {
   });
 };
 
-export const getAllInRadius = (query, tags = [1], distance = 5) => {
+export const getAllInRadius = (query, tags = [], distance = 5) => {
   console.log('IN GETALLINRADIUS...searchParams =', tags, distance);
   console.log('IN GETALLINRADIUS...query =', query);
   return function (dispatch) {

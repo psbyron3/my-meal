@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { getAllInRadius, getAllTags } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -148,5 +148,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getAllInRadius, getAllTags }, dispatch);
 }
+
+SearchBar.propTypes = {
+  restrictions: PropTypes.array,
+  genres: PropTypes.array,
+  getAllInRadius: PropTypes.func,
+  getAllTags: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

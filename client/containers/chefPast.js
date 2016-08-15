@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ChefPastEntry from './chefPastEntry';
 import { ChefPastFunc, EventIdFunc } from '../actions/index';
@@ -95,5 +95,10 @@ function mapStateToProps(state) {
     chefPastEvents: state.chefEvents.chefPastEvents,
   };
 }
+
+ChefPast.propTypes = {
+  ChefPastFunc: PropTypes.func,
+  chefPastEvents: PropTypes.array,
+};
 
 export default connect(mapStateToProps, { ChefPastFunc, EventIdFunc })(ChefPast);
