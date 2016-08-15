@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import NavBarComp from './navbar';
 import SearchBar from '../containers/searchBar';
 
 export default class App extends Component {
   render() {
+    console.log('typeof this.props.children......', typeof this.props.children);
     return (
       <div>
         <NavBarComp>
@@ -20,3 +21,5 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = { children: PropTypes.object };

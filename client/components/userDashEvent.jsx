@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import moment from 'moment';
@@ -75,5 +75,12 @@ function mapStateToProps(state) {
   };
 }
 
+DashEvent.propTypes = {
+  userHistory: PropTypes.array,
+  image: PropTypes.string,
+  eventName: PropTypes.string,
+  address: PropTypes.string,
+  description: PropTypes.string,
+};
 
 export default connect(mapStateToProps)(DashEvent);

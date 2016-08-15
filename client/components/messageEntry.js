@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import moment from 'moment';
 
 const MessageEntry = ({ body }) => {
@@ -38,6 +38,10 @@ const MessageEntry = ({ body }) => {
       </div>
     </div>
   );
+};
+
+MessageEntry.propTypes = {
+  body: PropTypes.object,
 };
 
 export default MessageEntry;

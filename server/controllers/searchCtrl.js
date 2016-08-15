@@ -31,19 +31,23 @@ module.exports = {
   },
   '/location': {
     get(req, res) {
-      console.log('Received GET at /api/event/location');
+      console.log('Received GET at /api/search/location....+++++.....', req.query);
       const latitude = req.query.latitude;
       const longitude = req.query.longitude;
-      const tags = req.query.tags.split(',') || [27];
       const distance = req.query.distance || 5;
+      let tags = req.query.tags || [];
+      if (!Array.isArray(tags)) {
+        tags = tags.split(',');
+      }
 
       Event.findEventsByParams(latitude, longitude, distance, tags)
         .then((results) => {
           res.send(results);
         })
         .catch((err) => {
-          console.log('Error in api/search/test', err);
-          res.send(err);
+          console.log('Error in api/search/location', err);
+          // err is put in array in response to satisfy proptypes on client side
+          res.send([err]);
         });
     },
     post(req, res) {
@@ -63,11 +67,11 @@ module.exports = {
     get(req, res) {
       const latitude = req.query.latitude;
       const longitude = req.query.longitude;
-      const tags = req.query.tags.split(',') || [27];
       const distance = req.query.distance || 5;
-      console.log('req.query.latitude.....', req.query.latitude);
-      console.log('typeof req.query.tags.....', typeof req.query.tags);
-      console.log('TAGS TAGS TAGS', tags);
+      let tags = req.query.tags || [];
+      if (!Array.isArray(tags)) {
+        tags = tags.split(',');
+      }
 
       Event.findEventsByParams(latitude, longitude, distance, tags)
         .then((results) => {
@@ -75,7 +79,8 @@ module.exports = {
         })
         .catch((err) => {
           console.log('Error in api/search/test', err);
-          res.send(err);
+          // err is put in array in response to satisfy proptypes on client side
+          res.send([err]);
         });
     },
     post(req, res) {

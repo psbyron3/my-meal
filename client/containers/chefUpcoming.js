@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ChefUpcomingEntry from './chefUpcomingEntry';
 
@@ -65,5 +65,9 @@ function mapStateToProps(state) {
     eventId: state.eventId.id,
   };
 }
+
+ChefUpcoming.propTypes = {
+  chefEvents: PropTypes.array,
+};
 
 export default connect(mapStateToProps)(ChefUpcoming);

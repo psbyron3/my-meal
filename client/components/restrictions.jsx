@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
 
@@ -32,5 +32,11 @@ class RestrictionMenu extends Component {
     );
   }
 }
+
+RestrictionMenu.propTypes = {
+  restrictions: PropTypes.array,
+  selectedRestrictions: PropTypes.array,
+  onCheckChange: PropTypes.func,
+};
 
 export default RestrictionMenu;

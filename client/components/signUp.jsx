@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { SignUpFunc } from '../actions/index';
@@ -123,6 +123,11 @@ const validate = (values) => {
   }
 
   return errors;
+};
+
+SignUp.propTypes = {
+  fields: PropTypes.object,
+  handleSubmit: PropTypes.func,
 };
 
 export default reduxForm({
