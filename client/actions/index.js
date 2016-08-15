@@ -18,10 +18,10 @@ export const POST_USER_REVIEW_OF_CHEF = 'POST_USER_REVIEW_OF_CHEF';
 export const SEND_EVENT_ID = 'SEND_EVENT_ID';
 export const ALL_GENRES = 'ALL_GENRES';
 export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
+export const GET_EVENTS_TO_BE_REVIEWED = 'GET_EVENTS_TO_BE_REVIEWED';
 
 
 export const getEventsByUserId = (userId) => {
-  console.log('before axios in events user id: ', userId);
   return axios.get(`/api/event/users/${userId}`)
     .then((response) => {
       return {
@@ -34,6 +34,18 @@ export const getEventsByUserId = (userId) => {
     });
 };
 
+export const getEventsToBeReviewed = (userId) => {
+  return axios.get(`/api/review/${userId}`)
+    .then((reviews) => {
+      return {
+        type: GET_EVENTS_TO_BE_REVIEWED,
+        payload: reviews,
+      };
+    })
+    .catch((err) => {
+      if (err) { console.error('err getting reviews for user', err); }
+    });
+};
 
 /** *************** AUTHENTICATIONS *********************/
 
@@ -322,6 +334,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
         });
         getAllEvents(latitude, longitude, tags, distance)
           .then((events) => {
+            console.log('actions after getAllEvents :', events);
             dispatch({
               type: GET_ALL_EVENTS,
               payload: events.data,
