@@ -36,16 +36,16 @@ export const getEventsByUserId = (userId) => {
 
 export const getEventsToBeReviewed = (userId) => {
   return axios.get(`/api/review/${userId}`)
-    .then((reveiws) => {
+    .then((reviews) => {
       return {
         type: GET_EVENTS_TO_BE_REVIEWED,
         payload: reviews,
-      }
+      };
     })
     .catch((err) => {
-      if (err) { console.error('err getting reviews for user', err)}
-    })
-}
+      if (err) { console.error('err getting reviews for user', err); }
+    });
+};
 
 /** *************** AUTHENTICATIONS *********************/
 
@@ -313,9 +313,8 @@ export const getAllEvents = (locationObj, tags, distance) => {
     params: {
       locationObj,
       distance,
-    }
+    },
   });
-  console.log("ACTIONS getAllEvents params: ", params)
 };
 
 export const getAllInRadius = (query, tags = [], distance = 5) => {
@@ -334,7 +333,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
         });
         getAllEvents(locationObj, tags, distance)
           .then((events) => {
-          console.log("actions after getAllEvents :", events )
+            console.log('actions after getAllEvents :', events);
             dispatch({
               type: GET_ALL_EVENTS,
               payload: events.data,

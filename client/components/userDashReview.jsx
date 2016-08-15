@@ -84,7 +84,7 @@ class UserReview extends Component {
 
 
   render() {
-    console.log("UDReview userHistory", this.props.userHistory)
+    console.log('UDReview userHistory', this.props.userHistory);
     return (
       <div>
         <Col className="review-gutter" md={2} />
@@ -133,10 +133,10 @@ class UserReview extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("mStoP in UDReview:", state)
+  console.log('mStoP in UDReview:', state);
   return {
     userHistory: state.userHistory,
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
