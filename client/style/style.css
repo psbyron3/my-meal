@@ -668,3 +668,39 @@ img {
   opacity: 0.6;
   filter: alpha(opacity=60);
 }*/
+
+
+/***************** User pic (SignUp) ****************/
+
+
+.kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+}
+.kv-avatar .file-input {
+    display: table-cell;
+    max-width: 220px;
+}
+
+.text-muted {
+  font-size: 0.75rem;
+}
+
+.file-preview-image {
+  border-radius: 5%;
+}
+
+.avatar{
+  border-radius: 5%;
+}
+
+.file-actions{
+  display: none;
+}
+
+.btn.btn-default.fileinput-remove.fileinput-remove-button{
+  margin-left: 60px;
+}
