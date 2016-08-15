@@ -36,6 +36,7 @@ class MapList extends Component {
           times={`${event.startDatetime} to ${event.endDatetime}`}
           description={event.description}
           maxGuests={event.maxGuests}
+          attending={event.attending}
           price={event.price}
         />);
     });
