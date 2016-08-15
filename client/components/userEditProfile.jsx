@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 class UserEditProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   render() {
-    return(<div>Edit Profile information here</div>)
+    return (<div>Edit Profile information here</div>);
   }
 }
 
