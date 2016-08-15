@@ -47,7 +47,7 @@ class MapView extends Component {
         );
       });
     }
-    return (<div></div>);
+    return (<div>No Events in this area</div>);
   }
 
   render() {
