@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class GenreMenu extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class GenreMenu extends Component {
     this.renderGenres = this.renderGenres.bind(this);
   }
   renderGenres() {
-    console.log('current genre:', this.props.selectedGenre);
+    console.log('current genre:', typeof this.props.selectedGenre);
     return this.props.genres.map((genre) => {
       return (
         <option key={genre.id} value={genre.id}>
@@ -29,5 +29,11 @@ class GenreMenu extends Component {
     );
   }
 }
+
+GenreMenu.propTypes = {
+  selectedGenre: PropTypes.array,
+  genres: PropTypes.array,
+  onGenreChange: PropTypes.func,
+};
 
 export default GenreMenu;

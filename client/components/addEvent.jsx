@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createEvent } from '../actions/index';
 import FileInput from 'react-file-input';
@@ -251,6 +251,11 @@ const validate = (values) => {
   }
 
   return errors;
+};
+
+AddEvent.propTypes = {
+  fields: PropTypes.object,
+  handleSubmit: PropTypes.func,
 };
 
 export default reduxForm({

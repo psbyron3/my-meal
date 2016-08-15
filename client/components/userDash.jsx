@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import DashEvent from './userDashEvent.jsx';
 import UserDashView from './userDashView';
@@ -45,6 +45,8 @@ class UserDash extends Component {
   }
 
   render() {
+    console.log('typeof this.props.userHistory:', typeof this.props.userHistory);
+    console.log('this.props.userHistory isArray?', Array.isArray(this.props.userHistory));
     return (
       <div>
         <Tabs
@@ -82,5 +84,9 @@ function mapStateToProps(state) {
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ getEventsByUserId }, dispatch);
 // }
+
+UserDash.propTypes = {
+  userHistory: PropTypes.array,
+};
 
 export default connect(mapStateToProps)(UserDash);

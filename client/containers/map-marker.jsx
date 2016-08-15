@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Popover, Button, Overlay } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -58,6 +58,7 @@ class MapMarker extends Component {
   }
 
   render() {
+    console.log('type of this.props.startTime:', typeof this.props.startTime);
     return (
       <div style={this.style} >
         <a
@@ -98,4 +99,39 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ selectEvent }, dispatch);
 }
 
+MapMarker.propTypes = {
+  allEvents: PropTypes.array,
+  openModal: PropTypes.func,
+  index: PropTypes.number,
+  selectEvent: PropTypes.func,
+  setCurrent: PropTypes.func,
+  setHoverEvent: PropTypes.func,
+  location: PropTypes.object,
+  currentMarker: PropTypes.number,
+  eventName: PropTypes.string,
+  address: PropTypes.string,
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(MapMarker);
+
+  // 24:16  warning  'openModal' is missing in props validation         react/prop-types
+  // 29:38  warning  'allEvents' is missing in props validation         react/prop-types
+  // 29:48  warning  'allEvents.find' is missing in props validation    react/prop-types
+  // 29:64  warning  Unexpected block statement surrounding arrow body  arrow-body-style
+  // 30:38  warning  'index' is missing in props validation             react/prop-types
+  // 33:16  warning  'selectEvent' is missing in props validation       react/prop-types
+  // 35:16  warning  'setCurrent' is missing in props validation        react/prop-types
+  // 35:38  warning  'index' is missing in props validation             react/prop-types
+  // 37:16  warning  'setHoverEvent' is missing in props validation     react/prop-types
+  // 37:41  warning  'index' is missing in props validation             react/prop-types
+  // 46:16  warning  'setCurrent' is missing in props validation        react/prop-types
+  // 47:16  warning  'setHoverEvent' is missing in props validation     react/prop-types
+  // 56:16  warning  'setCurrent' is missing in props validation        react/prop-types
+  // 57:16  warning  'openModal' is missing in props validation         react/prop-types
+  // 78:28  warning  'currentMarker' is missing in props validation     react/prop-types
+  // 78:57  warning  'index' is missing in props validation             react/prop-types
+  // 83:29  warning  'eventName' is missing in props validation         react/prop-types
+  // 84:29  warning  'address' is missing in props validation           react/prop-types
+  // 85:29  warning  'startTime' is missing in props validation         react/prop-types
+  // 85:54  warning  'endTime' is missing in props validation           react/prop-types
+  //

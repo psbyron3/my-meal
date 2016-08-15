@@ -54,15 +54,15 @@ app.get('*', (request, response) => {
 app.set('port', process.env.PORT || 8000);
 
 
-server.listen(app.get('port'), function () {
+server.listen(app.get('port'), () => {
   console.log(moment().format('h:mm:ss a'), ': Express Server listening on port', app.get('port'));
 });
 
 // socket
 const connections = [];
-io.on('connection', function (socket) {
+io.on('connection', (socket) => {
   // when a client send a message event
-  socket.on('message', function (body) {
+  socket.on('message', (body) => {
     console.log('BOOODY', body);
     // emit this message to all other client that are listenning (if I want to exclude myself use broadcast)
     socket.broadcast.emit('message', body);

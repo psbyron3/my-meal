@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import MapList from './maplist';
 import MapMarker from './map-marker.jsx';
@@ -84,5 +84,12 @@ function mapStateToProps(state) {
     allEvents: state.allEvents,
   };
 }
+
+MapView.propTypes = {
+  allEvents: PropTypes.array,
+  openModal: PropTypes.func,
+  setHoverEvent: PropTypes.func,
+  location: PropTypes.object,
+};
 
 export default connect(mapStateToProps)(MapView);

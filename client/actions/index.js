@@ -295,31 +295,31 @@ export const ChefSelectedEvent = () => {
 
 /** ***************** EVENT FUNC ***********************/
 
-export const getAllEvents = (locationObj, tags, distance) => {
-  return axios.get('/api/event/location', {
+export const getAllEvents = (latitude, longitude, tags, distance) => {
+  return axios.get('/api/search/location', {
     params: {
-      locationObj,
+      latitude,
+      longitude,
       tags,
       distance,
     },
   });
 };
 
-export const getAllInRadius = (query, tags = [], distance = 5) => {
+export const getAllInRadius = (query, tags = [1], distance = 5) => {
   console.log('IN GETALLINRADIUS...searchParams =', tags, distance);
   console.log('IN GETALLINRADIUS...query =', query);
   return function (dispatch) {
     convertAddress(query)
       .then((response) => {
-        const locationObj = {
-          latitude: response.data.latitude,
-          longitude: response.data.longitude,
-        };
+        const latitude = response.data.latitude;
+        const longitude = response.data.longitude;
+
         dispatch({
           type: MAP_CENTER,
-          payload: locationObj,
+          payload: { latitude, longitude },
         });
-        getAllEvents(locationObj, tags, distance)
+        getAllEvents(latitude, longitude, tags, distance)
           .then((events) => {
             dispatch({
               type: GET_ALL_EVENTS,

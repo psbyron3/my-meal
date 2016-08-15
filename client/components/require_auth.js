@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 export default function (ComposedComponent) {
@@ -39,6 +39,10 @@ export default function (ComposedComponent) {
   function mapStateToProps(state) {
     return { authenticated: state.auth.authenticated };
   }
+
+  Authentication.propTypes = {
+    authenticated: PropTypes.bool,
+  };
 
   return connect(mapStateToProps)(Authentication);
 }

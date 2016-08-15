@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import MapListEntry from './maplistentry';
 import { bindActionCreators } from 'redux';
@@ -18,6 +18,7 @@ class MapList extends Component {
 
   renderList() {
     console.log('openModal:', typeof this.props.openModal);
+    console.log('allEvents:', this.props.allEvents);
     return this.props.allEvents.map((event) => {
       const entryClass = classNames({
         'list-entry': true,
