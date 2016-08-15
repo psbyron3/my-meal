@@ -26,7 +26,6 @@ class SearchBar extends Component {
     this.onDistanceChange = this.onDistanceChange.bind(this);
     this.toggle = this.toggle.bind(this);
     this.onEnter = this.onEnter.bind(this);
-
   }
 
   componentDidMount() {
@@ -77,7 +76,7 @@ class SearchBar extends Component {
   // when state is reset in last line, make sure to reset restrictions to user preferences
   onFormSubmit(place) {
     this.setState({
-      query: place.formatted_address || this.state.query
+      query: place.formatted_address || this.state.query,
     });
 
     console.log('query:', this.state.query);
@@ -86,7 +85,7 @@ class SearchBar extends Component {
     const distance = this.state.distance;
     console.log('trying to getAllInRadius with query:', this.state.query);
     this.props.getAllInRadius(this.state.query, tags, distance);
-    //do we want to reset the state though?
+    // do we want to reset the state though?
     this.setState({ query: '', restrictions: [], genre: [] });
   }
 
@@ -105,7 +104,7 @@ class SearchBar extends Component {
             <Autocomplete
               className="autoComplete"
               style={{ width: '90%' }}
-              onPlaceSelected={ (place) => this.onFormSubmit(place) }
+              onPlaceSelected={(place) => this.onFormSubmit(place)}
               type="search"
               placeholder="Search Location"
               value={this.state.query}
