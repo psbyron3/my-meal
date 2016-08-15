@@ -35,12 +35,13 @@ export default class ProfilePic extends Component {
         <div id="kv-avatar-errors-2" className="center-block" style={{ width: '800px', display: 'none' }}>
         </div>
         <div className="kv-avatar center-block" style={{ width: '200px' }}>
-          <input 
-            id="avatar-2" 
-            name="avatar-2" 
+          <input
+            id="avatar-2"
+            name="avatar-2"
             type="file"
-            className="file-loading" 
-            onChange={(e) => { this.onSubmit(e); }} />
+            className="file-loading"
+            onChange={(e) => { this.onSubmit(e); }}
+          />
         </div>
       </div>
     );
