@@ -21,14 +21,14 @@ class DashEvent extends Component {
   }
 
   formatTime(time, str) {
-  const formattedTime = time.split(',');
-  const eventDate = formattedTime.splice(0, 1);
-  const eventTime = formattedTime.join('');
+    const formattedTime = time.split(',');
+    const eventDate = formattedTime.splice(0, 1);
+    const eventTime = formattedTime.join('');
 
-  if (str === 'time') {
-    return eventTime;
-  }
-  return eventDate;
+    if (str === 'time') {
+      return eventTime;
+    }
+    return eventDate;
   }
 
   render() {
