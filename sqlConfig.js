@@ -3,11 +3,11 @@ var path = require('path');
 module.exports = {
 
   development: {
-    user     : process.env.db_username, 
+    user     : process.env.db_username,
     password : process.env.db_password,
-    database : 'phils_db',
+    database : 'mymeal_db',
     connection: {
-    	host     : 'mymeal.justinpchen.com',
+    	host:'mymeal.justinpchen.com',
     	dialect: 'mysql',
     },
     charset  : 'utf8'
