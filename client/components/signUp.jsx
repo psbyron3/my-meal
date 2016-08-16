@@ -7,6 +7,11 @@ import { fileinput } from 'bootstrap-fileinput';
 import ProfilePic from './profilePic';
 
 class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
 
   constructor(props) {
     super(props);
@@ -178,6 +183,13 @@ SignUp.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
 };
+
+function mapStateToProps(state) {
+  return {
+    errorMessage: state.auth.error, // from rootReducer (index.js in reducers),
+    signIn: state.auth,
+  };
+}
 
 export default reduxForm({
   form: 'SignUpForm',

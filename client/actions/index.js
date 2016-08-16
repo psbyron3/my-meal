@@ -177,7 +177,7 @@ export const ChefEventsFunc = () => {
 
   let chefEventsArray;
 
-  console.log('SOMETHING WRONG HERE???');
+  console.log('SOMETHING WRONG HERE???', `/api/event/users/${userId}`);
 
   return (dispatch) => {
     console.log('INSIDE CHEFEVENTSFUNC DISPATCH');

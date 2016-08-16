@@ -38,3 +38,41 @@ export const reviewAverage = (reviews) => {
     return sum + current;
   }, 0) / reviews.length;
 };
+
+export const organizeChefPast = (allEvents) => {
+  const currentDate = new Date(Date.now());
+  let chefPastEvents;
+
+  new Promise((resolve, reject) => {
+    chefPastEvents = _.filter(allEvents, (event) => {
+      return Date.parse(event.startDatetime) < Date.parse(currentDate);
+    });
+    resolve(chefPastEvents);
+  })
+    .then((result) => {
+      result.sort((a, b) => {
+        return Date.parse(b.startDatetime) - Date.parse(a.startDatetime);
+      });
+    });
+  return chefPastEvents;
+};
+
+
+export const organizeChefUpcoming = (allEvents) => {
+  const currentDate = new Date(Date.now());
+  let chefUpcomingEvents;
+
+  new Promise((resolve, reject) => {
+    chefUpcomingEvents = _.filter(allEvents, (event) => {
+      return Date.parse(event.startDatetime) > Date.parse(currentDate);
+    });
+    resolve(chefUpcomingEvents);
+  })
+    .then((result) => {
+      result.sort((a, b) => {
+        return Date.parse(a.startDatetime) - Date.parse(b.startDatetime);
+      });
+    });
+  return chefUpcomingEvents;
+};
+
