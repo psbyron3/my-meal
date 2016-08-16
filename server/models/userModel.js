@@ -134,15 +134,15 @@ User.editUser = function (attr, tags = [], userId) {
   return db.User.findById(userId)
     .then((user) => {
       return user.update(attr, {
-        reset: false
+        reset: false,
       })
-      .then((updatedUser) => {
-        console.log('result of updating user.....', updatedUser);
-        return updatedUser.setTags(tags)
-          .then((result) =>{
-            console.log('result of setting tags on update.....', result);
-            return result;
-          });
-      })
-    })
+        .then((updatedUser) => {
+          console.log('result of updating user.....', updatedUser);
+          return updatedUser.setTags(tags)
+            .then((result) => {
+              console.log('result of setting tags on update.....', result);
+              return result;
+            });
+        });
+    });
 };

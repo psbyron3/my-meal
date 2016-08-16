@@ -70,18 +70,17 @@ module.exports = {
         lastName: req.body.lastName,
         address: req.body.address,
         phoneNumber: req.body.phoneNumber,
-        email: req.body.email
-      }
+        email: req.body.email,
+      };
       User.editUser(attr, req.body.tags, userId)
         .then((userInfo) => {
           res.send(userInfo);
         })
         .catch((err) => {
           res.send(err);
-        })
+        });
       // edit has to take info, lookup by :userId, and return new user profile
       // User.editUser()
-
     },
     delete(req, res) {
       console.log('Received DELETE at /api/:userId');

@@ -10,9 +10,8 @@ Review.createReview = function (attr) {
     .then(function (result) {
       attr.id = result.dataValues.id;
       return result;
-    })
-
- };
+    });
+};
 
 // find one review based on review id
 Review.findReviewById = function (reviewId) {

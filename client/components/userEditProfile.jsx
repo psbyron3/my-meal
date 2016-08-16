@@ -17,9 +17,8 @@ class UserEditProfile extends Component {
   }
 
   render() {
-
     const {
-      fields: { firstName, lastName, address, phoneNumber, email, Tags },
+      fields: { firstName, lastName, address, phoneNumber, email, tags },
       handleSubmit,
       resetForm,
       initialValues,
@@ -73,10 +72,10 @@ class UserEditProfile extends Component {
                                     type="checkbox"
                                     value={restriction.id}
                                     onChange={(event) => {
-                                      if (event.target.checked ) {
-                                        Tags.addField(event.target.value);
+                                      if (event.target.checked) {
+                                        tags.addField(event.target.value);
                                       } else {
-                                        Tags.removeField(Tags.indexOf(event.target.value));
+                                        tags.removeField(tags.indexOf(event.target.value));
                                       }
                                     }}
                                   />
@@ -108,7 +107,7 @@ function mapStateToProps(state) {
   return {
     restrictions: state.tags.restrictions,
     initialValues: state.userInfo,
-    userTags: state.userInfo.Tags
+    userTags: state.userInfo.Tags,
   };
 }
 
@@ -119,5 +118,5 @@ export default reduxForm({
            'address',
            'phoneNumber',
            'email',
-           'Tags[]'],
+           'tags[]'],
 }, mapStateToProps)(UserEditProfile);
