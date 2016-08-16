@@ -78,7 +78,7 @@ export const SignInFunc = (props) => {
   };
 };
 
-export const SignUpFunc = (props) => {
+export const SignUpFunc = (props, userPic) => {
   const firstName = props.firstName;
   const lastName = props.lastName;
   const address = props.address;
@@ -87,33 +87,51 @@ export const SignUpFunc = (props) => {
   const email = props.email;
   const password = props.password;
 
-  return (dispatch) => {
-    return axios({
-      method: 'POST',
-      url: '/api/auth/signup',
-      data: {
-        firstName,
-        lastName,
-        address,
-        phoneNumber,
-        userName,
-        email,
-        password,
-      },
-    })
-      .then((response) => {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('id', response.data.result.id);
-        dispatch({
-          type: AUTH_USER,
-        });
-        browserHistory.push('/');
+  const data = new FormData();
+  data.append('file', userPic[0]);
+  const opts = {
+    transformRequest() { return data; },
+  };
+
+  return function (dispatch) {
+    console.log('INSIDE DISPATCH');
+    return axios.post('/api/event/picture', data, opts)
+      .then((resp) => {
+        const url = resp.data;
+        console.log(url, 'SUPPOSED URL');
+        return url;
       })
-      .catch((err) => {
-        console.log('ERROR', err);
-        dispatch({
-          type: AUTH_ERROR,
-        });
+      .then((url) => {
+        return axios({
+          method: 'POST',
+          url: '/api/auth/signup',
+          data: {
+            firstName,
+            lastName,
+            address,
+            phoneNumber,
+            userName,
+            email,
+            password,
+            userPic: url,
+          },
+        })
+          .then((response) => {
+            console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('id', response.data.result.id);
+            console.log('INSIDE DISPATCH');
+            dispatch({
+              type: AUTH_USER,
+            });
+            browserHistory.push('/');
+          })
+          .catch((err) => {
+            console.log('ERROR', err);
+            dispatch({
+              type: AUTH_ERROR,
+            });
+          });
       });
   };
 };
@@ -344,8 +362,7 @@ export const selectEvent = (event) => {
   };
 };
 
-export const createEvent = (props) => {
-  console.log('PROOOOOPS: ', props);
+export const createEvent = (props, dishPic) => {
   const targetAddress = props.address + props.city + props.usState;
   return convertAddress(targetAddress)
     .then((payload) => {
@@ -359,9 +376,9 @@ export const createEvent = (props) => {
       };
       return coords;
     }).then((coords) => {
-      console.log('PIC PARAAAAAMS: ', props.picture[0]);
+      console.log('PIC PARAAAAAMS: ', dishPic[0]);
       const data = new FormData();
-      data.append('file', props.picture[0]);
+      data.append('file', dishPic[0]);
       const opts = {
         transformRequest() { return data; },
       };
@@ -390,8 +407,6 @@ export const createEvent = (props) => {
           startDatetime: props.start,
           endDatetime: props.end,
         };
-
-        console.log('PARAMSSSSSS', params);
 
         const request = axios.post('/api/event/', params);
         return {

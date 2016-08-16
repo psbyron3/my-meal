@@ -37,6 +37,7 @@
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
+    "bootstrap-fileinput": "^4.3.4",
     "busboy-body-parser": "^0.1.0",
     "classnames": "^2.2.5",
     "connect-multiparty": "^2.0.0",

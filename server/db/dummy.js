@@ -56,6 +56,7 @@ Dummy.init = function () {
           email: 'joe@gmail.com',
           address: 'Roma',
           phoneNumber: '4159305687',
+          userPic: 'https://avatars3.githubusercontent.com/u/12257623?v=3&s=460',
         }, [4, 6]),
         User.createUser({
           userName: 'Nizz',
@@ -65,6 +66,7 @@ Dummy.init = function () {
           email: 'nizz@gmail.com',
           address: 'Paris',
           phoneNumber: '4159345687',
+          userPic: 'https://avatars0.githubusercontent.com/u/17601607?v=3&s=460',
         }),
         User.createUser({
           userName: 'Phil',
@@ -74,6 +76,7 @@ Dummy.init = function () {
           email: 'phil@gmail.com',
           address: 'Santa',
           phoneNumber: '3259345687',
+          userPic: 'https://avatars1.githubusercontent.com/u/17244224?v=3&s=460',
         }, [8]),
         User.createUser({
           userName: 'Mike',
@@ -83,6 +86,7 @@ Dummy.init = function () {
           email: 'mike@gmail.com',
           address: 'Seoul',
           phoneNumber: '3259342787',
+          userPic: 'https://avatars0.githubusercontent.com/u/14685419?v=3&s=400',
         }),
       ];
 
