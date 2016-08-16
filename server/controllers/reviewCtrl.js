@@ -15,41 +15,14 @@ module.exports = {
       const { eventId, reviewerId } = req.body;
       delete newReview.token;
 
-      Review.findReviewForEventbyUser(eventId, reviewerId)
-        .then((review) => {
-          // if (review) {
-          //   console.log('review for event ', eventId, ' by user', reviewerId, 'already exists');
-          //   return res.end('A review for this user and event already exists');
-          // }
-          console.log("review doesn't exist, creating now");
-          return Review.createReview(newReview)
-            .then((result) => {
-              return Review.findReviewsByChef(result.hostId)
-                .then((reviews) => {
-                  return Review.updateAverage(reviews)
-                    .then((user) => {
-                      return Event.findEventById(eventId)
-                        .then((event) => {
-                          console.log('~~~~~event event event~~~~~~~', event);
-                          return event.removeUsers([reviewerId])
-                            .then((confirm) => {
-                              return event.addUsers([reviewerId], {
-                                role: 'guest',
-                                wasReviewed: true,
-                              })
-                                .then((reslt) => {
-                                  console.log('RESULT RESULT RESULT::::::', reslt);
-                                  res.send(reslt);
-                                });
-                            });
-                        });
-                    });
-                });
-            })
-            .catch((err) => {
-              console.log('error in POST at /api/review', err);
-              res.send(err);
-            });
+      Review.createReview(newReview)
+        .then((reslt) => {
+          console.log('RESULT RESULT RESULT::::::', reslt);
+          res.send(reslt);
+        })
+        .catch((err) => {
+          console.log('error in POST at /api/review', err);
+          res.send(err);
         });
     },
     put(req, res) {

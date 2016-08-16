@@ -220,56 +220,54 @@ Dummy.init = function () {
 
               return Promise.all(allMessagePromises)
                 .then(() => {
-                      // add dummy reviews
-                  const allReviewPromises = [
-                    Review.createReview({
-                      content: 'Awsome cook',
-                      rating: 5,
-                      eventId: 2,
-                      hostId: 3,
-                      reviewerId: 1,
-                    }),
-                    Review.createReview({
-                      content: 'Great cook',
-                      rating: 5,
-                      eventId: 3,
-                      hostId: 1,
-                      reviewerId: 2,
-                    }),
-                    Review.createReview({
-                      content: 'So tasty',
-                      rating: 5,
-                      eventId: 4,
-                      hostId: 1,
-                      reviewerId: 3,
-                    }),
-                    Review.createReview({
-                      content: 'Love it',
-                      rating: 5,
-                      eventId: 2,
-                      hostId: 3,
-                      reviewerId: 1,
-                    }),
-                    Review.createReview({
-                      content: 'Lovely host',
-                      rating: 5,
-                      eventId: 1,
-                      hostId: 2,
-                      reviewerId: 1,
-                    }),
+                  const allGuestPromises = [
+                    Event.joinEvent(1, 1),
+                    Event.joinEvent(2, 3),
+                    Event.joinEvent(2, 1),
+                    Event.joinEvent(3, 2),
+                    Event.joinEvent(4, 3),
                   ];
-
-                  return Promise.all(allReviewPromises)
+                  return Promise.all(allGuestPromises)
                     .then(() => {
-                      const allGuestPromises = [
-                        Event.joinEvent(7, 1),
-                        Event.joinEvent(3, 3),
-                        Event.joinEvent(3, 1),
-                        Event.joinEvent(1, 2),
-                        Event.joinEvent(1, 4),
+                      // add dummy reviews
+                      const allReviewPromises = [
+                        Review.createReview({
+                          content: 'Awsome cook',
+                          rating: 5,
+                          eventId: 2,
+                          hostId: 3,
+                          reviewerId: 1,
+                        }),
+                        Review.createReview({
+                          content: 'Great cook',
+                          rating: 5,
+                          eventId: 3,
+                          hostId: 1,
+                          reviewerId: 2,
+                        }),
+                        Review.createReview({
+                          content: 'So tasty',
+                          rating: 5,
+                          eventId: 4,
+                          hostId: 1,
+                          reviewerId: 3,
+                        }),
+                        Review.createReview({
+                          content: 'Love it',
+                          rating: 5,
+                          eventId: 2,
+                          hostId: 3,
+                          reviewerId: 3,
+                        }),
+                        Review.createReview({
+                          content: 'Lovely host',
+                          rating: 5,
+                          eventId: 1,
+                          hostId: 2,
+                          reviewerId: 1,
+                        }),
                       ];
-
-                      return Promise.all(allGuestPromises);
+                      return Promise.all(allReviewPromises);
                     });
                 });
             });

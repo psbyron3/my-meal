@@ -1,14 +1,38 @@
 const db = require('../db/db.js');
 const User = require('./userModel.js');
 const Review = module.exports;
+const Event = require('./eventModel.js');
 
 
 // create review for event in attr
 Review.createReview = function (attr) {
-  return db.Review.create(attr)
-    .then(function (result) {
-      attr.id = result.dataValues.id;
-      return result;
+  return Review.findReviewForEventbyUser(attr.eventId, attr.reviewerId)
+    .then(() => {
+      console.log("review doesn't exist, creating now");
+      return db.Review.create(attr)
+        .then(function (result) {
+          attr.id = result.dataValues.id;
+          return result;
+        }).then((result) => {
+          const eventId = result.dataValues.eventId;
+          const reviewerId = result.dataValues.reviewerId;
+          return Review.findReviewsByChef(result.hostId)
+            .then((reviews) => {
+              return Review.updateAverage(reviews)
+                .then((user) => {
+                  return Event.findEventById(eventId)
+                    .then((event) => {
+                      return event.removeUsers([reviewerId])
+                        .then((confirm) => {
+                          return event.addUsers([reviewerId], {
+                            role: 'guest',
+                            wasReviewed: true,
+                          });
+                        });
+                    });
+                });
+            });
+        });
     });
 };
 
