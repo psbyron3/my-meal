@@ -76,7 +76,7 @@ function mapStateToProps(state) {
 }
 
 DashEvent.propTypes = {
-  userHistory: PropTypes.object,
+  userHistory: PropTypes.array,
   image: PropTypes.string,
   eventName: PropTypes.string,
   address: PropTypes.string,

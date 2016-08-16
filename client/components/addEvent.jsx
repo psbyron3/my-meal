@@ -18,6 +18,8 @@ class AddEvent extends Component {
 
 
   onSubmit(props) {
+    const newEvent = props;
+    newEvent.tags = [...newEvent.tags, newEvent.genre];
     console.log(props);
     props.address += ', ';
     this.props.createEvent(props, this.state.file);
@@ -29,10 +31,8 @@ class AddEvent extends Component {
 
   render() {
     const { fields: { eventName,
-                      foodType,
-                      glutenFree,
-                      vegetarian,
-                      vegan,
+                      genre,
+                      tags,
                       description,
                       picture,
                       price,
@@ -53,7 +53,7 @@ class AddEvent extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
-              <form className="form-hotizontal row col" onSubmit={handleSubmit(this.onSubmit)}>
+              <form className="form-horizontal row col" onSubmit={handleSubmit(this.onSubmit)}>
                 <fieldset>
                   <h3>Create New Event</h3>
 
@@ -70,30 +70,46 @@ class AddEvent extends Component {
                   <br />
 
                   <div className="form-group">
-                    <label htmlFor="foodType"> Food Type </label>
-                    <select className="form-control" id="foodType" {...foodType} value={foodType.value || ''}>
-                      <option value="french">French</option>
-                      <option value="mexican">Mexican</option>
-                      <option value="japanese">Japanese</option>
-                      <option value="chinese">Chinese</option>
-                      <option value="southen">Southern</option>
-                      <option value="italian">Italian</option>
+                    <label htmlFor="genre"> Food Type </label>
+                    <select className="form-control" id="genre" {...genre} value={genre.value || ''}>
+                      <option></option>
+                      {this.props.genres.map((genreItem) => {
+                        return (
+                          <option key={genreItem.id} value={genreItem.id}>
+                            {genreItem.tagName}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
 
                   <label> Other Preference : </label>
+
                   <div>
-                    <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" {...glutenFree} /> Gluten Free
-                    </label>
-
-                    <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" {...vegetarian} /> Vegetarian
-                    </label>
-
-                    <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" {...vegan} /> Vegan
-                    </label>
+                    {this.props.restrictions.map((restriction) => {
+                      return (
+                        <div style={{ display: 'inline-block' }} >
+                          <label
+                            key={restriction.id}
+                            className="checkboxLabel form-check-inline"
+                          >
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              value={restriction.id}
+                              onChange={(event) => {
+                                if (event.target.checked) {
+                                  tags.addField(event.target.value);
+                                } else {
+                                  tags.removeField(tags.indexOf(event.target.value));
+                                }
+                              }}
+                            />
+                          {restriction.tagName}
+                          </label>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   <br />
@@ -106,6 +122,7 @@ class AddEvent extends Component {
                   <br />
 
                   <div className="row">
+
                     <div>
                       <div className="col-md-3">
                         <label> Price </label>
@@ -257,18 +274,25 @@ const validate = (values) => {
   return errors;
 };
 
+function mapStateToProps(state) {
+  return {
+    restrictions: state.tags.restrictions,
+    genres: state.tags.genres,
+  };
+}
+
 AddEvent.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
+  restrictions: PropTypes.array,
+  genres: PropTypes.array,
 };
 
 export default reduxForm({
   form: 'AddEventForm',
   fields: ['eventName',
-           'foodType',
-           'glutenFree',
-           'vegetarian',
-           'vegan',
+           'genre',
+           'tags[]',
            'description',
            'picture',
            'price',
@@ -279,8 +303,7 @@ export default reduxForm({
            'address',
            'city',
            'usState',
-           'zip'],
+           'zip',
+          ],
   validate,
-}, null, { createEvent })(AddEvent);
-
-//
+}, mapStateToProps, { createEvent })(AddEvent);
