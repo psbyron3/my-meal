@@ -43,7 +43,7 @@ class SearchBar extends Component {
 
   onTextChange(event) {
     console.log('textChange: ', event.target.value);
-    this.setState({ query: event.target.value }, () => { console.log('changed text'); });
+    this.setState({ query: event.target.value });
   }
 
   onCheckChange(event) {
@@ -66,16 +66,12 @@ class SearchBar extends Component {
   onGenreChange(event) {
     this.setState({
       genre: [event.target.value],
-    }, () => {
-      console.log('this.state =', this.state);
     });
   }
 
   onDistanceChange(event) {
     this.setState({
       distance: event.target.value,
-    }, () => {
-      console.log('this.state =', this.state);
     });
   }
 
@@ -107,7 +103,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log('this.state.restrictions is...: ', this.state.restrictions);
     return (
       <div className="nav-search" >
         <form className="search-input">

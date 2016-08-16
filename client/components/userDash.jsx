@@ -46,8 +46,6 @@ class UserDash extends Component {
   }
 
   render() {
-    console.log('typeof this.props.userHistory:', typeof this.props.userHistory);
-    console.log('this.props.userHistory isArray?', Array.isArray(this.props.userHistory));
     return (
       <div>
         <Tabs

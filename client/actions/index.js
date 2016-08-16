@@ -53,7 +53,7 @@ export const SignInFunc = (props) => {
       .then((response) => {
       // console.log("RESPOOOOOOOONSE: ", response);
         console.log('HELLLLOOOOOOOOOOO', response);
-      // dispatch action to update state to indicate that user is authenticate
+      // dispatch action to update state to indicate that user is authenticated
         dispatch({
           type: AUTH_USER,
         });
@@ -156,16 +156,23 @@ export const SignOutFunc = () => {
 
 export const editUser = (userAttr) => {
   const userId = localStorage.getItem('userId');
-  console.log('inside editUser......', userId);
-  return axios.put(`/api/user/${userId}`, userAttr)
+  console.log('inside editUser......', userAttr);
+  return function(dispatch) {
+    return axios.put(`/api/user/${userId}`, userAttr)
     .then((response) => {
       console.log('response to editUser is....', response);
       // action dispatch on response should be the new updated user info
-      // return {
-      //   type: USER_INFO,
-      //   payload: response
-      // }
+      dispatch({
+        type: USER_INFO,
+        payload: response
+      });
+      return response;
+    })
+    .catch((err) => {
+      console.log('HEY, IN INDEX.JS, running editUser and the error is..', err);
     });
+
+  }
 };
 
 /** ********************* CHEF DASHBOARD ***********************/
