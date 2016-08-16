@@ -220,10 +220,10 @@ User.hasMany(Message, { foreignKey: 'userId' });
 
 
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     console.log('Created tables from schema');
-    dummy.init();
+    //dummy.init();
   });
 
 exports.User = User;
