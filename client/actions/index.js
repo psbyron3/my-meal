@@ -134,7 +134,7 @@ export const SignOutFunc = () => {
   };
 };
 
-/************************USER FUNCTIONS**************************/
+/** **********************USER FUNCTIONS**************************/
 
 export const editUser = (userAttr) => {
   const userId = localStorage.getItem('userId');
@@ -148,7 +148,7 @@ export const editUser = (userAttr) => {
       //   payload: response
       // }
     });
-}
+};
 
 /** ********************* CHEF DASHBOARD ***********************/
 

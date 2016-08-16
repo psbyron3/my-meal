@@ -1,6 +1,7 @@
 const db = require('../db/db.js');
 const User = require('./userModel.js');
 const Review = module.exports;
+const Event = require('./eventModel.js');
 
 
 // create review for event in attr
@@ -9,8 +10,9 @@ Review.createReview = function (attr) {
     .then(function (result) {
       attr.id = result.dataValues.id;
       return result;
-    });
-};
+    })
+
+ };
 
 // find one review based on review id
 Review.findReviewById = function (reviewId) {

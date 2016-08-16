@@ -96,9 +96,9 @@ User.addHostToEvent = function (event, userId) {
 // userId parameter is to be used only to check hostId and should be the id of the user making the request
 User.findUsersByEvent = function (userId, eventId) {
   return db.Event.findById(eventId)
-  .then((event) => {
-    return event.getUsers();
-  });
+    .then((event) => {
+      return event.getUsers();
+    });
 };
 
 User.createUser = function (attr, tags = []) {
@@ -129,7 +129,20 @@ User.createUser = function (attr, tags = []) {
   });
 };
 
-User.editUser = function(attr, tags=[]) {
-  console.log('editing user...', attr);
-  
-}
+User.editUser = function (attr, tags = [], userId) {
+  console.log('editing user...', attr, tags, userId);
+  return db.User.findById(userId)
+    .then((user) => {
+      return user.update(attr, {
+        reset: false
+      })
+      .then((updatedUser) => {
+        console.log('result of updating user.....', updatedUser);
+        return updatedUser.setTags(tags)
+          .then((result) =>{
+            console.log('result of setting tags on update.....', result);
+            return result;
+          });
+      })
+    })
+};
