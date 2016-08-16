@@ -18,7 +18,7 @@ export const POST_USER_REVIEW_OF_CHEF = 'POST_USER_REVIEW_OF_CHEF';
 export const SEND_EVENT_ID = 'SEND_EVENT_ID';
 export const ALL_GENRES = 'ALL_GENRES';
 export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
-
+export const USER_INFO = 'USER_INFO';
 
 export const getEventsByUserId = (userId) => {
   console.log('before axios in events user id: ', userId);
@@ -57,6 +57,12 @@ export const SignInFunc = (props) => {
         dispatch({
           type: AUTH_USER,
         });
+        dispatch({
+          type: USER_INFO,
+          payload: response.data.user,
+        });
+
+
         browserHistory.push('/');
       // save token to localStorage
         localStorage.setItem('token', response.data.token);
@@ -144,6 +150,22 @@ export const SignOutFunc = () => {
   return {
     type: UNAUTH_USER,
   };
+};
+
+/** **********************USER FUNCTIONS**************************/
+
+export const editUser = (userAttr) => {
+  const userId = localStorage.getItem('userId');
+  console.log('inside editUser......', userId);
+  return axios.put(`/api/user/${userId}`, userAttr)
+    .then((response) => {
+      console.log('response to editUser is....', response);
+      // action dispatch on response should be the new updated user info
+      // return {
+      //   type: USER_INFO,
+      //   payload: response
+      // }
+    });
 };
 
 /** ********************* CHEF DASHBOARD ***********************/

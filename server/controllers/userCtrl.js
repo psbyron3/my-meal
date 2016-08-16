@@ -63,8 +63,24 @@ module.exports = {
       res.end('Received POST at /api/:userId');
     },
     put(req, res) {
-      console.log('Received PUT at /api/:userId');
-      res.end('Received PUT at /api/:userId');
+      console.log('Received PUT at /api/:userId', req.body);
+      const userId = url.parse(req.url, true).path.slice(1);
+      const attr = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        address: req.body.address,
+        phoneNumber: req.body.phoneNumber,
+        email: req.body.email,
+      };
+      User.editUser(attr, req.body.tags, userId)
+        .then((userInfo) => {
+          res.send(userInfo);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+      // edit has to take info, lookup by :userId, and return new user profile
+      // User.editUser()
     },
     delete(req, res) {
       console.log('Received DELETE at /api/:userId');

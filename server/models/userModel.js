@@ -42,6 +42,11 @@ User.findUserByUsername = function (userName) {
     where: {
       userName,
     },
+    include: [
+      {
+        model: db.Tag,
+      },
+    ],
   });
 };
 
@@ -51,6 +56,11 @@ User.findUserById = function (id) {
     where: {
       id,
     },
+    include: [
+      {
+        model: db.Tag,
+      },
+    ],
   }).then(function (rows) {
     return rows[0];
   });
@@ -61,6 +71,11 @@ User.findUserByEmail = function (email) {
     where: {
       email,
     },
+    include: [
+      {
+        model: db.Tag,
+      },
+    ],
   }).then(function (rows) {
     return rows[0];
   });
@@ -73,6 +88,16 @@ User.addHostToEvent = function (event, userId) {
       console.log('User = ', user.userName);
       event.setUsers([user], { role: 'host' })
         .then(() => event);
+    });
+};
+
+// To be used only by chef in order to see which users are attending.
+// require authentication matching userId to hostId
+// userId parameter is to be used only to check hostId and should be the id of the user making the request
+User.findUsersByEvent = function (userId, eventId) {
+  return db.Event.findById(eventId)
+    .then((event) => {
+      return event.getUsers();
     });
 };
 
@@ -104,12 +129,20 @@ User.createUser = function (attr, tags = []) {
   });
 };
 
-// To be used only by chef in order to see which users are attending.
-// require authentication matching userId to hostId
-// userId parameter is to be used only to check hostId and should be the id of the user making the request
-User.findUsersByEvent = function (userId, eventId) {
-  return db.Event.findById(eventId)
-    .then((event) => {
-      return event.getUsers();
+User.editUser = function (attr, tags = [], userId) {
+  console.log('editing user...', attr, tags, userId);
+  return db.User.findById(userId)
+    .then((user) => {
+      return user.update(attr, {
+        reset: false,
+      })
+        .then((updatedUser) => {
+          console.log('result of updating user.....', updatedUser);
+          return updatedUser.setTags(tags)
+            .then((result) => {
+              console.log('result of setting tags on update.....', result);
+              return result;
+            });
+        });
     });
 };

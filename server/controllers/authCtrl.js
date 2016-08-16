@@ -121,10 +121,10 @@ module.exports = {
               });
           } else {
             console.log('user does not exist');
-            res.status(401).json({
+            res.status(401).json([{
               success: false,
               message: 'Failure: user does not exist',
-            });
+            }]);
             // redirect to signup page
           }
         });

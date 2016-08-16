@@ -38,7 +38,6 @@ Event.findLastEvent = function () {
     });
 };
 
-
 Event.findEventById = function (eventId) {
   return db.Event.findById(eventId);
 };
@@ -83,11 +82,6 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
   const radx = +(Math.abs(distance * (1 / (Math.cos(lat) * 69.172)))).toFixed(7);
   const rady = +(distance * (1 / 69.172)).toFixed(7);
   const currentDate = new Date();
-
-  // console.log('inside events by params..', 'lat:', typeof lat, 'lng:', typeof lng);
-  // console.log('distance =', distance);
-  // console.log('radx =', typeof radx, 'rady = ', typeof rady);
-  // console.log('tags======', tags);
 
   return db.Event.findAll({
     where: {
@@ -206,7 +200,6 @@ Event.createEvent = function (newEvent) {
   return db.Event.create(newE)
     .then((event) => {
       console.log('result of createEvent', event.eventName);
-      console.log('newEvent is:', newEvent);
       return User.addHostToEvent(event, newEvent.userId)
         .then(() => {
           console.log('host added...adding tags');

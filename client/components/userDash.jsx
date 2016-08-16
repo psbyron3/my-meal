@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import DashEvent from './userDashEvent.jsx';
 import UserDashView from './userDashView';
+import UserEditProfile from './userEditProfile';
 
 import { getEventsByUserId } from '../actions/index';
 import { bindActionCreators } from 'redux';
@@ -58,7 +59,7 @@ class UserDash extends Component {
             <UserDashView />
           </Tab>
           <Tab eventKey={2} title="Preferences">
-            This is where the users manage their preferences
+            <UserEditProfile />
           </Tab>
           <Tab eventKey={3} title="Your Meals">
             <div className="user-feed">
@@ -86,7 +87,7 @@ function mapStateToProps(state) {
 // }
 
 UserDash.propTypes = {
-  userHistory: PropTypes.object,
+  userHistory: PropTypes.array,
 };
 
 export default connect(mapStateToProps)(UserDash);
