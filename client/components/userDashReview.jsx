@@ -78,13 +78,10 @@ class UserReview extends Component {
     }
   }
 
-  renderList() {
-
-  }
-
 
   render() {
     console.log('UDReview userHistory', this.props.userHistory);
+
     return (
       <div>
         <Col className="review-gutter" md={2} />
@@ -99,10 +96,10 @@ class UserReview extends Component {
             </div>
             <div className="review-event-details">
               <div className="review-event-title">
-                Some dope meal
+                <strong>{this.props.eventName}</strong>
               </div>
               <div className="review-event-date">
-                Some arbitrary date
+                {this.props.startDatetime}
               </div>
             </div>
           </div>
@@ -132,8 +129,9 @@ class UserReview extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
-  console.log('mStoP in UDReview:', state);
+  console.log('mStoP in UDReview:', state.userHistory);
   return {
     userHistory: state.userHistory,
   };

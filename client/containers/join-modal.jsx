@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Modal, Button, Grid, Row, Col, Image } from 'react-bootstrap';
 import moment from 'moment';
+import { getEventsByUserId } from '../actions/index';
 
 const userId = window.localStorage.userId;
 console.log('user id in join: ', userId);
@@ -22,6 +23,7 @@ class JoinModal extends Component {
       .then(() => {
         this.props.closeModal();
       });
+    return getEventsByUserId(userId);
   }
 
   handleCancel(e) {
