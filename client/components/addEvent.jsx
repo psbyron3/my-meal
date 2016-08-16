@@ -6,9 +6,11 @@ import FileInput from 'react-file-input';
 class AddEvent extends Component {
 
   onSubmit(props) {
+    const newEvent = props;
+    newEvent.tags = [...newEvent.tags, newEvent.genre];
     console.log(props);
-    props.address += ', ';
-    createEvent(props);
+    newEvent.address += ', ';
+    createEvent(newEvent);
   }
 
   render() {
@@ -35,7 +37,7 @@ class AddEvent extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
-              <form className="form-hotizontal row col" onSubmit={handleSubmit(this.onSubmit)}>
+              <form className="form-horizontal row col" onSubmit={handleSubmit(this.onSubmit)}>
                 <fieldset>
                   <h3>Create New Event</h3>
                   <div className={`form-group ${eventName.touched && eventName.invalid ? 'has-danger' : ''}`}>
@@ -278,6 +280,8 @@ function mapStateToProps(state) {
 AddEvent.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
+  restrictions: PropTypes.array,
+  genres: PropTypes.array
 };
 
 export default reduxForm({

@@ -134,6 +134,22 @@ export const SignOutFunc = () => {
   };
 };
 
+/************************USER FUNCTIONS**************************/
+
+export const editUser = (userAttr) => {
+  const userId = localStorage.getItem('userId');
+  console.log('inside editUser......', userId);
+  return axios.put(`/api/user/${userId}`, userAttr)
+    .then((response) => {
+      console.log('response to editUser is....', response);
+      // action dispatch on response should be the new updated user info
+      // return {
+      //   type: USER_INFO,
+      //   payload: response
+      // }
+    });
+}
+
 /** ********************* CHEF DASHBOARD ***********************/
 
 export const ChefEventsFunc = () => {

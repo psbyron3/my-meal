@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
+import { editUser } from '../actions/index';
+
 
 class UserEditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.onSubmit = this.onSubmit.bind(this);
-    this.renderRestrictions = this.renderRestrictions.bind(this);
   }
 
-  onSubmit(event) {
-    event.preventDefault();
+  onSubmit(userAttr) {
+    console.log('userAttr in UserEditProfile....', userAttr);
+    editUser(userAttr);
+
   }
 
   render() {
     const {
       fields: { firstName, lastName, address, phoneNumber, email, tags },
       handleSubmit,
+      resetForm,
+      initialValues
     } = this.props;
+
     return (
       <div className="top-margin">
         <div className="container">
@@ -29,9 +35,9 @@ class UserEditProfile extends Component {
               <div className="row">
                 <div className="col-md-6 col-md-offset-3">
 
-                  <form className="form-edit" onSubmit={handleSubmit(this.onSubmit)}>
+                  <form {...initialValues} className="form-edit" onSubmit={handleSubmit(this.onSubmit)}>
                     <fieldset>
-                      <h3 className="form-edit-heading">Sign Up</h3>
+                      <h3 className="form-edit-heading">Edit Personal Info</h3>
                       <br />
                       <div className="text-help">
                         <div className={`form-group ${firstName.touched && firstName.invalid ? 'has-danger' : ''}`}>
@@ -83,10 +89,7 @@ class UserEditProfile extends Component {
                         </div>
 
                       </div>
-                      <button className="btn btn-md btn-primary btn-block" type="submit">Sign Up</button>
-                      <div className="pull-right">
-                        <Link to="signIn">Already have an account? Sign in here!</Link>
-                      </div>
+                      <button className="btn btn-md btn-primary btn-block" type="submit">Update</button>
                     </fieldset>
                   </form>
 
@@ -103,7 +106,10 @@ class UserEditProfile extends Component {
 }
 
 function mapStateToProps(state) {
-  return { restrictions: state.tags.restrictions };
+  return {
+    restrictions: state.tags.restrictions,
+    initialValues: state.userInfo
+    };
 }
 
 export default reduxForm({

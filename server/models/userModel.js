@@ -91,6 +91,16 @@ User.addHostToEvent = function (event, userId) {
     });
 };
 
+// To be used only by chef in order to see which users are attending.
+// require authentication matching userId to hostId
+// userId parameter is to be used only to check hostId and should be the id of the user making the request
+User.findUsersByEvent = function (userId, eventId) {
+  return db.Event.findById(eventId)
+  .then((event) => {
+    return event.getUsers();
+  });
+};
+
 User.createUser = function (attr, tags = []) {
   console.log('creating user', attr);
   return new Promise(function (resolve, reject) {
@@ -119,12 +129,7 @@ User.createUser = function (attr, tags = []) {
   });
 };
 
-// To be used only by chef in order to see which users are attending.
-// require authentication matching userId to hostId
-// userId parameter is to be used only to check hostId and should be the id of the user making the request
-User.findUsersByEvent = function (userId, eventId) {
-  return db.Event.findById(eventId)
-    .then((event) => {
-      return event.getUsers();
-    });
-};
+User.editUser = function(attr, tags=[]) {
+  console.log('editing user...', attr);
+  
+}

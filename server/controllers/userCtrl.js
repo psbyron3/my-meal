@@ -63,7 +63,9 @@ module.exports = {
       res.end('Received POST at /api/:userId');
     },
     put(req, res) {
-      console.log('Received PUT at /api/:userId');
+      console.log('Received PUT at /api/:userId', req.body);
+      //edit has to take info, lookup by :userId, and return new user profile
+      //User.editUser()
       res.end('Received PUT at /api/:userId');
     },
     delete(req, res) {
