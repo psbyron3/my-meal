@@ -78,8 +78,13 @@ class UserReview extends Component {
     }
   }
 
+  renderList() {
+
+  }
+
 
   render() {
+    console.log('UDReview userHistory', this.props.userHistory);
     return (
       <div>
         <Col className="review-gutter" md={2} />
@@ -127,6 +132,13 @@ class UserReview extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  console.log('mStoP in UDReview:', state);
+  return {
+    userHistory: state.userHistory,
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ postUserReviewOfChef }, dispatch);
 }
@@ -135,4 +147,5 @@ UserReview.propTypes = {
   postUserReviewOfChef: PropTypes.func,
 };
 
-export default connect(null, mapDispatchToProps)(UserReview);
+export default connect(mapStateToProps, mapDispatchToProps)(UserReview);
+
