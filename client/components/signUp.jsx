@@ -7,11 +7,6 @@ import { fileinput } from 'bootstrap-fileinput';
 import ProfilePic from './profilePic';
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
 
   constructor(props) {
     super(props);

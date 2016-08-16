@@ -1,0 +1,17 @@
+
+
+export const MAP_CENTER = 'MAP_CENTER';
+export const SELECT_EVENT = 'SELECT_EVENT';
+export const CREATE_EVENT = 'CREATE_EVENT';
+export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
+export const AUTH_USER = 'AUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const UNAUTH_USER = 'UNAUTH_USER';
+export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
+export const CHEF_EVENTS = 'CHEF_EVENTS';
+export const CHEF_PAST_EVENTS = 'CHEF_PAST_EVENTS';
+export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS';
+export const POST_USER_REVIEW_OF_CHEF = 'POST_USER_REVIEW_OF_CHEF';
+export const SEND_EVENT_ID = 'SEND_EVENT_ID';
+export const ALL_GENRES = 'ALL_GENRES';
+export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
