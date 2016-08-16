@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import UserReview from './userDashReview';
+
+let now = moment();
 
 class userDashView extends Component {
 
@@ -11,20 +14,21 @@ class userDashView extends Component {
       return (<div> No reviews to give </div>);
     }
 
-    return this.props.userHistory.filter((event) =>
-      event.endDateTime < new Date())
+    return this.props.userHistory.filter((events) => events.endDatetime <= now)
+      console.log("in filtered event UDV : ", event)
       .map((event) => {
         // if(!event.UsersEvent.wasReviewed) {
 
         return (
           <UserReview
+            key={event.id}
             eventName={event.eventName}
             chefPic={"this is where the chef goes"}
             date={event.startDatetime}
             price={event.price}
           />
         );
-      });
+      })
   }
 
   render() {
@@ -38,6 +42,7 @@ class userDashView extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('in UDV checking state :', state.userHistory)
   return {
     userHistory: state.userHistory,
   };
