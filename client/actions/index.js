@@ -228,111 +228,19 @@ export const ChefEventsFunc = () => {
   };
 };
 
-export const ChefPastFunc = () => {
-  // get request to db to fetch list of past events the user hosts
-  const currentDate = new Date(Date.now());
-  const userId = localStorage.getItem('userId');
 
-  let chefPastArray;
-
-  // look in db and filter events by users and event date < currentDate
-
-  return (dispatch) => {
-    console.log('INSIDE CHEFPAST DISPATCH');
-    return axios({
-      method: 'GET',
-      url: `/api/event/users/${userId}`,
+export const DeleteEvent = (eventId) => {
+  return axios({
+    method: 'DELETE',
+    url: `/api/event/${eventId}`,
+  })
+    .then((response) => {
+      console.log('DELETE SUCCESS');
+      ChefEventsFunc();
     })
-      .then((response) => {
-        console.log('CHEF PAST FUNC REEEES: ', response);
-        chefPastArray = response.data;
-
-        return Promise.all(_.filter(chefPastArray, (chefEvent) => {
-          return Date.parse(chefEvent.startDatetime) < Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
-        }))
-          .then((chefEventFiltered) => {
-            return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
-              const eventId = chefEvent.UsersEvent.eventId;
-              return axios({
-                method: 'GET',
-                url: `/api/review/event/${eventId}`,
-              })
-                .then((reviews) => {
-                  chefEvent.reviews = reviews.data;
-                  return chefEvent;
-                });
-            }));
-          })
-          .then((result) => {
-            result.sort((a, b) => {
-              return Date.parse(a.startDatetime) - Date.parse(b.startDatetime);
-            });
-
-            dispatch({
-              type: CHEF_PAST_EVENTS,
-              payload: result,
-            });
-          });
-      })
-      .catch((err) => {
-        console.log('ERROR', err);
-      });
-  };
-};
-
-export const ChefUpcomingFunc = () => {
-  // get request to db to fetch list of upcoming events the user hosted
-  const currentDate = new Date(Date.now());
-  const userId = localStorage.getItem('userId');
-
-  let chefUpcomingArray;
-
-  // look in db and filter events by users and event date < currentDate
-
-  return (dispatch) => {
-    return axios({
-      method: 'GET',
-      url: `/api/event/users/${userId}`,
-    })
-      .then((response) => {
-        console.log('CHEF UPCOMING FUNC REEEES: ', response);
-        chefUpcomingArray = response.data;
-
-        return Promise.all(_.filter(chefUpcomingArray, (chefEvent) => {
-          return Date.parse(chefEvent.startDatetime) > Date.parse(currentDate) && chefEvent.UsersEvent.role === 'host';
-        }))
-          .then((chefEventFiltered) => {
-            return Promise.all(_.map(chefEventFiltered, (chefEvent) => {
-              const eventId = chefEvent.UsersEvent.eventId;
-              return axios({
-                method: 'GET',
-                url: `/api/review/event/${eventId}`,
-              })
-                .then((reviews) => {
-                  chefEvent.reviews = reviews.data;
-                  return chefEvent;
-                });
-            }));
-          })
-          .then((result) => {
-            result.sort((a, b) => {
-              return Date.parse(b.startDatetime) - Date.parse(a.startDatetime);
-            });
-
-            dispatch({
-              type: CHEF_UPCOMING_EVENTS,
-              payload: result,
-            });
-          });
-      })
-      .catch((err) => {
-        console.log('ERROR', err);
-      });
-  };
-};
-
-export const ChefSelectedEvent = () => {
-  // selected event in chef dash
+    .catch((err) => {
+      console.log('ERROR: ', err);
+    });
 };
 
 

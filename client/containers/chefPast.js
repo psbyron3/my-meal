@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { organizeChefPast } from '../utils/helper';
-import { EventIdFunc } from '../actions/index';
+import { EventIdFunc, DeleteEvent } from '../actions/index';
 import ChefPastEntry from './chefPastEntry';
 
 const _ = require('lodash');
@@ -22,6 +22,7 @@ class ChefPast extends Component {
           eventName={pastEvent.eventName}
           eventId={pastEvent.id}
           clicked={this.props.EventIdFunc}
+          deleteEvent={this.props.DeleteEvent}
         />
       );
     });
@@ -96,4 +97,4 @@ ChefPast.propTypes = {
   chefPastEvents: PropTypes.array,
 };
 
-export default connect(mapStateToProps, { EventIdFunc })(ChefPast);
+export default connect(mapStateToProps, { EventIdFunc, DeleteEvent })(ChefPast);
