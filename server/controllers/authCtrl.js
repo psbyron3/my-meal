@@ -19,6 +19,7 @@ module.exports = {
         lastName: req.body.lastName,
         address: req.body.address,
         phoneNumber: req.body.phoneNumber,
+        userPic: req.body.userPic,
       };
       const tags = req.body.tags || [];
 

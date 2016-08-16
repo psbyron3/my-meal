@@ -2,13 +2,29 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createEvent } from '../actions/index';
 import FileInput from 'react-file-input';
+import ProfilePic from './profilePic';
 
 class AddEvent extends Component {
+  constructor(props) {
+  super(props);
+
+  this.state = {
+    file: null,
+  };
+
+  this.onHandleSubmit = this.onHandleSubmit.bind(this);
+  this.onSubmit = this.onSubmit.bind(this);
+  }
+
 
   onSubmit(props) {
     console.log(props);
     props.address += ', ';
-    createEvent(props);
+    this.props.createEvent(props, this.state.file);
+  }
+
+  onHandleSubmit(e) {
+  this.setState({ file: e });
   }
 
   render() {
@@ -40,6 +56,9 @@ class AddEvent extends Component {
               <form className="form-hotizontal row col" onSubmit={handleSubmit(this.onSubmit)}>
                 <fieldset>
                   <h3>Create New Event</h3>
+
+                  <ProfilePic onValueChange={this.onHandleSubmit} />
+
                   <div className={`form-group ${eventName.touched && eventName.invalid ? 'has-danger' : ''}`}>
                     <label> Event Name </label>
                     <input type="text" className="form-control" {...eventName} />
@@ -82,21 +101,6 @@ class AddEvent extends Component {
                   <div>
                     <label> Description </label>
                     <textarea className="form-control" rows="6" {...description} />
-                  </div>
-
-                  <br />
-
-                  <label> Select a Picture </label>
-                  <div>
-                    <label className="custom-file">
-                      <FileInput
-                        name="myImage"
-                        accept=".jpeg"
-                        placeholder="insert a dish picture"
-                        className="input-file"
-                        {...picture}
-                      />
-                    </label>
                   </div>
 
                   <br />

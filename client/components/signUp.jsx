@@ -20,8 +20,7 @@ class SignUp extends Component {
   }
 
   onSubmit(props) {
-    console.log('ON SUBMIT');
-    SignUpFunc(props, this.state.file);
+    this.props.SignUpFunc(props, this.state.file);
   }
 
   onHandleSubmit(e) {
@@ -152,6 +151,10 @@ SignUp.propTypes = {
   handleSubmit: PropTypes.func,
 };
 
+function mapStateToProps (state){
+  return {}
+}
+
 export default reduxForm({
   form: 'SignUpForm',
   fields: [
@@ -163,4 +166,4 @@ export default reduxForm({
     'userName',
     'password'],
   validate,
-})(SignUp);
+},mapStateToProps,{ SignUpFunc })(SignUp);
