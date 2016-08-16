@@ -99,10 +99,10 @@ class UserReview extends Component {
             </div>
             <div className="review-event-details">
               <div className="review-event-title">
-                Some dope meal
+                <strong>{this.props.eventName}</strong>
               </div>
               <div className="review-event-date">
-                Some arbitrary date
+                {this.props.startDatetime}
               </div>
             </div>
           </div>
@@ -132,8 +132,10 @@ class UserReview extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
-  console.log('mStoP in UDReview:', state);
+  console.log('mStoP in UDReview:', state.userHistory);
+
   return {
     userHistory: state.userHistory,
   };
@@ -148,4 +150,3 @@ UserReview.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserReview);
-
