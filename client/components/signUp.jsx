@@ -170,6 +170,7 @@ const validate = (values) => {
   return errors;
 };
 
+
 SignUp.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
