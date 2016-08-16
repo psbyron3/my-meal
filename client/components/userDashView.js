@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import UserReview from './userDashReview';
 
-const now = moment();
+const now = moment().format();
 
 class userDashView extends Component {
 
@@ -14,13 +14,18 @@ class userDashView extends Component {
       return (<div> No reviews to give </div>);
     }
 
-    return this.props.userHistory.filter((events) => events.endDatetime <= now)
-      .map((event) => {
+    return this.props.userHistory
+      .filter((time) => {
+        console.log('UDV FILTER EVENTS : ', time);
+        console.log('MOMENT TIME : ', now);
+        return time.endDatetime <= now;
+      })
+      .map((event, index) => {
         // if(!event.UsersEvent.wasReviewed) {
-
         return (
+
           <UserReview
-            key={event.id}
+            key={index}
             eventName={event.eventName}
             chefPic={"this is where the chef goes"}
             date={event.startDatetime}
