@@ -170,10 +170,6 @@ const validate = (values) => {
   return errors;
 };
 
-function mapStateToProps(state) {
-  return { restrictions: state.tags.restrictions };
-}
-
 SignUp.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
@@ -181,6 +177,7 @@ SignUp.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    restrictions: state.tags.restrictions,
     errorMessage: state.auth.error, // from rootReducer (index.js in reducers),
     signIn: state.auth,
   };
@@ -196,7 +193,7 @@ export default reduxForm({
     'email',
     'userName',
     'password',
-    'tags[]'
-    ],
+    'tags[]',
+  ],
   validate,
 }, mapStateToProps, { SignUpFunc })(SignUp);
