@@ -16,6 +16,7 @@ export const CHEF_PAST_EVENTS = 'CHEF_PAST_EVENTS';
 export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS';
 export const POST_USER_REVIEW_OF_CHEF = 'POST_USER_REVIEW_OF_CHEF';
 export const SEND_EVENT_ID = 'SEND_EVENT_ID';
+export const CLOSE_CHAT_BOX = 'CLOSE_CHAT_BOX';
 export const ALL_GENRES = 'ALL_GENRES';
 export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
 export const GET_EVENTS_TO_BE_REVIEWED = 'GET_EVENTS_TO_BE_REVIEWED';
@@ -446,6 +447,14 @@ export const EventIdFunc = (eventId) => {
   return {
     type: SEND_EVENT_ID,
     payload: eventId,
+  };
+};
+
+export const ChatBoxFunc = (status) => {
+  console.log(status, 'STTTTTTTTTTTATUS');
+  return {
+    type: CLOSE_CHAT_BOX,
+    payload: status,
   };
 };
 

@@ -3,7 +3,6 @@ import React, { Component, PropTypes } from 'react';
 import DashEvent from './userDashEvent.jsx';
 import UserDashView from './userDashView';
 import UserEditProfile from './userEditProfile';
-
 import { getEventsByUserId } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
