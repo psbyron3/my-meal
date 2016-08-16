@@ -16,12 +16,11 @@ class userDashView extends Component {
 
     return this.props.userHistory
       .filter((time) => {
-        console.log("UDV FILTER EVENTS : ", time)
-        console.log("MOMENT TIME : ", now)
-        return time.endDatetime <= now
+        console.log('UDV FILTER EVENTS : ', time);
+        console.log('MOMENT TIME : ', now);
+        return time.endDatetime <= now;
       })
       .map((event, index) => {
-  
         // if(!event.UsersEvent.wasReviewed) {
         return (
 
