@@ -189,7 +189,7 @@ export default reduxForm({
     'email',
     'userName',
     'password',
-    'tags[]'
-    ],
+    'tags[]',
+  ],
   validate,
 }, mapStateToProps, { SignUpFunc })(SignUp);
