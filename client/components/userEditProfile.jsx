@@ -17,7 +17,7 @@ class UserEditProfile extends Component {
   }
 
   componentDidMount() {
-    console.log('????component did mount....????')
+    console.log('????component did mount....????');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -62,7 +62,7 @@ class UserEditProfile extends Component {
       })
       .catch((err) => {
         console.log('error in onSubmit in userEditProfile:', err);
-      })
+      });
   }
 
   render() {
@@ -157,7 +157,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators( { editUser }, dispatch);
+  return bindActionCreators({ editUser }, dispatch);
 }
 
 export default reduxForm({
