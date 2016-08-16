@@ -21,7 +21,7 @@ export default (
     <Route path="messbox" component={MessageBox} />
     <Route path="addevent" component={RequireAuth(AddEvent)} />
     <Route path="dashboard" component={RequireAuth(UserDash)} />
-    <Route path="chefdash" component={RequireAuth(ChefDash)} />
+    <Route path="chefdash" component={ChefDash} />
   </Route>
 
 );
