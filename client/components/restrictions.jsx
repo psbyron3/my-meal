@@ -9,10 +9,11 @@ class RestrictionMenu extends Component {
   }
 
   renderRestrictions() {
+    console.log('this.props.restrictions', this.props.restrictions);
     return this.props.restrictions.map((restriction) => {
       return (
-        <div style={{ display: 'inline-block' }}>
-          <label key={restriction.id} className="checkboxLabel">
+        <div style={{ display: 'inline-block' }} key={restriction.id}>
+          <label className="checkboxLabel">
             <input
               type="checkbox"
               value={restriction.id}

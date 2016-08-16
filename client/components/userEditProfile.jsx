@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import { editUser } from '../actions/index';
@@ -7,22 +8,71 @@ import { editUser } from '../actions/index';
 class UserEditProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedRestrictions: [],
+      wasChecked: false,
+    };
     this.onSubmit = this.onSubmit.bind(this);
+    this.onCheckChange = this.onCheckChange.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('????component did mount....????');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('????????componentWillReceiveProps?????', nextProps);
+    if (!this.state.wasChecked && nextProps.Tags) {
+      this.setState({
+        selectedRestrictions: nextProps.Tags.map(tag => tag.id),
+      }, () => {
+        console.log('selected Restrictions:', this.state.selectedRestrictions);
+      });
+    }
+  }
+
+  onCheckChange(event) {
+    event.target.blur();
+    this.setState({
+      wasChecked: true,
+    });
+    const index = this.state.selectedRestrictions.indexOf(Number(event.target.value));
+    console.log('index of selected', index);
+    const copy = this.state.selectedRestrictions.slice();
+    if (index > -1) {
+      copy.splice(index, 1);
+    } else {
+      copy.push(Number(event.target.value));
+    }
+    this.setState({ selectedRestrictions: copy }, () => {
+      console.log('this.state = ', this.state);
+    });
   }
 
   onSubmit(userAttr) {
     console.log('userAttr in UserEditProfile....', userAttr);
-    editUser(userAttr);
+    const userUpdate = Object.assign({}, userAttr, { tags: this.state.selectedRestrictions });
+    editUser(userUpdate);
+    this.props.editUser(userUpdate)
+      .then((response) => {
+        this.setState({
+          selectedRestrictions: [],
+          wasChecked: false,
+        });
+      })
+      .catch((err) => {
+        console.log('error in onSubmit in userEditProfile:', err);
+      });
   }
 
   render() {
     const {
-      fields: { firstName, lastName, address, phoneNumber, email, tags },
+      fields: { firstName, lastName, address, phoneNumber, email },
       handleSubmit,
       resetForm,
       initialValues,
     } = this.props;
+    console.log('state in edit profile...', this.state);
     return (
       <div className="top-margin">
         <div className="container">
@@ -71,13 +121,8 @@ class UserEditProfile extends Component {
                                   <input
                                     type="checkbox"
                                     value={restriction.id}
-                                    onChange={(event) => {
-                                      if (event.target.checked) {
-                                        tags.addField(event.target.value);
-                                      } else {
-                                        tags.removeField(tags.indexOf(event.target.value));
-                                      }
-                                    }}
+                                    checked={this.state.selectedRestrictions.indexOf(restriction.id) > -1}
+                                    onChange={this.onCheckChange}
                                   />
                                 {restriction.tagName}
                                 </label>
@@ -107,8 +152,12 @@ function mapStateToProps(state) {
   return {
     restrictions: state.tags.restrictions,
     initialValues: state.userInfo,
-    userTags: state.userInfo.Tags,
+    Tags: state.userInfo.Tags,
   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ editUser }, dispatch);
 }
 
 export default reduxForm({
@@ -118,5 +167,5 @@ export default reduxForm({
            'address',
            'phoneNumber',
            'email',
-           'tags[]'],
-}, mapStateToProps)(UserEditProfile);
+          ],
+}, mapStateToProps, mapDispatchToProps)(UserEditProfile);

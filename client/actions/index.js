@@ -19,6 +19,7 @@ export const SEND_EVENT_ID = 'SEND_EVENT_ID';
 export const ALL_GENRES = 'ALL_GENRES';
 export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
 export const GET_EVENTS_TO_BE_REVIEWED = 'GET_EVENTS_TO_BE_REVIEWED';
+export const USER_INFO = 'USER_INFO';
 
 
 export const getEventsByUserId = (userId) => {
@@ -65,7 +66,7 @@ export const SignInFunc = (props) => {
       .then((response) => {
       // console.log("RESPOOOOOOOONSE: ", response);
         console.log('HELLLLOOOOOOOOOOO', response);
-      // dispatch action to update state to indicate that user is authenticate
+      // dispatch action to update state to indicate that user is authenticated
         dispatch({
           type: AUTH_USER,
         });
@@ -137,6 +138,28 @@ export const SignOutFunc = () => {
   browserHistory.push('/');
   return {
     type: UNAUTH_USER,
+  };
+};
+
+/** **********************USER FUNCTIONS**************************/
+
+export const editUser = (userAttr) => {
+  const userId = localStorage.getItem('userId');
+  console.log('inside editUser......', userAttr);
+  return function (dispatch) {
+    return axios.put(`/api/user/${userId}`, userAttr)
+      .then((response) => {
+        console.log('response to editUser is....', response);
+      // action dispatch on response should be the new updated user info
+        dispatch({
+          type: USER_INFO,
+          payload: response,
+        });
+        return response;
+      })
+      .catch((err) => {
+        console.log('HEY, IN INDEX.JS, running editUser and the error is..', err);
+      });
   };
 };
 
