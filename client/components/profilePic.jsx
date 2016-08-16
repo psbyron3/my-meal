@@ -19,7 +19,7 @@ export default class ProfilePic extends Component {
       elErrorContainer: '#kv-avatar-errors-2',
       msgErrorClass: 'alert alert-block alert-danger',
       defaultPreviewContent: '<img src="../images/avatar.jpeg" alt="Your Avatar' +
-      'class="avatar" style="width:160px"><p class="text-muted">Click to add a profile picture</p>',
+      'class="avatar" style="width:160px"><p class="text-muted">Click to add a picture</p>',
       layoutTemplates: { main2: '{preview} {remove} {browse}' },
       allowedFileExtensions: ['jpg', 'png', 'gif'],
     });

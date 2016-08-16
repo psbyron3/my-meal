@@ -668,6 +668,8 @@ img {
   opacity: 0.6;
   filter: alpha(opacity=60);
 }*/
+
+
 /***************** User pic (SignUp) ****************/
 
 
@@ -702,5 +704,3 @@ img {
 .btn.btn-default.fileinput-remove.fileinput-remove-button{
   margin-left: 60px;
 }
-
-
