@@ -6,14 +6,14 @@ import ProfilePic from './profilePic';
 
 class AddEvent extends Component {
   constructor(props) {
-  super(props);
+    super(props);
 
-  this.state = {
-    file: null,
-  };
+    this.state = {
+      file: null,
+    };
 
-  this.onHandleSubmit = this.onHandleSubmit.bind(this);
-  this.onSubmit = this.onSubmit.bind(this);
+    this.onHandleSubmit = this.onHandleSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
 
@@ -24,7 +24,7 @@ class AddEvent extends Component {
   }
 
   onHandleSubmit(e) {
-  this.setState({ file: e });
+    this.setState({ file: e });
   }
 
   render() {

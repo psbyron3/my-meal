@@ -151,8 +151,8 @@ SignUp.propTypes = {
   handleSubmit: PropTypes.func,
 };
 
-function mapStateToProps (state){
-  return {}
+function mapStateToProps(state) {
+  return {};
 }
 
 export default reduxForm({
@@ -166,4 +166,4 @@ export default reduxForm({
     'userName',
     'password'],
   validate,
-},mapStateToProps,{ SignUpFunc })(SignUp);
+}, mapStateToProps, { SignUpFunc })(SignUp);

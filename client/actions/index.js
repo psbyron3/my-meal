@@ -94,46 +94,46 @@ export const SignUpFunc = (props, userPic) => {
   };
 
   return function (dispatch) {
-    console.log("INSIDE DISPATCH")
-   return axios.post('/api/event/picture', data, opts)
-    .then((resp) => {
-      const url = resp.data;
-      console.log(url, 'SUPPOSED URL');
-      return url;
-    })
-    .then((url) => {
-      return axios({
-        method: 'POST',
-        url: '/api/auth/signup',
-        data: {
-          firstName,
-          lastName,
-          address,
-          phoneNumber,
-          userName,
-          email,
-          password,
-          userPic: url,
-        },
+    console.log('INSIDE DISPATCH');
+    return axios.post('/api/event/picture', data, opts)
+      .then((resp) => {
+        const url = resp.data;
+        console.log(url, 'SUPPOSED URL');
+        return url;
       })
-        .then((response) => {
-          console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
+      .then((url) => {
+        return axios({
+          method: 'POST',
+          url: '/api/auth/signup',
+          data: {
+            firstName,
+            lastName,
+            address,
+            phoneNumber,
+            userName,
+            email,
+            password,
+            userPic: url,
+          },
+        })
+          .then((response) => {
+            console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('id', response.data.result.id);
-            console.log("INSIDE DISPATCH")
+            console.log('INSIDE DISPATCH');
             dispatch({
               type: AUTH_USER,
             });
             browserHistory.push('/');
-        })
-        .catch((err) => {
-          console.log('ERROR', err);
-          dispatch ({
-            type: AUTH_ERROR,
+          })
+          .catch((err) => {
+            console.log('ERROR', err);
+            dispatch({
+              type: AUTH_ERROR,
+            });
           });
-        });
-      });   
-    }
+      });
+  };
 };
 
 export const SignOutFunc = () => {
@@ -362,7 +362,7 @@ export const selectEvent = (event) => {
   };
 };
 
-export const createEvent = (props,dishPic) => {
+export const createEvent = (props, dishPic) => {
   const targetAddress = props.address + props.city + props.usState;
   return convertAddress(targetAddress)
     .then((payload) => {
