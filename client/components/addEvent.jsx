@@ -13,7 +13,7 @@ class AddEvent extends Component {
 
   render() {
     const { fields: { eventName,
-                      foodType,
+                      genre,
                       tags,
                       description,
                       picture,
@@ -49,14 +49,16 @@ class AddEvent extends Component {
                   <br />
 
                   <div className="form-group">
-                    <label htmlFor="foodType"> Food Type </label>
-                    <select className="form-control" id="foodType" {...foodType} value={foodType.value || ''}>
-                      <option value="french">French</option>
-                      <option value="mexican">Mexican</option>
-                      <option value="japanese">Japanese</option>
-                      <option value="chinese">Chinese</option>
-                      <option value="southen">Southern</option>
-                      <option value="italian">Italian</option>
+                    <label htmlFor="genre"> Food Type </label>
+                    <select className="form-control" id="genre" {...genre} value={genre.value || ''}>
+                      <option></option>
+                      {this.props.genres.map((genreItem) => {
+                        return (
+                          <option key={genreItem.id} value={genreItem.id}>
+                            {genreItem.tagName}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
 
@@ -267,7 +269,10 @@ const validate = (values) => {
 };
 
 function mapStateToProps(state) {
-  return { restrictions: state.tags.restrictions };
+  return {
+    restrictions: state.tags.restrictions,
+    genres: state.tags.genres,
+  };
 }
 
 AddEvent.propTypes = {
@@ -278,7 +283,7 @@ AddEvent.propTypes = {
 export default reduxForm({
   form: 'AddEventForm',
   fields: ['eventName',
-           'foodType',
+           'genre',
            'tags[]',
            'description',
            'picture',
