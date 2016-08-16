@@ -70,6 +70,11 @@ export const SignInFunc = (props) => {
         dispatch({
           type: AUTH_USER,
         });
+        dispatch({
+          type: USER_INFO,
+          payload: response.data.user,
+        });
+
         browserHistory.push('/');
       // save token to localStorage
         localStorage.setItem('token', response.data.token);
