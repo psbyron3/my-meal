@@ -216,9 +216,18 @@ Dummy.init = function () {
                   userId: 1,
                   eventId: 1,
                 }),
-              ];
+              ]
 
               return Promise.all(allMessagePromises)
+              .then(() => {
+                const allGuestPromises = [
+                  Event.joinEvent(1, 1),
+                  Event.joinEvent(2, 3),
+                  Event.joinEvent(2, 1),
+                  Event.joinEvent(3, 2),
+                  Event.joinEvent(4, 3),
+                ];
+                return Promise.all(allGuestPromises)
                 .then(() => {
                       // add dummy reviews
                   const allReviewPromises = [
@@ -248,7 +257,7 @@ Dummy.init = function () {
                       rating: 5,
                       eventId: 2,
                       hostId: 3,
-                      reviewerId: 1,
+                      reviewerId: 3,
                     }),
                     Review.createReview({
                       content: 'Lovely host',
@@ -256,21 +265,10 @@ Dummy.init = function () {
                       eventId: 1,
                       hostId: 2,
                       reviewerId: 1,
-                    }),
+                    })
                   ];
-
                   return Promise.all(allReviewPromises)
-                    .then(() => {
-                      const allGuestPromises = [
-                        Event.joinEvent(7, 1),
-                        Event.joinEvent(3, 3),
-                        Event.joinEvent(3, 1),
-                        Event.joinEvent(1, 2),
-                        Event.joinEvent(1, 4),
-                      ];
-
-                      return Promise.all(allGuestPromises);
-                    });
+                  });
                 });
             });
         });
