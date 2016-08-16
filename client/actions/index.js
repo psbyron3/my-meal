@@ -116,22 +116,22 @@ export const SignUpFunc = (props, userPic) => {
             userPic: url,
           },
         })
-        .then((response) => {
-          console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('id', response.data.result.id);
-          console.log('INSIDE DISPATCH');
-          dispatch({
-            type: AUTH_USER,
+          .then((response) => {
+            console.log('SIGN UP PAYLOOOOOOOOAAAAD: ', response);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('id', response.data.result.id);
+            console.log('INSIDE DISPATCH');
+            dispatch({
+              type: AUTH_USER,
+            });
+            browserHistory.push('/');
+          })
+          .catch((err) => {
+            console.log('ERROR', err);
+            dispatch({
+              type: AUTH_ERROR,
+            });
           });
-          browserHistory.push('/');
-        })
-        .catch((err) => {
-          console.log('ERROR', err);
-          dispatch({
-            type: AUTH_ERROR,
-          });
-        });
       });
   };
 };
