@@ -16,14 +16,14 @@ module.exports = {
       delete newReview.token;
 
       Review.createReview(newReview)
-      .then((reslt) => {
-        console.log('RESULT RESULT RESULT::::::', reslt);
-        res.send(reslt);
-      })
-      .catch((err) => {
-        console.log('error in POST at /api/review', err);
-        res.send(err);
-      });
+        .then((reslt) => {
+          console.log('RESULT RESULT RESULT::::::', reslt);
+          res.send(reslt);
+        })
+        .catch((err) => {
+          console.log('error in POST at /api/review', err);
+          res.send(err);
+        });
     },
     put(req, res) {
       console.log('Received PUT at /api/:review');
