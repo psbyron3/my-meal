@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Modal, Button, Grid, Row, Col, Image } from 'react-bootstrap';
 import moment from 'moment';
 import { getEventsByUserId } from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 const userId = window.localStorage.userId;
 console.log('user id in join: ', userId);
@@ -87,10 +88,14 @@ function mapStateToProps(state) {
   return { selectedEvent: state.selectedEvent };
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getEventsByUserId }, dispatch);
+}
+
 JoinModal.propTypes = {
   selectedEvent: PropTypes.object,
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
 };
 
-export default connect(mapStateToProps)(JoinModal);
+export default connect(mapStateToProps, mapDispatchToProps)(JoinModal);
