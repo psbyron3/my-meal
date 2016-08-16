@@ -14,9 +14,7 @@ class AddEvent extends Component {
   render() {
     const { fields: { eventName,
                       foodType,
-                      glutenFree,
-                      vegetarian,
-                      vegan,
+                      tags,
                       description,
                       picture,
                       price,
@@ -63,18 +61,32 @@ class AddEvent extends Component {
                   </div>
 
                   <label> Other Preference : </label>
+
                   <div>
-                    <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" {...glutenFree} /> Gluten Free
-                    </label>
-
-                    <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" {...vegetarian} /> Vegetarian
-                    </label>
-
-                    <label className="form-check-inline">
-                      <input className="form-check-input" type="checkbox" {...vegan} /> Vegan
-                    </label>
+                    {this.props.restrictions.map((restriction) => {
+                      return (
+                        <div style={{ display: 'inline-block' }} >
+                          <label
+                            key={restriction.id}
+                            className="checkboxLabel form-check-inline"
+                          >
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              value={restriction.id}
+                              onChange={(event) => {
+                                if (event.target.checked) {
+                                  tags.addField(event.target.value);
+                                } else {
+                                  tags.removeField(tags.indexOf(event.target.value));
+                                }
+                              }}
+                            />
+                          {restriction.tagName}
+                          </label>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   <br />
@@ -102,6 +114,7 @@ class AddEvent extends Component {
                   <br />
 
                   <div className="row">
+
                     <div>
                       <div className="col-md-3">
                         <label> Price </label>
@@ -253,6 +266,10 @@ const validate = (values) => {
   return errors;
 };
 
+function mapStateToProps(state) {
+  return { restrictions: state.tags.restrictions };
+}
+
 AddEvent.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
@@ -262,9 +279,7 @@ export default reduxForm({
   form: 'AddEventForm',
   fields: ['eventName',
            'foodType',
-           'glutenFree',
-           'vegetarian',
-           'vegan',
+           'tags[]',
            'description',
            'picture',
            'price',
@@ -275,8 +290,7 @@ export default reduxForm({
            'address',
            'city',
            'usState',
-           'zip'],
+           'zip',
+          ],
   validate,
-}, null, { createEvent })(AddEvent);
-
-//
+}, mapStateToProps, { createEvent })(AddEvent);

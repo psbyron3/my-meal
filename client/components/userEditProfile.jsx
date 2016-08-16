@@ -1,14 +1,117 @@
 import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
+import { Link } from 'react-router';
 
 class UserEditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.onSubmit = this.onSubmit.bind(this);
+    this.renderRestrictions = this.renderRestrictions.bind(this);
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
   }
 
   render() {
-    return (<div>Edit Profile information here</div>);
+    const {
+      fields: { firstName, lastName, address, phoneNumber, email, tags },
+      handleSubmit,
+    } = this.props;
+    return (
+      <div className="top-margin">
+        <div className="container">
+
+          <div className="row">
+            <div className="col-md-10 col-md-offset-1">
+
+              <div className="row">
+                <div className="col-md-6 col-md-offset-3">
+
+                  <form className="form-edit" onSubmit={handleSubmit(this.onSubmit)}>
+                    <fieldset>
+                      <h3 className="form-edit-heading">Sign Up</h3>
+                      <br />
+                      <div className="text-help">
+                        <div className={`form-group ${firstName.touched && firstName.invalid ? 'has-danger' : ''}`}>
+                          <label>First Name</label>
+                          <input type="text" className="form-control" {...firstName} />
+                        </div>
+
+                        <div className={`form-group ${lastName.touched && lastName.invalid ? 'has-danger' : ''}`}>
+                          <label>Last Name</label>
+                          <input type="text" className="form-control" {...lastName} />
+                        </div>
+
+                        <div className={`form-group ${address.touched && address.invalid ? 'has-danger' : ''}`}>
+                          <label>Address</label>
+                          <input type="text" className="form-control" {...address} />
+                        </div>
+
+                        <div className={`form-group ${phoneNumber.touched && phoneNumber.invalid ? 'has-danger' : ''}`}>
+                          <label>Phone Number</label>
+                          <input type="text" className="form-control" {...phoneNumber} />
+                        </div>
+
+                        <div className={`form-group ${email.touched && email.invalid ? 'has-danger' : ''}`}>
+                          <label>Email Address</label>
+                          <input type="text" className="form-control" {...email} />
+                        </div>
+
+                        <div>
+                          {this.props.restrictions.map((restriction) => {
+                            return (
+                              <div style={{ display: 'inline-block' }} key={restriction.id}>
+                                <label className="checkboxLabel">
+                                  <input
+                                    type="checkbox"
+                                    value={restriction.id}
+                                    onChange={(event) => {
+                                      if (event.target.checked) {
+                                        tags.addField(event.target.value);
+                                      } else {
+                                        tags.removeField(tags.indexOf(event.target.value));
+                                      }
+                                    }}
+                                  />
+                                {restriction.tagName}
+                                </label>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                      </div>
+                      <button className="btn btn-md btn-primary btn-block" type="submit">Sign Up</button>
+                      <div className="pull-right">
+                        <Link to="signIn">Already have an account? Sign in here!</Link>
+                      </div>
+                    </fieldset>
+                  </form>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    );
   }
 }
 
-export default UserEditProfile;
+function mapStateToProps(state) {
+  return { restrictions: state.tags.restrictions };
+}
+
+export default reduxForm({
+  form: 'UserEditProfile',
+  fields: ['firstName',
+           'lastName',
+           'address',
+           'phoneNumber',
+           'email',
+           'tags[]'],
+}, mapStateToProps)(UserEditProfile);

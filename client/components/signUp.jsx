@@ -19,6 +19,7 @@ class SignUp extends Component {
                       email,
                       userName,
                       password,
+                      tags,
                     }, handleSubmit } = this.props;
 
     return (
@@ -59,6 +60,29 @@ class SignUp extends Component {
                         <div className={`form-group ${email.touched && email.invalid ? 'has-danger' : ''}`}>
                           <label>Email Address</label>
                           <input type="text" className="form-control" {...email} />
+                        </div>
+
+                        <div>
+                          {this.props.restrictions.map((restriction) => {
+                            return (
+                              <div style={{ display: 'inline-block' }} key={restriction.id}>
+                                <label className="checkboxLabel">
+                                  <input
+                                    type="checkbox"
+                                    value={restriction.id}
+                                    onChange={(event) => {
+                                      if (event.target.checked) {
+                                        tags.addField(event.target.value);
+                                      } else {
+                                        tags.removeField(tags.indexOf(event.target.value));
+                                      }
+                                    }}
+                                  />
+                                {restriction.tagName}
+                                </label>
+                              </div>
+                            );
+                          })}
                         </div>
 
                         <div className={`form-group ${userName.touched && userName.invalid ? 'has-danger' : ''}`}>
@@ -125,10 +149,15 @@ const validate = (values) => {
   return errors;
 };
 
+function mapStateToProps(state) {
+  return { restrictions: state.tags.restrictions };
+}
+
 SignUp.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
 };
+
 
 export default reduxForm({
   form: 'SignUpForm',
@@ -138,6 +167,8 @@ export default reduxForm({
            'phoneNumber',
            'email',
            'userName',
-           'password'],
+           'password',
+           'tags[]',
+          ],
   validate,
-})(SignUp);
+}, mapStateToProps)(SignUp);

@@ -44,9 +44,9 @@ User.findUserByUsername = function (userName) {
     },
     include: [
       {
-        model: db.Tag
-      }
-    ]
+        model: db.Tag,
+      },
+    ],
   });
 };
 
@@ -56,6 +56,11 @@ User.findUserById = function (id) {
     where: {
       id,
     },
+    include: [
+      {
+        model: db.Tag,
+      },
+    ],
   }).then(function (rows) {
     return rows[0];
   });
@@ -68,9 +73,9 @@ User.findUserByEmail = function (email) {
     },
     include: [
       {
-        model: db.Tag
-      }
-    ]
+        model: db.Tag,
+      },
+    ],
   }).then(function (rows) {
     return rows[0];
   });
