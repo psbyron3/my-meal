@@ -5,6 +5,7 @@ import $ from 'jquery';
 import MessageEntry from './messageEntry';
 import io from 'socket.io-client';
 import axios from 'axios';
+import { ChatBoxFunc } from '../actions/index';
 
 class MessageBox extends Component {
 
@@ -20,7 +21,8 @@ class MessageBox extends Component {
   componentWillMount() {
     // fetch previous messages for this specific event
     // const eventId = this.props.selectedEvent.eventId
-    const eventId = 1;
+    const eventId = this.props.eventId;
+    console.log(eventId, 'eventId INSIDE MESSSBOOOOOOOX');
     axios.get(`/api/message/${eventId}`).then((result) => {
       const messages = result.data;
       this.setState({ messages: [...this.state.messages, ...messages] }, () => {
@@ -55,6 +57,7 @@ class MessageBox extends Component {
   }
 
   onClose(e) {
+    this.props.ChatBoxFunc('false');
     $('#chat_window_1').remove();
   }
 
@@ -176,8 +179,10 @@ class MessageBox extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    eventId: state.eventId.id,
+  };
 }
 
-export default connect(mapStateToProps)(MessageBox);
+export default connect(mapStateToProps, { ChatBoxFunc })(MessageBox);
 

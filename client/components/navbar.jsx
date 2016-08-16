@@ -39,9 +39,26 @@ class NavBarComp extends Component {
           </Link>
         </NavItem>
         <NavItem className="user-dash">
-          <Link to="dashboard">
-            <button className="btn btn-primary btn-sm">Dashboard</button>
-          </Link>
+
+          <div className="btn-group">
+            <button
+              type="button"
+              className="btn btn-primary dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false"
+            >
+              Dashboard <span className="caret"></span>
+            </button>
+            <ul className="dropdown-menu">
+              <Link to="userdash">
+                <li><a href="#">Foodie user</a></li>
+              </Link>
+              <Link to="chefdash">
+                <li><a href="#">Gourmet Chief</a></li>
+              </Link>
+            </ul>
+          </div>
+
         </NavItem>
         <NavItem>
           <button onClick={() => { this.props.SignOutFunc(); }} className="btn btn-primary btn-sm">
