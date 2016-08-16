@@ -21,15 +21,15 @@ class UserDash extends Component {
   // }
 
   renderList() {
-    console.log("Times in UD: ", this.props.userHistory.startDatetime);
+    console.log('Times in UD: ', this.props.userHistory.startDatetime);
 
     if (!this.props.userHistory.length) {
       return (<div>Join Events to populate this page!</div>);
     }
     return this.props.userHistory.filter((event) => event.UsersEvent.role === 'guest')
       .map((event) => {
-        const startTime = moment(event.startDatetime, ["YYYY", moment.ISO_8601]).format("MMMM DD YYYY, hh:mm A");
-        const endTime = moment(event.endDatetime, ["YYYY", moment.ISO_8601]).format("hh:mm A");
+        const startTime = moment(event.startDatetime, ['YYYY', moment.ISO_8601]).format('MMMM DD YYYY, hh:mm A');
+        const endTime = moment(event.endDatetime, ['YYYY', moment.ISO_8601]).format('hh:mm A');
         return (
           <DashEvent
             key={event.id}

@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import UserReview from './userDashReview';
 
-let now = moment();
+const now = moment();
 
 class userDashView extends Component {
 
@@ -15,7 +15,6 @@ class userDashView extends Component {
     }
 
     return this.props.userHistory.filter((events) => events.endDatetime <= now)
-      console.log("in filtered event UDV : ", event)
       .map((event) => {
         // if(!event.UsersEvent.wasReviewed) {
 
@@ -28,7 +27,7 @@ class userDashView extends Component {
             price={event.price}
           />
         );
-      })
+      });
   }
 
   render() {
@@ -42,7 +41,7 @@ class userDashView extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('in UDV checking state :', state.userHistory)
+  console.log('in UDV checking state :', state.userHistory);
   return {
     userHistory: state.userHistory,
   };

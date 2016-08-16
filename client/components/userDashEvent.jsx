@@ -31,8 +31,8 @@ class DashEvent extends Component {
   }
 
   render() {
-    let startTime = moment(this.props.userHistory.startDatetime).format('MMMM Do YYYY, h:mm a');
-    let endTime = moment(this.props.userHistory.endDatetime).format('MMMM Do YYYY, h:mm a');
+    const startTime = moment(this.props.userHistory.startDatetime).format('MMMM Do YYYY, h:mm a');
+    const endTime = moment(this.props.userHistory.endDatetime).format('MMMM Do YYYY, h:mm a');
     return (
       <div>
         <Col className="user-gutter" md={2} />
@@ -56,7 +56,7 @@ class DashEvent extends Component {
                 <div className="user-event-date">
                   {this.props.times}
                   <div className="user-event-time">
-                    
+
                   </div>
                 </div>
                 <div className="user-event-description">
