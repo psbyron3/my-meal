@@ -74,6 +74,7 @@ module.exports = {
       };
       User.editUser(attr, req.body.tags, userId)
         .then((userInfo) => {
+          console.log('sending back userInfo....', userInfo);
           res.send(userInfo);
         })
         .catch((err) => {

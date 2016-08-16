@@ -18,6 +18,7 @@ class SearchBar extends Component {
                    restrictions: [],
                    genre: [],
                    distance: 5,
+                   wasChecked: false,
                  };
     this.onTextChange = this.onTextChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -32,13 +33,24 @@ class SearchBar extends Component {
     this.props.getAllTags();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.wasChecked) {
+      this.setState({
+        restrictions: nextProps.Tags.map(tag => tag.id),
+      });
+    }
+  }
+
   onTextChange(event) {
     console.log('textChange: ', event.target.value);
-    this.setState({ query: event.target.value }, () => { console.log('changed text'); });
+    this.setState({ query: event.target.value });
   }
 
   onCheckChange(event) {
     event.target.blur();
+    this.setState({
+      wasChecked: true,
+    });
     const index = this.state.restrictions.indexOf(Number(event.target.value));
     const copy = this.state.restrictions.slice();
     if (index > -1) {
@@ -54,16 +66,12 @@ class SearchBar extends Component {
   onGenreChange(event) {
     this.setState({
       genre: [event.target.value],
-    }, () => {
-      console.log('this.state =', this.state);
     });
   }
 
   onDistanceChange(event) {
     this.setState({
       distance: event.target.value,
-    }, () => {
-      console.log('this.state =', this.state);
     });
   }
 
@@ -83,10 +91,9 @@ class SearchBar extends Component {
     const tags = [...this.state.restrictions, ...this.state.genre];
     console.log('params: ', tags);
     const distance = this.state.distance;
-    console.log('trying to getAllInRadius with query:', this.state.query);
     this.props.getAllInRadius(this.state.query, tags, distance);
     // do we want to reset the state though?
-    this.setState({ query: '', restrictions: [], genre: [] });
+    this.setState({ show: false, genre: [] });
   }
 
   toggle() {
@@ -97,7 +104,6 @@ class SearchBar extends Component {
 
   render() {
     return (
-
       <div className="nav-search" >
         <form className="search-input">
           <div style={{ display: 'inline-block' }}>
@@ -153,6 +159,7 @@ function mapStateToProps(state) {
   return {
     restrictions: state.tags.restrictions,
     genres: state.tags.genres,
+    Tags: state.userInfo.Tags,
   };
 }
 

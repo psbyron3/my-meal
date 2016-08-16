@@ -10,10 +10,7 @@ Review.createReview = function (attr) {
     .then(() => {
       console.log("review doesn't exist, creating now");
       return db.Review.create(attr)
-        .then(function (result) {
-          attr.id = result.dataValues.id;
-          return result;
-        }).then((result) => {
+        .then((result) => {
           const eventId = result.dataValues.eventId;
           const reviewerId = result.dataValues.reviewerId;
           return Review.findReviewsByChef(result.hostId)
@@ -84,16 +81,11 @@ Review.findReviewForEventbyUser = function (eventId, reviewerId) {
 
 Review.updateAverage = function (reviews) {
   const hostId = reviews[0].dataValues.hostId;
-  console.log('hostId in updateAverage is--------->', hostId);
-  const sum = reviews.reduce((total, curr) => {
+  const avg = reviews.reduce((total, curr) => {
     return total + curr.dataValues.rating;
-  }, 0);
-  console.log('sum in updateAverage is....', sum);
-  const avg = sum / reviews.length;
-  console.log('avg in updateAverage is...', avg);
+  }, 0) / reviews.length;
   return db.User.findById(hostId)
     .then((user) => {
-      console.log('updating average on this user...', user.dataValues);
       return user.update({
         avgRating: avg,
       });

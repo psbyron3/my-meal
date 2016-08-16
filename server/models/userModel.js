@@ -141,7 +141,7 @@ User.editUser = function (attr, tags = [], userId) {
           return updatedUser.setTags(tags)
             .then((result) => {
               console.log('result of setting tags on update.....', result);
-              return result;
+              return updatedUser;
             });
         });
     });
