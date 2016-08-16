@@ -7,7 +7,6 @@ import UserEditProfile from './userEditProfile';
 import { getEventsByUserId } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import thunk from 'redux-thunk';
 import moment from 'moment';
 
 import { Tabs, Tab } from 'react-bootstrap';
@@ -23,14 +22,15 @@ class UserDash extends Component {
   // }
 
   renderList() {
-    const startTime = moment(this.props.userHistory.startDatetime).format('MMMM Do YYYY, h:mm a');
-    const endTime = moment(this.props.userHistory.endDatetime).format('MMMM Do YYYY, h:mm a');
+    console.log('Times in UD: ', this.props.userHistory.startDatetime);
 
     if (!this.props.userHistory.length) {
       return (<div>Join Events to populate this page!</div>);
     }
     return this.props.userHistory.filter((event) => event.UsersEvent.role === 'guest')
       .map((event) => {
+        const startTime = moment(event.startDatetime, ['YYYY', moment.ISO_8601]).format('MMMM DD YYYY, hh:mm A');
+        const endTime = moment(event.endDatetime, ['YYYY', moment.ISO_8601]).format('hh:mm A');
         return (
           <DashEvent
             key={event.id}
@@ -76,7 +76,7 @@ class UserDash extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('mapStoP Events by User Id : ', state.userHistory.data);
+  console.log('mapStoP Events by User Id : ', state.userHistory);
   return {
     userHistory: state.userHistory,
   };

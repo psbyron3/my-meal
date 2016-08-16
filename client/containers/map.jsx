@@ -27,6 +27,7 @@ class MapView extends Component {
   }
 
   renderMarkers() {
+    console.log('allEvents in MapView:', this.props.allEvents);
     if (this.props.allEvents.length > 0) {
       return this.props.allEvents.map((event) => {
         return (

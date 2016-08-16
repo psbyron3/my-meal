@@ -18,6 +18,18 @@ class DashEvent extends Component {
     return eventDate;
   }
 
+ // Interprets db location string and breaks into street and city, state.
+  formatAddress(address, str) {
+    const formattedAddress = address.split(',');
+    const streetAddress = formattedAddress.splice(0, 1);
+    const cityAddress = formattedAddress.join('');
+
+    if (str === 'street') {
+      return streetAddress;
+    }
+    return cityAddress;
+  }
+
   render() {
     const startTime = moment(this.props.userHistory.startDatetime).format('MMMM Do YYYY, h:mm a');
     const endTime = moment(this.props.userHistory.endDatetime).format('MMMM Do YYYY, h:mm a');
@@ -35,13 +47,17 @@ class DashEvent extends Component {
                 <div className="user-event-title">
                   {this.props.eventName}
                 </div>
-                <div className="user-event-location">
-                  {this.props.address}
+                <div className="user-event-street">
+                  {this.formatAddress(this.props.address, 'street')}
                 </div>
-                <div className="user-event-time">
-                  {this.formatTime(startTime)},
-                  {this.formatTime(startTime, 'time')} to
-                  {this.formatTime(endTime, 'time')}
+                <div className="user-event-location">
+                  {this.formatAddress(this.props.address)}
+                </div>
+                <div className="user-event-date">
+                  {this.props.times}
+                  <div className="user-event-time">
+
+                  </div>
                 </div>
                 <div className="user-event-description">
                   {this.props.description}
@@ -69,7 +85,7 @@ class DashEvent extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('UD mapStoP Events by User Id : ', state.userHistory.data);
+  console.log('UDE mapStoP Events by User Id : ', state.userHistory);
   return {
     userHistory: state.userHistory,
   };

@@ -416,6 +416,12 @@ input::-webkit-input-placeholder {
 
 /*************************  User Dash ****************************/
 
+.user-feed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .user-event {
   display: flex;
   flex-direction: column;
@@ -592,6 +598,11 @@ img {
 
 /***************** User Dash (Reviews) ****************/
 
+.review-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .review-container {
   margin-top: 100px;
