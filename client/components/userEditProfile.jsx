@@ -7,18 +7,53 @@ import { editUser } from '../actions/index';
 class UserEditProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedRestrictions: [],
+      wasChecked: false
+    };
     this.onSubmit = this.onSubmit.bind(this);
+    this.onCheckChange = this.onCheckChange.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.wasChecked) {
+      this.setState({
+        selectedRestrictions: nextProps.Tags.map(tag => tag.id),
+      });
+    }
+  }
+
+  onCheckChange(event) {
+    event.target.blur();
+    this.setState({
+      wasChecked: true,
+    });
+    const index = this.state.selectedRestrictions.indexOf(Number(event.target.value));
+    console.log('index of selected',index);
+    const copy = this.state.selectedRestrictions.slice();
+    if (index > -1) {
+      copy.splice(index, 1);
+    } else {
+      copy.push(Number(event.target.value));
+    }
+    this.setState({ selectedRestrictions: copy }, () => {
+      console.log('this.state = ', this.state);
+    });
   }
 
   onSubmit(userAttr) {
     console.log('userAttr in UserEditProfile....', userAttr);
+
     editUser(userAttr);
+    this.setState({
+      selectedRestrictions: [],
+      wasChecked: false
+    });
   }
 
   render() {
     const {
-      fields: { firstName, lastName, address, phoneNumber, email, tags },
+      fields: { firstName, lastName, address, phoneNumber, email },
       handleSubmit,
       resetForm,
       initialValues,
@@ -71,13 +106,8 @@ class UserEditProfile extends Component {
                                   <input
                                     type="checkbox"
                                     value={restriction.id}
-                                    onChange={(event) => {
-                                      if (event.target.checked) {
-                                        tags.addField(event.target.value);
-                                      } else {
-                                        tags.removeField(tags.indexOf(event.target.value));
-                                      }
-                                    }}
+                                    checked={this.state.selectedRestrictions.indexOf(restriction.id) > -1}
+                                    onChange={this.onCheckChange}
                                   />
                                 {restriction.tagName}
                                 </label>
@@ -107,7 +137,7 @@ function mapStateToProps(state) {
   return {
     restrictions: state.tags.restrictions,
     initialValues: state.userInfo,
-    userTags: state.userInfo.Tags,
+    Tags: state.userInfo.Tags,
   };
 }
 
@@ -117,6 +147,6 @@ export default reduxForm({
            'lastName',
            'address',
            'phoneNumber',
-           'email',
-           'tags[]'],
+           'email'
+          ],
 }, mapStateToProps)(UserEditProfile);

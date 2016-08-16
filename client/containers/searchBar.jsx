@@ -18,7 +18,7 @@ class SearchBar extends Component {
                    restrictions: [],
                    genre: [],
                    distance: 5,
-                   wasChecked: false
+                   wasChecked: false,
                  };
     this.onTextChange = this.onTextChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -34,9 +34,9 @@ class SearchBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(!this.state.wasChecked) {
+    if (!this.state.wasChecked) {
       this.setState({
-        restrictions: nextProps.Tags.map(tag => tag.id)
+        restrictions: nextProps.Tags.map(tag => tag.id),
       });
     }
   }
@@ -49,7 +49,7 @@ class SearchBar extends Component {
   onCheckChange(event) {
     event.target.blur();
     this.setState({
-      wasChecked: true
+      wasChecked: true,
     });
     const index = this.state.restrictions.indexOf(Number(event.target.value));
     const copy = this.state.restrictions.slice();
@@ -95,10 +95,9 @@ class SearchBar extends Component {
     const tags = [...this.state.restrictions, ...this.state.genre];
     console.log('params: ', tags);
     const distance = this.state.distance;
-    console.log('trying to getAllInRadius with query:', this.state.query);
     this.props.getAllInRadius(this.state.query, tags, distance);
     // do we want to reset the state though?
-    this.setState({ query: '', restrictions: [], genre: [] });
+    this.setState({ show: false, genre: [] });
   }
 
   toggle() {
@@ -108,7 +107,7 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log('this.state.restrictions is...: ', this.state.restrictions)
+    console.log('this.state.restrictions is...: ', this.state.restrictions);
     return (
       <div className="nav-search" >
         <form className="search-input">
@@ -165,7 +164,7 @@ function mapStateToProps(state) {
   return {
     restrictions: state.tags.restrictions,
     genres: state.tags.genres,
-    Tags: state.userInfo.Tags
+    Tags: state.userInfo.Tags,
   };
 }
 
