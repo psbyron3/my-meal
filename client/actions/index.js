@@ -179,8 +179,6 @@ export const ChefEventsFunc = () => {
 
   let chefEventsArray;
 
-  console.log('SOMETHING WRONG HERE???');
-
   return (dispatch) => {
     console.log('INSIDE CHEFEVENTSFUNC DISPATCH');
     return axios({
@@ -230,17 +228,67 @@ export const ChefEventsFunc = () => {
 
 
 export const DeleteEvent = (eventId) => {
-  return axios({
-    method: 'DELETE',
-    url: `/api/event/${eventId}`,
-  })
-    .then((response) => {
-      console.log('DELETE SUCCESS');
-      ChefEventsFunc();
+  const currentDate = new Date(Date.now());
+  const userId = localStorage.getItem('userId');
+  console.log('INITIAL LOGGING');
+
+  let chefEventsArray;
+
+  return (dispatch) => {
+    return axios({
+      method: 'DELETE',
+      url: `/api/event/${eventId}`,
     })
-    .catch((err) => {
-      console.log('ERROR: ', err);
-    });
+      .then(() => {
+        console.log('DELETE SUCCESS');
+      // ChefEventsFunc();
+      // action case: delete_success
+      // in reducer: lodash, deep
+        console.log('INSIDE CHEFEVENTSFUNC DISPATCH');
+        return axios({
+          method: 'GET',
+          url: `/api/event/users/${userId}`,
+        })
+          .then((response) => {
+            console.log('AFTER DISPATCH RESPONSE ', response);
+            chefEventsArray = response.data;
+
+            return Promise.all(_.filter(chefEventsArray, (event) => {
+              return event.UsersEvent.role === 'host';
+            }))
+              .then((chefEventFiltered) => {
+                return Promise.all(_.map(chefEventFiltered, (event) => {
+                  const eventID = event.UsersEvent.eventID;
+                  return axios({
+                    method: 'GET',
+                    url: `/api/review/event/${eventID}`,
+                  })
+                    .then((reviews) => {
+                      event.reviews = reviews.data;
+                      console.log('EVEEEEENT REVIEEEWSSSS: ', event.reviews);
+                      const ratingArray = [];
+                      _.each(event.reviews, (review) => {
+                        if (typeof review.rating === 'number') {
+                          ratingArray.push(review.rating);
+                        }
+                      });
+                      event.rating = reviewAverage(ratingArray);
+                      return event;
+                    });
+                }));
+              })
+              .then((result) => {
+                dispatch({
+                  type: CHEF_EVENTS,
+                  payload: result,
+                });
+              });
+          })
+          .catch((err) => {
+            console.log('ERROR: ', err);
+          });
+      });
+  };
 };
 
 
