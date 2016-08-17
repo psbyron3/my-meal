@@ -210,6 +210,7 @@ Event.createEvent = function (newEvent) {
 };
 
 Event.joinEvent = function (eventId, userId) {
+  console.log(`eventId is .... ${eventId}, and userId is....${userId}`);
   return db.Event.findById(eventId)
     .then((event) => {
       if (!event) return {};

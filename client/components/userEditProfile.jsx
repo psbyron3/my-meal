@@ -160,7 +160,7 @@ UserEditProfile.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
   initialValues: PropTypes.object,
-  restrictions: PropTypes.array
+  restrictions: PropTypes.array,
 };
 
 export default reduxForm({
@@ -172,19 +172,3 @@ export default reduxForm({
            'email',
           ],
 }, mapStateToProps, mapDispatchToProps)(UserEditProfile);
-
- //  22:20  warning  'pristine' is missing in props validation          react/prop-types
- //  22:41  warning  'initializeForm' is missing in props validation    react/prop-types
- //  22:67  warning  'todo' is missing in props validation              react/prop-types
- //  23:54  warning  'Tags' is missing in props validation              react/prop-types
- //  23:59  warning  'Tags.map' is missing in props validation          react/prop-types
- //  27:20  warning  'pristine' is missing in props validation          react/prop-types
- //  27:41  warning  'destroyForm' is missing in props validation       react/prop-types
- //  44:16  warning  'editUser' is missing in props validation          react/prop-types
- //  62:7   warning  'fields' is missing in props validation            react/prop-types
- //  63:7   warning  'handleSubmit' is missing in props validation      react/prop-types
- //  64:7   warning  'resetForm' is missing in props validation         react/prop-types
- //  65:7   warning  'initialValues' is missing in props validation     react/prop-types
- // 109:39  warning  'restrictions' is missing in props validation      react/prop-types
- // 109:52  warning  'restrictions.map' is missing in props validation  react/prop-types
- // 109:73  warning  Unexpected block statement surrounding arrow body  arrow-body-style
