@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-
 
 class RestrictionMenu extends Component {
   constructor(props) {
