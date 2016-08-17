@@ -11,14 +11,16 @@ class UserEditProfile extends Component {
     this.state = {
       selectedRestrictions: [],
       wasChecked: false,
+      submitted: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onCheckChange = this.onCheckChange.bind(this);
   }
 
-  componentDidMount() {
-    console.log('????component did mount....????');
+  componentWillMount() {
+    if (this.props.pristine) this.props.initializeForm(this.props.todo);
   }
+
 
   componentWillReceiveProps(nextProps) {
     console.log('????????componentWillReceiveProps?????', nextProps);
@@ -29,6 +31,10 @@ class UserEditProfile extends Component {
         console.log('selected Restrictions:', this.state.selectedRestrictions);
       });
     }
+  }
+
+  componentWillUnmount() {
+    if (this.props.pristine) this.props.destroyForm();
   }
 
   onCheckChange(event) {
@@ -58,6 +64,7 @@ class UserEditProfile extends Component {
         this.setState({
           selectedRestrictions: [],
           wasChecked: false,
+          submitted: true,
         });
       })
       .catch((err) => {
@@ -86,6 +93,7 @@ class UserEditProfile extends Component {
                   <form {...initialValues} className="form-edit" onSubmit={handleSubmit(this.onSubmit)}>
                     <fieldset>
                       <h3 className="form-edit-heading">Edit Personal Info</h3>
+                      <p>User info updated</p>
                       <br />
                       <div className="text-help">
                         <div className={`form-group ${firstName.touched && firstName.invalid ? 'has-danger' : ''}`}>

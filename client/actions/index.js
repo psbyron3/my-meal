@@ -75,8 +75,7 @@ export const SignInFunc = (props) => {
           payload: response.data.user,
         });
 
-        browserHistory.push('/');
-      // save token to localStorage
+        // save token to localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user.id);
         localStorage.setItem('userName', response.data.user.userName);
@@ -375,8 +374,15 @@ export const createEvent = (props, dishPic) => {
         longitude,
       };
       return coords;
+<<<<<<< 4a62f37b1e4ed0e41fa9eb0920a76d107666a104
     }).then((coords) => {
       console.log('PIC PARAAAAAMS: ', dishPic[0]);
+=======
+    })
+
+    .then((coords) => {
+      console.log('PIC PARAAAAAMS: ', file[0]);
+>>>>>>> [bug] Trying to update edit profile component with new user info
       const data = new FormData();
       data.append('file', dishPic[0]);
       const opts = {
@@ -403,25 +409,24 @@ export const createEvent = (props, dishPic) => {
             price: props.price,
             maxGuests: props.maxGuest,
       // guestDecide??
-          address: output.address,
-          latitude: output.latitude,
-          longitude: output.longitude,
-          startDatetime: props.start,
-          endDatetime: props.end,
-        };
+            address: output.address,
+            latitude: output.latitude,
+            longitude: output.longitude,
+            startDatetime: props.start,
+            endDatetime: props.end,
+          };
 
-        console.log('PARAMSSSSSS', params);
+          console.log('PARAMSSSSSS', params);
 
-        return axios.post('/api/event/', params)
-          .then(() => {
-            browserHistory.push('/')
-          })
-          .catch((err) => {
-            console.log('ERROR', err);
-          });
+          return axios.post('/api/event/', params)
+            .then(() => {
+              browserHistory.push('/');
+            })
+            .catch((err) => {
+              console.log('ERROR', err);
+            });
         });
     });
-
 };
 
 export const postUserReviewOfChef = (reviewData) => {

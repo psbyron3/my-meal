@@ -15,10 +15,13 @@ const userId = window.localStorage.userId;
 
 class UserDash extends Component {
 
+<<<<<<< 4a62f37b1e4ed0e41fa9eb0920a76d107666a104
   componentWillUnmount() {
     this.props.ChatBoxFunc('false');
   }
 
+=======
+>>>>>>> [bug] Trying to update edit profile component with new user info
   // componentWillMount() {
   //   console.log("in component will mount ")
   //   this.props.getEventsByUserId(userId);
