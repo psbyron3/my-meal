@@ -134,7 +134,7 @@ class UserReview extends Component {
 
 
 function mapStateToProps(state) {
-  //console.log('mStoP in UDReview:', state.userHistory);
+  // console.log('mStoP in UDReview:', state.userHistory);
 
   return {
     userHistory: state.userHistory,

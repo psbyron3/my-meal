@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
@@ -10,7 +10,6 @@ class UserEditProfile extends Component {
     super(props);
     this.state = {
       selectedRestrictions: [],
-      wasChecked: false,
       submitted: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,8 +18,7 @@ class UserEditProfile extends Component {
   }
 
   componentWillMount() {
-    if (this.props.pristine) this.props.initializeForm(this.props.todo);
-    this.setState({ selectedRestrictions: this.props.Tags.map(tag => tag.id) })
+    this.setState({ selectedRestrictions: this.props.Tags.map(tag => tag.id) });
   }
 
   componentWillUnmount() {
@@ -28,7 +26,6 @@ class UserEditProfile extends Component {
   }
 
   onCheckChange(event) {
-    this.setState({ wasChecked: true });
     const index = this.state.selectedRestrictions.indexOf(Number(event.target.value));
     const copy = this.state.selectedRestrictions.slice();
     if (index > -1) {
@@ -54,7 +51,7 @@ class UserEditProfile extends Component {
   }
 
   showSuccess() {
-    return (<div>{this.state.submitted ? <p>User info updated</p> : <br/>}</div>);
+    return (<div>{this.state.submitted ? <p>User info updated</p> : <br />}</div>);
   }
 
   render() {
@@ -153,6 +150,11 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ editUser }, dispatch);
 }
 
+UserEditProfile.propTypes = {
+  pristine: PropTypes.bool,
+  initializeForm: PropTypes.func,
+}
+
 export default reduxForm({
   form: 'UserEditProfile',
   fields: ['firstName',
@@ -162,3 +164,19 @@ export default reduxForm({
            'email',
           ],
 }, mapStateToProps, mapDispatchToProps)(UserEditProfile);
+
+ //  22:20  warning  'pristine' is missing in props validation          react/prop-types
+ //  22:41  warning  'initializeForm' is missing in props validation    react/prop-types
+ //  22:67  warning  'todo' is missing in props validation              react/prop-types
+ //  23:54  warning  'Tags' is missing in props validation              react/prop-types
+ //  23:59  warning  'Tags.map' is missing in props validation          react/prop-types
+ //  27:20  warning  'pristine' is missing in props validation          react/prop-types
+ //  27:41  warning  'destroyForm' is missing in props validation       react/prop-types
+ //  44:16  warning  'editUser' is missing in props validation          react/prop-types
+ //  62:7   warning  'fields' is missing in props validation            react/prop-types
+ //  63:7   warning  'handleSubmit' is missing in props validation      react/prop-types
+ //  64:7   warning  'resetForm' is missing in props validation         react/prop-types
+ //  65:7   warning  'initialValues' is missing in props validation     react/prop-types
+ // 109:39  warning  'restrictions' is missing in props validation      react/prop-types
+ // 109:52  warning  'restrictions.map' is missing in props validation  react/prop-types
+ // 109:73  warning  Unexpected block statement surrounding arrow body  arrow-body-style

@@ -50,7 +50,7 @@ class UserDash extends Component {
           defaultActiveKey={1}
           animation={false}
           id="noanim-tab-example"
-          unmountOnExit={true}
+          unmountOnExit
         >
           <Tab eventKey={1} title="Dashboard">
             <UserDashView />

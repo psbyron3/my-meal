@@ -46,7 +46,7 @@ class userDashView extends Component {
 }
 
 function mapStateToProps(state) {
-  //console.log('in UDV checking state :', state.userHistory);
+  // console.log('in UDV checking state :', state.userHistory);
   return {
     userHistory: state.userHistory,
   };
