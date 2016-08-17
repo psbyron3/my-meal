@@ -402,7 +402,7 @@ export const createEvent = (props, file) => {
       };
       return coords;
     })
-      .then((coords) => {
+    .then((coords) => {
       console.log('PIC PARAAAAAMS: ', file[0]);
       const data = new FormData();
       data.append('file', file[0]);
@@ -411,44 +411,43 @@ export const createEvent = (props, file) => {
       };
       return axios.post('/api/event/picture', data, opts)
         .then((resp) => {
-        const url = resp.data;
-        console.log(url, 'SUPPOSED URL');
-        const output = {
-          address: coords.address,
-          latitude: coords.latitude,
-          longitude: coords.longitude,
-          url };
-        return output;
+          const url = resp.data;
+          console.log(url, 'SUPPOSED URL');
+          const output = {
+            address: coords.address,
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            url };
+          return output;
         })
-      .then((output) => {
-        console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
-        const params = {
-          eventName: props.eventName,
+        .then((output) => {
+          console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
+          const params = {
+            eventName: props.eventName,
       // foodType?? glutenFree, vegetarian, vegan??
-          description: props.description,
-          eventPic: output.url,
-          price: props.price,
-          maxGuests: props.maxGuest,
+            description: props.description,
+            eventPic: output.url,
+            price: props.price,
+            maxGuests: props.maxGuest,
       // guestDecide??
-          address: output.address,
-          latitude: output.latitude,
-          longitude: output.longitude,
-          startDatetime: props.start,
-          endDatetime: props.end,
-        };
+            address: output.address,
+            latitude: output.latitude,
+            longitude: output.longitude,
+            startDatetime: props.start,
+            endDatetime: props.end,
+          };
 
-        console.log('PARAMSSSSSS', params);
+          console.log('PARAMSSSSSS', params);
 
-        return axios.post('/api/event/', params)
-          .then(() => {
-            browserHistory.push('/')
-          })
-          .catch((err) => {
-            console.log('ERROR', err);
-          });
+          return axios.post('/api/event/', params)
+            .then(() => {
+              browserHistory.push('/');
+            })
+            .catch((err) => {
+              console.log('ERROR', err);
+            });
         });
     });
-  
 };
 
 export const postUserReviewOfChef = (reviewData) => {
