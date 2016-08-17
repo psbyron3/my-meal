@@ -24,6 +24,7 @@ export const USER_INFO = 'USER_INFO';
 
 
 export const getEventsByUserId = (userId) => {
+  console.log('userId is....');
   return axios.get(`/api/event/users/${userId}`)
     .then((response) => {
       return {
@@ -71,6 +72,11 @@ export const SignInFunc = (props) => {
         dispatch({
           type: AUTH_USER,
         });
+        dispatch({
+          type: USER_INFO,
+          payload: response.data.user,
+        });
+
         browserHistory.push('/');
       // save token to localStorage
         localStorage.setItem('token', response.data.token);
@@ -382,7 +388,7 @@ export const selectEvent = (event) => {
   };
 };
 
-export const createEvent = (props) => {
+export const createEvent = (props, file) => {
   console.log('PROOOOOPS: ', props);
   const targetAddress = props.address + props.city + props.usState;
   return convertAddress(targetAddress)
@@ -396,31 +402,35 @@ export const createEvent = (props) => {
         longitude,
       };
       return coords;
-    }).then((coords) => {
-      console.log('PIC PARAAAAAMS: ', props.picture[0]);
+    })
+
+      .then((coords) => {
+      console.log('PIC PARAAAAAMS: ', file[0]);
       const data = new FormData();
-      data.append('file', props.picture[0]);
+      data.append('file', file[0]);
       const opts = {
         transformRequest() { return data; },
       };
-      axios.post('/api/event/picture', data, opts).then((resp) => {
-        const url = resp.data;
-        console.log(url, 'SUPPOSED URL');
-        const output = {
-          address: coords.address,
-          latitude: coords.latitude,
-          longitude: coords.longitude,
-          url };
-        return output;
-      }).then((output) => {
-        console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
-        const params = {
-          eventName: props.eventName,
+      return axios.post('/api/event/picture', data, opts)
+        .then((resp) => {
+          const url = resp.data;
+          console.log(url, 'SUPPOSED URL');
+          const output = {
+            address: coords.address,
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            url };
+          return output;
+        })
+        .then((output) => {
+          console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
+          const params = {
+            eventName: props.eventName,
       // foodType?? glutenFree, vegetarian, vegan??
-          description: props.description,
-          eventPic: output.url,
-          price: props.price,
-          maxGuests: props.maxGuest,
+            description: props.description,
+            eventPic: output.url,
+            price: props.price,
+            maxGuests: props.maxGuest,
       // guestDecide??
           address: output.address,
           latitude: output.latitude,
@@ -431,23 +441,16 @@ export const createEvent = (props) => {
 
         console.log('PARAMSSSSSS', params);
 
-        const request = axios.post('/api/event/', params);
-        return {
-          type: 'CREATE_EVENT',
-          payload: request,
-        };
-      })
-        .then(() =>
-      browserHistory.push('/')
-    )
-        .catch((err) => {
-          console.log('ERROR', err);
-    // return {
-    //   type: '??????????',
-    //   payload: '??????????'
-    // };
+        return axios.post('/api/event/', params)
+          .then(() => {
+            browserHistory.push('/')
+          })
+          .catch((err) => {
+            console.log('ERROR', err);
+          });
         });
     });
+
 };
 
 export const postUserReviewOfChef = (reviewData) => {

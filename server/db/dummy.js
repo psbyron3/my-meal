@@ -49,6 +49,7 @@ Dummy.init = function () {
     .then(() => {
       const allUserPromises = [
         User.createUser({
+          id: 1,
           userName: 'Joe',
           password: 'test',
           firstName: 'Joseph',
@@ -59,6 +60,7 @@ Dummy.init = function () {
           userPic: 'https://avatars3.githubusercontent.com/u/12257623?v=3&s=460',
         }, [4, 6]),
         User.createUser({
+          id: 2,
           userName: 'Nizz',
           password: 'test2',
           firstName: 'Nizar',
@@ -69,6 +71,7 @@ Dummy.init = function () {
           userPic: 'https://avatars0.githubusercontent.com/u/17601607?v=3&s=460',
         }),
         User.createUser({
+          id: 3,
           userName: 'Phil',
           password: 'test3',
           firstName: 'Phil',
@@ -79,6 +82,7 @@ Dummy.init = function () {
           userPic: 'https://avatars1.githubusercontent.com/u/17244224?v=3&s=460',
         }, [8]),
         User.createUser({
+          id: 4,
           userName: 'Mike',
           password: 'test4',
           firstName: 'Mike',
@@ -94,6 +98,7 @@ Dummy.init = function () {
         .then(() => {
           const allEventPromises = [
             Event.createEvent({
+              id: 1,
               eventName: 'Boeuf Bourguignon on fire',
               eventPic: 'http://icu.linter.fr/750/10002051/1603680841/boeuf-bourguignon.jpg',
               price: 'pay what you want',
@@ -108,6 +113,7 @@ Dummy.init = function () {
               tags: [12],
             }),
             Event.createEvent({
+              id: 2,
               eventName: 'Tacos Party',
               eventPic: 'http://mediad.publicbroadcasting.net/p/kwmu/files/201508/tacos.jpg',
               price: 5.00,
@@ -122,6 +128,7 @@ Dummy.init = function () {
               tags: [10],
             }),
             Event.createEvent({
+              id: 3,
               eventName: 'Carne Asada Cookout',
               eventPic: 'http://tipsforbbq.com/Include/Images/Recipes/Carne-Asada/AndrewLLoydSriracha.1024.jpg',
               price: 0.00,
@@ -136,6 +143,7 @@ Dummy.init = function () {
               tags: [10],
             }),
             Event.createEvent({
+              id: 4,
               eventName: 'Vegetarian Feast',
               eventPic: 'http://clv.h-cdn.co/assets/16/02/1452527843-vegetarian-pad-tha-2-2-600x900.jpg',
               price: 7.00,
@@ -144,12 +152,13 @@ Dummy.init = function () {
               address: '1289 South Redondo Blvd, Los Angeles, CA 90019',
               latitude: 34.0505127,
               longitude: -118.3491435,
-              startDatetime: '2016-08-07T18:00:00',
-              endDatetime: '2016-08-07T20:00:00',
-              userId: 3,
+              startDatetime: '2016-08-17T18:00:00',
+              endDatetime: '2016-08-17T20:00:00',
+              userId: 2,
               tags: [1, 5, 19],
             }),
             Event.createEvent({
+              id: 5,
               eventName: 'Hot Dog Async Party (...WUT?)',
               eventPic: 'https://a.dilcdn.com/bl/wp-content/uploads/sites/8/2011/05/hot-dogs-chili11-480.jpg',
               price: 0.00,
@@ -164,6 +173,7 @@ Dummy.init = function () {
               tags: [27],
             }),
             Event.createEvent({
+              id: 6,
               eventName: 'Hot Dog Eating (No Contest)',
               eventPic: 'https://a.dilcdn.com/bl/wp-content/uploads/sites/8/2011/05/hot-dogs-chili11-480.jpg',
               price: 0.00,
@@ -178,6 +188,7 @@ Dummy.init = function () {
               tags: [27],
             }),
             Event.createEvent({
+              id: 7,
               eventName: 'Biweekly Yum-a-thon',
               eventPic: 'http://clv.h-cdn.co/assets/16/02/1452527843-vegetarian-pad-tha-2-2-600x900.jpg',
               price: 7.00,
@@ -221,11 +232,15 @@ Dummy.init = function () {
               return Promise.all(allMessagePromises)
                 .then(() => {
                   const allGuestPromises = [
-                    Event.joinEvent(1, 1),
+                    Event.joinEvent(3, 4),
                     Event.joinEvent(2, 3),
-                    Event.joinEvent(2, 1),
-                    Event.joinEvent(3, 2),
-                    Event.joinEvent(4, 3),
+                    Event.joinEvent(7, 1),
+                    Event.joinEvent(3, 3),
+                    Event.joinEvent(5, 2),
+                    Event.joinEvent(6, 2),
+                    Event.joinEvent(1, 2),
+                    Event.joinEvent(3, 1),
+                    Event.joinEvent(4, 4),
                   ];
                   return Promise.all(allGuestPromises)
                     .then(() => {
@@ -235,36 +250,36 @@ Dummy.init = function () {
                           content: 'Awsome cook',
                           rating: 5,
                           eventId: 2,
-                          hostId: 3,
-                          reviewerId: 1,
+                          hostId: 2,
+                          reviewerId: 3,
                         }),
                         Review.createReview({
                           content: 'Great cook',
                           rating: 5,
                           eventId: 3,
-                          hostId: 1,
-                          reviewerId: 2,
+                          hostId: 2,
+                          reviewerId: 4,
                         }),
                         Review.createReview({
                           content: 'So tasty',
                           rating: 5,
-                          eventId: 4,
-                          hostId: 1,
-                          reviewerId: 3,
+                          eventId: 7,
+                          hostId: 2,
+                          reviewerId: 1,
                         }),
                         Review.createReview({
                           content: 'Love it',
                           rating: 5,
-                          eventId: 2,
-                          hostId: 3,
-                          reviewerId: 3,
+                          eventId: 6,
+                          hostId: 1,
+                          reviewerId: 2,
                         }),
                         Review.createReview({
                           content: 'Lovely host',
                           rating: 5,
-                          eventId: 1,
+                          eventId: 3,
                           hostId: 2,
-                          reviewerId: 1,
+                          reviewerId: 3,
                         }),
                       ];
                       return Promise.all(allReviewPromises);
