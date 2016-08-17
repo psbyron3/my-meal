@@ -66,8 +66,6 @@ export const SignInFunc = (props) => {
       },
     })
       .then((response) => {
-      // console.log("RESPOOOOOOOONSE: ", response);
-        console.log('HELLLLOOOOOOOOOOO', response);
       // dispatch action to update state to indicate that user is authenticated
         dispatch({
           type: AUTH_USER,
@@ -77,8 +75,7 @@ export const SignInFunc = (props) => {
           payload: response.data.user,
         });
 
-        browserHistory.push('/');
-      // save token to localStorage
+        // save token to localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user.id);
         localStorage.setItem('userName', response.data.user.userName);
@@ -404,7 +401,7 @@ export const createEvent = (props, file) => {
       return coords;
     })
 
-      .then((coords) => {
+    .then((coords) => {
       console.log('PIC PARAAAAAMS: ', file[0]);
       const data = new FormData();
       data.append('file', file[0]);
@@ -432,25 +429,24 @@ export const createEvent = (props, file) => {
             price: props.price,
             maxGuests: props.maxGuest,
       // guestDecide??
-          address: output.address,
-          latitude: output.latitude,
-          longitude: output.longitude,
-          startDatetime: props.start,
-          endDatetime: props.end,
-        };
+            address: output.address,
+            latitude: output.latitude,
+            longitude: output.longitude,
+            startDatetime: props.start,
+            endDatetime: props.end,
+          };
 
-        console.log('PARAMSSSSSS', params);
+          console.log('PARAMSSSSSS', params);
 
-        return axios.post('/api/event/', params)
-          .then(() => {
-            browserHistory.push('/')
-          })
-          .catch((err) => {
-            console.log('ERROR', err);
-          });
+          return axios.post('/api/event/', params)
+            .then(() => {
+              browserHistory.push('/');
+            })
+            .catch((err) => {
+              console.log('ERROR', err);
+            });
         });
     });
-
 };
 
 export const postUserReviewOfChef = (reviewData) => {

@@ -14,7 +14,6 @@ const userId = window.localStorage.userId;
 
 class UserDash extends Component {
 
-
   // componentWillMount() {
   //   console.log("in component will mount ")
   //   this.props.getEventsByUserId(userId);
