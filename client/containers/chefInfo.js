@@ -9,18 +9,33 @@ class ChefInfo extends Component {
 
   render() {
     const chefRatingArray = [];
-
+    console.log('USERINFO HERE????? ', this.props.userInfo);
     _.each(this.props.chefEvents, (event) => {
       if (typeof event.rating === 'number') {
         chefRatingArray.push(event.rating);
       }
     });
 
-    let chefRating = reviewAverage(chefRatingArray);
+    let chefRating;
+
+    if (chefRatingArray.length) {
+      chefRating = Math.round(reviewAverage(chefRatingArray) * 10) / 10;
+    } else {
+      chefRating = 'n/a';
+    }
+
+    let name = `${this.props.userInfo.firstName} ${this.props.userInfo.lastName}`;
 
     return (
-      <div>
-        chef rating: {chefRating}
+      <div className="chef-mc">
+        <span>profile picture here</span>
+        <br />
+        <span className="text-capitalize">name: {name}</span>
+        <br />
+        <span>email: {this.props.userInfo.email}</span>
+        <br />
+        <span>chef rating: {chefRating}</span>
+        <br />
       </div>
     );
   }
@@ -29,6 +44,7 @@ class ChefInfo extends Component {
 function mapStateToProps(state) {
   return {
     chefEvents: state.chefEvents.allChefEvents,
+    userInfo: state.userInfo,
   };
 }
 

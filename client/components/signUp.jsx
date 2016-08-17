@@ -10,6 +10,8 @@ class SignUp extends Component {
 
   constructor(props) {
     super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+
 
     this.state = {
       file: null,
@@ -40,7 +42,6 @@ class SignUp extends Component {
                     }, handleSubmit } = this.props;
 
     return (
-
       <div className="top-margin">
         <div className="container">
 
