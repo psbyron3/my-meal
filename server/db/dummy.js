@@ -146,7 +146,7 @@ Dummy.init = function () {
               longitude: -118.3491435,
               startDatetime: '2016-08-07T18:00:00',
               endDatetime: '2016-08-07T20:00:00',
-              userId: 3,
+              userId: 2,
               tags: [1, 5, 19],
             }),
             Event.createEvent({
@@ -221,11 +221,12 @@ Dummy.init = function () {
               return Promise.all(allMessagePromises)
                 .then(() => {
                   const allGuestPromises = [
-                    Event.joinEvent(1, 1),
+                    Event.joinEvent(3, 4),
                     Event.joinEvent(2, 3),
-                    Event.joinEvent(2, 1),
-                    Event.joinEvent(3, 2),
-                    Event.joinEvent(4, 3),
+                    Event.joinEvent(7, 4),
+                    Event.joinEvent(3, 4),
+                    Event.joinEvent(7, 3),
+                    Event.joinEvent(6, 3)
                   ];
                   return Promise.all(allGuestPromises)
                     .then(() => {
@@ -235,36 +236,36 @@ Dummy.init = function () {
                           content: 'Awsome cook',
                           rating: 5,
                           eventId: 2,
-                          hostId: 3,
-                          reviewerId: 1,
+                          hostId: 1,
+                          reviewerId: 3,
                         }),
                         Review.createReview({
                           content: 'Great cook',
                           rating: 5,
                           eventId: 3,
-                          hostId: 1,
-                          reviewerId: 2,
+                          hostId: 2,
+                          reviewerId: 4,
                         }),
                         Review.createReview({
                           content: 'So tasty',
                           rating: 5,
-                          eventId: 4,
+                          eventId: 7,
                           hostId: 1,
-                          reviewerId: 3,
+                          reviewerId: 4,
                         }),
                         Review.createReview({
                           content: 'Love it',
                           rating: 5,
-                          eventId: 2,
-                          hostId: 3,
+                          eventId: 7,
+                          hostId: 1,
                           reviewerId: 3,
                         }),
                         Review.createReview({
                           content: 'Lovely host',
                           rating: 5,
-                          eventId: 1,
+                          eventId: 6,
                           hostId: 2,
-                          reviewerId: 1,
+                          reviewerId: 3,
                         }),
                       ];
                       return Promise.all(allReviewPromises);
