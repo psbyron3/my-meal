@@ -240,7 +240,7 @@ Dummy.init = function () {
                     Event.joinEvent(6, 2),
                     Event.joinEvent(1, 2),
                     Event.joinEvent(3, 1),
-                    Event.joinEvent(4, 4)
+                    Event.joinEvent(4, 4),
                   ];
                   return Promise.all(allGuestPromises)
                     .then(() => {
