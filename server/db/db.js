@@ -123,21 +123,6 @@ const Tag = sequelize.define('Tag', {
   },
 });
 
-const Dish = sequelize.define('Dish', {
-  dishName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  dishPic: {
-    type: Sequelize.STRING,
-    validate: {
-      isUrl: {
-        msg: 'Must be a valid URL',
-      },
-    },
-  },
-});
-
 const Review = sequelize.define('Review', {
   content: {
     type: Sequelize.STRING,
@@ -186,8 +171,6 @@ const Message = sequelize.define('Message', {
 
 /** ********MANY TO MANY RELATIONSHIPS**********/
 // join tables: events_dishes, users_tags, users_events, events_tags
-Event.belongsToMany(Dish, { through: 'EventsDishes', foreignKey: 'eventId' });
-Dish.belongsToMany(Event, { through: 'EventsDishes', foreignKey: 'dishId' });
 
 User.belongsToMany(Event, { through: 'UsersEvent', foreignKey: 'userId' });
 Event.belongsToMany(User, { through: 'UsersEvent', foreignKey: 'eventId' });
@@ -200,8 +183,6 @@ Tag.belongsToMany(Event, { through: 'TagsEvents', foreignKey: 'tagId' });
 
 /** ********ONE TO MANY RELATIONSHIPS**********/
 // one in many: (1:many) users:dishes, events:reviews, users:reviews (two times)
-Dish.belongsTo(User, { as: 'user', foreignKey: 'userId' });
-User.hasMany(Dish, { foreignKey: 'userId' });
 
 Review.belongsTo(Event, { as: 'event', foreignKey: 'eventId' });
 Event.hasMany(Review, { foreignKey: 'eventId' });
@@ -223,13 +204,12 @@ sequelize
   .sync({ force: false })
   .then(() => {
     console.log('Created tables from schema');
-    //dummy.init();
+    // dummy.init();
   });
 
 exports.User = User;
 exports.Event = Event;
 exports.Tag = Tag;
-exports.Dish = Dish;
 exports.Review = Review;
 exports.UsersEvent = UsersEvent;
 exports.sequelize = Sequelize;

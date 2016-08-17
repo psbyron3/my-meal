@@ -403,6 +403,7 @@ export const createEvent = (props, file) => {
       };
       return coords;
     })
+
       .then((coords) => {
       console.log('PIC PARAAAAAMS: ', file[0]);
       const data = new FormData();
@@ -412,24 +413,24 @@ export const createEvent = (props, file) => {
       };
       return axios.post('/api/event/picture', data, opts)
         .then((resp) => {
-        const url = resp.data;
-        console.log(url, 'SUPPOSED URL');
-        const output = {
-          address: coords.address,
-          latitude: coords.latitude,
-          longitude: coords.longitude,
-          url };
-        return output;
+          const url = resp.data;
+          console.log(url, 'SUPPOSED URL');
+          const output = {
+            address: coords.address,
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            url };
+          return output;
         })
-      .then((output) => {
-        console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
-        const params = {
-          eventName: props.eventName,
+        .then((output) => {
+          console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
+          const params = {
+            eventName: props.eventName,
       // foodType?? glutenFree, vegetarian, vegan??
-          description: props.description,
-          eventPic: output.url,
-          price: props.price,
-          maxGuests: props.maxGuest,
+            description: props.description,
+            eventPic: output.url,
+            price: props.price,
+            maxGuests: props.maxGuest,
       // guestDecide??
           address: output.address,
           latitude: output.latitude,
@@ -449,7 +450,7 @@ export const createEvent = (props, file) => {
           });
         });
     });
-  
+
 };
 
 export const postUserReviewOfChef = (reviewData) => {
