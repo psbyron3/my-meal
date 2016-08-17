@@ -153,7 +153,15 @@ function mapDispatchToProps(dispatch) {
 UserEditProfile.propTypes = {
   pristine: PropTypes.bool,
   initializeForm: PropTypes.func,
-}
+  Tags: PropTypes.array,
+  destroyForm: PropTypes.func,
+  resetForm: PropTypes.func,
+  editUser: PropTypes.func,
+  fields: PropTypes.object,
+  handleSubmit: PropTypes.func,
+  initialValues: PropTypes.object,
+  restrictions: PropTypes.array
+};
 
 export default reduxForm({
   form: 'UserEditProfile',
