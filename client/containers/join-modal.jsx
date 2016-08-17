@@ -6,8 +6,8 @@ import moment from 'moment';
 import { getEventsByUserId } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
-const userId = window.localStorage.userId;
-console.log('user id in join: ', userId);
+// const userId = window.localStorage.userId;
+// console.log('user id in join: ', userId);
 
 class JoinModal extends Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class JoinModal extends Component {
   }
 
   handleJoinEvent() {
+    const userId = this.props.userId;
     console.log('eventId is:', this.props.selectedEvent.id);
     axios.post(`api/event/join/${this.props.selectedEvent.id}`, { userId })
       .then(() => {
@@ -85,7 +86,7 @@ class JoinModal extends Component {
 }
 
 function mapStateToProps(state) {
-  return { selectedEvent: state.selectedEvent };
+  return { selectedEvent: state.selectedEvent, userId: state.userInfo.id };
 }
 
 function mapDispatchToProps(dispatch) {
