@@ -141,7 +141,11 @@ User.editUser = function (attr, tags = [], userId) {
           return updatedUser.setTags(tags)
             .then((result) => {
               console.log('result of setting tags on update.....', result);
-              return updatedUser;
+              return db.User.findById(userId, {
+                include: {
+                  model: db.Tag
+                }
+              });
             });
         });
     });

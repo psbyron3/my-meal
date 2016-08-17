@@ -16,8 +16,8 @@ class userDashView extends Component {
 
     return this.props.userHistory
       .filter((time) => {
-        console.log('UDV FILTER EVENTS : ', time);
-        console.log('MOMENT TIME : ', now);
+        // console.log('UDV FILTER EVENTS : ', time);
+        // console.log('MOMENT TIME : ', now);
         return time.endDatetime <= now;
       })
       .map((event, index) => {
@@ -46,7 +46,7 @@ class userDashView extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('in UDV checking state :', state.userHistory);
+  //console.log('in UDV checking state :', state.userHistory);
   return {
     userHistory: state.userHistory,
   };

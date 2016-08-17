@@ -157,7 +157,7 @@ export const editUser = (userAttr) => {
       // action dispatch on response should be the new updated user info
         dispatch({
           type: USER_INFO,
-          payload: response,
+          payload: response.data,
         });
         return response;
       })

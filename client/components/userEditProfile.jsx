@@ -15,22 +15,12 @@ class UserEditProfile extends Component {
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onCheckChange = this.onCheckChange.bind(this);
+    this.showSuccess = this.showSuccess.bind(this);
   }
 
   componentWillMount() {
     if (this.props.pristine) this.props.initializeForm(this.props.todo);
-  }
-
-
-  componentWillReceiveProps(nextProps) {
-    console.log('????????componentWillReceiveProps?????', nextProps);
-    if (!this.state.wasChecked && nextProps.Tags) {
-      this.setState({
-        selectedRestrictions: nextProps.Tags.map(tag => tag.id),
-      }, () => {
-        console.log('selected Restrictions:', this.state.selectedRestrictions);
-      });
-    }
+    this.setState({ selectedRestrictions: this.props.Tags.map(tag => tag.id) })
   }
 
   componentWillUnmount() {
@@ -38,31 +28,22 @@ class UserEditProfile extends Component {
   }
 
   onCheckChange(event) {
-    event.target.blur();
-    this.setState({
-      wasChecked: true,
-    });
+    this.setState({ wasChecked: true });
     const index = this.state.selectedRestrictions.indexOf(Number(event.target.value));
-    console.log('index of selected', index);
     const copy = this.state.selectedRestrictions.slice();
     if (index > -1) {
       copy.splice(index, 1);
     } else {
       copy.push(Number(event.target.value));
     }
-    this.setState({ selectedRestrictions: copy }, () => {
-      console.log('this.state = ', this.state);
-    });
+    this.setState({ selectedRestrictions: copy });
   }
 
   onSubmit(userAttr) {
-    console.log('userAttr in UserEditProfile....', userAttr);
     const userUpdate = Object.assign({}, userAttr, { tags: this.state.selectedRestrictions });
-    editUser(userUpdate);
     this.props.editUser(userUpdate)
       .then((response) => {
         this.setState({
-          selectedRestrictions: [],
           wasChecked: false,
           submitted: true,
         });
@@ -70,6 +51,10 @@ class UserEditProfile extends Component {
       .catch((err) => {
         console.log('error in onSubmit in userEditProfile:', err);
       });
+  }
+
+  showSuccess() {
+    return (<div>{this.state.submitted ? <p>User info updated</p> : <br/>}</div>);
   }
 
   render() {
@@ -93,8 +78,7 @@ class UserEditProfile extends Component {
                   <form {...initialValues} className="form-edit" onSubmit={handleSubmit(this.onSubmit)}>
                     <fieldset>
                       <h3 className="form-edit-heading">Edit Personal Info</h3>
-                      <p>User info updated</p>
-                      <br />
+                      {this.showSuccess()}
                       <div className="text-help">
                         <div className={`form-group ${firstName.touched && firstName.invalid ? 'has-danger' : ''}`}>
                           <label>First Name</label>
@@ -157,6 +141,7 @@ class UserEditProfile extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('state.userInfo(initialValues....)', state.userInfo);
   return {
     restrictions: state.tags.restrictions,
     initialValues: state.userInfo,
