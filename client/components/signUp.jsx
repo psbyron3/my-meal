@@ -22,7 +22,8 @@ class SignUp extends Component {
   }
 
   onSubmit(props) {
-    this.props.SignUpFunc(props, this.state.file);
+    const currFile = this.state.file;
+    this.props.SignUpFunc(props, currFile);
   }
 
   onHandleSubmit(e) {

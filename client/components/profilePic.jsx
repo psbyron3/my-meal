@@ -18,10 +18,10 @@ export default class ProfilePic extends Component {
       removeTitle: 'Cancel or reset changes',
       elErrorContainer: '#kv-avatar-errors-2',
       msgErrorClass: 'alert alert-block alert-danger',
-      defaultPreviewContent: '<img src="../images/avatar.jpeg" alt="Your Avatar' +
+      defaultPreviewContent: '<img src="../images/avatar.png" alt="Your Avatar' +
       'class="avatar" style="width:160px"><p class="text-muted">Click to add a picture</p>',
       layoutTemplates: { main2: '{preview} {remove} {browse}' },
-      allowedFileExtensions: ['jpg', 'png', 'gif'],
+      allowedFileExtensions: ['jpg'],
     });
   }
 
