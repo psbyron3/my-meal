@@ -15,14 +15,15 @@ const userId = window.localStorage.userId;
 
 class UserDash extends Component {
 
-  componentWillUnmount() {
-    this.props.ChatBoxFunc('false');
-  }
-
   // componentWillMount() {
   //   console.log("in component will mount ")
   //   this.props.getEventsByUserId(userId);
   // }
+
+  componentWillUnmount() {
+    this.props.ChatBoxFunc('false');
+  }
+
 
   renderList() {
     // console.log('Times in UD: ', this.props.userHistory.startDatetime);

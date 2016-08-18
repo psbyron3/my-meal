@@ -83,6 +83,7 @@ module.exports = {
     post(req, res) {
       console.log('Received POST at /api/event/picture');
       const file = req.files.file; // get the file from the request object thanks to multyparty middleware
+      console.log('file is......', file);
       const stream = fs.createReadStream(file.path); // read the file
 
       const fsImplStyles = s3fsImpl.getPath(file.name);
@@ -90,9 +91,10 @@ module.exports = {
       // we are sending to s3 the file using this stream
       s3fsImpl.writeFile(file.originalFilename, stream, { ContentType: 'image/jpeg' })
         .then(() => {
+          console.log('streaming writeFile.....');
           fs.unlink(file.path, (err) => {
             if (err) {
-              console.error(err);
+              console.error('error occurred here....', err);
             }
           });
           return res.end(picUrl);

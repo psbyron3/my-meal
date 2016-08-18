@@ -3,7 +3,6 @@ const _ = require('lodash');
 
 export const convertAddress = (address) => {
   let response;
-  let coordinate;
   console.log('inside convertAddress.....', address);
   return axios({
     method: 'GET',
@@ -16,7 +15,7 @@ export const convertAddress = (address) => {
     .then((payload) => {
       console.log('inside response to convertAddress..', payload);
       response = payload.data.results[0].geometry.location;
-      coordinate = {
+      const coordinate = {
         latitude: response.lat,
         longitude: response.lng,
         address,
@@ -73,4 +72,3 @@ export const organizeChefUpcoming = (allEvents) => {
     });
   return chefUpcomingEvents;
 };
-
