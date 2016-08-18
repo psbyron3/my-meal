@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { convertAddress, reviewAverage } from '../utils/helper';
+import Gravatar from 'gravatar';
 const _ = require('lodash');
 
 export const MAP_CENTER = 'MAP_CENTER';
@@ -105,50 +106,86 @@ export const SignUpFunc = (props, userPic) => {
   const email = props.email;
   const password = props.password;
 
-  const data = new FormData();
-  data.append('file', userPic[0]);
-  const opts = {
-    transformRequest() { return data; },
-  };
+  if (userPic !== null) {
+    const data = new FormData();
+    data.append('file', userPic[0]);
+    const opts = {
+      transformRequest() { return data; },
+    };
 
-  return function (dispatch) {
-    console.log('INSIDE DISPATCH');
-    return axios.post('/api/event/picture', data, opts)
-      .then((resp) => {
-        const url = resp.data;
-        console.log(url, 'SUPPOSED URL');
-        return url;
-      })
-      .then((url) => {
-        return axios({
-          method: 'POST',
-          url: '/api/auth/signup',
-          data: {
-            firstName,
-            lastName,
-            address,
-            phoneNumber,
-            userName,
-            email,
-            password,
-            userPic: url,
-          },
+    return function (dispatch) {
+      console.log('INSIDE DISPATCH');
+      return axios.post('/api/event/picture', data, opts)
+        .then((resp) => {
+          const url = resp.data;
+          console.log(url, 'SUPPOSED URL');
+          return url;
         })
-          .then((response) => {
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('id', response.data.result.id);
-            localStorage.setItem('userPic', response.data.result.userPic);
-            dispatch({
-              type: AUTH_USER,
-            });
-            browserHistory.push('/');
+        .then((url) => {
+          return axios({
+            method: 'POST',
+            url: '/api/auth/signup',
+            data: {
+              firstName,
+              lastName,
+              address,
+              phoneNumber,
+              userName,
+              email,
+              password,
+              userPic: url,
+            },
           })
-          .catch((err) => {
-            console.log('ERROR', err);
-            dispatch({
-              type: AUTH_ERROR,
+            .then((response) => {
+              localStorage.setItem('token', response.data.token);
+              localStorage.setItem('id', response.data.result.id);
+              localStorage.setItem('userPic', response.data.result.userPic);
+              dispatch({
+                type: AUTH_USER,
+              });
+              browserHistory.push('/');
+            })
+            .catch((err) => {
+              console.log('ERROR', err);
+              dispatch({
+                type: AUTH_ERROR,
+              });
             });
-          });
+        });
+    };
+  }
+  return function (dispatch) {
+    console.log('NOOOOOOOOOOOO FIIIIIIIIIIIIIIIILE');
+    const url = `http:${Gravatar.url(email)}`;
+    console.log(url, 'MON URL GRAAAAVATAR');
+    return axios({
+      method: 'POST',
+      url: '/api/auth/signup',
+      data: {
+        firstName,
+        lastName,
+        address,
+        phoneNumber,
+        userName,
+        email,
+        password,
+        userPic: url,
+      },
+    })
+      .then((response) => {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('id', response.data.result.id);
+        localStorage.setItem('userPic', response.data.result.userPic);
+        dispatch({
+          type: AUTH_USER,
+        });
+        browserHistory.push('/');
+      })
+      .catch((err) => {
+        console.log('ERROR', err);
+        dispatch({
+          type: AUTH_ERROR,
+        });
       });
   };
 };
@@ -375,49 +412,58 @@ export const createEvent = (props, dishPic) => {
       };
       return coords;
     }).then((coords) => {
-      console.log('PIC PARAAAAAMS: ', dishPic[0]);
-      const data = new FormData();
-      data.append('file', dishPic[0]);
-      const opts = {
-        transformRequest() { return data; },
-      };
-      return axios.post('/api/event/picture', data, opts)
-        .then((resp) => {
-          const url = resp.data;
-          console.log(url, 'SUPPOSED URL');
-          const output = {
-            address: coords.address,
-            latitude: coords.latitude,
-            longitude: coords.longitude,
-            url };
-          return output;
-        })
-        .then((output) => {
-          console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
-          const params = {
-            eventName: props.eventName,
+      if (dishPic !== null) {
+        console.log('PIC PARAAAAAMS: ', dishPic[0]);
+        const data = new FormData();
+        data.append('file', dishPic[0]);
+        const opts = {
+          transformRequest() { return data; },
+        };
+        return axios.post('/api/event/picture', data, opts);
+      }
+      return coords;
+    })
+    .then((resp) => {
+      let url = null;
+      if (typeof resp === 'string') {
+        url = resp.data;
+      } else {
+        console.log('NOOOOOO PIIIIIIC');
+        url = 'https://s3-us-west-2.amazonaws.com/mymealmks/logo.png';
+      }
+      console.log(url, 'SUPPOSED URL');
+      const output = {
+        address: resp.address,
+        latitude: resp.latitude,
+        longitude: resp.longitude,
+        url };
+      return output;
+    })
+    .then((output) => {
+      console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
+      const params = {
+        eventName: props.eventName,
       // foodType?? glutenFree, vegetarian, vegan??
-            description: props.description,
-            eventPic: output.url,
-            price: props.price,
-            maxGuests: props.maxGuest,
+        description: props.description,
+        eventPic: output.url,
+        price: props.price,
+        maxGuests: props.maxGuest,
       // guestDecide??
-            address: output.address,
-            latitude: output.latitude,
-            longitude: output.longitude,
-            startDatetime: props.start,
-            endDatetime: props.end,
-          };
+        address: output.address,
+        latitude: output.latitude,
+        longitude: output.longitude,
+        startDatetime: props.start,
+        endDatetime: props.end,
+      };
 
-          console.log('PARAMSSSSSS', params);
+      console.log('PARAMSSSSSS', params);
 
-          return axios.post('/api/event/', params)
-            .then(() => {
-              browserHistory.push('/');
-            })
-            .catch((err) => {
-              console.log('ERROR', err);
-            });
+      return axios.post('/api/event/', params)
+        .then(() => {
+          browserHistory.push('/');
+        })
+        .catch((err) => {
+          console.log('ERROR', err);
         });
     });
 };
