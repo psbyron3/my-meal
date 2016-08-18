@@ -353,9 +353,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
     convertAddress(query)
       .then((response) => {
         console.log('GEOCODE RESPONSE : ', response);
-        const latitude = response.data.latitude;
-        const longitude = response.data.longitude;
-
+        const { latitude, longitude } = response;
         dispatch({
           type: MAP_CENTER,
           payload: { latitude, longitude },
@@ -388,18 +386,10 @@ export const selectEvent = (event) => {
 
 export const createEvent = (props, dishPic) => {
   const targetAddress = props.address + props.city + props.usState;
+  let coords = {};
   return convertAddress(targetAddress)
     .then((payload) => {
-      const address = payload.data.address;
-      const latitude = payload.data.latitude;
-      const longitude = payload.data.longitude;
-      const coords = {
-        address,
-        latitude,
-        longitude,
-      };
-      return coords;
-    }).then((coords) => {
+      coords = payload;
       if (dishPic !== null) {
         const data = new FormData();
         data.append('file', dishPic[0]);
@@ -411,23 +401,19 @@ export const createEvent = (props, dishPic) => {
       return coords;
     })
     .then((resp) => {
+      console.log(resp, 'WITH FILLEEEEEEEEEEEE');
       let url = null;
-      if (typeof resp === 'string') {
+      if (typeof resp === 'object') {
         url = resp.data;
       } else {
         console.log('NOOOOOO PIIIIIIC');
         url = 'https://s3-us-west-2.amazonaws.com/mymealmks/logo.png';
       }
       console.log(url, 'SUPPOSED URL');
-      const output = {
-        address: resp.address,
-        latitude: resp.latitude,
-        longitude: resp.longitude,
-        url };
-      return output;
+      return Object.assign({}, coords, { url });
     })
     .then((output) => {
-      console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
+      const userId = localStorage.getItem('userId');
       const params = {
         eventName: props.eventName,
       // foodType?? glutenFree, vegetarian, vegan??
@@ -441,6 +427,7 @@ export const createEvent = (props, dishPic) => {
         longitude: output.longitude,
         startDatetime: props.start,
         endDatetime: props.end,
+        userId,
       };
 
       console.log('PARAMSSSSSS', params);

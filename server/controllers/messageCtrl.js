@@ -15,7 +15,7 @@ module.exports = {
           console.log('these are the messages', messages);
           if (messages.length === 0) {
             console.log('messages do not exist');
-            res.end('No messages for this event: ', eventId);
+            res.end(`No messages for this event: ${eventId}`);
           } else {
             console.log('there are messages, return them');
             res.send(messages);
