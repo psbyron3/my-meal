@@ -18,27 +18,26 @@ class MessageBox extends Component {
     };
   }
 
-  componentWillMount() {
-    // fetch previous messages for this specific event
-    // const eventId = this.props.selectedEvent.eventId
-    const eventId = this.props.eventId;
-    console.log(eventId, 'eventId INSIDE MESSSBOOOOOOOX');
+  componentDidMount() {
+    const eventId = this.props.eventId.eventId;
     axios.get(`/api/message/${eventId}`).then((result) => {
       const messages = result.data;
       this.setState({ messages: [...this.state.messages, ...messages] }, () => {
-        // Keep scrollBAr down
+      // Keep scrollBAr down
         const msgbox = document.getElementsByClassName('panel-body msg_container_base');
         msgbox[0].scrollTop = msgbox[0].scrollHeight;
       });
     });
-  }
 
-  componentDidMount() {
     // connect the io lib. to the root of our webserver;
     this.socket = io('/'); // that trigger the on connection event server side
     // set up a listenner for new messages that coming in
     this.socket.on('message', (message) => {
-      this.setState({ messages: [...this.state.messages, message] });
+      this.setState({ messages: [...this.state.messages, message] }, () => {
+        // Keep scrollBAr down
+        const msgbox = document.getElementsByClassName('panel-body msg_container_base');
+        msgbox[0].scrollTop = msgbox[0].scrollHeight;
+      });
     });
   }
 
@@ -58,7 +57,7 @@ class MessageBox extends Component {
 
   onClose(e) {
     this.props.ChatBoxFunc('false');
-    $('#chat_window_1').remove();
+    // $('#chat_window_1').remove();
   }
 
   onFooter(e) {
@@ -72,7 +71,7 @@ class MessageBox extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    const eventId = this.props.eventId.eventId;
     const content = this.state.message;
     const userName = localStorage.getItem('userName');
     const userId = localStorage.getItem('userId');
@@ -82,7 +81,7 @@ class MessageBox extends Component {
       userName,
       createdAt: new Date(),
       userId,
-      eventId: 1,
+      eventId,
     };
 
     // store the message in the database
@@ -94,9 +93,9 @@ class MessageBox extends Component {
       this.setState({ message: '' });
       // Keep scrollBAr down
       const msgbox = document.getElementsByClassName('panel-body msg_container_base');
+      console.log(msgbox, 'SCROLLL DOWN');
       msgbox[0].scrollTop = msgbox[0].scrollHeight;
     });
-
     this.socket.emit('message', msg); // trigger on message event server side
   }
 
@@ -113,7 +112,11 @@ class MessageBox extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row chat-window col-xs-5 col-md-3" id="chat_window_1" style={{ marginLeft: '10px' }}>
+        <div
+          className="row chat-window col-xs-5 col-md-3"
+          id="chat_window_1"
+          style={{ marginLeft: '10px', zIndex: 4 }}
+        >
 
           <div className="col-xs-12 col-md-12">
             <div className="panel panel-default">
@@ -121,7 +124,7 @@ class MessageBox extends Component {
                 <div className="col-md-8 col-xs-8">
                   <h3 className="panel-title"><span
                     className="glyphicon glyphicon-comment"
-                  ></span> Chat - EventName
+                  ></span> Chat - {this.props.eventId.evName}
                   </h3>
                 </div>
                 <div className="col-md-4 col-xs-4" style={{ textAlign: 'right' }}>

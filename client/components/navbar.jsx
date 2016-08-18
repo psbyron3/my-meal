@@ -47,7 +47,7 @@ class NavBarComp extends Component {
               data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false"
             >
-              Dashboard <span className="caret"></span>
+              Dashboard
             </button>
             <ul className="dropdown-menu">
               <Link to="userdash">

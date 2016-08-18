@@ -3,10 +3,11 @@ import React, { Component, PropTypes } from 'react';
 import DashEvent from './userDashEvent.jsx';
 import UserDashView from './userDashView';
 import UserEditProfile from './userEditProfile';
-import { getEventsByUserId } from '../actions/index';
+import { getEventsByUserId, ChatBoxFunc } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import MessageBox from './messageBox';
 
 import { Tabs, Tab } from 'react-bootstrap';
 
@@ -14,6 +15,9 @@ const userId = window.localStorage.userId;
 
 class UserDash extends Component {
 
+  componentWillUnmount() {
+    this.props.ChatBoxFunc('false');
+  }
 
   // componentWillMount() {
   //   console.log("in component will mount ")
@@ -47,6 +51,9 @@ class UserDash extends Component {
   render() {
     return (
       <div>
+        <div>
+          {this.props.boxStatus === 'true' ? <MessageBox /> : null}
+        </div>
         <Tabs
           defaultActiveKey={1}
           animation={false}
@@ -76,6 +83,7 @@ function mapStateToProps(state) {
   console.log('mapStoP Events by User Id : ', state.userHistory);
   return {
     userHistory: state.userHistory,
+    boxStatus: state.boxStatus.status,
   };
 }
 
@@ -87,4 +95,4 @@ UserDash.propTypes = {
   userHistory: PropTypes.array,
 };
 
-export default connect(mapStateToProps)(UserDash);
+export default connect(mapStateToProps, { ChatBoxFunc })(UserDash);
