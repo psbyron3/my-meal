@@ -66,8 +66,6 @@ export const SignInFunc = (props) => {
       },
     })
       .then((response) => {
-      // console.log("RESPOOOOOOOONSE: ", response);
-        console.log('HELLLLOOOOOOOOOOO', response);
       // dispatch action to update state to indicate that user is authenticated
         dispatch({
           type: AUTH_USER,
@@ -77,16 +75,16 @@ export const SignInFunc = (props) => {
           payload: response.data.user,
         });
 
-        browserHistory.push('/');
-      // save token to localStorage
+        // save token to localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user.id);
         localStorage.setItem('userName', response.data.user.userName);
+        localStorage.setItem('userPic', response.data.user.userPic);
 
         return getEventsByUserId(response.data.user.id)
           .then((action) => {
             dispatch(action);
-            browserHistory.push('/dashboard');
+            browserHistory.push('/');
           });
       })
       .catch(() => {
@@ -98,7 +96,7 @@ export const SignInFunc = (props) => {
   };
 };
 
-export const SignUpFunc = (props) => {
+export const SignUpFunc = (props, userPic) => {
   const firstName = props.firstName;
   const lastName = props.lastName;
   const address = props.address;
@@ -107,33 +105,50 @@ export const SignUpFunc = (props) => {
   const email = props.email;
   const password = props.password;
 
-  return (dispatch) => {
-    return axios({
-      method: 'POST',
-      url: '/api/auth/signup',
-      data: {
-        firstName,
-        lastName,
-        address,
-        phoneNumber,
-        userName,
-        email,
-        password,
-      },
-    })
-      .then((response) => {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('id', response.data.result.id);
-        dispatch({
-          type: AUTH_USER,
-        });
-        browserHistory.push('/');
+  const data = new FormData();
+  data.append('file', userPic[0]);
+  const opts = {
+    transformRequest() { return data; },
+  };
+
+  return function (dispatch) {
+    console.log('INSIDE DISPATCH');
+    return axios.post('/api/event/picture', data, opts)
+      .then((resp) => {
+        const url = resp.data;
+        console.log(url, 'SUPPOSED URL');
+        return url;
       })
-      .catch((err) => {
-        console.log('ERROR', err);
-        dispatch({
-          type: AUTH_ERROR,
-        });
+      .then((url) => {
+        return axios({
+          method: 'POST',
+          url: '/api/auth/signup',
+          data: {
+            firstName,
+            lastName,
+            address,
+            phoneNumber,
+            userName,
+            email,
+            password,
+            userPic: url,
+          },
+        })
+          .then((response) => {
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('id', response.data.result.id);
+            localStorage.setItem('userPic', response.data.result.userPic);
+            dispatch({
+              type: AUTH_USER,
+            });
+            browserHistory.push('/');
+          })
+          .catch((err) => {
+            console.log('ERROR', err);
+            dispatch({
+              type: AUTH_ERROR,
+            });
+          });
       });
   };
 };
@@ -142,6 +157,7 @@ export const SignOutFunc = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('userId');
   localStorage.removeItem('userName');
+  localStorage.removeItem('userPic');
   browserHistory.push('/');
   return {
     type: UNAUTH_USER,
@@ -160,7 +176,7 @@ export const editUser = (userAttr) => {
       // action dispatch on response should be the new updated user info
         dispatch({
           type: USER_INFO,
-          payload: response,
+          payload: response.data,
         });
         return response;
       })
@@ -344,8 +360,8 @@ export const selectEvent = (event) => {
   };
 };
 
-export const createEvent = (props, file) => {
-  console.log('PROOOOOPS: ', props);
+
+export const createEvent = (props, dishPic) => {
   const targetAddress = props.address + props.city + props.usState;
   return convertAddress(targetAddress)
     .then((payload) => {
@@ -359,54 +375,54 @@ export const createEvent = (props, file) => {
       };
       return coords;
     })
+    .then((coords) => {
+      console.log('PIC PARAAAAAMS: ', dishPic[0]);
+      const data = new FormData();
+      data.append('file', dishPic[0]);
+      const opts = {
+        transformRequest() { return data; },
+      };
+      return axios.post('/api/event/picture', data, opts);
+    })
+    .then((resp) => {
+      const url = resp.data;
+      console.log(url, 'SUPPOSED URL');
+      const output = {
+        // address: coords.address,
+        // latitude: coords.latitude,
+        // longitude: coords.longitude,
+        url };
+      return output;
+    })
+    .then((output) => {
+      console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
+      const params = {
+        eventName: props.eventName,
+  // foodType?? glutenFree, vegetarian, vegan??
+        description: props.description,
+        eventPic: output.url,
+        price: props.price,
+        maxGuests: props.maxGuest,
+  // guestDecide??
+        address: output.address,
+        latitude: output.latitude,
+        longitude: output.longitude,
+        startDatetime: props.start,
+        endDatetime: props.end,
+      };
 
-      .then((coords) => {
-        console.log('PIC PARAAAAAMS: ', file[0]);
-        const data = new FormData();
-        data.append('file', file[0]);
-        const opts = {
-          transformRequest() { return data; },
-        };
-        return axios.post('/api/event/picture', data, opts)
-        .then((resp) => {
-          const url = resp.data;
-          console.log(url, 'SUPPOSED URL');
-          const output = {
-            address: coords.address,
-            latitude: coords.latitude,
-            longitude: coords.longitude,
-            url };
-          return output;
+      console.log('PARAMSSSSSS', params);
+
+      return axios.post('/api/event/', params)
+        .then(() => {
+          browserHistory.push('/');
         })
-        .then((output) => {
-          console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
-          const params = {
-            eventName: props.eventName,
-      // foodType?? glutenFree, vegetarian, vegan??
-            description: props.description,
-            eventPic: output.url,
-            price: props.price,
-            maxGuests: props.maxGuest,
-      // guestDecide??
-            address: output.address,
-            latitude: output.latitude,
-            longitude: output.longitude,
-            startDatetime: props.start,
-            endDatetime: props.end,
-          };
-
-          console.log('PARAMSSSSSS', params);
-
-          return axios.post('/api/event/', params)
-          .then(() => {
-            browserHistory.push('/');
-          })
-          .catch((err) => {
-            console.log('ERROR', err);
-          });
+        .catch((err) => {
+          console.log('ERROR', err);
         });
-      });
+    });
 };
+
 
 export const postUserReviewOfChef = (reviewData) => {
   console.log('in post review action :', reviewData);
@@ -425,15 +441,15 @@ export const postUserReviewOfChef = (reviewData) => {
 
 /** ******************** CHAT **************************/
 
-export const EventIdFunc = (eventId) => {
+export const EventIdFunc = (eventId, evName) => {
+  const res = { eventId, evName };
   return {
     type: SEND_EVENT_ID,
-    payload: eventId,
+    payload: res,
   };
 };
 
 export const ChatBoxFunc = (status) => {
-  console.log(status, 'STTTTTTTTTTTATUS');
   return {
     type: CLOSE_CHAT_BOX,
     payload: status,

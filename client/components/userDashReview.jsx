@@ -22,7 +22,6 @@ class UserReview extends Component {
     };
     this.onCommentChange = this.onCommentChange.bind(this);
     this.onReviewSubmit = this.onReviewSubmit.bind(this);
-    this.setRating = this.setRating.bind(this);
     this.onStarClick = this.onStarClick.bind(this);
   }
 
