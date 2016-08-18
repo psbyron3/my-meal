@@ -99,7 +99,7 @@ function mapStateToProps(state) {
   return {
     userHistory: state.userHistory,
     Review: state.review,
-    userInfo: state.userInfo
+    userInfo: state.userInfo,
   };
 }
 

@@ -442,7 +442,7 @@ export const postUserReviewOfChef = (reviewData) => {
     .then((response) => {
       console.log('action review response: ', response);
       return {
-        type: POST_USER_REVIEW_OF_CHEF,
+        type: GET_EVENTS_BY_USER_ID,
         payload: response,
       };
     })
