@@ -70,10 +70,10 @@ function mapStateToProps(state) {
   };
 }
 
-ChefDash.PropTypes = { 
+ChefDash.PropTypes = {
   ChefEventsFunc: PropTypes.func,
   ChatBoxFunc: PropTypes.func,
-  boxStatus: PropTypes.string
+  boxStatus: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { ChefEventsFunc, ChatBoxFunc })(ChefDash);
