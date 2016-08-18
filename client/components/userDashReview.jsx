@@ -27,8 +27,6 @@ class UserReview extends Component {
   }
 
 
-
-
   onCommentChange(event) {
     this.setState({
       content: event.target.value,
@@ -36,7 +34,7 @@ class UserReview extends Component {
   }
 
   onReviewSubmit(event) {
-    console.log("THE EVENT TARGET IN REVIEW SUBMIT : ", event.target);
+    console.log('THE EVENT TARGET IN REVIEW SUBMIT : ', event.target);
     event.preventDefault();
 
     this.props.postUserReviewOfChef(this.state);
@@ -44,11 +42,11 @@ class UserReview extends Component {
   }
 
   onStarClick(name, value) {
-    this.setState({rating: value})
+    this.setState({ rating: value });
   }
 
   render() {
-    const { rating } = this.state
+    const { rating } = this.state;
     return (
       <div>
         <Col className="review-gutter" md={2} />
@@ -71,7 +69,7 @@ class UserReview extends Component {
             </div>
           </div>
           <form className="review-rating-container" >
-            <StarRatingComponent 
+            <StarRatingComponent
               name={this.props.index}
               starCount={5}
               value={rating}
@@ -99,7 +97,7 @@ class UserReview extends Component {
 function mapStateToProps(state) {
   return {
     userHistory: state.userHistory,
-    Review : state.review,
+    Review: state.review,
   };
 }
 
@@ -114,10 +112,9 @@ UserReview.propTypes = {
 export default connect(mapStateToProps, mapDispatchToProps)(UserReview);
 
 
-
- // <div 
+ // <div
  //              key={this.props.key}
- //              index={this.props.index} 
+ //              index={this.props.index}
  //              onClick={this.setRating}
  //            >
  //              <div className="review-rating">
@@ -133,7 +130,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(UserReview);
  // // Responsible for recording the star rating of the review
   // setRating(event) {
   //   const rating = event.target.getAttribute('value');
-    
+
   //   this.setState({ rating }, () => {
   //     console.log("Star-rating is: ", this.state.rating)
   //   })

@@ -53,7 +53,7 @@ class UserDash extends Component {
           id="noanim-tab-example"
         >
           <Tab eventKey={1} title="Dashboard">
-            <UserDashView setHoverEvent={this.setHoverEvent}/>
+            <UserDashView setHoverEvent={this.setHoverEvent} />
           </Tab>
           <Tab eventKey={2} title="Preferences">
             <UserEditProfile />

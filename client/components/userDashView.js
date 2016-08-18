@@ -9,14 +9,13 @@ const now = moment().format();
 
 class userDashView extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.state = { hoverEvent: 0}
+    this.state = { hoverEvent: 0 };
     this.setHoverEvent = this.setHoverEvent.bind(this);
-
   }
 
-    setHoverEvent(index) {
+  setHoverEvent(index) {
     this.setState({
       hoverEvent: index,
     });
@@ -35,14 +34,12 @@ class userDashView extends Component {
         return (
 
           <UserReview
-            setHoverEvent={this.props.setHoverEvent}
             hoverEvent={this.props.hoverEvent}
             key={event.id}
             index={event.id}
-            entryReview={entryReview}
             eventName={event.eventName}
             chefPic={"this is where the chef goes"}
-            date={event.startDatetime} 
+            date={event.startDatetime}
             price={event.price}
           />
         );

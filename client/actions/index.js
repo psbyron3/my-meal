@@ -361,13 +361,13 @@ export const createEvent = (props, file) => {
     })
 
       .then((coords) => {
-      console.log('PIC PARAAAAAMS: ', file[0]);
-      const data = new FormData();
-      data.append('file', file[0]);
-      const opts = {
-        transformRequest() { return data; },
-      };
-      return axios.post('/api/event/picture', data, opts)
+        console.log('PIC PARAAAAAMS: ', file[0]);
+        const data = new FormData();
+        data.append('file', file[0]);
+        const opts = {
+          transformRequest() { return data; },
+        };
+        return axios.post('/api/event/picture', data, opts)
         .then((resp) => {
           const url = resp.data;
           console.log(url, 'SUPPOSED URL');
@@ -388,25 +388,24 @@ export const createEvent = (props, file) => {
             price: props.price,
             maxGuests: props.maxGuest,
       // guestDecide??
-          address: output.address,
-          latitude: output.latitude,
-          longitude: output.longitude,
-          startDatetime: props.start,
-          endDatetime: props.end,
-        };
+            address: output.address,
+            latitude: output.latitude,
+            longitude: output.longitude,
+            startDatetime: props.start,
+            endDatetime: props.end,
+          };
 
-        console.log('PARAMSSSSSS', params);
+          console.log('PARAMSSSSSS', params);
 
-        return axios.post('/api/event/', params)
+          return axios.post('/api/event/', params)
           .then(() => {
-            browserHistory.push('/')
+            browserHistory.push('/');
           })
           .catch((err) => {
             console.log('ERROR', err);
           });
         });
-    });
-
+      });
 };
 
 export const postUserReviewOfChef = (reviewData) => {
