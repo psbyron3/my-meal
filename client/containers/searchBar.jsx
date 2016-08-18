@@ -3,23 +3,19 @@ import { getAllInRadius, getAllTags } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Autocomplete from 'react-google-autocomplete';
-import RestrictionMenu from '../components/restrictions.jsx';
-import GenreMenu from '../components/genres.jsx';
-import DistanceMenu from '../components/distances.jsx';
-import ReactDOM from 'react-dom';
-import { Button, Overlay } from 'react-bootstrap';
+import AdvancedSearch from '../components/advancedSearch';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    // state.restrictions eventually pre-populated from user profile
-    this.state = { show: false,
-                   query: '',
-                   restrictions: [],
-                   genre: [],
-                   distance: 5,
-                   wasChecked: false,
-                 };
+    this.state = {
+      show: false,
+      query: '',
+      restrictions: [],
+      genre: 0,
+      distance: 0,
+      wasChecked: false,
+    };
     this.onTextChange = this.onTextChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onCheckChange = this.onCheckChange.bind(this);
@@ -34,7 +30,7 @@ class SearchBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.wasChecked) {
+    if (!this.state.wasChecked && nextProps.Tags) {
       this.setState({
         restrictions: nextProps.Tags.map(tag => tag.id),
       });
@@ -48,9 +44,7 @@ class SearchBar extends Component {
 
   onCheckChange(event) {
     event.target.blur();
-    this.setState({
-      wasChecked: true,
-    });
+    this.setState({ wasChecked: true });
     const index = this.state.restrictions.indexOf(Number(event.target.value));
     const copy = this.state.restrictions.slice();
     if (index > -1) {
@@ -58,14 +52,12 @@ class SearchBar extends Component {
     } else {
       copy.push(Number(event.target.value));
     }
-    this.setState({ restrictions: copy }, () => {
-      console.log('this.state = ', this.state);
-    });
+    this.setState({ restrictions: copy });
   }
 
   onGenreChange(event) {
     this.setState({
-      genre: [event.target.value],
+      genre: event.target.value,
     });
   }
 
@@ -81,18 +73,12 @@ class SearchBar extends Component {
     }
   }
 
-  // when state is reset in last line, make sure to reset restrictions to user preferences
   onFormSubmit(place) {
-    this.setState({
-      query: place.formatted_address || this.state.query,
-    });
-
-    console.log('query:', this.state.query);
-    const tags = [...this.state.restrictions, ...this.state.genre];
-    console.log('params: ', tags);
-    const distance = this.state.distance;
+    const genre = +this.state.genre ? [+this.state.genre] : [];
+    const tags = [...this.state.restrictions, ...genre];
+    const distance = +this.state.distance || 5;
+    this.setState({ query: place.formatted_address || this.state.query });
     this.props.getAllInRadius(this.state.query, tags, distance);
-    // do we want to reset the state though?
     this.setState({ show: false, genre: [] });
   }
 
@@ -118,42 +104,23 @@ class SearchBar extends Component {
               onKeyDown={this.onEnter}
             />
           </div>
-          <Button id="searchButton" ref="target" onClick={this.toggle}>
-            &gt;
-          </Button>
-          <Overlay
+          <AdvancedSearch
             show={this.state.show}
-            onHide={() => this.setState({ show: false })}
-            placement="right"
-            container={this}
-            rootClose
-            target={() => ReactDOM.findDOMNode(this.refs.target)}
-          >
-            <div id="advancedSearch">
-              <RestrictionMenu
-                onCheckChange={this.onCheckChange}
-                selectedRestrictions={this.state.restrictions}
-                restrictions={this.props.restrictions}
-              />
-              <GenreMenu
-                onGenreChange={this.onGenreChange}
-                selectedGenre={this.state.genre}
-                genres={this.props.genres}
-              />
-              <DistanceMenu
-                onDistanceChange={this.onDistanceChange}
-              />
-            </div>
-          </Overlay>
+            toggle={this.toggle}
+            onCheckChange={this.onCheckChange}
+            selectedRestrictions={this.state.restrictions}
+            restrictions={this.props.restrictions}
+            onGenreChange={this.onGenreChange}
+            selectedGenre={this.state.genre}
+            genres={this.props.genres}
+            onDistanceChange={this.onDistanceChange}
+            distance={this.state.distance}
+          />
         </form>
       </div>
     );
   }
 }
-
-// SearchBar.propTypes = {
-//
-// }
 
 function mapStateToProps(state) {
   return {

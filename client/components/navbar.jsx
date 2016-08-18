@@ -7,11 +7,6 @@ import { connect } from 'react-redux';
 
 
 class NavBarComp extends Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {};
-  // }
 
   authRender() {
     console.log('typeof authenticated == = = = ', typeof this.props.authenticated);
@@ -50,12 +45,8 @@ class NavBarComp extends Component {
               Dashboard
             </button>
             <ul className="dropdown-menu">
-              <Link to="userdash">
-                <li><a href="#">Foodie user</a></li>
-              </Link>
-              <Link to="chefdash">
-                <li><a href="#">Gourmet Chief</a></li>
-              </Link>
+              <li><Link to="userdash">Foodie user</Link></li>
+              <li><Link to="chefdash">Gourmet Chief</Link></li>
             </ul>
           </div>
 

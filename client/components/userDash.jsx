@@ -18,14 +18,14 @@ class UserDash extends Component {
   componentWillUnmount() {
     this.props.ChatBoxFunc('false');
   }
-
+  
   // componentWillMount() {
   //   console.log("in component will mount ")
   //   this.props.getEventsByUserId(userId);
   // }
 
   renderList() {
-    console.log('Times in UD: ', this.props.userHistory.startDatetime);
+    // console.log('Times in UD: ', this.props.userHistory.startDatetime);
 
     if (!this.props.userHistory.length) {
       return (<div>Join Events to populate this page!</div>);
@@ -58,6 +58,7 @@ class UserDash extends Component {
           defaultActiveKey={1}
           animation={false}
           id="noanim-tab-example"
+          unmountOnExit
         >
           <Tab eventKey={1} title="Dashboard">
             <UserDashView />
@@ -80,7 +81,7 @@ class UserDash extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('mapStoP Events by User Id : ', state.userHistory);
+  // console.log('mapStoP Events by User Id : ', state.userHistory);
   return {
     userHistory: state.userHistory,
     boxStatus: state.boxStatus.status,

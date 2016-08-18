@@ -1,24 +1,17 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React, { PropTypes } from 'react';
 
-
-class RestrictionMenu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  renderRestrictions() {
-    console.log('this.props.restrictions', this.props.restrictions);
-    return this.props.restrictions.map((restriction) => {
+const RestrictionMenu = ({ restrictions, selectedRestrictions, onCheckChange }) => {
+  function renderRestrictions() {
+    console.log('restrictions.......', restrictions);
+    return restrictions.map((restriction) => {
       return (
         <div style={{ display: 'inline-block' }} key={restriction.id}>
           <label className="checkboxLabel">
             <input
               type="checkbox"
               value={restriction.id}
-              checked={this.props.selectedRestrictions.indexOf(restriction.id) > -1}
-              onFocus={this.props.onCheckChange}
+              checked={selectedRestrictions.indexOf(restriction.id) > -1}
+              onFocus={onCheckChange}
             />
           {restriction.tagName}
           </label>
@@ -27,12 +20,10 @@ class RestrictionMenu extends Component {
     });
   }
 
-  render() {
-    return (
-      <div id="checkboxes">{this.renderRestrictions()}</div>
-    );
-  }
-}
+  return (
+    <div id="checkboxes">{renderRestrictions()}</div>
+  );
+};
 
 RestrictionMenu.propTypes = {
   restrictions: PropTypes.array,
