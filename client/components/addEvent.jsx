@@ -286,7 +286,7 @@ AddEvent.propTypes = {
   handleSubmit: PropTypes.func,
   restrictions: PropTypes.array,
   genres: PropTypes.array,
-  createEvent: PropTypes.func
+  createEvent: PropTypes.func,
 };
 
 export default reduxForm({

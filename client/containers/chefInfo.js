@@ -50,7 +50,7 @@ function mapStateToProps(state) {
 
 ChefInfo.propTypes = {
   chefEvents: PropTypes.array,
-  userInfo: PropTypes.object
+  userInfo: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(ChefInfo);

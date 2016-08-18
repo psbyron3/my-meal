@@ -54,7 +54,7 @@ function mapStateToProps(state) {
 
 userDashView.PropTypes = {
   userHistory: PropTypes.array,
-  
-}
+
+};
 
 export default connect(mapStateToProps)(userDashView);
