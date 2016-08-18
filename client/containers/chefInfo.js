@@ -28,7 +28,7 @@ class ChefInfo extends Component {
 
     return (
       <div className="chef-mc">
-        <span>profile picture here</span>
+        <img src={this.props.userInfo.userPic} alt="userpic" width="128" />
         <br />
         <span className="text-capitalize">name: {name}</span>
         <br />
@@ -50,6 +50,7 @@ function mapStateToProps(state) {
 
 ChefInfo.propTypes = {
   chefEvents: PropTypes.array,
+  userInfo: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(ChefInfo);

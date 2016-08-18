@@ -147,6 +147,9 @@ function mapDispatchToProps(dispatch) {
 
 UserReview.propTypes = {
   postUserReviewOfChef: PropTypes.func,
+  userHistory: PropTypes.array,
+  eventName: PropTypes.string,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserReview);

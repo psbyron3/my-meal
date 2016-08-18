@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { organizeChefUpcoming } from '../utils/helper';
-import { EventIdFunc, ChatBoxFunc } from '../actions/index';
+import { EventIdFunc, DeleteEvent, ChatBoxFunc } from '../actions/index';
 import ChefUpcomingEntry from './chefEntry';
 
 const _ = require('lodash');
@@ -58,6 +58,7 @@ class ChefUpcoming extends Component {
           eventId={event.id}
           rating={event.rating}
           clicked={this.onHandleClick}
+          deleteEvent={this.props.DeleteEvent}
         />
       );
       // return (
@@ -93,6 +94,9 @@ function mapStateToProps(state) {
 
 ChefUpcoming.propTypes = {
   chefEvents: PropTypes.array,
+  ChatBoxFunc: PropTypes.func,
+  DeleteEvent: PropTypes.func,
+  EventIdFunc: PropTypes.func,
 };
 
-export default connect(mapStateToProps, { EventIdFunc, ChatBoxFunc })(ChefUpcoming);
+export default connect(mapStateToProps, { EventIdFunc, DeleteEvent, ChatBoxFunc })(ChefUpcoming);

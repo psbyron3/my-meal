@@ -97,6 +97,7 @@ JoinModal.propTypes = {
   selectedEvent: PropTypes.object,
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
+  userId: PropTypes.number,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(JoinModal);
