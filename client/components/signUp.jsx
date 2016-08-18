@@ -175,6 +175,8 @@ const validate = (values) => {
 SignUp.propTypes = {
   fields: PropTypes.object,
   handleSubmit: PropTypes.func,
+  SignUpFunc: PropTypes.func,
+  restrictions: PropTypes.array,
 };
 
 function mapStateToProps(state) {

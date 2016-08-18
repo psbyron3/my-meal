@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { fileinput } from 'bootstrap-fileinput';
 import $ from 'jquery';
 
@@ -47,3 +47,5 @@ export default class ProfilePic extends Component {
     );
   }
 }
+
+ProfilePic.propTypes = { onValueChange: PropTypes.func };

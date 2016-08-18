@@ -112,6 +112,9 @@ DashEvent.propTypes = {
   eventName: PropTypes.string,
   address: PropTypes.string,
   description: PropTypes.string,
+  EventIdFunc: PropTypes.func,
+  ChatBoxFunc: PropTypes.func,
+  boxStatus: PropTypes.bool
 };
 
 export default connect(mapStateToProps, { EventIdFunc, ChatBoxFunc })(DashEvent);

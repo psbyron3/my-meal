@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -50,6 +50,11 @@ function mapStateToProps(state) {
   return {
     userHistory: state.userHistory,
   };
+}
+
+userDashView.PropTypes = {
+  userHistory: PropTypes.array,
+  
 }
 
 export default connect(mapStateToProps)(userDashView);
