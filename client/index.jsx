@@ -17,7 +17,7 @@ const createStoreWithMiddleware = applyMiddleware(thunk, promise)(createStore);
 const store = createStoreWithMiddleware(reducers,
   window.devToolsExtension ? window.devToolsExtension() : f => f, autoRehydrate());
 
-persistStore(store);
+persistStore(store).purgeAll();
 
 
 ReactDOM.render(

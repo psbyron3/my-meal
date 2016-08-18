@@ -98,13 +98,15 @@ export const SignInFunc = (props) => {
 };
 
 export const SignUpFunc = (props, userPic) => {
-  const firstName = props.firstName;
-  const lastName = props.lastName;
-  const address = props.address;
-  const phoneNumber = props.phoneNumber;
-  const userName = props.userName;
-  const email = props.email;
-  const password = props.password;
+  const { firstName, lastName, address, phoneNumber, userName, email, password } = props;
+
+  // const firstName = props.firstName;
+  // const lastName = props.lastName;
+  // const address = props.address;
+  // const phoneNumber = props.phoneNumber;
+  // const userName = props.userName;
+  // const email = props.email;
+  // const password = props.password;
 
   if (userPic !== null) {
     const data = new FormData();
@@ -205,11 +207,9 @@ export const SignOutFunc = () => {
 
 export const editUser = (userAttr) => {
   const userId = localStorage.getItem('userId');
-  console.log('inside editUser......', userAttr);
   return function (dispatch) {
     return axios.put(`/api/user/${userId}`, userAttr)
       .then((response) => {
-        console.log('response to editUser is....', response);
       // action dispatch on response should be the new updated user info
         dispatch({
           type: USER_INFO,
@@ -365,8 +365,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
     convertAddress(query)
       .then((response) => {
         console.log('GEOCODE RESPONSE : ', response);
-        const latitude = response.data.latitude;
-        const longitude = response.data.longitude;
+        const { latitude, longitude } = response;
 
         dispatch({
           type: MAP_CENTER,
@@ -400,18 +399,10 @@ export const selectEvent = (event) => {
 
 export const createEvent = (props, dishPic) => {
   const targetAddress = props.address + props.city + props.usState;
+  let coords = {};
   return convertAddress(targetAddress)
     .then((payload) => {
-      const address = payload.data.address;
-      const latitude = payload.data.latitude;
-      const longitude = payload.data.longitude;
-      const coords = {
-        address,
-        latitude,
-        longitude,
-      };
-      return coords;
-    }).then((coords) => {
+      coords = payload;
       if (dishPic !== null) {
         console.log('PIC PARAAAAAMS: ', dishPic[0]);
         const data = new FormData();
@@ -424,24 +415,21 @@ export const createEvent = (props, dishPic) => {
       return coords;
     })
     .then((resp) => {
+      console.log('in response to upload picture');
       let url = null;
-      if (typeof resp === 'string') {
+      if (typeof resp === 'object') {
         url = resp.data;
       } else {
         console.log('NOOOOOO PIIIIIIC');
         url = 'https://s3-us-west-2.amazonaws.com/mymealmks/logo.png';
       }
       console.log(url, 'SUPPOSED URL');
-      const output = {
-        address: resp.address,
-        latitude: resp.latitude,
-        longitude: resp.longitude,
-        url };
-      return output;
+      return Object.assign({}, coords, { url });
     })
     .then((output) => {
       console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
       const params = {
+        userId: localStorage.getItem('userId'),
         eventName: props.eventName,
       // foodType?? glutenFree, vegetarian, vegan??
         description: props.description,
