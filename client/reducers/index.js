@@ -10,6 +10,7 @@ import ChefEventsReducer from './chef_events_reducer';
 import EventIdReducer from './event_id_reducer';
 import CloseChatReducer from './close_chatBox_reducer';
 import TagReducer from './tag_reducer';
+import Review from './review_reducer';
 import { reducer as formReducer } from 'redux-form';
 
 
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   tags: TagReducer,
   boxStatus: CloseChatReducer,
+  review: Review,
 });
 
 export default rootReducer;
