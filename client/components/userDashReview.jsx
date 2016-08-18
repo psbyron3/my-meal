@@ -4,8 +4,8 @@ import { postUserReviewOfChef } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 
-import { Col, FormControl, textarea, Image } from 'react-bootstrap';
-import StarRatingComponent from 'react-star-rating';
+import { Col, Row, FormControl, textarea, Image } from 'react-bootstrap';
+import StarRatingComponent from 'react-star-rating-component';
 
 const userId = window.localStorage.userId;
 
@@ -15,10 +15,10 @@ class UserReview extends Component {
 
     this.state = {
       content: '',
-      rating: 0,
-      eventId: 2,
-      reviewerId: userId,
-      hostId: 4,
+      rating: 1,
+      eventId: this.props.index,
+      reviewerId: this.props.userInfo.id,
+      hostId: this.props.hostId,
     };
     this.onCommentChange = this.onCommentChange.bind(this);
     this.onReviewSubmit = this.onReviewSubmit.bind(this);
@@ -37,7 +37,6 @@ class UserReview extends Component {
     event.preventDefault();
 
     this.props.postUserReviewOfChef(this.state);
-    this.props.wasReviewed = true;
   }
 
   onStarClick(name, value) {
@@ -48,7 +47,7 @@ class UserReview extends Component {
     // console.log('UDReview userHistory', this.props.userHistory);
     const { rating } = this.state;
     return (
-      <div>
+      <Row>
         <Col className="review-gutter" md={2} />
         <Col className="review-container" md={8}>
           <div className="review-event-basics">
@@ -87,7 +86,7 @@ class UserReview extends Component {
           </form>
         </Col>
         <Col className="review-gutter" md={2} />
-      </div>
+      </Row>
 
     );
   }
@@ -100,6 +99,7 @@ function mapStateToProps(state) {
   return {
     userHistory: state.userHistory,
     Review: state.review,
+    userInfo: state.userInfo
   };
 }
 

@@ -63,7 +63,7 @@
     "react-google-autocomplete": "^1.0.3",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
-    "react-star-rating": "^1.4.2",
+    "react-star-rating-component": "^1.0.0",
     "redux": "^3.5.2",
     "redux-form": "^5.3.2",
     "redux-persist": "^3.2.2",

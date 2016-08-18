@@ -41,6 +41,7 @@ class userDashView extends Component {
             chefPic={"this is where the chef goes"}
             date={event.startDatetime}
             price={event.price}
+            hostId={event.UsersEvent.userId}
           />
         );
       });
