@@ -100,14 +100,6 @@ export const SignInFunc = (props) => {
 export const SignUpFunc = (props, userPic) => {
   const { firstName, lastName, address, phoneNumber, userName, email, password } = props;
 
-  // const firstName = props.firstName;
-  // const lastName = props.lastName;
-  // const address = props.address;
-  // const phoneNumber = props.phoneNumber;
-  // const userName = props.userName;
-  // const email = props.email;
-  // const password = props.password;
-
   if (userPic !== null) {
     const data = new FormData();
     data.append('file', userPic[0]);

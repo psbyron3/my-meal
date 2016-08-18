@@ -15,15 +15,13 @@ class userDashView extends Component {
     }
 
     return this.props.userHistory
-      .filter((time) => {
-        // console.log('UDV FILTER EVENTS : ', time);
-        // console.log('MOMENT TIME : ', now);
-        return time.endDatetime <= now;
+      .filter((event) => {
+        console.log('now is.....', now, 'of type', typeof now);
+        console.log('endDatetime is......', event.endDatetime, 'of type', typeof event.endDatetime);
+        return event.endDatetime <= now && !event.UsersEvent.wasReviewed;
       })
       .map((event, index) => {
-        // if(!event.UsersEvent.wasReviewed) {
         return (
-
           <UserReview
             key={index}
             eventName={event.eventName}
