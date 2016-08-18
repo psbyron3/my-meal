@@ -196,8 +196,8 @@ User.hasMany(Review, { foreignKey: 'reviewerId' });
 Message.belongsTo(Event, { as: 'event', foreignKey: 'eventId' });
 Event.hasMany(Message, { foreignKey: 'eventId' });
 
-Message.belongsTo(User, { as: 'user', foreignKey: 'userId' });
 User.hasMany(Message, { foreignKey: 'userId' });
+Message.belongsTo(User, { as: 'user', foreignKey: 'userId' });
 
 
 sequelize

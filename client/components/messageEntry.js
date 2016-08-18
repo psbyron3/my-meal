@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import moment from 'moment';
 
 const MessageEntry = ({ body }) => {
-  if (localStorage.getItem('userId') === body.userId) {
+  if (Number(localStorage.getItem('userId')) === body.userId) {
     return (
       <div className="row msg_container base_sent">
         <div className="col-md-10 col-xs-10">
@@ -26,7 +26,7 @@ const MessageEntry = ({ body }) => {
       <div className="col-md-2 col-xs-2 avatar">
         <img
           alt=""
-          src={localStorage.getItem('userPic')}
+          src={body.user.userPic}
           className="img-responsive"
         />
       </div>

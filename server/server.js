@@ -17,7 +17,6 @@ const io = socketIo(server);// create a new instance of socket.io and handle our
 
 const routesUser = require('./routes/routesUser.js');
 const routesEvent = require('./routes/routesEvent.js');
-const routesDish = require('./routes/routesDish.js');
 const routesAuth = require('./routes/routesAuth.js');
 const routesReview = require('./routes/routesReview.js');
 const routesSearch = require('./routes/routesSearch.js');
@@ -40,7 +39,6 @@ app.use(express.static('./client'));
 app.use('/api/user', routesUser);
 app.use('/api/auth', routesAuth);
 app.use('/api/event', routesEvent);
-app.use('api/dish', routesDish);
 app.use('/api/review', routesReview);
 app.use('/api/tag', routesTag);
 app.use('/api/search', routesSearch);

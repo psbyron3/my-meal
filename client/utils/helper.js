@@ -21,9 +21,7 @@ export const convertAddress = (address) => {
         longitude: response.lng,
         address,
       };
-      return {
-        data: coordinate,
-      };
+      return coordinate;
     })
     .catch((err) => {
       console.log('ERROR ', err);
