@@ -197,8 +197,8 @@ Dummy.init = function () {
               address: '1345 South Redondo Boulevard Los Angeles, CA 90019',
               latitude: 34.048887,
               longitude: -118.349243,
-              startDatetime: '2016-08-23T18:00:00',
-              endDatetime: '2016-08-23T20:00:00',
+              startDatetime: '2016-08-13T18:00:00',
+              endDatetime: '2016-08-13T20:00:00',
               userId: 2,
               tags: [4, 8, 19],
             }),
@@ -220,7 +220,7 @@ Dummy.init = function () {
             Event.createEvent({
               id: 9,
               eventName: 'Cajun Cookout',
-              eventPic: 'http://clv.h-cdn.co/assets/16/02/1452527843-vegetarian-pad-tha-2-2-600x900.jpg',
+              eventPic: 'http://www.decaturish.com/wp-content/uploads/2015/11/Louisiana-Bistreaux.jpg',
               price: 7.00,
               maxGuests: 10,
               description: 'Authentic Cajun Cookout with special guest chef Remy LaFlamme',
@@ -235,17 +235,17 @@ Dummy.init = function () {
             Event.createEvent({
               id: 10,
               eventName: 'Southern Hospitality',
-              eventPic: 'http://clv.h-cdn.co/assets/16/02/1452527843-vegetarian-pad-tha-2-2-600x900.jpg',
-              price: 7.00,
-              maxGuests: 10,
-              description: 'Biweekly Yum-a-thon',
-              address: '1345 South Redondo Boulevard Los Angeles, CA 90019',
-              latitude: 34.048887,
-              longitude: -118.349243,
-              startDatetime: '2016-08-23T18:00:00',
-              endDatetime: '2016-08-237T20:00:00',
-              userId: 4,
-              tags: [4, 8, 19],
+              eventPic: 'http://media.tulsafood.com.s3.amazonaws.com/wp-content/uploads/2012/12/IMG_4909.jpg',
+              price: 9.00,
+              maxGuests: 5,
+              description: 'Come on down for some good southern comfort food',
+              address: '950-11 Tsuchiyamachō Kitatsuchiyama Kōka-shi, Shiga-ken 528-0211 Japan',
+              latitude: 34.9356693,
+              longitude: 136.2879953,
+              startDatetime: '2016-08-14T18:00:00',
+              endDatetime: '2016-08-147T20:00:00',
+              userId: 1,
+              tags: [31],
             }),
           ];
           return Promise.all(allEventPromises)
@@ -287,6 +287,7 @@ Dummy.init = function () {
                     Event.joinEvent(3, 1),
                     Event.joinEvent(4, 4),
                     Event.joinEvent(4, 1),
+                    Event.joinEvent(10, 2),
                   ];
                   return Promise.all(allGuestPromises)
                     .then(() => {
