@@ -191,7 +191,7 @@ MessageBox.PropTypes = {
   EventId: PropTypes.object,
   ChatBoxFunc: PropTypes.func,
 
-}
+};
 
 export default connect(mapStateToProps, { ChatBoxFunc })(MessageBox);
 
