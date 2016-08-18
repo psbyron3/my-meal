@@ -15,7 +15,7 @@ const GenreMenu = ({ selectedGenre, genres, onGenreChange }) => {
   return (
     <div>
       <select onChange={onGenreChange} value={selectedGenre}>
-        <option value={''}>Select a type of food</option>
+        <option value={0}>Select a type of food</option>
         {renderGenres()}
       </select>
     </div>
@@ -23,7 +23,7 @@ const GenreMenu = ({ selectedGenre, genres, onGenreChange }) => {
 };
 
 GenreMenu.propTypes = {
-  selectedGenre: PropTypes.number,
+  selectedGenre: PropTypes.string,
   genres: PropTypes.array,
   onGenreChange: PropTypes.func,
 };

@@ -16,7 +16,7 @@ const DistanceMenu = ({ onDistanceChange, distance }) => {
 
 DistanceMenu.propTypes = {
   onDistanceChange: PropTypes.func,
-  distance: PropTypes.number,
+  distance: PropTypes.string,
 };
 
 export default DistanceMenu;
