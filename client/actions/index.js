@@ -151,7 +151,6 @@ export const SignUpFunc = (props, userPic) => {
               dispatch({
                 type: AUTH_ERROR,
               });
-
             });
         });
     };
@@ -402,7 +401,6 @@ export const createEvent = (props, dishPic) => {
       return coords;
     }).then((coords) => {
       if (dishPic !== null) {
-
         const data = new FormData();
         data.append('file', dishPic[0]);
         const opts = {
@@ -453,7 +451,6 @@ export const createEvent = (props, dishPic) => {
         })
         .catch((err) => {
           console.log('ERROR', err);
-
         });
     });
 };
