@@ -9,12 +9,12 @@ class AdvancedSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    }
+    };
   }
 
   render() {
-    return(
-      <div style={{display: 'inline-block'}}>
+    return (
+      <div style={{ display: 'inline-block' }}>
         <Button id="searchButton" ref="target" onClick={this.props.toggle}>
           &gt;
         </Button>
@@ -39,11 +39,12 @@ class AdvancedSearch extends Component {
             />
             <DistanceMenu
               onDistanceChange={this.props.onDistanceChange}
+              distance={this.props.distance}
             />
           </div>
         </Overlay>
       </div>
-    )
+    );
   }
 }
 

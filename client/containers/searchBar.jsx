@@ -4,23 +4,18 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Autocomplete from 'react-google-autocomplete';
 import AdvancedSearch from '../components/advancedSearch';
-// import RestrictionMenu from '../components/restrictions.jsx';
-// import GenreMenu from '../components/genres.jsx';
-// import DistanceMenu from '../components/distances.jsx';
-// import ReactDOM from 'react-dom';
-// import { Button, Overlay } from 'react-bootstrap';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-                  show: false,
-                  query: '',
-                  restrictions: [],
-                  genre: [],
-                  distance: 5,
-                  wasChecked: false,
-                 };
+      show: false,
+      query: '',
+      restrictions: [],
+      genre: 0,
+      distance: 0,
+      wasChecked: false,
+    };
     this.onTextChange = this.onTextChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onCheckChange = this.onCheckChange.bind(this);
@@ -62,7 +57,7 @@ class SearchBar extends Component {
 
   onGenreChange(event) {
     this.setState({
-      genre: [event.target.value] || [],
+      genre: event.target.value,
     });
   }
 
@@ -79,8 +74,9 @@ class SearchBar extends Component {
   }
 
   onFormSubmit(place) {
-    const tags = [...this.state.restrictions, ...this.state.genre];
-    const distance = this.state.distance || 5;
+    const genre = +this.state.genre ? [+this.state.genre] : [];
+    const tags = [...this.state.restrictions, ...genre];
+    const distance = +this.state.distance || 5;
     this.setState({ query: place.formatted_address || this.state.query });
     this.props.getAllInRadius(this.state.query, tags, distance);
     this.setState({ show: false, genre: [] });
@@ -118,6 +114,7 @@ class SearchBar extends Component {
             selectedGenre={this.state.genre}
             genres={this.props.genres}
             onDistanceChange={this.onDistanceChange}
+            distance={this.state.distance}
           />
         </form>
       </div>
@@ -145,34 +142,3 @@ SearchBar.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
-
-
-// <div style={{display: 'inline-block'}}>
-//   <Button id="searchButton" ref="target" onClick={this.toggle}>
-//     &gt;
-//   </Button>
-//   <Overlay
-//     show={this.state.show}
-//     onHide={() => this.setState({ show: false })}
-//     placement="right"
-//     container={this}
-//     rootClose
-//     target={() => ReactDOM.findDOMNode(this.refs.target)}
-//   >
-//     <div id="advancedSearch">
-//       <RestrictionMenu
-//         onCheckChange={this.onCheckChange}
-//         selectedRestrictions={this.state.restrictions}
-//         restrictions={this.props.restrictions}
-//       />
-//       <GenreMenu
-//         onGenreChange={this.onGenreChange}
-//         selectedGenre={this.state.genre}
-//         genres={this.props.genres}
-//       />
-//       <DistanceMenu
-//         onDistanceChange={this.onDistanceChange}
-//       />
-//     </div>
-//   </Overlay>
-// </div>

@@ -4,7 +4,6 @@ import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import { editUser } from '../actions/index';
 
-
 class UserEditProfile extends Component {
   constructor(props) {
     super(props);
