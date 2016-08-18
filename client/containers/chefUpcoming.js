@@ -94,6 +94,8 @@ function mapStateToProps(state) {
 
 ChefUpcoming.propTypes = {
   chefEvents: PropTypes.array,
+  ChatBoxFunc: PropTypes.func,
+  DeleteEvent: PropTypes.func
 };
 
 export default connect(mapStateToProps, { EventIdFunc, DeleteEvent, ChatBoxFunc })(ChefUpcoming);

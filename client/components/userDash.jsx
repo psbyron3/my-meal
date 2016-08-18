@@ -94,6 +94,8 @@ function mapStateToProps(state) {
 
 UserDash.propTypes = {
   userHistory: PropTypes.array,
+  ChatBoxFunc: PropTypes.func,
+  boxStatus: PropTypes.string
 };
 
 export default connect(mapStateToProps, { ChatBoxFunc })(UserDash);
