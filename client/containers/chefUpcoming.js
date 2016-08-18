@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { organizeChefUpcoming } from '../utils/helper';
 import { EventIdFunc, DeleteEvent, ChatBoxFunc } from '../actions/index';
-import ChefUpcomingEntry from './chefUpcomingEntry';
+import ChefUpcomingEntry from './chefEntry';
 
 const _ = require('lodash');
 

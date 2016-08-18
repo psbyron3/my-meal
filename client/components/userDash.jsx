@@ -18,7 +18,7 @@ class UserDash extends Component {
   componentWillUnmount() {
     this.props.ChatBoxFunc('false');
   }
-  
+
   // componentWillMount() {
   //   console.log("in component will mount ")
   //   this.props.getEventsByUserId(userId);

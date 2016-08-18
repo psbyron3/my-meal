@@ -33,7 +33,9 @@ export const getEventsByUserId = (userId) => {
       };
     })
     .catch((err) => {
-      if (err) { console.error('err getting user events', err); }
+      if (err) {
+        throw err;
+      }
     });
 };
 
@@ -46,7 +48,9 @@ export const getEventsToBeReviewed = (userId) => {
       };
     })
     .catch((err) => {
-      if (err) { console.error('err getting reviews for user', err); }
+      if (err) {
+        throw err;
+      }
     });
 };
 
@@ -56,7 +60,6 @@ export const SignInFunc = (props) => {
   const email = props.email;
   const password = props.password;
   return (dispatch) => {
-    console.log('PROOOOOOOPS ');
     return axios({
       method: 'POST',
       url: '/api/auth/login',
@@ -112,11 +115,9 @@ export const SignUpFunc = (props, userPic) => {
   };
 
   return function (dispatch) {
-    console.log('INSIDE DISPATCH');
     return axios.post('/api/event/picture', data, opts)
       .then((resp) => {
         const url = resp.data;
-        console.log(url, 'SUPPOSED URL');
         return url;
       })
       .then((url) => {
@@ -143,8 +144,7 @@ export const SignUpFunc = (props, userPic) => {
             });
             browserHistory.push('/');
           })
-          .catch((err) => {
-            console.log('ERROR', err);
+          .catch(() => {
             dispatch({
               type: AUTH_ERROR,
             });
@@ -181,7 +181,7 @@ export const editUser = (userAttr) => {
         return response;
       })
       .catch((err) => {
-        console.log('HEY, IN INDEX.JS, running editUser and the error is..', err);
+        throw err;
       });
   };
 };
@@ -191,18 +191,15 @@ export const editUser = (userAttr) => {
 export const ChefEventsFunc = () => {
   const currentDate = new Date(Date.now());
   const userId = localStorage.getItem('userId');
-  console.log('INITIAL LOGGING');
 
   let chefEventsArray;
 
   return (dispatch) => {
-    console.log('INSIDE CHEFEVENTSFUNC DISPATCH');
     return axios({
       method: 'GET',
       url: `/api/event/users/${userId}`,
     })
       .then((response) => {
-        console.log('AFTER DISPATCH RESPONSE ', response);
         chefEventsArray = response.data;
 
         return Promise.all(_.filter(chefEventsArray, (event) => {
@@ -217,7 +214,6 @@ export const ChefEventsFunc = () => {
               })
                 .then((reviews) => {
                   event.reviews = reviews.data;
-                  console.log('EVEEEEENT REVIEEEWSSSS: ', event.reviews);
                   const ratingArray = [];
                   _.each(event.reviews, (review) => {
                     if (typeof review.rating === 'number') {
@@ -237,7 +233,7 @@ export const ChefEventsFunc = () => {
           });
       })
       .catch((err) => {
-        console.log('ERROR', err);
+        throw err;
       });
   };
 };
@@ -246,7 +242,6 @@ export const ChefEventsFunc = () => {
 export const DeleteEvent = (eventId) => {
   const currentDate = new Date(Date.now());
   const userId = localStorage.getItem('userId');
-  console.log('INITIAL LOGGING');
 
   let chefEventsArray;
 
@@ -256,19 +251,12 @@ export const DeleteEvent = (eventId) => {
       url: `/api/event/${eventId}`,
     })
       .then(() => {
-        console.log('DELETE SUCCESS');
-      // ChefEventsFunc();
-      // action case: delete_success
-      // in reducer: lodash, deep
-        console.log('INSIDE CHEFEVENTSFUNC DISPATCH');
         return axios({
           method: 'GET',
           url: `/api/event/users/${userId}`,
         })
           .then((response) => {
-            console.log('AFTER DISPATCH RESPONSE ', response);
             chefEventsArray = response.data;
-
             return Promise.all(_.filter(chefEventsArray, (event) => {
               return event.UsersEvent.role === 'host';
             }))
@@ -281,7 +269,6 @@ export const DeleteEvent = (eventId) => {
                   })
                     .then((reviews) => {
                       event.reviews = reviews.data;
-                      console.log('EVEEEEENT REVIEEEWSSSS: ', event.reviews);
                       const ratingArray = [];
                       _.each(event.reviews, (review) => {
                         if (typeof review.rating === 'number') {
@@ -301,7 +288,7 @@ export const DeleteEvent = (eventId) => {
               });
           })
           .catch((err) => {
-            console.log('ERROR: ', err);
+            throw err;
           });
       });
   };
@@ -346,7 +333,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
       })
       .catch((err) => {
         if (err) {
-          console.log('error searching location from actions searchLocation', err);
+          throw err;
         }
       });
     browserHistory.push('home');
@@ -375,7 +362,6 @@ export const createEvent = (props, dishPic) => {
       };
       return coords;
     }).then((coords) => {
-      console.log('PIC PARAAAAAMS: ', dishPic[0]);
       const data = new FormData();
       data.append('file', dishPic[0]);
       const opts = {
@@ -384,7 +370,6 @@ export const createEvent = (props, dishPic) => {
       return axios.post('/api/event/picture', data, opts)
         .then((resp) => {
           const url = resp.data;
-          console.log(url, 'SUPPOSED URL');
           const output = {
             address: coords.address,
             latitude: coords.latitude,
@@ -393,30 +378,24 @@ export const createEvent = (props, dishPic) => {
           return output;
         })
         .then((output) => {
-          console.log(output, 'OUUUUUUUUTPPPPPPPOUUUUUUUUT');
           const params = {
             eventName: props.eventName,
-      // foodType?? glutenFree, vegetarian, vegan??
             description: props.description,
             eventPic: output.url,
             price: props.price,
             maxGuests: props.maxGuest,
-      // guestDecide??
             address: output.address,
             latitude: output.latitude,
             longitude: output.longitude,
             startDatetime: props.start,
             endDatetime: props.end,
           };
-
-          console.log('PARAMSSSSSS', params);
-
           return axios.post('/api/event/', params)
             .then(() => {
               browserHistory.push('/');
             })
             .catch((err) => {
-              console.log('ERROR', err);
+              throw err;
             });
         });
     });
@@ -433,7 +412,9 @@ export const postUserReviewOfChef = (reviewData) => {
       };
     })
     .catch((err) => {
-      if (err) { console.error('Could not post event review: ', err); }
+      if (err) {
+        throw err;
+      }
     });
 };
 
@@ -476,6 +457,6 @@ export const getAllTags = () => {
       };
     })
     .catch((err) => {
-      console.log('error in getAllTags:', err);
+      throw err;
     });
 };
