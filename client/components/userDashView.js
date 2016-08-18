@@ -26,13 +26,13 @@ class userDashView extends Component {
       return (<div> No reviews to give </div>);
     }
     return this.props.userHistory
-      .filter((time) => {
-        return time.endDatetime <= now;
+      .filter((event) => {
+        console.log('now is.....', now, 'of type', typeof now);
+        console.log('endDatetime is......', event.endDatetime, 'of type', typeof event.endDatetime);
+        return event.endDatetime <= now && !event.UsersEvent.wasReviewed;
       })
       .map((event, index) => {
-        // if(!event.UsersEvent.wasReviewed) {
         return (
-
           <UserReview
             hoverEvent={this.props.hoverEvent}
             key={event.id}

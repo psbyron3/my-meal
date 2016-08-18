@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 
 import { Col, FormControl, textarea, Image } from 'react-bootstrap';
-import StarRatingComponent from 'react-star-rating-component';
+import StarRatingComponent from 'react-star-rating';
 
 const userId = window.localStorage.userId;
 

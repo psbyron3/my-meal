@@ -205,7 +205,10 @@ Event.createEvent = function (newEvent) {
         .then(() => {
           console.log('host added...adding tags');
           return Tag.addTagsToEvent(event, newEvent.tags)
-            .then(() => event);
+            .then(() => {
+              console.log('tags added, getting events....');
+              return Event.findEventsByUser(newEvent.userId);
+            });
         });
     });
 };

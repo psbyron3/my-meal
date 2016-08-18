@@ -101,13 +101,7 @@ export const SignInFunc = (props) => {
 };
 
 export const SignUpFunc = (props, userPic) => {
-  const firstName = props.firstName;
-  const lastName = props.lastName;
-  const address = props.address;
-  const phoneNumber = props.phoneNumber;
-  const userName = props.userName;
-  const email = props.email;
-  const password = props.password;
+  const { firstName, lastName, address, phoneNumber, userName, email, password } = props;
 
   if (userPic !== null) {
     const data = new FormData();
@@ -206,11 +200,9 @@ export const SignOutFunc = () => {
 
 export const editUser = (userAttr) => {
   const userId = localStorage.getItem('userId');
-  console.log('inside editUser......', userAttr);
   return function (dispatch) {
     return axios.put(`/api/user/${userId}`, userAttr)
       .then((response) => {
-        console.log('response to editUser is....', response);
       // action dispatch on response should be the new updated user info
         dispatch({
           type: USER_INFO,
@@ -354,6 +346,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
       .then((response) => {
         console.log('GEOCODE RESPONSE : ', response);
         const { latitude, longitude } = response;
+
         dispatch({
           type: MAP_CENTER,
           payload: { latitude, longitude },
