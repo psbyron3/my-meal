@@ -137,6 +137,7 @@ export const SignUpFunc = (props, userPic) => {
               userPic: url,
             },
           })
+
             .then((response) => {
               localStorage.setItem('token', response.data.token);
               localStorage.setItem('id', response.data.result.id);
@@ -150,6 +151,7 @@ export const SignUpFunc = (props, userPic) => {
               dispatch({
                 type: AUTH_ERROR,
               });
+
             });
         });
     };
@@ -399,7 +401,6 @@ export const createEvent = (props, dishPic) => {
       };
       return coords;
     }).then((coords) => {
-
       if (dishPic !== null) {
 
         const data = new FormData();
