@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const ChefUpcomingEntry = (props) => {
+const ChefPastEntry = (props) => {
   return (
     <div className="card-mc">
       {props.eventId}
@@ -8,16 +8,16 @@ const ChefUpcomingEntry = (props) => {
       {props.eventName}
       <br />
       <div>
-        <button onClick={() => { props.clicked(props.eventId); }}> chat </button>
+        <button onClick={() => { props.clicked(props.eventId, props.eventName); }}> chat </button>
       </div>
     </div>
   );
 };
 
-ChefUpcomingEntry.propTypes = {
+ChefPastEntry.propTypes = {
   eventId: PropTypes.number,
   eventName: PropTypes.string,
   clicked: PropTypes.func,
 };
 
-export default ChefUpcomingEntry;
+export default ChefPastEntry;

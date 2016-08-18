@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import ChefPast from '../containers/chefPast';
 import ChefUpcoming from '../containers/chefUpcoming';
 import ChefInfo from '../containers/chefInfo';
-import { ChefEventsFunc } from '../actions/index';
+import { ChefEventsFunc, ChatBoxFunc } from '../actions/index';
+import MessageBox from './messageBox';
 
 
 class ChefDash extends Component {
@@ -14,10 +15,16 @@ class ChefDash extends Component {
     this.props.ChefEventsFunc();
   }
 
+  componentWillUnmount() {
+    this.props.ChatBoxFunc('false');
+  }
 
   render() {
     return (
       <div>
+        <div>
+          {this.props.boxStatus === 'true' ? <MessageBox /> : null}
+        </div>
         <Tabs
           defaultActiveKey={1}
           animation={false} id="noanim-tab-example"
@@ -58,9 +65,11 @@ class ChefDash extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    boxStatus: state.boxStatus.status,
+  };
 }
 
 ChefDash.propTypes = { ChefEventsFunc: PropTypes.func };
 
-export default connect(mapStateToProps, { ChefEventsFunc })(ChefDash);
+export default connect(mapStateToProps, { ChefEventsFunc, ChatBoxFunc })(ChefDash);

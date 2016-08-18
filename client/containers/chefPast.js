@@ -1,12 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { organizeChefPast } from '../utils/helper';
-import { EventIdFunc } from '../actions/index';
-import ChefPastEntry from './chefPastEntry';
+import { EventIdFunc, ChatBoxFunc } from '../actions/index';
+import ChefPastEntry from './chefEntry';
 
 const _ = require('lodash');
 
 class ChefPast extends Component {
+
+  onHandleClick(e, evName) {
+    new Promise((resolve, reject) => {
+      resolve(this.props.ChatBoxFunc('false'));
+    }).then(() => {
+      return this.props.EventIdFunc(e, evName);
+    }).then(() => {
+      return this.props.ChatBoxFunc('true');
+    });
+  }
 
   renderList() {
     console.log('CHEF PAST:::::: ', this.props);
@@ -21,7 +31,7 @@ class ChefPast extends Component {
         <ChefPastEntry
           eventName={pastEvent.eventName}
           eventId={pastEvent.id}
-          clicked={this.props.EventIdFunc}
+          clicked={this.onHandleClick}
         />
       );
     });
@@ -78,6 +88,7 @@ class ChefPast extends Component {
   // }
 
   render() {
+    this.onHandleClick = this.onHandleClick.bind(this);
     return (
       <div>
         {this.renderList()}
@@ -96,4 +107,4 @@ ChefPast.propTypes = {
   chefPastEvents: PropTypes.array,
 };
 
-export default connect(mapStateToProps, { EventIdFunc })(ChefPast);
+export default connect(mapStateToProps, { EventIdFunc, ChatBoxFunc })(ChefPast);

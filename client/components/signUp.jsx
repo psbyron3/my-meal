@@ -181,7 +181,6 @@ function mapStateToProps(state) {
     restrictions: state.tags.restrictions,
     errorMessage: state.auth.error, // from rootReducer (index.js in reducers),
     signIn: state.auth,
-    restrictions: state.tags.restrictions,
   };
 }
 
