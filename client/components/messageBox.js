@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import $ from 'jquery';
@@ -185,6 +185,12 @@ function mapStateToProps(state) {
   return {
     eventId: state.eventId.id,
   };
+}
+
+MessageBox.PropTypes = {
+  EventId: PropTypes.object,
+  ChatBoxFunc: PropTypes.func,
+
 }
 
 export default connect(mapStateToProps, { ChatBoxFunc })(MessageBox);
