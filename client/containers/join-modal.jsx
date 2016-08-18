@@ -20,7 +20,7 @@ class JoinModal extends Component {
 
   handleJoinEvent() {
     const userId = this.props.userId;
-    console.log('eventId is:', this.props.selectedEvent.id);
+    console.log('eventId is:', this.props.selectedEvent.id, 'userId is...', userId);
     axios.post(`api/event/join/${this.props.selectedEvent.id}`, { userId })
       .then(() => {
         this.props.closeModal();

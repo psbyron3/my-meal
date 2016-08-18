@@ -75,8 +75,7 @@ export const SignInFunc = (props) => {
           payload: response.data.user,
         });
 
-        browserHistory.push('/');
-      // save token to localStorage
+        // save token to localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user.id);
         localStorage.setItem('userName', response.data.user.userName);
@@ -177,7 +176,7 @@ export const editUser = (userAttr) => {
       // action dispatch on response should be the new updated user info
         dispatch({
           type: USER_INFO,
-          payload: response,
+          payload: response.data,
         });
         return response;
       })
@@ -403,25 +402,24 @@ export const createEvent = (props, dishPic) => {
             price: props.price,
             maxGuests: props.maxGuest,
       // guestDecide??
-          address: output.address,
-          latitude: output.latitude,
-          longitude: output.longitude,
-          startDatetime: props.start,
-          endDatetime: props.end,
-        };
+            address: output.address,
+            latitude: output.latitude,
+            longitude: output.longitude,
+            startDatetime: props.start,
+            endDatetime: props.end,
+          };
 
-        console.log('PARAMSSSSSS', params);
+          console.log('PARAMSSSSSS', params);
 
-        return axios.post('/api/event/', params)
-          .then(() => {
-            browserHistory.push('/')
-          })
-          .catch((err) => {
-            console.log('ERROR', err);
-          });
+          return axios.post('/api/event/', params)
+            .then(() => {
+              browserHistory.push('/');
+            })
+            .catch((err) => {
+              console.log('ERROR', err);
+            });
         });
     });
-
 };
 
 export const postUserReviewOfChef = (reviewData) => {

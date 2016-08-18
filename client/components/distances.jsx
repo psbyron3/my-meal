@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-const DistanceMenu = ({ onDistanceChange }) => {
+const DistanceMenu = ({ onDistanceChange, distance }) => {
   return (
-    <select onChange={onDistanceChange}>
-      <option selected disabled>Select a radius</option>
+    <select onChange={onDistanceChange} value={distance}>
+      <option value={0}>Select a radius</option>
       <option value={1}>1 miles</option>
       <option value={5}>5 miles</option>
       <option value={10}>10 miles</option>
@@ -16,6 +16,7 @@ const DistanceMenu = ({ onDistanceChange }) => {
 
 DistanceMenu.propTypes = {
   onDistanceChange: PropTypes.func,
+  distance: PropTypes.string,
 };
 
 export default DistanceMenu;
