@@ -14,7 +14,7 @@ const MessageEntry = ({ body }) => {
         <div className="col-md-2 col-xs-2 avatar">
           <img
             alt=""
-            src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
+            src={localStorage.getItem('userPic')}
             className="img-responsive"
           />
         </div>
@@ -26,7 +26,7 @@ const MessageEntry = ({ body }) => {
       <div className="col-md-2 col-xs-2 avatar">
         <img
           alt=""
-          src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
+          src={localStorage.getItem('userPic')}
           className="img-responsive"
         />
       </div>

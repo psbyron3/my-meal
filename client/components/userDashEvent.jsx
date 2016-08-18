@@ -4,20 +4,17 @@ import { Link } from 'react-router';
 import moment from 'moment';
 import { Grid, Col, Row, Image } from 'react-bootstrap';
 import { EventIdFunc, ChatBoxFunc } from '../actions/index';
-import MessageBox from './messageBox';
 
 class DashEvent extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      file: null,
-    };
-  }
-
-  onHandleClick(e) {
-    this.props.EventIdFunc(e);
-    this.props.ChatBoxFunc('true');
+  onHandleClick(e, evName) {
+    new Promise((resolve, reject) => {
+      resolve(this.props.ChatBoxFunc('false'));
+    }).then(() => {
+      return this.props.EventIdFunc(e, evName);
+    }).then(() => {
+      return this.props.ChatBoxFunc('true');
+    });
   }
 
   formatTime(time, str) {
@@ -44,13 +41,6 @@ class DashEvent extends Component {
   }
 
   render() {
-    let box = null;
-    console.log(this.props.boxStatus, 'EEEEEEEEEEEND');
-    if (this.props.boxStatus) {
-      box = <MessageBox />;
-    }
-
-
     const startTime = moment(this.props.userHistory.startDatetime).format('MMMM Do YYYY, h:mm a');
     const endTime = moment(this.props.userHistory.endDatetime).format('MMMM Do YYYY, h:mm a');
     return (
@@ -93,14 +83,16 @@ class DashEvent extends Component {
                 circle
               />
               <div className="user-chat">
-                <button className="btn btn-primary" onClick={() => { this.onHandleClick(this.props.index); }}>Chat
+                <button
+                  className="btn btn-primary"
+                  onClick={() => { this.onHandleClick(this.props.index, this.props.eventName); }}
+                >Chat
                 </button>
               </div>
             </Row>
           </div>
         </Col>
         <Col className="user-gutter" md={2} />
-        {box}
       </div>
     );
   }
@@ -108,10 +100,8 @@ class DashEvent extends Component {
 
 function mapStateToProps(state) {
   console.log('UD mapStoP Events by User Id : ', state.userHistory.data);
-  console.log(state.boxStatus.status, 'box STATUUUUUUUS');
   return {
     userHistory: state.userHistory,
-    boxStatus: state.boxStatus.status,
   };
 }
 

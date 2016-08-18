@@ -85,6 +85,7 @@ User.findUserByEmail = function (email) {
 User.addHostToEvent = function (event, userId) {
   return db.User.findById(userId)
     .then((user) => {
+      console.log(user, 'UUUUUUUUUSEEEER');
       console.log('User = ', user.userName);
       event.setUsers([user], { role: 'host' })
         .then(() => event);

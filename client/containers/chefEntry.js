@@ -8,7 +8,7 @@ const ChefPastEntry = (props) => {
       {props.eventName}
       <br />
       <div>
-        <button onClick={() => { props.clicked(props.eventId); }}> chat </button>
+        <button onClick={() => { props.clicked(props.eventId, props.eventName); }}> chat </button>
       </div>
       <div>
         <button onClick={() => { props.deleteEvent(props.eventId); }}> delete </button>

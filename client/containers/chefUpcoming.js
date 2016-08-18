@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { organizeChefUpcoming } from '../utils/helper';
-import { EventIdFunc } from '../actions/index';
-import ChefUpcomingEntry from './chefUpcomingEntry';
+import { EventIdFunc, ChatBoxFunc } from '../actions/index';
+import ChefUpcomingEntry from './chefEntry';
 
 const _ = require('lodash');
 
@@ -27,6 +27,16 @@ class ChefUpcoming extends Component {
   //   return chefPastEvents;
   // }
 
+  onHandleClick(e, evName) {
+    new Promise((resolve, reject) => {
+      resolve(this.props.ChatBoxFunc('false'));
+    }).then(() => {
+      return this.props.EventIdFunc(e, evName);
+    }).then(() => {
+      return this.props.ChatBoxFunc('true');
+    });
+  }
+
   renderList() {
     console.log('PROOOOOOOOPS: ', this.props.chefEvents);
     if (this.props.chefEvents === undefined) {
@@ -43,7 +53,7 @@ class ChefUpcoming extends Component {
           eventName={event.eventName}
           eventId={event.id}
           rating={event.rating}
-          clicked={this.props.EventIdFunc}
+          clicked={this.onHandleClick}
         />
       );
       // return (
@@ -62,6 +72,7 @@ class ChefUpcoming extends Component {
   }
 
   render() {
+    this.onHandleClick = this.onHandleClick.bind(this);
     return (
       <div>
         {this.renderList()}
@@ -81,4 +92,4 @@ ChefUpcoming.propTypes = {
   chefEvents: PropTypes.array,
 };
 
-export default connect(mapStateToProps, { EventIdFunc })(ChefUpcoming);
+export default connect(mapStateToProps, { EventIdFunc, ChatBoxFunc })(ChefUpcoming);

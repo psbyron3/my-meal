@@ -199,7 +199,7 @@ Event.createEvent = function (newEvent) {
   const newE = Object.assign({}, newEvent, { attending: 0 });
   return db.Event.create(newE)
     .then((event) => {
-      console.log('result of createEvent', event.eventName);
+      console.log('result of createEvent', event.eventName, newEvent.userId);
       return User.addHostToEvent(event, newEvent.userId)
         .then(() => {
           console.log('host added...adding tags');
