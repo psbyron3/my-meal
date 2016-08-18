@@ -7,6 +7,11 @@ import ChefPastEntry from './chefEntry';
 const _ = require('lodash');
 
 class ChefPast extends Component {
+  constructor(props) {
+    super(props);
+    this.state ={};
+    this.onHandleClick = this.onHandleClick.bind(this);
+  }
 
   onHandleClick(e, evName) {
     new Promise((resolve, reject) => {
@@ -89,7 +94,6 @@ class ChefPast extends Component {
   // }
 
   render() {
-    this.onHandleClick = this.onHandleClick.bind(this);
     return (
       <div>
         {this.renderList()}
@@ -109,4 +113,3 @@ ChefPast.propTypes = {
 };
 
 export default connect(mapStateToProps, { EventIdFunc, ChatBoxFunc, DeleteEvent })(ChefPast);
-

@@ -374,15 +374,8 @@ export const createEvent = (props, dishPic) => {
         longitude,
       };
       return coords;
-<<<<<<< 4a62f37b1e4ed0e41fa9eb0920a76d107666a104
     }).then((coords) => {
       console.log('PIC PARAAAAAMS: ', dishPic[0]);
-=======
-    })
-
-    .then((coords) => {
-      console.log('PIC PARAAAAAMS: ', file[0]);
->>>>>>> [bug] Trying to update edit profile component with new user info
       const data = new FormData();
       data.append('file', dishPic[0]);
       const opts = {

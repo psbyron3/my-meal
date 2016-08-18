@@ -8,7 +8,11 @@ const _ = require('lodash');
 
 
 class ChefUpcoming extends Component {
-
+  constructor(props){
+    super(props);
+    this.state = {};
+    this.onHandleClick = this.onHandleClick.bind(this);
+  }
   // organizeEvents(allEvents) {
   //   const currentDate = new Date(Date.now());
   //   let chefPastEvents;
@@ -71,8 +75,7 @@ class ChefUpcoming extends Component {
     });
   }
 
-  render() {
-    this.onHandleClick = this.onHandleClick.bind(this);
+  render() {  
     return (
       <div>
         {this.renderList()}
