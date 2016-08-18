@@ -9,7 +9,7 @@ const _ = require('lodash');
 class ChefPast extends Component {
   constructor(props) {
     super(props);
-    this.state ={};
+    this.state = {};
     this.onHandleClick = this.onHandleClick.bind(this);
   }
 

@@ -8,7 +8,7 @@ const _ = require('lodash');
 
 
 class ChefUpcoming extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
     this.onHandleClick = this.onHandleClick.bind(this);
@@ -75,7 +75,7 @@ class ChefUpcoming extends Component {
     });
   }
 
-  render() {  
+  render() {
     return (
       <div>
         {this.renderList()}
