@@ -1,23 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import classNames from 'classnames';
 
 import UserReview from './userDashReview';
 
 const now = moment().format();
 
 class userDashView extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = { hoverEvent: 0 };
+    this.setHoverEvent = this.setHoverEvent.bind(this);
+  }
+
+  setHoverEvent(index) {
+    this.setState({
+      hoverEvent: index,
+    });
+  }
 
   renderList() {
     if (!this.props.userHistory.length) {
       return (<div> No reviews to give </div>);
     }
-
     return this.props.userHistory
       .filter((time) => {
-        console.log('UDV FILTER EVENTS : ', time);
-        console.log('MOMENT TIME : ', now);
         return time.endDatetime <= now;
       })
       .map((event, index) => {
@@ -25,7 +34,9 @@ class userDashView extends Component {
         return (
 
           <UserReview
-            key={index}
+            hoverEvent={this.props.hoverEvent}
+            key={event.id}
+            index={event.id}
             eventName={event.eventName}
             chefPic={"this is where the chef goes"}
             date={event.startDatetime}
@@ -46,7 +57,6 @@ class userDashView extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('in UDV checking state :', state.userHistory);
   return {
     userHistory: state.userHistory,
   };
