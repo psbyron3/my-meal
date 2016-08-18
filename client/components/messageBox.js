@@ -188,7 +188,7 @@ function mapStateToProps(state) {
 }
 
 MessageBox.PropTypes = {
-  EventId: PropTypes.object,
+  eventId: PropTypes.object,
   ChatBoxFunc: PropTypes.func,
 
 };
