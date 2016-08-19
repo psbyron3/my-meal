@@ -205,7 +205,10 @@ Event.createEvent = function (newEvent) {
         .then(() => {
           console.log('host added...adding tags');
           return Tag.addTagsToEvent(event, newEvent.tags)
-            .then(() => event);
+            .then(() => {
+              console.log('tags added, getting events....');
+              return Event.findEventsByUser(newEvent.userId);
+            });
         });
     });
 };
@@ -223,7 +226,10 @@ Event.joinEvent = function (eventId, userId) {
               if (result) return {};
               return event.addUsers([user], { role: 'guest', wasReviewed: false })
                 .then(() => {
-                  return event.increment('attending');
+                  return event.increment('attending')
+                    .then(() => {
+                      return Event.findEventsByUser(userId);
+                    });
                 });
             });
         });

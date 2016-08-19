@@ -11,8 +11,8 @@ Review.createReview = function (attr) {
       console.log("review doesn't exist, creating now");
       return db.Review.create(attr)
         .then((result) => {
-          const eventId = result.dataValues.eventId;
-          const reviewerId = result.dataValues.reviewerId;
+          console.log('result.dataValues ====', result.dataValues);
+          const { eventId, reviewerId } = result.dataValues;
           return Review.findReviewsByChef(result.hostId)
             .then((reviews) => {
               return Review.updateAverage(reviews)
@@ -24,7 +24,10 @@ Review.createReview = function (attr) {
                           return event.addUsers([reviewerId], {
                             role: 'guest',
                             wasReviewed: true,
-                          });
+                          })
+                            .then(() => {
+                              return Event.findEventsByUser(attr.reviewerId);
+                            });
                         });
                     });
                 });

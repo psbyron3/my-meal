@@ -101,13 +101,7 @@ export const SignInFunc = (props) => {
 };
 
 export const SignUpFunc = (props, userPic) => {
-  const firstName = props.firstName;
-  const lastName = props.lastName;
-  const address = props.address;
-  const phoneNumber = props.phoneNumber;
-  const userName = props.userName;
-  const email = props.email;
-  const password = props.password;
+  const { firstName, lastName, address, phoneNumber, userName, email, password } = props;
 
   if (userPic !== null) {
     const data = new FormData();
@@ -206,11 +200,9 @@ export const SignOutFunc = () => {
 
 export const editUser = (userAttr) => {
   const userId = localStorage.getItem('userId');
-  console.log('inside editUser......', userAttr);
   return function (dispatch) {
     return axios.put(`/api/user/${userId}`, userAttr)
       .then((response) => {
-        console.log('response to editUser is....', response);
       // action dispatch on response should be the new updated user info
         dispatch({
           type: USER_INFO,
@@ -253,7 +245,7 @@ export const ChefEventsFunc = () => {
                 .then((reviews) => {
                   event.reviews = reviews.data;
                   const ratingArray = [];
-                  _.each(event.reviews, (review) => {
+                  event.reviews.forEach((review) => {
                     if (typeof review.rating === 'number') {
                       ratingArray.push(review.rating);
                     }
@@ -354,6 +346,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
       .then((response) => {
         console.log('GEOCODE RESPONSE : ', response);
         const { latitude, longitude } = response;
+
         dispatch({
           type: MAP_CENTER,
           payload: { latitude, longitude },
@@ -401,7 +394,6 @@ export const createEvent = (props, dishPic) => {
       return coords;
     })
     .then((resp) => {
-      console.log(resp, 'WITH FILLEEEEEEEEEEEE');
       let url = null;
       if (typeof resp === 'object') {
         url = resp.data;
@@ -442,6 +434,22 @@ export const createEvent = (props, dishPic) => {
     });
 };
 
+export const joinEvent = (eventId, userId) => {
+  return function (dispatch) {
+    return axios.post(`api/event/join/${eventId}`, { userId })
+      .then((events) => {
+        console.log('WILL IT DISPATCH UPON JOINEVENT RESPONSE?', events);
+        dispatch({
+          type: GET_EVENTS_BY_USER_ID,
+          payload: events,
+        });
+        return events;
+      });
+  };
+};
+
+/** **************REVIEWS*********************/
+
 
 export const postUserReviewOfChef = (reviewData) => {
   console.log('in post review action :', reviewData);
@@ -449,7 +457,7 @@ export const postUserReviewOfChef = (reviewData) => {
     .then((response) => {
       console.log('action review response: ', response);
       return {
-        type: POST_USER_REVIEW_OF_CHEF,
+        type: GET_EVENTS_BY_USER_ID,
         payload: response,
       };
     })
