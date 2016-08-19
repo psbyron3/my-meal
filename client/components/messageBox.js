@@ -21,12 +21,16 @@ class MessageBox extends Component {
   componentDidMount() {
     const eventId = this.props.eventId.eventId;
     axios.get(`/api/message/${eventId}`).then((result) => {
-      const messages = result.data;
-      this.setState({ messages: [...this.state.messages, ...messages] }, () => {
-      // Keep scrollBAr down
-        const msgbox = document.getElementsByClassName('panel-body msg_container_base');
-        msgbox[0].scrollTop = msgbox[0].scrollHeight;
-      });
+      console.log('RESULT IS >>>>>>>>', result);
+      if (typeof result.data === 'object') {
+        const messages = result.data;
+        this.setState({ messages: [...this.state.messages, ...messages] }, () => {
+          // Keep scrollBAr down
+          console.log('THIS.STATE.MESSAGES....', this.state.messages);
+          const msgbox = document.getElementsByClassName('panel-body msg_container_base');
+          msgbox[0].scrollTop = msgbox[0].scrollHeight;
+        });
+      }
     });
 
     // connect the io lib. to the root of our webserver;
@@ -100,7 +104,9 @@ class MessageBox extends Component {
   }
 
   renderMsg() {
+    if (this.state.messages.length === 0) return (null);
     const msges = this.state.messages.map((message, index) => {
+      console.log('message is......', message);
       return (<MessageEntry
         key={index}
         body={message}
@@ -194,4 +200,3 @@ MessageBox.PropTypes = {
 };
 
 export default connect(mapStateToProps, { ChatBoxFunc })(MessageBox);
-

@@ -245,7 +245,7 @@ export const ChefEventsFunc = () => {
                 .then((reviews) => {
                   event.reviews = reviews.data;
                   const ratingArray = [];
-                  _.each(event.reviews, (review) => {
+                  event.reviews.forEach((review) => {
                     if (typeof review.rating === 'number') {
                       ratingArray.push(review.rating);
                     }
