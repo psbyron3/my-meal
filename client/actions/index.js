@@ -245,7 +245,7 @@ export const ChefEventsFunc = () => {
                 .then((reviews) => {
                   event.reviews = reviews.data;
                   const ratingArray = [];
-                  _.each(event.reviews, (review) => {
+                  event.reviews.forEach((review) => {
                     if (typeof review.rating === 'number') {
                       ratingArray.push(review.rating);
                     }
@@ -346,6 +346,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
       .then((response) => {
         console.log('GEOCODE RESPONSE : ', response);
         const { latitude, longitude } = response;
+
         dispatch({
           type: MAP_CENTER,
           payload: { latitude, longitude },
@@ -406,7 +407,6 @@ export const createEvent = (props, dishPic) => {
     .then((output) => {
       const userId = localStorage.getItem('userId');
       const params = {
-        userId: localStorage.getItem('userId'),
         eventName: props.eventName,
       // foodType?? glutenFree, vegetarian, vegan??
         description: props.description,
@@ -434,6 +434,22 @@ export const createEvent = (props, dishPic) => {
     });
 };
 
+export const joinEvent = (eventId, userId) => {
+  return function (dispatch) {
+    return axios.post(`api/event/join/${eventId}`, { userId })
+      .then((events) => {
+        console.log('WILL IT DISPATCH UPON JOINEVENT RESPONSE?', events);
+        dispatch({
+          type: GET_EVENTS_BY_USER_ID,
+          payload: events,
+        });
+        return events;
+      });
+  };
+};
+
+/** **************REVIEWS*********************/
+
 
 export const postUserReviewOfChef = (reviewData) => {
   console.log('in post review action :', reviewData);
@@ -441,7 +457,7 @@ export const postUserReviewOfChef = (reviewData) => {
     .then((response) => {
       console.log('action review response: ', response);
       return {
-        type: POST_USER_REVIEW_OF_CHEF,
+        type: GET_EVENTS_BY_USER_ID,
         payload: response,
       };
     })

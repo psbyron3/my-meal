@@ -59,7 +59,6 @@ class UserDash extends Component {
           defaultActiveKey={1}
           animation={false}
           id="noanim-tab-example"
-          unmountOnExit
         >
           <Tab eventKey={1} title="Dashboard">
             <UserDashView setHoverEvent={this.setHoverEvent} />

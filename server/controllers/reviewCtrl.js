@@ -17,13 +17,32 @@ module.exports = {
 
       Review.createReview(newReview)
         .then((reslt) => {
-          console.log('RESULT RESULT RESULT::::::', reslt);
+          console.log('RESULT RESULT RESULT::::::', reslt[0].dataValues);
           res.send(reslt);
         })
         .catch((err) => {
           console.log('error in POST at /api/review', err);
           res.send(err);
         });
+    },
+    put(req, res) {
+      console.log('Received PUT at /api/:review');
+      res.end('Received PUT at /api/:review');
+    },
+    delete(req, res) {
+      console.log('Received DELETE at /api/:review');
+      res.end('Received DELETE at /api/:review');
+    },
+  },
+  '/user/:userId': {
+    get(req, res) {
+      console.log('Received GET at /api/review/:userId');
+      const userId = url.parse(req.url, true).path.slice(7);
+      res.end('Received GET at /api/review/:userId');
+    },
+    post(req, res) {
+      console.log('Received POST at /api/review/:userId');
+      res.end('Received POST at /api/review/:userId');
     },
     put(req, res) {
       console.log('Received PUT at /api/:review');

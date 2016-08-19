@@ -2,9 +2,7 @@ import React, { Component, PropTypes, ReactDOM } from 'react';
 import { connect } from 'react-redux';
 import { postUserReviewOfChef } from '../actions/index';
 import { bindActionCreators } from 'redux';
-import classNames from 'classnames';
-
-import { Col, FormControl, textarea, Image } from 'react-bootstrap';
+import { Col, Row, FormControl, textarea, Image } from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
 
 const userId = window.localStorage.userId;
@@ -15,10 +13,10 @@ class UserReview extends Component {
 
     this.state = {
       content: '',
-      rating: 0,
-      eventId: 2,
-      reviewerId: userId,
-      hostId: 4,
+      rating: 1,
+      eventId: this.props.index,
+      reviewerId: this.props.userInfo.id,
+      hostId: this.props.hostId,
     };
     this.onCommentChange = this.onCommentChange.bind(this);
     this.onReviewSubmit = this.onReviewSubmit.bind(this);
@@ -37,24 +35,26 @@ class UserReview extends Component {
     event.preventDefault();
 
     this.props.postUserReviewOfChef(this.state);
-    this.props.wasReviewed = true;
   }
 
-  onStarClick(name, value) {
-    this.setState({ rating: value });
+  onStarClick(nextValue, prevValue) {
+    console.log(`next value is...${nextValue} and previous value was ${prevValue}`);
+    this.setState({ rating: nextValue }, () => {
+      console.log('this.state is....', this.state);
+    });
   }
 
   render() {
     // console.log('UDReview userHistory', this.props.userHistory);
     const { rating } = this.state;
     return (
-      <div>
+      <Row>
         <Col className="review-gutter" md={2} />
         <Col className="review-container" md={8}>
           <div className="review-event-basics">
             <div className="review-event-image">
               <Image
-                src="../assets/stock-chef.jpg"
+                src={this.props.eventPic}
                 role="presentation"
                 circle
               />
@@ -87,7 +87,7 @@ class UserReview extends Component {
           </form>
         </Col>
         <Col className="review-gutter" md={2} />
-      </div>
+      </Row>
 
     );
   }
@@ -100,6 +100,7 @@ function mapStateToProps(state) {
   return {
     userHistory: state.userHistory,
     Review: state.review,
+    userInfo: state.userInfo,
   };
 }
 
@@ -115,57 +116,3 @@ UserReview.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserReview);
-
-
- // <div
- //              key={this.props.key}
- //              index={this.props.index}
- //              onClick={this.setRating}
- //            >
- //              <div className="review-rating">
- //                <span value={1}>☆</span>
- //                <span value={2}>☆</span>
- //                <span value={3}>☆</span>
- //                <span value={4}>☆</span>
- //                <span value={5}>☆</span>
- //              </div>
- //            </div>
-
-
- // // Responsible for recording the star rating of the review
-  // setRating(event) {
-  //   const rating = event.target.getAttribute('value');
-
-  //   this.setState({ rating }, () => {
-  //     console.log("Star-rating is: ", this.state.rating)
-  //   })
-  // }
-
-  // initStars = () => {
-  //   this.stars = document.querySelectorAll('.review-rating span');
-  //   for (let i = 0; i < this.stars.length; i++) {
-  //     this.stars[i].setAttribute('data_count', i);
-  //     this.stars[i].addEventListener('mouseenter', this.enterStarListener.bind(this));
-  //   }
-  //   document.querySelector('.review-rating').addEventListener('mouseleave',
-  //     this.leaveStarListener.bind(this));
-  // }
-
-  // enterStarListener = (event) => {
-  //   this.fillStarsUpToElement(event.target);
-  // }
-
-  // leaveStarListener = () => {
-  //   this.fillStarsUpToElement(null);
-  // }
-
-  // fillStarsUpToElement = (element) => {
-  //   // remove the hover states
-  //   for (let i = 0; i < this.stars.length; i++) {
-  //     if (element === null || this.stars[i].getAttribute('data_count') > element.getAttribute('data_count')) {
-  //       this.stars[i].classList.remove('hover');
-  //     } else {
-  //       this.stars[i].classList.add('hover');
-  //     }
-  //   }
-  // }
