@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import moment from 'moment';
 
 const MessageEntry = ({ body }) => {
-  if (Number(localStorage.getItem('userId')) === body.userId) {
+  if (Number(localStorage.getItem('userId')) === Number(body.userId)) {
     return (
       <div className="row msg_container base_sent">
         <div className="col-md-10 col-xs-10">
