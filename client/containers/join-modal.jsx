@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Modal, Button, Grid, Row, Col, Image } from 'react-bootstrap';
 import moment from 'moment';
-import { getEventsByUserId } from '../actions/index';
+import { joinEvent } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 // const userId = window.localStorage.userId;
@@ -19,13 +19,11 @@ class JoinModal extends Component {
   }
 
   handleJoinEvent() {
-    const userId = this.props.userId;
-    console.log('eventId is:', this.props.selectedEvent.id, 'userId is...', userId);
-    axios.post(`api/event/join/${this.props.selectedEvent.id}`, { userId })
+    console.log('eventId is:', this.props.selectedEvent.id, 'userId is...', this.props.userId);
+    return joinEvent(this.props.selectedEvent.id, this.props.userId)
       .then(() => {
         this.props.closeModal();
       });
-    return getEventsByUserId(userId);
   }
 
   handleCancel(e) {
@@ -90,7 +88,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getEventsByUserId }, dispatch);
+  return bindActionCreators({ joinEvent }, dispatch);
 }
 
 JoinModal.propTypes = {

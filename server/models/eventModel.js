@@ -226,7 +226,10 @@ Event.joinEvent = function (eventId, userId) {
               if (result) return {};
               return event.addUsers([user], { role: 'guest', wasReviewed: false })
                 .then(() => {
-                  return event.increment('attending');
+                  return event.increment('attending')
+                    .then(() => {
+                      return Event.findEventsByUser(userId);
+                    });
                 });
             });
         });

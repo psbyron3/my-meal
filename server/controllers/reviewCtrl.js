@@ -37,12 +37,12 @@ module.exports = {
   '/user/:userId': {
     get(req, res) {
       console.log('Received GET at /api/review/:userId');
-      const userId = url.parse(req.url, true).path.slice(7)
+      const userId = url.parse(req.url, true).path.slice(7);
       res.end('Received GET at /api/review/:userId');
     },
     post(req, res) {
       console.log('Received POST at /api/review/:userId');
-      res.end('Received POST at /api/review/:userId')
+      res.end('Received POST at /api/review/:userId');
     },
     put(req, res) {
       console.log('Received PUT at /api/:review');

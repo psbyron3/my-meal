@@ -38,7 +38,7 @@ class userDashView extends Component {
             key={event.id}
             index={event.id}
             eventName={event.eventName}
-            chefPic={"this is where the chef goes"}
+            chefPic={event.Users[0].userPic}
             date={event.startDatetime}
             price={event.price}
             hostId={event.UsersEvent.userId}

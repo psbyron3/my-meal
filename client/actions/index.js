@@ -435,6 +435,22 @@ export const createEvent = (props, dishPic) => {
     });
 };
 
+export const joinEvent = (eventId, userId) => {
+  return function (dispatch) {
+    return axios.post(`api/event/join/${eventId}`, { userId })
+      .then((events) => {
+        console.log('WILL IT DISPATCH UPON JOINEVENT RESPONSE?', events);
+        dispatch({
+          type: GET_EVENTS_BY_USER_ID,
+          payload: events,
+        });
+        return events;
+      });
+  };
+};
+
+/** **************REVIEWS*********************/
+
 
 export const postUserReviewOfChef = (reviewData) => {
   console.log('in post review action :', reviewData);

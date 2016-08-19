@@ -39,8 +39,11 @@ class UserReview extends Component {
     this.props.postUserReviewOfChef(this.state);
   }
 
-  onStarClick(name, value) {
-    this.setState({ rating: value });
+  onStarClick(nextValue, prevValue) {
+    console.log(`next value is...${nextValue} and previous value was ${prevValue}`);
+    this.setState({ rating: nextValue }, () => {
+      console.log('this.state is....', this.state);
+    });
   }
 
   render() {
