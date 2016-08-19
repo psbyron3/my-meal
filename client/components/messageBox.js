@@ -29,7 +29,6 @@ class MessageBox extends Component {
           const msgbox = document.getElementsByClassName('panel-body msg_container_base');
           msgbox[0].scrollTop = msgbox[0].scrollHeight;
         });
-
       }
     });
 
@@ -106,7 +105,7 @@ class MessageBox extends Component {
   renderMsg() {
     if (this.state.messages.length === 0) return (null);
     const msges = this.state.messages.map((message, index) => {
-      console.log('message is......', message)
+      console.log('message is......', message);
       return (<MessageEntry
         key={index}
         body={message}
