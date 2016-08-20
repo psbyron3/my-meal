@@ -8,80 +8,117 @@ import { connect } from 'react-redux';
 
 class NavBarComp extends Component {
 
+  showSearchBox() {
+    if (this.props.showSearch) {
+      return (
+        <li> <SearchBar /> </li>
+      );
+    }
+    return null;
+  }
+
   authRender() {
     console.log('typeof authenticated == = = = ', typeof this.props.authenticated);
     if (!this.props.authenticated) {
       return (
-        <Nav pullRight>
-          <NavItem className="sign-up">
-            <Link to="signup">
-              <button className="btn btn-primary btn-sm">Sign Up</button>
-            </Link>
-          </NavItem>
-          <NavItem className="sign-in">
-            <Link to="signin">
-              <button className="btn btn-primary btn-sm">Sign In</button>
-            </Link>
-          </NavItem>
-        </Nav>
+        <ul className="nav navbar-nav navbar-right">
+          <li><a href="signIn">Log In</a></li>
+          <li><a href="signUp">Sign Up</a></li>
+        </ul>
       );
     }
+
     return (
-      <Nav pullRight>
-        <NavItem className="add-event">
-          <Link to="addevent">
-            <button className="btn btn-primary btn-sm">Host Event</button>
-          </Link>
-        </NavItem>
-        <NavItem className="user-dash">
+      <ul className="nav navbar-nav navbar-right">
+        <li className="dropdown">
+          <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+            <span className="glyphicon glyphicon-user"></span>
+            <strong>{this.props.userInfo.userName}</strong>
+            <span className="glyphicon glyphicon-chevron-down"></span>
+          </a>
 
-          <div className="btn-group">
-            <button
-              type="button"
-              className="btn btn-primary dropdown-toggle"
-              data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false"
-            >
-              Dashboard
-            </button>
-            <ul className="dropdown-menu">
-              <li><Link to="userdash">Foodie user</Link></li>
-              <li><Link to="chefdash">Gourmet Chief</Link></li>
-            </ul>
-          </div>
+          <ul className="dropdown-menu">
+            <li>
+              <div className="navbar-login">
+                <div className="row">
+                  <div className="col-lg-8">
+                    <p className="text-center">
+                      <span className="glyphicon glyphicon-user icon-size"></span>
+                    </p>
+                  </div>
+                  <div className="col-lg-8">
+                    <p className="text-left">
+                      <strong>
+                        {this.props.userInfo.firstName} {this.props.userInfo.lastName}
+                      </strong>
+                    </p>
+                    <p className="text-left small">{this.props.userInfo.email}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
 
-        </NavItem>
-        <NavItem>
-          <button onClick={() => { this.props.SignOutFunc(); }} className="btn btn-primary btn-sm">
-            log out
-          </button>
-        </NavItem>
-      </Nav>
+            <li className="divider"></li>
+
+            <li>
+              <div className="navbar-login">
+                <div className="row">
+                  <div className="col-lg-4">
+                    <Link to="userdash"><p className="text-center"><strong>Foodie User</strong></p></Link>
+                    <Link to="chefdash"><p className="text-center"><strong>Gourmet Chef</strong></p></Link>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li className="divider"></li>
+
+            <li>
+              <div className="navbar-login navbar-login-session">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <p>
+                      <a 
+                        href="#" 
+                        onClick={() => { this.props.SignOutFunc(); }} 
+                        className="btn btn-danger btn-block">Log out
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
     );
   }
 
   render() {
     return (
-      <Navbar fixedTop fluid className="navbar">
-        <Navbar.Header className="nav-logo">
-          <Navbar.Brand>
+      <div className="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div className="container">
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
             <Link to="/">
-              <img
-                src="../assets/share-eat.png"
-                role="presentation"
-              />
+              <img src="../assets/share-eat.png" role="presentation" />
             </Link>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav pullLeft>
-          <NavItem>
-            <SearchBar />
-          </NavItem>
-        </Nav>
+          </div>
 
-{this.authRender()}
+          <div className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+             {this.showSearchBox()}
+            </ul>
 
-      </Navbar>
+            {this.authRender()}
+
+          </div>
+        </div>
+      </div>
     );
   }
 }
@@ -89,12 +126,15 @@ class NavBarComp extends Component {
 const mapStateToProps = (state) => {
   return {
     authenticated: state.auth.authenticated,
+    userInfo: state.userInfo,
+    showSearch: state.showSearch.status,
   };
 };
 
 NavBarComp.propTypes = {
   authenticated: PropTypes.bool,
   SignOutFunc: PropTypes.func,
+  showSearch: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, { SignOutFunc })(NavBarComp);

@@ -4,18 +4,34 @@
   &.navbar.navbar-default.navbar-fixed-top {
     background: $primary-light-blue;
   }
+}
 
-  > .container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
+
+.navbar-toggle {
+  margin-top: 20px;
 }
 
 .navbar-header img {
-  height: 90px;
-  width: 72px;
+  height: 81px;
+  width: 65px;
   margin-left: 15px;
 }
 
