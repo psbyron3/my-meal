@@ -118,7 +118,7 @@ class MapListEntry extends Component {
                 starCount={5}
                 value={this.props.rating}
                 editing={false}
-                />
+              />
             </div>
           </div>
         </div>
