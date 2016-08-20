@@ -1,5 +1,36 @@
+$pointer: pointer;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-top: 100px;
+  font-family: $base-font-family;
+  background-color: $primary-white;
+}
+
 button {
   background-color: $primary-brown;
   border-color: $primary-brown;
+
+  &:hover {
+    color: lighter($primary-brown, 15%);
+    background-color: lighter($primary-brown, 15%);
+  }
 }
 
+a {
+  color: $primary-brown;
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary-orange;
+  }
+}
+
+p {
+  margin: 0 0 20px;
+}

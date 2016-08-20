@@ -1,0 +1,40 @@
+// ************ User Pic (Signup) *************** //
+
+.kv-avatar {
+  .file-preview-frame {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+
+    &:hover {
+      margin: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      text-align: center;
+    }
+  }
+
+  .file-input {
+    display: table-cell;
+    max-width: 220px;
+  }
+}
+
+.text-muted {
+  font-size: 0.75rem;
+}
+
+.file-preview-image, .avatar {
+  border-radius: 5%;
+}
+
+.file-actions {
+  display: none;
+}
+
+.btn.btn-default.fileinput-remove.fileinput-remove-button {
+  margin-left: 60px;
+}

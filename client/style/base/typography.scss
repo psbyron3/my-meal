@@ -1,5 +1,4 @@
-
-// Font weights 
+// Font weights
 $light: 150;
 $regular: 400;
 $bold: 600;
@@ -11,10 +10,12 @@ $base-font-size: 14px;
 $base-line-height: 1.4;
 
 // Fixed Font
-$fixed-font-family : monospace;
-$fixed-font-size : 85%;
+$fixed-font-family: monospace;
+$fixed-font-size: 85%;
 $fixed-line-height: $base-line-height;
 
 // Headings
-$header-font-weight : $bold;
-
+$header-font-weight: $bold;
+$header-font-size: 1.7em;
+$header-line-height: 110%;
+$header-color: #000;
