@@ -34,11 +34,18 @@ module.exports = {
       res.end('Received DELETE at /api/:review');
     },
   },
-  '/user/:userId': {
+  '/users/:userId': {
     get(req, res) {
       console.log('Received GET at /api/review/:userId');
       const userId = url.parse(req.url, true).path.slice(7);
-      res.end('Received GET at /api/review/:userId');
+      Review.findReviewsByUser(userId)
+        .then((results) => {
+          console.log('results coming back....', results[0].dataValues);
+          res.send(results);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
     },
     post(req, res) {
       console.log('Received POST at /api/review/:userId');

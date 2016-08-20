@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-
 import DashEvent from './userDashEvent.jsx';
 import UserDashView from './userDashView';
 import UserEditProfile from './userEditProfile';
