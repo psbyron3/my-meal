@@ -4,32 +4,12 @@ import { organizeChefUpcoming } from '../utils/helper';
 import { EventIdFunc, DeleteEvent, ChatBoxFunc } from '../actions/index';
 import ChefUpcomingEntry from './chefEntry';
 
-const _ = require('lodash');
-
-
 class ChefUpcoming extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.onHandleClick = this.onHandleClick.bind(this);
   }
-  // organizeEvents(allEvents) {
-  //   const currentDate = new Date(Date.now());
-  //   let chefPastEvents;
-
-  //   new Promise((resolve, reject) => {
-  //     chefPastEvents = _.filter(allEvents, (event) => {
-  //       return Date.parse(event.startDatetime) > 1471032409000;
-  //     });
-  //     resolve(chefPastEvents);
-  //   })
-  //     .then((result) => {
-  //       result.sort((a, b) => {
-  //         return Date.parse(b.startDatetime) - Date.parse(a.startDatetime);
-  //       });
-  //     });
-  //   return chefPastEvents;
-  // }
 
   onHandleClick(e, evName) {
     new Promise((resolve, reject) => {
@@ -42,7 +22,6 @@ class ChefUpcoming extends Component {
   }
 
   renderList() {
-    console.log('PROOOOOOOOPS: ', this.props.chefEvents);
     if (this.props.chefEvents === undefined) {
       return (
         <div>
@@ -50,7 +29,6 @@ class ChefUpcoming extends Component {
       );
     }
     return this.props.chefEvents.map((event) => {
-      console.log('INSIDE RENDERLIST RETURN ', event);
       return (
         <ChefUpcomingEntry
           key={event.id}
@@ -61,18 +39,6 @@ class ChefUpcoming extends Component {
           deleteEvent={this.props.DeleteEvent}
         />
       );
-      // return (
-      //   <div>
-      //     <div>
-      //       <button> chat </button>
-      //     </div>
-      //     {event.id}
-      //     <br />
-      //     {event.eventName}
-      //     <br />
-      //     rating: {event.rating}
-      //   </div>
-      // );
     });
   }
 

@@ -4,8 +4,6 @@ import { organizeChefPast } from '../utils/helper';
 import { EventIdFunc, ChatBoxFunc, DeleteEvent } from '../actions/index';
 import ChefPastEntry from './chefEntry';
 
-const _ = require('lodash');
-
 class ChefPast extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +22,6 @@ class ChefPast extends Component {
   }
 
   renderList() {
-    console.log('CHEF PAST:::::: ', this.props);
     if (!this.props.chefPastEvents.length) {
       return (
         <div>
@@ -34,6 +31,7 @@ class ChefPast extends Component {
     return this.props.chefPastEvents.map((pastEvent) => {
       return (
         <ChefPastEntry
+          key={pastEvent.id}
           eventName={pastEvent.eventName}
           eventId={pastEvent.id}
           deleteEvent={this.props.DeleteEvent}
@@ -42,56 +40,6 @@ class ChefPast extends Component {
       );
     });
   }
-
-  //   return (
-  //     <div>
-  //       <div className="card-mc">
-  //         {this.props.chefPastEvents[0].id}
-  //         <br />
-  //         {this.props.chefPastEvents[0].eventName}
-  //         <div>
-  //           <button onClick={() => { this.clicked('HELLOOO 1'); }}> chat </button>
-  //         </div>
-  //       </div>
-
-  //       <div className="card-mc">
-  //         {this.props.chefPastEvents[0].id}
-  //         <br />
-  //         {this.props.chefPastEvents[0].eventName}
-  //         <div>
-  //           <button onClick={() => { this.clicked('HELLOOO 2'); }}> chat </button>
-  //         </div>
-  //       </div>
-
-  //       <div className="card-mc">
-  //         {this.props.chefPastEvents[0].id}
-  //         <br />
-  //         {this.props.chefPastEvents[0].eventName}
-  //         <div>
-  //           <button onClick={() => { this.clicked('HELLOOO 3'); }}> chat </button>
-  //         </div>
-  //       </div>
-
-  //       <div className="card-mc">
-  //         {this.props.chefPastEvents[0].id}
-  //         <br />
-  //         {this.props.chefPastEvents[0].eventName}
-  //         <div>
-  //           <button onClick={() => { this.clicked('HELLOOO 2'); }}> chat </button>
-  //         </div>
-  //       </div>
-
-  //       <div className="card-mc">
-  //         {this.props.chefPastEvents[0].id}
-  //         <br />
-  //         {this.props.chefPastEvents[0].eventName}
-  //         <div>
-  //           <button onClick={() => { this.clicked('HELLOOO 3'); }}> chat </button>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   render() {
     return (

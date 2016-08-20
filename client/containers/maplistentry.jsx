@@ -49,8 +49,8 @@ class MapListEntry extends Component {
   render() {
     const startTime = moment(this.props.selectedEvent.startDatetime).format('MMMM Do YYYY, h:mm a');
     const endTime = moment(this.props.selectedEvent.endDatetime).format('MMMM Do YYYY, h:mm a');
+    // removed index={this.props.index} line 61
     return (
-
       <div
         id="f1_container"
         className={this.props.entryClass}
@@ -58,8 +58,7 @@ class MapListEntry extends Component {
         <div
           id="f1_card"
           onClick={this.props.openModal}
-          key={this.props.key}
-          index={this.props.index}
+          key={this.props.index}
           onMouseEnter={this.handleEnter}
         >
           <div className="front face">
@@ -146,7 +145,6 @@ MapListEntry.propTypes = {
   selectedEvent: PropTypes.object,
   entryClass: PropTypes.string,
   openModal: PropTypes.func,
-  key: PropTypes.number,
   index: PropTypes.number,
   image: PropTypes.string,
   price: PropTypes.number,

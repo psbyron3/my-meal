@@ -7,7 +7,6 @@ export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
 
     case GET_EVENTS_BY_USER_ID :
-      console.log('in reducer get events', action.payload.data);
       return action.payload.data;
     default:
       return state;

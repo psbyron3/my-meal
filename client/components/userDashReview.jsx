@@ -70,7 +70,7 @@ class UserReview extends Component {
           </div>
           <form className="review-rating-container" >
             <StarRatingComponent
-              name={this.props.index}
+              name={this.props.eventName}
               starCount={5}
               value={rating}
               onStarClick={this.onStarClick}

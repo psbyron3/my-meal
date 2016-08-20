@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Modal, Button, Grid, Row, Col, Image } from 'react-bootstrap';
@@ -44,6 +45,24 @@ class JoinModal extends Component {
     });
   }
 
+  authRender() {
+    if (!this.props.authenticated) {
+      return (
+        <Modal.Footer>
+          <div>
+            <p>Please <a href="signIn">Sign In</a> or <a href="signUp">Sign Up</a> to join events!</p>
+          </div>
+        </Modal.Footer>
+      );
+    }
+    return (
+      <Modal.Footer>
+        <Button onClick={this.handleJoinEvent}>Confirm</Button>
+        <Button onClick={this.props.closeModal}>Cancel</Button>
+      </Modal.Footer>
+    );
+  }
+
   renderPic() {
     if (this.props.selectedEvent.eventPic) {
       return (
@@ -74,17 +93,18 @@ class JoinModal extends Component {
           <div>{this.props.selectedEvent.address}</div>
           <div>{startTime} - {endTime}</div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.handleJoinEvent}>Confirm</Button>
-          <Button onClick={this.props.closeModal}>Cancel</Button>
-        </Modal.Footer>
+        {this.authRender()}
       </Modal>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { selectedEvent: state.selectedEvent, userId: state.userInfo.id };
+  return {
+    selectedEvent: state.selectedEvent,
+    userId: state.userInfo.id,
+    authenticated: state.auth.authenticated,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -96,6 +116,7 @@ JoinModal.propTypes = {
   closeModal: PropTypes.func,
   showModal: PropTypes.bool,
   userId: PropTypes.number,
+  authenticated: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(JoinModal);

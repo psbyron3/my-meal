@@ -25,7 +25,6 @@ export const USER_INFO = 'USER_INFO';
 
 
 export const getEventsByUserId = (userId) => {
-  console.log('userId is....');
   return axios.get(`/api/event/users/${userId}`)
     .then((response) => {
       return {
@@ -70,7 +69,6 @@ export const SignInFunc = (props) => {
       },
     })
       .then((response) => {
-      // dispatch action to update state to indicate that user is authenticated
         dispatch({
           type: AUTH_USER,
         });
@@ -78,8 +76,6 @@ export const SignInFunc = (props) => {
           type: USER_INFO,
           payload: response.data.user,
         });
-
-        // save token to localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user.id);
         localStorage.setItem('userName', response.data.user.userName);
@@ -102,14 +98,12 @@ export const SignInFunc = (props) => {
 
 export const SignUpFunc = (props, userPic) => {
   const { firstName, lastName, address, phoneNumber, userName, email, password } = props;
-
   if (userPic !== null) {
     const data = new FormData();
     data.append('file', userPic[0]);
     const opts = {
       transformRequest() { return data; },
     };
-
     return function (dispatch) {
       return axios.post('/api/event/picture', data, opts)
         .then((resp) => {
@@ -131,7 +125,6 @@ export const SignUpFunc = (props, userPic) => {
               userPic: url,
             },
           })
-
             .then((response) => {
               localStorage.setItem('token', response.data.token);
               localStorage.setItem('id', response.data.result.id);
@@ -150,9 +143,7 @@ export const SignUpFunc = (props, userPic) => {
     };
   }
   return function (dispatch) {
-    console.log('NOOOOOOOOOOOO FIIIIIIIIIIIIIIIILE');
     const url = `http:${Gravatar.url(email)}`;
-    console.log(url, 'MON URL GRAAAAVATAR');
     return axios({
       method: 'POST',
       url: '/api/auth/signup',
@@ -177,7 +168,6 @@ export const SignUpFunc = (props, userPic) => {
         browserHistory.push('/');
       })
       .catch((err) => {
-        console.log('ERROR', err);
         dispatch({
           type: AUTH_ERROR,
         });
@@ -398,22 +388,18 @@ export const createEvent = (props, dishPic) => {
       if (typeof resp === 'object') {
         url = resp.data;
       } else {
-        console.log('NOOOOOO PIIIIIIC');
         url = 'https://s3-us-west-2.amazonaws.com/mymealmks/logo.png';
       }
-      console.log(url, 'SUPPOSED URL');
       return Object.assign({}, coords, { url });
     })
     .then((output) => {
       const userId = localStorage.getItem('userId');
       const params = {
         eventName: props.eventName,
-      // foodType?? glutenFree, vegetarian, vegan??
         description: props.description,
         eventPic: output.url,
         price: props.price,
         maxGuests: props.maxGuest,
-      // guestDecide??
         address: output.address,
         latitude: output.latitude,
         longitude: output.longitude,
@@ -421,15 +407,12 @@ export const createEvent = (props, dishPic) => {
         endDatetime: props.end,
         userId,
       };
-
-      console.log('PARAMSSSSSS', params);
-
       return axios.post('/api/event/', params)
         .then(() => {
           browserHistory.push('/');
         })
         .catch((err) => {
-          console.log('ERROR', err);
+          throw (err);
         });
     });
 };

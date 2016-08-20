@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 class NavBarComp extends Component {
 
   authRender() {
-    console.log('typeof authenticated == = = = ', typeof this.props.authenticated);
     if (!this.props.authenticated) {
       return (
         <Nav pullRight>
