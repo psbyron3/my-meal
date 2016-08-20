@@ -9,7 +9,6 @@ class ChefInfo extends Component {
 
   render() {
     const chefRatingArray = [];
-    console.log('USERINFO HERE????? ', this.props.userInfo);
     _.each(this.props.chefEvents, (event) => {
       if (typeof event.rating === 'number') {
         chefRatingArray.push(event.rating);

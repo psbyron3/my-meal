@@ -20,7 +20,6 @@ class AddEvent extends Component {
   onSubmit(props) {
     const newEvent = props;
     newEvent.tags = [...newEvent.tags, newEvent.genre];
-    console.log(newEvent.tags);
     props.address += ', ';
     this.props.createEvent(props, this.state.file);
   }
@@ -45,8 +44,6 @@ class AddEvent extends Component {
                       usState,
                       zip,
                     }, handleSubmit } = this.props;
-    // const eventName = this.props.fields.eventName;
-    // const handleSubmit = this.props.handleSubmit;
 
     return (
       <div className="top-margin">
