@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 export default class Landing extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     // Video configuration
     function scaleVideoContainer() {
       const height = $(window).height() + 5;
