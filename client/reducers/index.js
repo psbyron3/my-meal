@@ -13,7 +13,6 @@ import Review from './review_reducer';
 import { reducer as FormReducer } from 'redux-form';
 import CloseSearchReducer from './close_searchBox_reducer';
 
-
 const rootReducer = combineReducers({
   allEvents: AllEventsReducer,
   userInfo: UserInfoReducer,

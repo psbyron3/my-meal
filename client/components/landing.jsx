@@ -5,6 +5,7 @@ import { renderSearchFunc } from '../actions/index';
 import { connect } from 'react-redux';
 import SearchBar from '../containers/searchBar';
 
+
 class Landing extends Component {
 
   componentWillMount() {
