@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { selectEvent } from '../actions/index.js';
 import moment from 'moment';
 import { Image } from 'react-bootstrap';
-
+import StarRatingComponent from 'react-star-rating-component';
 
 class MapListEntry extends Component {
   constructor(props) {
@@ -72,14 +72,14 @@ class MapListEntry extends Component {
               <div className="event-price">
                 $ {this.props.price}
               </div>
-              <div className="chef-rating-container">
-                <div className="chef-rating">
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                </div>
+              <div >
+                <p className="context">Chef&apos;s Rating:</p>
+                <StarRatingComponent
+                  name={this.props.index}
+                  starCount={5}
+                  value={this.props.rating}
+                  editing={false}
+                />
               </div>
             </div>
           </div>
@@ -112,15 +112,14 @@ class MapListEntry extends Component {
                 src="../assets/stock-chef.jpg"
                 circle
               />
-              <div className="chef-rating-container">
-                <div className="chef-rating">
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                </div>
-              </div>
+            </div>
+            <div>
+              <StarRatingComponent
+                name={this.props.index}
+                starCount={5}
+                value={this.props.rating}
+                editing={false}
+                />
             </div>
           </div>
         </div>
