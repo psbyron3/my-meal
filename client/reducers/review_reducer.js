@@ -1,10 +1,10 @@
-import { POST_USER_REVIEW_OF_CHEF } from '../actions/index';
+import { ALL_USER_REVIEWS } from '../actions/index';
 
 const INITIAL_STATE = {};
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case POST_USER_REVIEW_OF_CHEF :
+    case ALL_USER_REVIEWS :
       return action.payload;
     default:
       return state;
