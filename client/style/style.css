@@ -346,9 +346,9 @@ input::-webkit-input-placeholder {
   opacity: 0.6;
   filter: alpha(opacity=60);
 }
-/*
+
 .chef-rating > span:hover:before {
-   /*content: "\2605";
+   content: "\2605";
    position: absolute;
    color: yellow;
 }
@@ -360,9 +360,9 @@ input::-webkit-input-placeholder {
 }
 .chef-rating > span:hover:before,
 .chef-rating > span:hover ~ span:before {
-   /*content: "\2605";
+   content: "\2605";
    position: absolute;
-}*/
+}
 
 .chef-container > .chef-photo {
   position: absolute;
