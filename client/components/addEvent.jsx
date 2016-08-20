@@ -87,7 +87,7 @@ class AddEvent extends Component {
                       return (
                         <div key={restriction.id} style={{ display: 'inline-block' }} >
                           <label
-                            
+
                             className="checkboxLabel form-check-inline"
                           >
                             <input

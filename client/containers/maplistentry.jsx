@@ -49,7 +49,7 @@ class MapListEntry extends Component {
   render() {
     const startTime = moment(this.props.selectedEvent.startDatetime).format('MMMM Do YYYY, h:mm a');
     const endTime = moment(this.props.selectedEvent.endDatetime).format('MMMM Do YYYY, h:mm a');
-    //removed index={this.props.index} line 61
+    // removed index={this.props.index} line 61
     return (
       <div
         id="f1_container"
