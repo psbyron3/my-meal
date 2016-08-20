@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { PropTypes } from 'react';
 import { Col, Row, FormControl, textarea, Image } from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
 
-const PastReview = ({ eventName, date, index, rating }) => {
+const PastReview = ({ eventName, date, index, rating, eventPic }) => {
   // return (const { rating } = this.state;
   return (
     <Row>
