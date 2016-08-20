@@ -1,3 +1,6 @@
+$home-card-width: 275px;
+$home-card-height: 235px;
+
 .event-list {
   width: 33%;
   height: 100%;
@@ -10,11 +13,11 @@
 }
 
 .list-entry {
-  width: 250px;
+  width: $home-card-width;
   margin: 20px;
   cursor: pointer;
   text-align: center;
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4), 0 2.5px 6px rgba(0, 0, 0, 0.2);
+  @include box-shadow(0, 1.5px, 4px, 0px, rgba(0, 0, 0, 0.4)); //(0, 2.5px, 2.5px, 6px, rgba(0, 0, 0, 0.2));
 
   &:hover {
     background-color: gray;
@@ -36,8 +39,8 @@
   display: block;
   position: relative;
   margin: 20px auto;
-  width: 350px;
-  height: 300px;
+  width: $home-card-width;
+  height: $home-card-height;
   z-index: 1;
   perspective: 1000;
 }
@@ -72,8 +75,8 @@
 }
 
 .list-image {
-  width: 350px;
-  height: 300px;
+  width: $home-card-width;
+  height: $home-card-height;
 }
 
 .price-banner {
