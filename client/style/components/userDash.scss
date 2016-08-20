@@ -1,0 +1,131 @@
+@import "utils/mixins";
+
+//************ User Dash Events ********************//
+.user-feed {
+  display: flex;
+  flex-direction: flex;
+  justify-content: center;
+}
+
+.user-event {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+  @include box-shadow(0px, 1.5px, 1.5px, 4px, rgba(0, 0, 0, 0.4));
+}
+
+.user-event-basics {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-grow: 8;
+}
+
+.user-event-pic {
+  height: 50%;
+  width: 50%;
+  padding: 15px;
+}
+
+.user-event-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-gutter {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-chef-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 25px;
+}
+
+.user-chef-photo {
+  width: 100px;
+  height: 100px;
+}
+
+// **************** User Dash Reviews******************//
+
+.review-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.review-container {
+  margin-top: 100px;
+
+  @include box-shadow(0px, 1.5px, 1.5px, 4px, rgba(0, 0, 0, 0.4));
+}
+
+.review-event-basics {
+  display: flex;
+  flex-direction: row;
+}
+
+.review-event-image {
+  height: 175px;
+  width: 175px;
+}
+
+.review-gutter {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-rating-container {
+  background: #333;
+  top: 20px;
+  right: 20px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.review-rating {
+  text-align: center;
+  perspective: 250px;
+  top: 40%;
+  width: 100%;
+
+  span {
+    cursor: pointer;
+    padding: 0 10px;
+    color: #fff;
+    opacity: 0.5;
+    transition: all 150ms;
+    display: inline-block;
+    transform: rotateX(45deg);
+    transform-origin: center bottom;
+
+    &.hover, :active {
+      color: #ff0;
+      opacity: 1;
+      transform: rotateX(0deg);
+      text-shadow: 0 0 30px #ffc;
+    }
+  }
+}
+
+.review-comments {
+  width: 75%;
+}
+
+/*.chef-rating-container {
+ *  position: absolute;
+ *  bottom: 20px;
+ *  left: 230px;
+ *  width: 50% auto;
+ *  background-color: black;
+ *  font-size: 24px;
+ *  opacity: 0.6;
+ *  filter: alpha(opacity=60);
+ *} */
