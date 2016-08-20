@@ -85,9 +85,9 @@ class AddEvent extends Component {
                   <div>
                     {this.props.restrictions.map((restriction) => {
                       return (
-                        <div style={{ display: 'inline-block' }} >
+                        <div key={restriction.id} style={{ display: 'inline-block' }} >
                           <label
-                            key={restriction.id}
+                            
                             className="checkboxLabel form-check-inline"
                           >
                             <input

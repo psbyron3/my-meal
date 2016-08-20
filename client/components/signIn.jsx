@@ -11,13 +11,11 @@ class SignIn extends Component {
   }
 
   onSubmit(props) {
-    console.log('PROOOOOPR', props);
     this.props.SignInFunc(props);
   }
 
   renderAlert() {
     if (this.props.errorMessage) {
-      console.log(this.props.errorMessage, 'HELLOOOOOOOOOOOOOO');
       return (
         <div className="alert alert-danger">
           <strong>{this.props.errorMessage}</strong>
@@ -29,7 +27,6 @@ class SignIn extends Component {
 
 
   render() {
-    console.log('typeof this.props.errorMessage::::::', typeof this.props.errorMessage);
     const { fields: { email,
                       password,
                     }, handleSubmit } = this.props;

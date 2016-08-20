@@ -58,7 +58,7 @@ class MapMarker extends Component {
   }
 
   render() {
-    console.log('type of this.props.startTime:', typeof this.props.startTime);
+    console.log('type of this.props.startTime:', typeof this.props);
     return (
       <div style={this.style} >
         <a
@@ -80,7 +80,7 @@ class MapMarker extends Component {
           target={this.state.target}
           placement="top"
         >
-          <Popover>
+          <Popover id={this.props.eventName}>
             <h5>{this.props.eventName}</h5>
             <h6>{this.props.address}</h6>
             <h6>{this.props.startTime} - {this.props.endTime}</h6>

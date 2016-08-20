@@ -52,7 +52,7 @@ class MapView extends Component {
   }
 
   render() {
-    console.log('location in map: ', this.props.location);
+    console.log('location in map: ', this.props);
     return (
       <div>Here is the map:
         <div className="map">
@@ -88,7 +88,7 @@ MapView.propTypes = {
   allEvents: PropTypes.array,
   openModal: PropTypes.func,
   setHoverEvent: PropTypes.func,
-  location: PropTypes.array,
+  location: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(MapView);
