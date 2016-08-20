@@ -1,3 +1,4 @@
+import styles from './style/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -11,6 +12,7 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import App from './components/app';
 import reducers from './reducers';
 import routes from './routes';
+
 
 const createStoreWithMiddleware = compose(applyMiddleware(thunk, promise))(createStore);
 

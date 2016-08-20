@@ -1,7 +1,149 @@
-@import "base/colors";
-// Nav Bar
+//****************************** Nav Bar ***********************//
 
-$navbar-background-color: $primary-light-blue;
+.navbar {
+  &.navbar.navbar-default.navbar-fixed-top {
+    background: $primary-light-blue;
+  }
 
-.navbar 
-  
+  > .container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.navbar-header img {
+  height: 90px;
+  width: 72px;
+  margin-left: 15px;
+}
+
+.autoComplete input[type=search] {
+  width: 15px;
+  color: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.autoComplete input[type=search]:hover {
+  background-color: #fff;
+}
+
+.autoComplete input[type=search]:focus {
+  width: 150px;
+  padding-left: 32px;
+  color: #000;
+  background-color: #fff;
+  border-color: #F7F4EF;
+  cursor: auto;
+}
+
+.autoComplete input:-moz-placeholder {
+  color: transparent;
+}
+
+.autoComplete input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+a {
+  color: #371C11;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #F60;
+}
+
+h1 {
+  font: 1.7em;
+  line-height: 110%;
+  color: #000;
+}
+
+p {
+  margin: 0 0 20px;
+}
+
+input {
+  outline: none;
+}
+
+input[type=search] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  font-family: inherit;
+  font-size: 100%;
+}
+
+input::-webkit-search-decoration, 
+input::-webkit-search-cancel-button {
+  display: none;
+}
+
+input[type=search] {
+  background: #ededed url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+  border: solid 1px #ccc;
+  padding: 9px 10px 9px 32px;
+  width: 55px;
+  -webkit-border-radius: 10em;
+  -moz-border-radius: 10em;
+  border-radius: 10em;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+input[type=search]:focus {
+  width: 130px;
+  background-color: #fff;
+  border-color: #F7F4EF;
+  -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+  -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+  box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+}
+
+input:-moz-placeholder {
+  color: #999;
+}
+
+input::-webkit-input-placeholder {
+  color: #999;
+}
+//************* Advanced Search Popover *******************//
+
+#searchButton {
+  border-radius: 100%;
+  margin-left: 25px;
+  border: none;
+
+  &:focus, &:visited, &:hover {
+    border-radius: 100%;
+    margin-left: 25px;
+    border: none;
+  }
+}
+
+#advancedSearch {
+  background-color: #F7F4EF;
+  position: absolute;
+  borderRadius: 10px;
+  margin-left: 10px;
+}
+
+// ***************** Google Places dropdown ****************//
+
+.pac-container {
+  top: 20px;
+  z-index: 1051;
+  border-radius: 15px;
+}
+
+.pac-item, .pac-selected {}
+
+.pac-container:after {
+  background-position: 15px;
+}
+  // This is the stylized animated search bar. Has not yet been implemented with
+  // Autocomplete searchbar

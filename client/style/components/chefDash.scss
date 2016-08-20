@@ -1,0 +1,17 @@
+$chef-card-border: 1px solid rgba(0, 0, 0, 0.125);
+
+.card-mc, .chef-mc {
+  position: relative;
+  min-height: 1px;
+  max-height: 500px;
+  padding: 15px;
+  float: left;
+  width: 32.9%;
+  border: $chef-card-border;
+  border-radius: 0.25rem;
+  margin: 3px;
+}
+
+.center-mc {
+  margin: auto;
+}
