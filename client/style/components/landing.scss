@@ -1,0 +1,17 @@
+.landing-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-35%);
+  width: 70%;
+  height: 300px;
+  z-index: 4;
+  & > .landing-mission {
+    color: $primary-white;
+    font-family: $fixed-font-family;
+  }
+}

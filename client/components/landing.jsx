@@ -9,6 +9,11 @@ export default class Landing extends Component {
       <div>
         <div className="homepage-hero-module">
           <div className="video-container">
+              <div className="landing-overlay">
+                <h1 className="landing-mission">
+                Your perfect meal awaits.
+                </h1>
+              </div>
             <div className="filter"></div>
             <video className="fillWidth" autoPlay muted loop>
               <source src="https://s3-us-west-2.amazonaws.com/mymealmks/videos/523395704.mp4" type="video/mp4" />
@@ -24,12 +29,10 @@ export default class Landing extends Component {
 
         <div className="row featurette">
           <div className="col-md-7">
-            <h2 className="featurette-heading">First featurette heading.
-              <span className="text-muted"> It&#39;ll blow your mind.</span>
+            <h2 className="featurette-heading"> Discover.
+              <span className="text-muted">  Find your new favorite dish</span>
             </h2>
-            <p className="lead">Donec ullamcorper nulla non metus auctor fringilla.
-            Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna,
-            vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+            <p className="lead"> Explore in your neighborhood or find a great meal across town. Our chefs are waiting to serve you. Choose a meal you crave like grandma's secret recipe fried chicken. Branch out and try something new like Japanese Omakase. Limited diet? No problem. Our search engine will tailor to your every need. The possibilities are limitless!
             </p>
           </div>
           <div className="col-md-5">
@@ -45,12 +48,11 @@ export default class Landing extends Component {
 
         <div className="row featurette">
           <div className="col-md-7">
-            <h2 className="featurette-heading">First featurette heading.
-              <span className="text-muted"> It&#39;ll blow your mind. </span>
+            <h2 className="featurette-heading"> Book Now.
+              <span className="text-muted"> You're meal awaits you </span>
             </h2>
-            <p className="lead">Donec ullamcorper nulla non metus auctor fringilla.
-            Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna,
-            vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p className="lead"> Find a day and time that works for you. Once your perfect meal is discovered, reserve your spot. Don't worry, we set you up with a chat to reach out to your host and work out all the details. Need more details? Head to your dashboard and manage your meals.
+            </p>
           </div>
           <div className="col-md-5">
             <img
@@ -65,12 +67,11 @@ export default class Landing extends Component {
 
         <div className="row featurette">
           <div className="col-md-7">
-            <h2 className="featurette-heading">First featurette heading.
-              <span className="text-muted"> It&#39;ll blow your mind.</span>
+            <h2 className="featurette-heading">  Enjoy.
+              <span className="text-muted"> You're in good company now </span>
             </h2>
-            <p className="lead">Donec ullamcorper nulla non metus auctor fringilla.
-            Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna,
-            vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p className="lead"> Savor your meal. Share new experiences with new people. Join the conversation. Uncover new cultures from both your host and your new friends. Relax and let us take care of everything.
+            </p>
           </div>
           <div className="col-md-5">
             <img
