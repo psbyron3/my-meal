@@ -22,6 +22,7 @@ export const ALL_GENRES = 'ALL_GENRES';
 export const ALL_RESTRICTIONS = 'ALL_RESTRICTIONS';
 export const GET_EVENTS_TO_BE_REVIEWED = 'GET_EVENTS_TO_BE_REVIEWED';
 export const USER_INFO = 'USER_INFO';
+export const CLOSE_SEARCH_BOX = 'CLOSE_SEARCH_BOX';
 
 
 export const getEventsByUserId = (userId) => {
@@ -464,6 +465,14 @@ export const EventIdFunc = (eventId, evName) => {
 export const ChatBoxFunc = (status) => {
   return {
     type: CLOSE_CHAT_BOX,
+    payload: status,
+  };
+};
+
+export const renderSearchFunc = (status) => {
+  console.log(status, 'STATUSSSSSSS IN ACTION');
+  return {
+    type: CLOSE_SEARCH_BOX,
     payload: status,
   };
 };

@@ -11,6 +11,7 @@ import TagReducer from './tag_reducer';
 import CloseChatReducer from './close_chatBox_reducer';
 import Review from './review_reducer';
 import { reducer as FormReducer } from 'redux-form';
+import CloseSearchReducer from './close_searchBox_reducer';
 
 
 const rootReducer = combineReducers({
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   boxStatus: CloseChatReducer,
   review: Review,
   form: FormReducer,
+  showSearch: CloseSearchReducer,
 });
 
 export default rootReducer;
