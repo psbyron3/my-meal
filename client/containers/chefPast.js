@@ -31,6 +31,7 @@ class ChefPast extends Component {
     return this.props.chefPastEvents.map((pastEvent) => {
       return (
         <ChefPastEntry
+          key={pastEvent.id}
           eventName={pastEvent.eventName}
           eventId={pastEvent.id}
           deleteEvent={this.props.DeleteEvent}
