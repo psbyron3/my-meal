@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
   tags: TagReducer,
   boxStatus: CloseChatReducer,
   review: Review,
-  form: FormReducer
+  form: FormReducer,
 });
 
 export default rootReducer;

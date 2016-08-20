@@ -245,11 +245,11 @@ const validate = (values) => {
   }
 
   if (!values.start) {
-    errors.start = 'Please enter a start time';
+    errors.start = 'Please enter a valid start time';
   }
 
-  if (!values.end) {
-    errors.end = 'Please enter an end time';
+  if (!values.end || Date.parse(values.end) < Date.parse(values.start)) {
+    errors.end = 'Please enter a valid end time';
   }
 
   if (!values.address) {

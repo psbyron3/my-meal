@@ -412,7 +412,7 @@ export const createEvent = (props, dishPic) => {
           browserHistory.push('/');
         })
         .catch((err) => {
-          throw(err);
+          throw (err);
         });
     });
 };
