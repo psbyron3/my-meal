@@ -39,6 +39,7 @@ class MapList extends Component {
           maxGuests={event.maxGuests}
           attending={event.attending}
           price={event.price}
+          rating={event.Users[0].avgRating}
         />);
     });
   }
