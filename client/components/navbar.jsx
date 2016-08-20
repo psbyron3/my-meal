@@ -78,10 +78,11 @@ class NavBarComp extends Component {
                 <div className="row">
                   <div className="col-lg-12">
                     <p>
-                      <a 
-                        href="#" 
-                        onClick={() => { this.props.SignOutFunc(); }} 
-                        className="btn btn-danger btn-block">Log out
+                      <a
+                        href="#"
+                        onClick={() => { this.props.SignOutFunc(); }}
+                        className="btn btn-danger btn-block"
+                      >Log out
                       </a>
                     </p>
                   </div>
