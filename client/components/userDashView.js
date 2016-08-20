@@ -10,7 +10,6 @@ const now = moment().format();
 class userDashView extends Component {
   constructor(props) {
     super(props);
-
     this.state = { hoverEvent: 0 };
     this.setHoverEvent = this.setHoverEvent.bind(this);
   }
