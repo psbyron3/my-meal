@@ -56,11 +56,11 @@ export const getEventsToBeReviewed = (userId) => {
 };
 
 export const getReviewsByUserId = (userId) => {
-  return axios.get(`/api/review/user/${userId}`)
+  return axios.get(`/api/review/users/${userId}`)
     .then((reviews) => {
       const action = {
         type: ALL_USER_REVIEWS,
-        payload: reviews,
+        payload: reviews.data,
       };
       return action;
     });
