@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import PastReview from './userPastReview';
 
 class ReviewList extends Component {
@@ -7,9 +7,32 @@ class ReviewList extends Component {
     this.state = {};
   }
 
+  // renderPastReviews() {
+  //   return this.props.reviews.map((review) => {
+  //     return (
+  //       <PastReview
+  //         key={}
+  //         eventName={}
+  //         date={}
+  //         index={}
+  //         rating={}
+  //         eventPic={}
+  //       />
+  //     )
+  //   })
+  // }
+
   render() {
-    return (<div></div>);
+    return (
+      <div>
+
+      </div>)
+    ;
   }
+}
+
+function mapStateToProps(state) {
+  return { reviews: state.reviews };
 }
 
 export default ReviewList;

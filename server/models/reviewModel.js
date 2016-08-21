@@ -46,8 +46,17 @@ Review.findReviewById = function (reviewId) {
 
 // find all reviews by a given reviewer id
 Review.findReviewsByUser = function (reviewerId) {
-  // console.log('in findReviewsByUser.....reviewerId is....', reviewerId);
-  return db.Review.findAll({ where: { reviewerId } })
+  console.log('in findReviewsByUser.....reviewerId is....', reviewerId);
+  return db.Review.findAll({
+    where: { reviewerId },
+    include: [
+      {
+        model: db.Event,
+        as: 'event',
+        attributes: ['eventPic', 'startDatetime', 'endDatetime'],
+      },
+    ],
+  })
     .then(function (rows) {
       console.log('RESULTS OF FINDALL WHERE REVIEWERID....', rows[0]);
       return rows;
