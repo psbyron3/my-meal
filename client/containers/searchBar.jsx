@@ -90,7 +90,7 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="nav-search" >
+      <div className="nav-search searchbar" >
         <form className="search-input">
           <div >
             <Autocomplete
