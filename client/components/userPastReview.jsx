@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Col, Row, FormControl, textarea, Image } from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
 
-const PastReview = ({ eventName, date, index, rating, eventPic }) => {
+const PastReview = ({ eventName, date, index, rating, eventPic, content }) => {
   // return (const { rating } = this.state;
   return (
     <Row>
@@ -11,34 +11,44 @@ const PastReview = ({ eventName, date, index, rating, eventPic }) => {
         <div className="review-event-basics">
           <div className="review-event-image">
             <Image
-              src="../assets/stock-chef.jpg"
+              src={eventPic}
               role="presentation"
-              circle
             />
           </div>
           <div className="review-event-details">
             <div className="review-event-title">
-              <strong>{this.props.eventName}</strong>
+              <h3>{eventName}</h3>
             </div>
             <div className="review-event-date">
-              {this.props.date}
+              {date}
             </div>
           </div>
-        </div>
-        <StarRatingComponent
-          name={this.props.index}
-          starCount={5}
-          value={rating}
-          editing={false}
-        />
-        <div className="review-comments">
-          <textarea onChange={this.onCommentChange} />
+          <div className="star-review">
+            <StarRatingComponent
+              name={index}
+              starCount={5}
+              value={rating}
+              editing={false}
+            />
+          </div>
+          <div className="review-content">
+            <p>{content}</p>
+          </div>
         </div>
       </Col>
       <Col className="review-gutter" md={2} />
     </Row>
 
   );
+};
+
+PastReview.propTypes = {
+  eventName: PropTypes.string,
+  date: PropTypes.string,
+  index: PropTypes.number,
+  rating: PropTypes.number,
+  eventPic: PropTypes.string,
+  content: PropTypes.string,
 };
 
 export default PastReview;
