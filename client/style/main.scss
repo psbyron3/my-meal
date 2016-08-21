@@ -11,15 +11,14 @@
 @import "components/modal";
 @import "components/userDash";
 @import "components/landing";
-
+@import "components/advancedSearch";
 // Layout -- Headers and footers
 @import "layout/navbar";
 
-// pages 
+// pages
 @import "pages/auth";
 @import "pages/landingVideo";
 @import "pages/listCards";
 
-// mixins 
+// mixins
 @import "utils/mixins";
-
