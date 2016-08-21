@@ -61,7 +61,7 @@ class UserReview extends Component {
             </div>
             <div className="review-event-details">
               <div className="review-event-title">
-                <strong>{this.props.eventName}</strong>
+                <h3>{this.props.eventName}</h3>
               </div>
               <div className="review-event-date">
                 {this.props.date}
