@@ -103,7 +103,7 @@ class NavBarComp extends Component {
   render() {
     return (
       <div className="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div className="container">
+        <div className="container-fluid">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span className="icon-bar"></span>
@@ -115,10 +115,10 @@ class NavBarComp extends Component {
             </Link>
           </div>
 
+          <ul className="nav navbar-nav">
+            {this.showSearchBox()}
+          </ul>
           <div className="collapse navbar-collapse">
-            <ul className="nav navbar-nav">
-             {this.showSearchBox()}
-            </ul>
 
             {this.authRender()}
 

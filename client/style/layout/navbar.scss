@@ -3,6 +3,7 @@
 .navbar {
   &.navbar.navbar-default.navbar-fixed-top {
     background: $primary-light-blue;
+    padding-bottom: 5px;
   }
 }
 
@@ -20,6 +21,9 @@
     padding-top: 0px;
 }
 
+.navbar-nav>li>a {
+  padding: 10px 15px 5px;
+}
 
 .navbar-toggle {
   margin-top: 20px;
@@ -127,32 +131,7 @@ input:-moz-placeholder {
 input::-webkit-input-placeholder {
   color: #999;
 }
-//************* Advanced Search Popover *******************//
 
-#searchButton {
-  border-radius: 100%;
-  margin-left: 25px;
-  border: none;
-
-  &:focus, &:visited, &:hover {
-    border-radius: 100%;
-    margin-left: 25px;
-    border: none;
-  }
+.dropdown-toggle {
+  padding: 0;
 }
-
-// ***************** Google Places dropdown ****************//
-
-.pac-container {
-  top: 20px;
-  z-index: 1051;
-  border-radius: 15px;
-}
-
-.pac-item, .pac-selected {}
-
-.pac-container:after {
-  background-position: 15px;
-}
-  // This is the stylized animated search bar. Has not yet been implemented with
-  // Autocomplete searchbar
