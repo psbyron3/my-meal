@@ -1,5 +1,5 @@
 .map {
-  width: 45%;
+  width: 60%;
   height: 100%;
   left: 0px;
   top: 0px;
@@ -18,4 +18,23 @@
 .marker  > img {
   width: 32px;
   height: 40px;
+}
+
+.showAlert-false {
+  display: none;
+}
+
+.errorAlert span {
+  color: $primary-orange;
+}
+
+.errorAlert {
+  background-color: $primary-white;
+  z-index: 9999;
+  position: absolute;
+  left: 37%;
+  top: 300px;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid $primary-yellow;
 }

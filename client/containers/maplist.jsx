@@ -17,8 +17,6 @@ class MapList extends Component {
   }
 
   renderList() {
-    console.log('hoverEvent:', this.props.hoverEvent);
-    console.log('allEvents:', this.props.allEvents);
     return this.props.allEvents.map((event) => {
       const entryClass = classNames({
         'list-entry': true,
@@ -58,7 +56,6 @@ class MapList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('All Events in state, map comp : ', state.allEvents);
   return {
     allEvents: state.allEvents,
     selectedEvent: state.selectedEvent,

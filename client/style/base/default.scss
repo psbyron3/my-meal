@@ -22,8 +22,13 @@ button {
   }
 }
 
+a:focus, a:active:focus, a.active:focus{
+    outline:none;
+    box-shadow:none;
+}
+
 a {
-  color: $primary-brown;
+  color: $primary-orange;
   text-decoration: none;
 
   &:hover {
