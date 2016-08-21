@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import SearchBar from '../containers/searchBar';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { SignOutFunc } from '../actions/index';
 import { connect } from 'react-redux';
 
@@ -21,8 +20,8 @@ class NavBarComp extends Component {
     if (!this.props.authenticated) {
       return (
         <ul className="nav navbar-nav navbar-right">
-          <li><a href="signIn">Log In</a></li>
-          <li><a href="signUp">Sign Up</a></li>
+          <li><a href="#"><Link to="signIn">Log In</Link></a></li>
+          <li><a href="#"><Link to="signUp">Sign Up</Link></a></li>
         </ul>
       );
     }
@@ -31,27 +30,34 @@ class NavBarComp extends Component {
       <ul className="nav navbar-nav navbar-right">
         <li className="dropdown">
           <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-            <span className="glyphicon glyphicon-user"></span>
-            <strong>{this.props.userInfo.userName}</strong>
-            <span className="glyphicon glyphicon-chevron-down"></span>
+            <img
+              src={this.props.userInfo.userPic}
+              role="presentation"
+              className="img-circle"
+              style={{ width: '60px',
+                height: '60px',
+                display: 'inline-block',
+                marginRight: '6px' }}
+            />
+            <strong >{this.props.userInfo.userName}</strong>
           </a>
 
           <ul className="dropdown-menu">
             <li>
               <div className="navbar-login">
                 <div className="row">
-                  <div className="col-lg-8">
+                  <div className="col-lg-12">
                     <p className="text-center">
-                      <span className="glyphicon glyphicon-user icon-size"></span>
-                    </p>
-                  </div>
-                  <div className="col-lg-8">
-                    <p className="text-left">
                       <strong>
                         {this.props.userInfo.firstName} {this.props.userInfo.lastName}
                       </strong>
                     </p>
-                    <p className="text-left small">{this.props.userInfo.email}</p>
+                    <p className="text-center small">{this.props.userInfo.email}</p>
+                    <Link to="addevent">
+                      <p className="col-lg-8 col-lg-offset-2 text-center">
+                        <a href="#" className="btn btn-primary btn-block btn-sm">Host an event</a>
+                      </p>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -62,9 +68,9 @@ class NavBarComp extends Component {
             <li>
               <div className="navbar-login">
                 <div className="row">
-                  <div className="col-lg-4">
-                    <Link to="userdash"><p className="text-center"><strong>Foodie User</strong></p></Link>
-                    <Link to="chefdash"><p className="text-center"><strong>Gourmet Chef</strong></p></Link>
+                  <div className="col-lg-12">
+                    <p className="text-center"><strong><Link to="userdash">Foodie User</Link></strong></p>
+                    <p className="text-center"><strong><Link to="chefdash">Gourmet Chef</Link></strong></p>
                   </div>
                 </div>
               </div>
