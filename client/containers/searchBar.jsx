@@ -92,7 +92,7 @@ class SearchBar extends Component {
     return (
       <div className="nav-search" >
         <form className="search-input">
-          <div style={{ display: 'inline-block' }}>
+          <div >
             <Autocomplete
               className="autoComplete"
               style={{ width: '90%' }}
