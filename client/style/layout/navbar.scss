@@ -89,7 +89,7 @@ input[type=search] {
   font-size: 100%;
 }
 
-input::-webkit-search-decoration, 
+input::-webkit-search-decoration,
 input::-webkit-search-cancel-button {
   display: none;
 }
@@ -135,13 +135,6 @@ input::-webkit-input-placeholder {
     margin-left: 25px;
     border: none;
   }
-}
-
-#advancedSearch {
-  background-color: #F7F4EF;
-  position: absolute;
-  borderRadius: 10px;
-  margin-left: 10px;
 }
 
 // ***************** Google Places dropdown ****************//

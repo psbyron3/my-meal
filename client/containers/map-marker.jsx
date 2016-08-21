@@ -82,8 +82,8 @@ class MapMarker extends Component {
         >
           <Popover id={this.props.eventName}>
             <h5>{this.props.eventName}</h5>
-            <h6>{this.props.address}</h6>
-            <h6>{this.props.startTime} - {this.props.endTime}</h6>
+            <p>{this.props.address}</p>
+            <p>{this.props.startTime} - {this.props.endTime}</p>
           </Popover>
         </Overlay>
       </div>
