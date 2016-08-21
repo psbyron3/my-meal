@@ -113,7 +113,8 @@ User.createUser = function (attr, tags = []) {
       })
       .then(() => {
         console.log('password hashed');
-        db.User.create(attr)
+        let newUser = Object.assign({}, attr, { avgRating: 0 });
+        db.User.create(newUser)
           .then(function (result) {
             const output = result.dataValues;
             return result.setTags(tags)
