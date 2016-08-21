@@ -196,7 +196,7 @@ Event.findEventsByUser = function (userId) {
 };
 
 Event.createEvent = function (newEvent) {
-  console.log(newEvent, 'EVENT CREATED WHERE BUG');
+  console.log(newEvent, 'EVENT CREATED WHERE BUG+++++++++++++++++++++++++++++++++++++++++++++');
   const newE = Object.assign({}, newEvent, { attending: 0 });
   return db.Event.create(newE)
     .then((event) => {
