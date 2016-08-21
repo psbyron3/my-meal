@@ -513,10 +513,8 @@ export const renderSearchFunc = (status) => {
 /** ***********Tags*******************/
 
 export const getAllTags = () => {
-  console.log('inside getAllTags....');
   return axios.get('/api/tag')
     .then((tags) => {
-      console.log('tags=====', tags);
       const restrictions = tags.data.filter(tag => tag.restriction);
       const genres = tags.data.filter(tag => !tag.restriction);
       return function (dispatch) {
