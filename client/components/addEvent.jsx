@@ -270,7 +270,7 @@ const validate = (values) => {
     errors.end = 'Please enter a valid end time';
   }
 
-  if (values.end && (Date.parse(values.end) < Date.parse(values.start) 
+  if (values.end && (Date.parse(values.end) < Date.parse(values.start)
     || Date.parse(new Date()) > Date.parse(values.end))) {
     errors.end = 'Please enter a valid end time';
   }
