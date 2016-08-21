@@ -7,7 +7,11 @@ import JoinModal from '../containers/join-modal.jsx';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: false, hoverEvent: 0 };
+    this.state = {
+      showModal: false,
+      hoverEvent: 0,
+    };
+
     this.setHoverEvent = this.setHoverEvent.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);

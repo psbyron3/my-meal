@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import $ from 'jquery';
+import { renderSearchFunc } from '../actions/index';
+import { connect } from 'react-redux';
 
 
-export default class Landing extends Component {
+class Landing extends Component {
+
+  componentWillMount() {
+    this.props.renderSearchFunc(false);
+  }
 
   componentDidMount() {
     // Video configuration
@@ -60,6 +66,10 @@ export default class Landing extends Component {
     });
 
     $('.fillWidth').get(0).play();
+  }
+
+  componentWillUnmount() {
+    this.props.renderSearchFunc(true);
   }
 
   render() {
@@ -168,3 +178,15 @@ export default class Landing extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+Landing.propTypes = {
+  renderSearchFunc: PropTypes.func,
+};
+
+export default connect(mapStateToProps, { renderSearchFunc })(Landing);
+
