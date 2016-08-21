@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const ErrorAlert = ({message, alert}) => {
+const ErrorAlert = ({ message, alert }) => {
   return (
     <div className={`showAlert-${alert}`}>
       <div className="errorAlert">
@@ -8,7 +8,7 @@ const ErrorAlert = ({message, alert}) => {
         <p>Adjust your search options and try again.</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ErrorAlert;
