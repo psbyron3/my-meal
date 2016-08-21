@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import $ from 'jquery';
 import { renderSearchFunc } from '../actions/index';
 import { connect } from 'react-redux';
+import SearchBar from '../containers/searchBar';
 
 
 class Landing extends Component {
@@ -81,6 +82,10 @@ class Landing extends Component {
               <h1 className="landing-mission">
               Your perfect meal awaits.
               </h1>
+              <br />
+              <div>
+                <SearchBar />
+              </div>
             </div>
             <div className="filter"></div>
             <video className="fillWidth" autoPlay muted loop>
