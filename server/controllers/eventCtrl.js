@@ -62,7 +62,7 @@ module.exports = {
           }
           return Event.createEvent(newEvent)
             .then((result) => {
-              console.log('result...', result);
+              console.log('result of a succesful event creation..........______...');
               return res.send(result);
             });
         }).catch((err) => {

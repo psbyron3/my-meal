@@ -83,7 +83,7 @@ User.findUserByEmail = function (email) {
 
 // Used in the Event.createEvent function only
 User.addHostToEvent = function (event, userId) {
-  console.log('inside userModel', userId, event);
+  console.log('inside userModel#$%@#$&^*&((%#^%#^$@#$@))');
   return db.User.findById(userId)
     .then((user) => {
       console.log(user, 'UUUUUUUUUSEEEER');

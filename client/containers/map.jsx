@@ -20,6 +20,10 @@ class MapView extends Component {
     this.setCurrent = this.setCurrent.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    return nextProps.allEvents.length > 0 ? this.props.setAlert(false) : this.props.setAlert(true);
+  }
+
   setCurrent(index) {
     return this.setState({ currentMarker: index });
   }
@@ -27,7 +31,6 @@ class MapView extends Component {
   renderMarkers() {
     // console.log('allEvents in MapView:', this.props.allEvents);
     if (this.props.allEvents.length > 0) {
-      this.props.setAlert(false);
       return this.props.allEvents.map((event) => {
         return (
           <MapMarker
@@ -47,8 +50,7 @@ class MapView extends Component {
         );
       });
     }
-    this.props.setAlert(true);
-    return null;
+    return (<span></span>);
   }
 
   render() {
