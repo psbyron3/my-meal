@@ -26,7 +26,6 @@ class AdvancedSearch extends Component {
           onHide={this.props.toggle}
           placement="bottom"
           container={this}
-          rootClose
           target={() => ReactDOM.findDOMNode(this.refs.target)}
         >
           <div id="searchMenu">
