@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import PastReview from './userPastReview';
 
 class ReviewList extends Component {
@@ -17,9 +18,10 @@ class ReviewList extends Component {
           index={review.id}
           rating={review.rating}
           eventPic={review.event.eventPic}
+          content={review.content}
         />
-      )
-    })
+      );
+    });
   }
 
   render() {
@@ -35,4 +37,8 @@ function mapStateToProps(state) {
   return { reviews: state.reviews };
 }
 
-export default ReviewList;
+ReviewList.propTypes = {
+  reviews: PropTypes.array
+};
+
+export default connect(mapStateToProps)(ReviewList);

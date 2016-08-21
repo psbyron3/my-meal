@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import DashEvent from './userDashEvent.jsx';
 import UserDashView from './userDashView';
 import UserEditProfile from './userEditProfile';
+import ReviewList from './userReviewList';
 import { getEventsByUserId, ChatBoxFunc } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,10 +15,6 @@ const userId = window.localStorage.userId;
 
 class UserDash extends Component {
 
-  // componentWillMount() {
-  //   console.log("in component will mount ")
-  //   this.props.getEventsByUserId(userId);
-  // }
 
   componentWillUnmount() {
     this.props.ChatBoxFunc('false');
@@ -62,16 +59,16 @@ class UserDash extends Component {
           <Tab eventKey={1} title="Dashboard">
             <UserDashView setHoverEvent={this.setHoverEvent} />
           </Tab>
-          <Tab eventKey={2} title="Preferences">
-            <UserEditProfile />
-          </Tab>
-          <Tab eventKey={3} title="Your Meals">
+          <Tab eventKey={2} title="Your Meals">
             <div className="user-feed">
             {this.renderList()}
             </div>
           </Tab>
-          <Tab eventKey={4} title="Your Reviews">q
-            This is where the reviews a user already created will go
+          <Tab eventKey={3} title="Your Reviews">
+            <ReviewList />
+          </Tab>
+          <Tab eventKey={4} title="Preferences">
+            <UserEditProfile />
           </Tab>
         </Tabs>
       </div>

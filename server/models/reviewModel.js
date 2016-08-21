@@ -47,7 +47,7 @@ Review.findReviewById = function (reviewId) {
           'eventName',
           'eventPic',
           'startDatetime',
-          'endDatetime'
+          'endDatetime',
         ],
       },
     ],
@@ -69,7 +69,7 @@ Review.findReviewsByUser = function (reviewerId) {
           'eventName',
           'eventPic',
           'startDatetime',
-          'endDatetime'
+          'endDatetime',
         ],
       },
     ],
@@ -88,7 +88,7 @@ Review.findReviewsByChef = function (chefId) {
           'eventName',
           'eventPic',
           'startDatetime',
-          'endDatetime'
+          'endDatetime',
         ],
       },
     ],
