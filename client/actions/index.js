@@ -10,6 +10,7 @@ export const CREATE_EVENT = 'CREATE_EVENT';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const AUTH_ERROR_SIGNUP = 'AUTH_ERROR_SIGNUP';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
 export const CHEF_EVENTS = 'CHEF_EVENTS';
@@ -133,11 +134,16 @@ export const SignUpFunc = (props, userPic) => {
               dispatch({
                 type: AUTH_USER,
               });
+              dispatch({
+                type: USER_INFO,
+                payload: response.data.result,
+              });
               browserHistory.push('/');
             })
             .catch((err) => {
               dispatch({
-                type: AUTH_ERROR,
+                type: AUTH_ERROR_SIGNUP,
+                payload: 'Please use a different email',
               });
             });
         });
@@ -166,11 +172,16 @@ export const SignUpFunc = (props, userPic) => {
         dispatch({
           type: AUTH_USER,
         });
+        dispatch({
+          type: USER_INFO,
+          payload: response.data.result,
+        });
         browserHistory.push('/');
       })
       .catch((err) => {
         dispatch({
-          type: AUTH_ERROR,
+          type: AUTH_ERROR_SIGNUP,
+          payload: 'Please use a different email',
         });
       });
   };
@@ -385,12 +396,14 @@ export const createEvent = (props, dishPic) => {
       return coords;
     })
     .then((resp) => {
+      console.log(resp, 'RESP WITH NO PICTURE');
       let url = null;
-      if (typeof resp === 'object') {
+      if (typeof resp === 'object' && resp.data) {
         url = resp.data;
       } else {
         url = 'https://s3-us-west-2.amazonaws.com/mymealmks/logo.png';
       }
+
       return Object.assign({}, coords, { url });
     })
     .then((output) => {
@@ -408,8 +421,9 @@ export const createEvent = (props, dishPic) => {
         endDatetime: props.end,
         userId,
       };
+
       return axios.post('/api/event/', params)
-        .then(() => {
+        .then((resp) => {
           browserHistory.push('/');
         })
         .catch((err) => {
@@ -470,7 +484,6 @@ export const ChatBoxFunc = (status) => {
 };
 
 export const renderSearchFunc = (status) => {
-  console.log(status, 'STATUSSSSSSS IN ACTION');
   return {
     type: CLOSE_SEARCH_BOX,
     payload: status,

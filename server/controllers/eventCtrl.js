@@ -48,6 +48,8 @@ module.exports = {
         tags: req.body.tags,
       };
 
+      console.log(newEvent, 'NEW EVEEEEEEEEEEEEEEEEENT');
+
       Event.findEventByLocationAndDate(
         newEvent.latitude,
         newEvent.longitude,
@@ -63,6 +65,8 @@ module.exports = {
               console.log('result...', result);
               return res.send(result);
             });
+        }).catch((err) => {
+          console.log(err);
         });
     },
     put(req, res) {
