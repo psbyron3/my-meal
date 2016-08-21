@@ -38,7 +38,7 @@ function mapStateToProps(state) {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.array
+  reviews: PropTypes.array,
 };
 
 export default connect(mapStateToProps)(ReviewList);

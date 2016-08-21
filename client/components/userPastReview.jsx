@@ -29,7 +29,7 @@ const PastReview = ({ eventName, date, index, rating, eventPic, content }) => {
               starCount={5}
               value={rating}
               editing={false}
-              />
+            />
           </div>
           <div className="review-content">
             <p>{content}</p>
@@ -48,7 +48,7 @@ PastReview.propTypes = {
   index: PropTypes.number,
   rating: PropTypes.number,
   eventPic: PropTypes.string,
-  content: PropTypes.string
+  content: PropTypes.string,
 };
 
 export default PastReview;
