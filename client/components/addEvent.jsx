@@ -59,7 +59,7 @@ class AddEvent extends Component {
                   <div className={`form-group ${eventName.touched && eventName.invalid ? 'has-danger' : ''}`}>
                     <label> Event Name </label>
                     <input type="text" className="form-control" {...eventName} />
-                    <div className="text-help">
+                    <div className="text-help" style={{ color: 'red' }}>
                       {eventName.touched ? eventName.error : ''}
                     </div>
                   </div>
@@ -121,14 +121,24 @@ class AddEvent extends Component {
                   <div className="row">
 
                     <div>
-                      <div className="col-md-3">
-                        <label> Price </label>
-                        <input type="number" className="form-control" {...price} />
+                      <div className="col-md-4">
+                        <div className={`form-group ${price.touched && price.invalid ? 'has-danger' : ''}`}>
+                          <label> Price </label>
+                          <input type="number" min="0" className="form-control" {...price} />
+                          <div className="text-help" style={{ color: 'red' }}>
+                            {price.touched ? price.error : ''}
+                          </div>
+                        </div>
                       </div>
 
-                      <div className="col-md-3">
-                        <label> Max Guests </label>
-                        <input type="number" className="form-control" {...maxGuest} />
+                      <div className="col-md-4">
+                        <div className={`form-group ${maxGuest.touched && maxGuest.invalid ? 'has-danger' : ''}`}>
+                          <label> Max Guests </label>
+                          <input type="number" min="0" className="form-control" {...maxGuest} />
+                          <div className="text-help" style={{ color: 'red' }}>
+                            {maxGuest.touched ? maxGuest.error : ''}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -146,7 +156,7 @@ class AddEvent extends Component {
                       <div className={`form-group ${start.touched && start.invalid ? 'has-danger' : ''}`}>
                         <label> Start </label>
                         <input type="datetime-local" className="form-control" {...start} />
-                        <div className="text-help">
+                        <div className="text-help" style={{ color: 'red' }}>
                           {start.touched ? start.error : ''}
                         </div>
                       </div>
@@ -156,7 +166,7 @@ class AddEvent extends Component {
                       <div className={`form-group ${end.touched && end.invalid ? 'has-danger' : ''}`}>
                         <label> End </label>
                         <input type="datetime-local" className="form-control" {...end} />
-                        <div className="text-help">
+                        <div className="text-help" style={{ color: 'red' }}>
                           {end.touched ? end.error : ''}
                         </div>
                       </div>
@@ -168,7 +178,7 @@ class AddEvent extends Component {
                   <div>
 
                     <label> Location </label>
-                    <div className="text-help">
+                    <div className="text-help" style={{ color: 'red' }}>
                       <div className={`form-group ${address.touched && address.invalid ? 'has-danger' : ''}`}>
                         <input type="text" className="form-control" placeholder="Street Address" {...address} />
                         {address.touched ? address.error : ''}
@@ -189,25 +199,21 @@ class AddEvent extends Component {
                           </div>
                         </div>
 
-                        <div className={`form-group ${zip.touched && zip.invalid ? 'has-danger' : ''}`}>
-                          <div className="col-md-4">
-                            <input type="number" className="form-control" placeholder="Zip Code" {...zip} />
-                          </div>
+
+                        <div className="col-md-4">
+                          <input type="number" min="10000" className="form-control" placeholder="Zip Code" {...zip} />
                         </div>
+
                       </div>
                     </div>
 
                     <div className="row">
-                      <div className="text-help col-md-4">
+                      <div className="text-help col-md-4" style={{ color: 'red' }}>
                        {city.touched ? city.error : ''}
                       </div>
 
-                      <div className="text-help col-md-4">
+                      <div className="text-help col-md-4" style={{ color: 'red' }}>
                        {usState.touched ? usState.error : ''}
-                      </div>
-
-                      <div className="text-help col-md-4">
-                       {zip.touched ? zip.error : ''}
                       </div>
                     </div>
 
@@ -244,11 +250,28 @@ const validate = (values) => {
     errors.eventName = 'Please enter an event name';
   }
 
+  if (!values.price) {
+    errors.price = 'Please enter valid price';
+  }
+
+  if (!values.maxGuest) {
+    errors.maxGuest = 'Please enter a valid number of guests';
+  }
+
   if (!values.start) {
     errors.start = 'Please enter a valid start time';
   }
 
-  if (!values.end || Date.parse(values.end) < Date.parse(values.start)) {
+  if (values.start && Date.parse(new Date()) > Date.parse(values.start)) {
+    errors.start = 'Please enter a valid start time';
+  }
+
+  if (!values.end) {
+    errors.end = 'Please enter a valid end time';
+  }
+
+  if (values.end && (Date.parse(values.end) < Date.parse(values.start) 
+    || Date.parse(new Date()) > Date.parse(values.end))) {
     errors.end = 'Please enter a valid end time';
   }
 
@@ -262,10 +285,6 @@ const validate = (values) => {
 
   if (!values.usState) {
     errors.usState = 'Enter a state';
-  }
-
-  if (!values.zip) {
-    errors.zip = 'Enter zip code';
   }
 
   return errors;

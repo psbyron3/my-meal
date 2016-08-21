@@ -30,6 +30,17 @@ class SignUp extends Component {
     this.setState({ file: e });
   }
 
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>{this.props.errorMessage}</strong>
+        </div>
+      );
+    }
+    return null;
+  }
+
   render() {
     const { fields: {
                       firstName,
@@ -53,6 +64,9 @@ class SignUp extends Component {
                 <div className="col-md-6 col-md-offset-3">
 
                   <form className="form-signin" onSubmit={handleSubmit(this.onSubmit)}>
+                    <div>
+                      {this.renderAlert()}
+                    </div>
                     <fieldset>
                       <h3 className="form-signin-heading">Sign Up</h3>
                       <br />
@@ -157,8 +171,22 @@ const validate = (values) => {
     errors.phoneNumber = 'Please enter a phone number';
   }
 
+  if (values.phoneNumber) {
+    const phone = String(values.phoneNumber).match(/\d/gi) || [];
+    if (phone.length !== 10) {
+      errors.phoneNumber = 'Please enter a phone number';
+    }
+  }
+
   if (!values.email) {
     errors.email = 'Please enter valid email';
+  }
+
+  if (values.email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(values.email)) {
+      errors.email = 'Please enter valid email';
+    }
   }
 
   if (!values.userName) {
