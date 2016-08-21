@@ -90,9 +90,9 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="nav-search" >
+      <div className="nav-search searchbar" >
         <form className="search-input">
-          <div style={{ display: 'inline-block' }}>
+          <div >
             <Autocomplete
               className="autoComplete"
               style={{ width: '90%' }}

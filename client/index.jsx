@@ -21,7 +21,6 @@ const store = createStoreWithMiddleware(reducers,
 
 persistStore(store, { blacklist: ['form', 'showSearch'] });
 
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />

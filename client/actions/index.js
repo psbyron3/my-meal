@@ -16,7 +16,7 @@ export const GET_EVENTS_BY_USER_ID = 'GET_EVENTS_BY_USER_ID';
 export const CHEF_EVENTS = 'CHEF_EVENTS';
 export const CHEF_PAST_EVENTS = 'CHEF_PAST_EVENTS';
 export const CHEF_UPCOMING_EVENTS = 'CHEF_UPCOMING_EVENTS';
-export const POST_USER_REVIEW_OF_CHEF = 'POST_USER_REVIEW_OF_CHEF';
+export const ALL_USER_REVIEWS = 'ALL_USER_REVIEWS';
 export const SEND_EVENT_ID = 'SEND_EVENT_ID';
 export const CLOSE_CHAT_BOX = 'CLOSE_CHAT_BOX';
 export const ALL_GENRES = 'ALL_GENRES';
@@ -56,6 +56,17 @@ export const getEventsToBeReviewed = (userId) => {
     });
 };
 
+export const getReviewsByUserId = (userId) => {
+  return axios.get(`/api/review/users/${userId}`)
+    .then((reviews) => {
+      const action = {
+        type: ALL_USER_REVIEWS,
+        payload: reviews.data,
+      };
+      return action;
+    });
+};
+
 /** *************** AUTHENTICATIONS *********************/
 
 export const SignInFunc = (props) => {
@@ -86,7 +97,11 @@ export const SignInFunc = (props) => {
         return getEventsByUserId(response.data.user.id)
           .then((action) => {
             dispatch(action);
-            browserHistory.push('/');
+            return getReviewsByUserId(localStorage.getItem('userId'))
+              .then((reviews) => {
+                dispatch(reviews);
+                browserHistory.push('/');
+              });
           });
       })
       .catch(() => {
@@ -451,20 +466,24 @@ export const joinEvent = (eventId, userId) => {
 
 export const postUserReviewOfChef = (reviewData) => {
   console.log('in post review action :', reviewData);
-  return axios.post('/api/review/', reviewData)
-    .then((response) => {
-      console.log('action review response: ', response);
-      return {
-        type: GET_EVENTS_BY_USER_ID,
-        payload: response,
-      };
-    })
-    .catch((err) => {
-      if (err) {
-        throw err;
-      }
-    });
+  return function (dispatch) {
+    return axios.post('/api/review/', reviewData)
+      .then((response) => {
+        console.log('action review response: ', response);
+        dispatch({
+          type: GET_EVENTS_BY_USER_ID,
+          payload: response,
+        });
+        return getReviewsByUserId(reviewData.reviewerId);
+      })
+      .catch((err) => {
+        if (err) {
+          throw err;
+        }
+      });
+  };
 };
+
 
 /** ******************** CHAT **************************/
 

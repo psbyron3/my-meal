@@ -1,12 +1,12 @@
 // Font weights
-$light: 150;
+$light: 300;
 $regular: 400;
 $bold: 600;
 
 // Base Font
-$base-font-family: sans-serif;
+$base-font-family: 'Raleway', sans-serif;
 $base-font-weight: $regular;
-$base-font-size: 14px;
+$base-font-size: 1em;
 $base-line-height: 1.4;
 
 // Fixed Font
@@ -15,7 +15,8 @@ $fixed-font-size: 85%;
 $fixed-line-height: $base-line-height;
 
 // Headings
-$header-font-weight: $bold;
+$header-font-family: 'Patua One', sans-serif;
+$header-font-weight: $regular;
 $header-font-size: 1.7em;
 $header-line-height: 110%;
 $header-color: #000;

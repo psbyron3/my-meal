@@ -14,33 +14,41 @@ class AdvancedSearch extends Component {
 
   render() {
     return (
-      <div style={{ display: 'inline-block' }}>
-        <Button id="searchButton" ref="target" onClick={this.props.toggle}>
-          &gt;
-        </Button>
+      <div id="advancedSearch">
+        <div id="searchButton">
+          <a ref="target" onClick={this.props.toggle}>
+            More search options...
+          </a>
+        </div>
         <Overlay
+          id="searchOverlay"
           show={this.props.show}
           onHide={this.props.toggle}
-          placement="right"
+          placement="bottom"
           container={this}
-          rootClose
           target={() => ReactDOM.findDOMNode(this.refs.target)}
         >
-          <div id="advancedSearch">
-            <RestrictionMenu
-              onCheckChange={this.props.onCheckChange}
-              selectedRestrictions={this.props.selectedRestrictions}
-              restrictions={this.props.restrictions}
-            />
-            <GenreMenu
-              onGenreChange={this.props.onGenreChange}
-              selectedGenre={this.props.selectedGenre}
-              genres={this.props.genres}
-            />
-            <DistanceMenu
-              onDistanceChange={this.props.onDistanceChange}
-              distance={this.props.distance}
-            />
+          <div id="searchMenu">
+            <div id="restrictions">
+              <RestrictionMenu
+                onCheckChange={this.props.onCheckChange}
+                selectedRestrictions={this.props.selectedRestrictions}
+                restrictions={this.props.restrictions}
+              />
+            </div>
+            <div id="genreMenu">
+              <GenreMenu
+                onGenreChange={this.props.onGenreChange}
+                selectedGenre={this.props.selectedGenre}
+                genres={this.props.genres}
+              />
+            </div>
+            <div id="distanceMenu">
+              <DistanceMenu
+                onDistanceChange={this.props.onDistanceChange}
+                distance={this.props.distance}
+              />
+            </div>
           </div>
         </Overlay>
       </div>

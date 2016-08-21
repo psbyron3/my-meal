@@ -83,7 +83,7 @@ User.findUserByEmail = function (email) {
 
 // Used in the Event.createEvent function only
 User.addHostToEvent = function (event, userId) {
-  console.log('inside userModel', userId, event);
+  console.log('inside userModel#$%@#$&^*&((%#^%#^$@#$@))');
   return db.User.findById(userId)
     .then((user) => {
       console.log(user, 'UUUUUUUUUSEEEER');
@@ -113,7 +113,8 @@ User.createUser = function (attr, tags = []) {
       })
       .then(() => {
         console.log('password hashed');
-        db.User.create(attr)
+        const newUser = Object.assign({}, attr, { avgRating: 0 });
+        db.User.create(newUser)
           .then(function (result) {
             const output = result.dataValues;
             return result.setTags(tags)

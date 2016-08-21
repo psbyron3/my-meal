@@ -3,6 +3,7 @@
 .navbar {
   &.navbar.navbar-default.navbar-fixed-top {
     background: $primary-light-blue;
+    padding-bottom: 5px;
   }
 }
 
@@ -20,6 +21,9 @@
     padding-top: 0px;
 }
 
+.navbar-nav>li>a {
+  padding: 10px 15px 5px;
+}
 
 .navbar-toggle {
   margin-top: 20px;
@@ -36,6 +40,10 @@
   color: transparent;
   cursor: pointer;
   z-index: 2;
+}
+
+.nav-search {
+  margin: 15px 10px 0;
 }
 
 .autoComplete input[type=search]:hover {
@@ -89,7 +97,7 @@ input[type=search] {
   font-size: 100%;
 }
 
-input::-webkit-search-decoration, 
+input::-webkit-search-decoration,
 input::-webkit-search-cancel-button {
   display: none;
 }
@@ -123,39 +131,3 @@ input:-moz-placeholder {
 input::-webkit-input-placeholder {
   color: #999;
 }
-//************* Advanced Search Popover *******************//
-
-#searchButton {
-  border-radius: 100%;
-  margin-left: 25px;
-  border: none;
-
-  &:focus, &:visited, &:hover {
-    border-radius: 100%;
-    margin-left: 25px;
-    border: none;
-  }
-}
-
-#advancedSearch {
-  background-color: #F7F4EF;
-  position: absolute;
-  borderRadius: 10px;
-  margin-left: 10px;
-}
-
-// ***************** Google Places dropdown ****************//
-
-.pac-container {
-  top: 20px;
-  z-index: 1051;
-  border-radius: 15px;
-}
-
-.pac-item, .pac-selected {}
-
-.pac-container:after {
-  background-position: 15px;
-}
-  // This is the stylized animated search bar. Has not yet been implemented with
-  // Autocomplete searchbar

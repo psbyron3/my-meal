@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import MapList from './maplist';
-import MapMarker from './map-marker.jsx';
+import MapMarker from './map-marker';
 import { connect } from 'react-redux';
-// import IceFixedTable from '../exampleTable/example_maplist'
-// import shouldPureComponentUpdate from 'react-addons-shallow-compare';
 
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
@@ -22,12 +20,16 @@ class MapView extends Component {
     this.setCurrent = this.setCurrent.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    return nextProps.allEvents.length > 0 ? this.props.setAlert(false) : this.props.setAlert(true);
+  }
+
   setCurrent(index) {
     return this.setState({ currentMarker: index });
   }
 
   renderMarkers() {
-    console.log('allEvents in MapView:', this.props.allEvents);
+    // console.log('allEvents in MapView:', this.props.allEvents);
     if (this.props.allEvents.length > 0) {
       return this.props.allEvents.map((event) => {
         return (
@@ -48,11 +50,11 @@ class MapView extends Component {
         );
       });
     }
-    return (<div>No Events in this area</div>);
+    return (<span></span>);
   }
 
   render() {
-    console.log('location in map: ', this.props);
+    // console.log('location in map: ', this.props);
     return (
       <div>Here is the map:
         <div className="map">
