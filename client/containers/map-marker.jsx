@@ -3,6 +3,7 @@ import { Popover, Button, Overlay } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectEvent } from '../actions/index.js';
+import moment from 'moment';
 
 class MapMarker extends Component {
   constructor(props) {
@@ -58,7 +59,8 @@ class MapMarker extends Component {
   }
 
   render() {
-    console.log('type of this.props.startTime:', typeof this.props);
+    let startTime = moment(this.props.startTime).format('MMMM Do YYYY, h:mm');
+    let endTime = moment(this.props.endTime).format('h:mm');
     return (
       <div style={this.style} >
         <a
@@ -80,10 +82,13 @@ class MapMarker extends Component {
           target={this.state.target}
           placement="top"
         >
-          <Popover id={this.props.eventName}>
+          <Popover
+            className="popover"
+            id={this.props.eventName}
+          >
             <h5>{this.props.eventName}</h5>
             <p>{this.props.address}</p>
-            <p>{this.props.startTime} - {this.props.endTime}</p>
+            <p>{startTime} - {endTime}</p>
           </Popover>
         </Overlay>
       </div>

@@ -114,7 +114,7 @@ class UserEditProfile extends Component {
                                     checked={this.state.selectedRestrictions.indexOf(restriction.id) > -1}
                                     onChange={this.onCheckChange}
                                   />
-                                {restriction.tagName}
+                                  &nbsp;{restriction.tagName}
                                 </label>
                               </div>
                             );

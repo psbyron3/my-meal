@@ -6,7 +6,6 @@ import SearchBar from '../containers/searchBar';
 
 export default class App extends Component {
   render() {
-    console.log('typeof this.props.children......', typeof this.props.children);
     return (
       <div>
         <NavBarComp>

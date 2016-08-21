@@ -1,8 +1,6 @@
-// #search {
-//     float: right;
-//     margin-top: 9px;
-//     width: 250px;
-// }
+
+//************* Advanced Search Popover *******************//
+
 
 #advancedSearch {
   background-color: $primary-light-blue;
@@ -18,7 +16,6 @@
 }
 
 #searchOverlay {
-  z-index: -1000;
   margin-top: 100px;
 }
 
@@ -29,14 +26,11 @@
     margin-left: -170px;
     padding: 10px;
     width: 370px;
-    // -webkit-transition: all 0.5s ease-in-out;
-    // -moz-transition: all 0.5s ease-in-out;
-    // -o-transition: all 0.5s ease-in-out;
-    // transition: all 0.5s ease-in-out;
     line-height: 18px;
     background-color: #FFB74C;
     border-radius: 0 0 10px 10px;
     border: 1px solid $primary-yellow;
+    z-index: 4;
 }
 
 #searchMenu label {
@@ -49,14 +43,76 @@
 }
 
 #restrictions {
-  display: inline-block;
+  display: block;
+  position: relative;
+  float: left;
   width: 349px;
+  clear: right;
 }
 
 #genreMenu {
   display: inline-block;
+  position: relative;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 5px;
 }
 
 #distanceMenu {
   display: inline-block;
+  position: relative;
+  float: right;
 }
+
+#searchButton {
+  border-radius: 100%;
+  margin-left: 25px;
+  border: none;
+  cursor: pointer;
+
+  &:focus, &:visited, &:hover {
+    border-radius: 100%;
+    margin-left: 25px;
+    border: none;
+  }
+}
+
+// ***************** Google Places dropdown ****************//
+
+.pac-container {
+  top: 20px;
+  z-index: 1051;
+  border-radius: 15px;
+}
+
+.pac-item, .pac-selected {}
+
+.pac-container:after {
+  background-position: 15px;
+}
+  // This is the stylized animated search bar. Has not yet been implemented with
+  // Autocomplete searchbar
+
+  // @media (max-width: 768px){
+  //   #advancedSearch {
+  //     width: 100%;
+  //   }
+  //   #searchOverlay {
+  //     width: 100%;
+  //   }
+  //   #searchMenu {
+  //     width: 100%;
+  //     margin: 10px 0 0;
+  //     overflow: hidden;
+  //   }
+  //   // #restrictions, #genreMenu {
+  //   //   display: block;
+  //   //   position: static;
+  //   // }
+  // }
+
+  @media (max-width: 420px) {
+    #distanceMenu {
+      float: left;
+    }
+  }

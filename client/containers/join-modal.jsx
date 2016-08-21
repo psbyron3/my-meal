@@ -50,10 +50,10 @@ class JoinModal extends Component {
       return (
         <Modal.Footer>
           <div>
-            <p> Please
+            <p> Please &nbsp;
               <a href="#">
                 <Link to="signIn">Sign In</Link>
-              </a> or
+              </a> or&nbsp;
               <a href="#">
                 <Link to="signUp">Sign Up</Link>
               </a> to join events!

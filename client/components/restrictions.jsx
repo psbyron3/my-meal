@@ -13,7 +13,7 @@ const RestrictionMenu = ({ restrictions, selectedRestrictions, onCheckChange }) 
               checked={selectedRestrictions.indexOf(restriction.id) > -1}
               onFocus={onCheckChange}
             />
-          {restriction.tagName}
+          &nbsp;{restriction.tagName}
           </label>
         </div>
       );
