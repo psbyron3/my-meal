@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
-const ErrorAlert = ({ message, alert }) => {
+const ErrorAlert = ({ alert }) => {
   return (
     <div className={`showAlert-${alert}`}>
       <div className="errorAlert">
@@ -9,6 +9,10 @@ const ErrorAlert = ({ message, alert }) => {
       </div>
     </div>
   );
+};
+
+ErrorAlert.propTypes = {
+  alert: PropTypes.bool,
 };
 
 export default ErrorAlert;

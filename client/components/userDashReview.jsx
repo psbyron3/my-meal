@@ -31,21 +31,15 @@ class UserReview extends Component {
   }
 
   onReviewSubmit(event) {
-    console.log('THE EVENT TARGET IN REVIEW SUBMIT : ', event.target);
     event.preventDefault();
-
     this.props.postUserReviewOfChef(this.state);
   }
 
   onStarClick(nextValue, prevValue) {
-    console.log(`next value is...${nextValue} and previous value was ${prevValue}`);
-    this.setState({ rating: nextValue }, () => {
-      console.log('this.state is....', this.state);
-    });
+    this.setState({ rating: nextValue });
   }
 
   render() {
-    // console.log('UDReview userHistory', this.props.userHistory);
     const { rating } = this.state;
     return (
       <Row>
@@ -88,15 +82,12 @@ class UserReview extends Component {
         </Col>
         <Col className="review-gutter" md={2} />
       </Row>
-
     );
   }
 }
 
 
 function mapStateToProps(state) {
-  // console.log('mStoP in UDReview:', state.userHistory);
-
   return {
     userHistory: state.userHistory,
     Review: state.review,
@@ -112,7 +103,11 @@ UserReview.propTypes = {
   postUserReviewOfChef: PropTypes.func,
   userHistory: PropTypes.array,
   eventName: PropTypes.string,
-
+  index: PropTypes.number,
+  userInfo: PropTypes.object,
+  hostId: PropTypes.number,
+  eventPic: PropTypes.string,
+  date: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserReview);

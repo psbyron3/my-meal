@@ -51,7 +51,6 @@ module.exports = {
       const userId = url.parse(req.url, true).path.slice(1);
       User.findUserById(userId)
         .then((results) => {
-          console.log('results are................... ....... . . . ....', results);
           res.send(results);
         })
         .catch((err) => {
@@ -74,7 +73,6 @@ module.exports = {
       };
       User.editUser(attr, req.body.tags, userId)
         .then((userInfo) => {
-          console.log('sending back userInfo....', userInfo);
           res.send(userInfo);
         })
         .catch((err) => {

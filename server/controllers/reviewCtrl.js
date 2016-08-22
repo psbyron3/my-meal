@@ -17,7 +17,6 @@ module.exports = {
 
       Review.createReview(newReview)
         .then((reslt) => {
-          console.log('RESULT RESULT RESULT::::::', reslt[0].dataValues);
           res.send(reslt);
         })
         .catch((err) => {
@@ -40,7 +39,6 @@ module.exports = {
       const userId = url.parse(req.url, true).path.slice(7);
       Review.findReviewsByUser(userId)
         .then((results) => {
-          console.log('results coming back....', results[0].dataValues);
           res.send(results);
         })
         .catch((err) => {
@@ -66,16 +64,15 @@ module.exports = {
 
       const eventId = url.parse(req.url, true).path.split('/event/')[1];
 
-      console.log('getting all reviews for event: ', eventId);
+      // console.log('getting all reviews for event: ', eventId);
 
       Review.findReviewsByEvent(eventId)
         .then((reviews) => {
-          console.log('these are the reviews', reviews);
+          // console.log('these are the reviews', reviews);
           if (reviews.length === 0) {
             console.log('reviews do not exist');
             res.end('Received GET at /api/review/event/:eventId');
           } else {
-            console.log('there are reviews, return them');
             res.send(reviews);
           }
         });
@@ -98,7 +95,6 @@ module.exports = {
       const userId = url.parse(req.url, true).path.slice(6);
       Review.findReviewsByChef(userId)
         .then((results) => {
-          console.log('results received in /chef/:userId');
           Review.updateAverage(results);
           res.send(results);
         });

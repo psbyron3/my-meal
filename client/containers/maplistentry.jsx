@@ -142,6 +142,7 @@ MapListEntry.propTypes = {
   address: PropTypes.string,
   description: PropTypes.string,
   maxGuests: PropTypes.number,
+  rating: PropTypes.number,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapListEntry);

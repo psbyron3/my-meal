@@ -26,8 +26,8 @@ class userDashView extends Component {
     }
     return this.props.userHistory
       .filter((event) => {
-        console.log('now is.....', now, 'of type', typeof now);
-        console.log('endDatetime is......', event.endDatetime, 'of type', typeof event.endDatetime);
+        // console.log('now is.....', now, 'of type', typeof now);
+        // console.log('endDatetime is......', event.endDatetime, 'of type', typeof event.endDatetime);
         return event.endDatetime <= now && !event.UsersEvent.wasReviewed;
       })
       .map((event, index) => {
@@ -62,8 +62,9 @@ function mapStateToProps(state) {
   };
 }
 
-userDashView.PropTypes = {
+userDashView.propTypes = {
   userHistory: PropTypes.array,
+  hoverEvent: PropTypes.func,
 };
 
 export default connect(mapStateToProps)(userDashView);

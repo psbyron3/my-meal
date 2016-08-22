@@ -38,7 +38,6 @@ class SearchBar extends Component {
   }
 
   onTextChange(event) {
-    console.log('textChange: ', event.target.value);
     this.setState({ query: event.target.value });
   }
 
