@@ -73,7 +73,7 @@ module.exports = {
         tags = tags.split(',');
       }
 
-      Event.findEventsByParams(latitude, longitude, distance, tags)
+      Event.findEventsInRadius(latitude, longitude)
         .then((results) => {
           res.send(results);
         })
