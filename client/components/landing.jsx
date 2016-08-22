@@ -155,7 +155,7 @@ class Landing extends Component {
             </h2>
             <p className="lead">
               Savor your meal. Share new experiences with new people.
-              Join the conversation.
+              Eat like a local.
               Uncover new cultures from both your host and your new friends.
               Relax and let us take care of everything.
             </p>
