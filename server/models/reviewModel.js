@@ -59,6 +59,7 @@ Review.findReviewById = function (reviewId) {
 
 // find all reviews by a given reviewer id
 Review.findReviewsByUser = function (reviewerId) {
+  console.log('reviewerId in Review model findReviewsByUser...', reviewerId)
   return db.Review.findAll({
     where: { reviewerId },
     include: [
@@ -73,7 +74,12 @@ Review.findReviewsByUser = function (reviewerId) {
         ],
       },
     ],
-  });
+  })
+  .catch((err) => {
+    console.log('err in findReviewsByUser.....', err);
+    return err;
+  })
+  ;
 };
 
 // find all reviews for a chef
@@ -92,6 +98,10 @@ Review.findReviewsByChef = function (chefId) {
         ],
       },
     ],
+  })
+  .catch((err) => {
+    console.log('error in findReviewsByChef', err);
+    return err;
   });
 };
 

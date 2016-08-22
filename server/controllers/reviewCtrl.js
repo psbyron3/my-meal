@@ -36,7 +36,8 @@ module.exports = {
   '/users/:userId': {
     get(req, res) {
       console.log('Received GET at /api/review/:userId');
-      const userId = url.parse(req.url, true).path.slice(7);
+      const userId = url.parse(req.url, true).path.split('/users/')[1];
+      console.log(userId);
       Review.findReviewsByUser(userId)
         .then((results) => {
           res.send(results);
