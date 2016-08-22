@@ -35,11 +35,13 @@ module.exports = {
   },
   '/users/:userId': {
     get(req, res) {
-      console.log('Received GET at /api/review/:userId');
+      console.log('Received GET at /api/review/users/:userId');
+      console.log('url is.....', req.url);
       const userId = url.parse(req.url, true).path.split('/users/')[1];
-      console.log(userId);
+      console.log('userId in /api/review/users/:userId is...', userId);
       Review.findReviewsByUser(userId)
         .then((results) => {
+          console.log('results of findReviewsByUser', results);
           res.send(results);
         })
         .catch((err) => {
