@@ -86,21 +86,12 @@ class MapListEntry extends Component {
             <div className="event-name">
               <strong>{this.props.eventName}</strong>
             </div>
-            <div className="street-address">
-              {this.formatAddress(this.props.address, 'street')}
-            </div>
-            <div className="city-address">
-              {this.formatAddress(this.props.address)}
-            </div>
             <div className="event-time">
               {this.formatTime(startTime, 'time')} -
               {this.formatTime(endTime, 'time')}
             </div>
             <div className="event-date">
               {this.formatTime(startTime)}
-            </div>
-            <div className="event-description">
-              {this.props.description}
             </div>
             <div className="event-maxGuests">
               Max Guests: {this.props.maxGuests}
