@@ -69,14 +69,14 @@ class MapListEntry extends Component {
             />
             <div className="price-banner">
               <div className="event-price">
-                $ {this.props.price}
+                <h4>$ {this.props.price}</h4>
               </div>
               <div >
-                <p className="context">Chef&apos;s Rating:</p>
+
                 <StarRatingComponent
-                  name={this.props.index}
+                  name={String(this.props.index)}
                   starCount={5}
-                  value={this.props.rating}
+                  value={+this.props.rating}
                   editing={false}
                 />
               </div>
@@ -84,7 +84,7 @@ class MapListEntry extends Component {
           </div>
           <div className="back face center">
             <div className="event-name">
-              <strong>{this.props.eventName}</strong>
+              <h5>{this.props.eventName}</h5>
             </div>
             <div className="event-time">
               {this.formatTime(startTime, 'time')} -
@@ -99,15 +99,16 @@ class MapListEntry extends Component {
             <div className="chef-container">
               <Image
                 className="chef-photo"
-                src="../assets/stock-chef.jpg"
+                src={this.props.chefPic}
                 circle
               />
             </div>
             <div>
               <StarRatingComponent
-                name={this.props.index}
+                className="card-rating"
+                name={String(this.props.index)}
                 starCount={5}
-                value={this.props.rating}
+                value={+this.props.rating}
                 editing={false}
               />
             </div>
@@ -143,6 +144,7 @@ MapListEntry.propTypes = {
   description: PropTypes.string,
   maxGuests: PropTypes.number,
   rating: PropTypes.number,
+  chefPic: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapListEntry);

@@ -79,7 +79,7 @@ class DashEvent extends Component {
               </div>
               <Image
                 className="user-chef-photo"
-                src="../assets/stock-chef.jpg"
+                src={this.props.chefPic}
                 circle
               />
               <div className="user-chat">

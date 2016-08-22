@@ -63,7 +63,7 @@ AdvancedSearch.propTypes = {
   selectedRestrictions: PropTypes.array,
   restrictions: PropTypes.array,
   onGenreChange: PropTypes.func,
-  selectedGenre: PropTypes.array,
+  selectedGenre: PropTypes.number,
   genres: PropTypes.array,
   onDistanceChange: PropTypes.func,
   distance: PropTypes.number,
