@@ -9,7 +9,7 @@ const RestrictionMenu = ({ restrictions, selectedRestrictions, onCheckChange }) 
             <input
               type="checkbox"
               value={restriction.id}
-              checked={selectedRestrictions.indexOf(restriction.id) > -1}
+              defaultChecked={selectedRestrictions.indexOf(restriction.id) > -1}
               onFocus={onCheckChange}
             />
           &nbsp;{restriction.tagName}

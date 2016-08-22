@@ -22,7 +22,7 @@ const GenreMenu = ({ selectedGenre, genres, onGenreChange }) => {
 };
 
 GenreMenu.propTypes = {
-  selectedGenre: PropTypes.array,
+  selectedGenre: PropTypes.number,
   genres: PropTypes.array,
   onGenreChange: PropTypes.func,
 };
