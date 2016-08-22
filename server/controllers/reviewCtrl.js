@@ -8,16 +8,17 @@ module.exports = {
     get(req, res) {
       console.log('Received GET at /api/review/users/:userId');
       console.log('url is.....', req.url);
-      const userId = url.parse(req.url, true).path.split('/users/')[1];
+      const userId = url.parse(req.url, true).path.slice(7);
+      console.log('parsing url............', url.parse(req.url, true).path);
       console.log('userId in /api/review/users/:userId is...', userId);
       Review.findReviewsByUser(userId)
-      .then((results) => {
-        console.log('results of findReviewsByUser', results);
-        res.send(results);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
+        .then((results) => {
+          console.log('results of findReviewsByUser', results);
+          res.send(results);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
     },
     post(req, res) {
       console.log('Received POST at /api/review/:userId');
