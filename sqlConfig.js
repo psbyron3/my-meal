@@ -9,6 +9,7 @@ module.exports = {
     connection: {
     	host:'mymeal.justinpchen.com',
     	dialect: 'mysql',
+        timezone:"-07:00"
     },
     charset  : 'utf8'
   }
