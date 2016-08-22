@@ -66,7 +66,7 @@ class DashEvent extends Component {
                 <div className="user-event-date">
                   {this.formatTime(this.props.times)}
                   <div className="user-event-time">
-                  {this.formatTime(this.props.times, "time")}
+                  {this.formatTime(this.props.times, 'time')}
                   </div>
                 </div>
                 <div className="user-event-description">
