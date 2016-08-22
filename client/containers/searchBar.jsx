@@ -30,7 +30,7 @@ class SearchBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.wasChecked && nextProps.Tags) {
+    if (!this.state.wasChecked && nextProps.Tags && nextProps.authenticated) {
       this.setState({
         restrictions: nextProps.Tags.map(tag => tag.id),
       });
@@ -127,6 +127,7 @@ function mapStateToProps(state) {
     restrictions: state.tags.restrictions,
     genres: state.tags.genres,
     Tags: state.userInfo.Tags,
+    authenticated: state.auth.authenticated
   };
 }
 
@@ -139,6 +140,7 @@ SearchBar.propTypes = {
   genres: PropTypes.array,
   getAllInRadius: PropTypes.func,
   getAllTags: PropTypes.func,
+  authenticated: PropTypes.bool
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

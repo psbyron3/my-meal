@@ -19,7 +19,7 @@ const createStoreWithMiddleware = compose(applyMiddleware(thunk, promise))(creat
 const store = createStoreWithMiddleware(reducers,
   window.devToolsExtension ? window.devToolsExtension() : f => f, autoRehydrate());
 
-persistStore(store, { blacklist: ['form', 'showSearch'] });
+persistStore(store, { blacklist: ['form', 'showSearch'] }).purgeAll();
 
 ReactDOM.render(
   <Provider store={store}>
