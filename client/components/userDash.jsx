@@ -12,6 +12,7 @@ import MessageBox from './messageBox';
 import { Tabs, Tab } from 'react-bootstrap';
 
 const userId = window.localStorage.userId;
+const now = moment().format();
 
 class UserDash extends Component {
 
@@ -27,7 +28,7 @@ class UserDash extends Component {
     if (!this.props.userHistory.length) {
       return (<div>Join Events to populate this page!</div>);
     }
-    return this.props.userHistory.filter((event) => event.UsersEvent.role === 'guest')
+    return this.props.userHistory.filter((event) => event.UsersEvent.role === 'guest' && event.startDatetime >= now)
       .map((event) => {
         const startTime = moment(event.startDatetime, ['YYYY', moment.ISO_8601]).format('MMMM DD YYYY, hh:mm A');
         const endTime = moment(event.endDatetime, ['YYYY', moment.ISO_8601]).format('hh:mm A');
@@ -40,6 +41,7 @@ class UserDash extends Component {
             address={event.address}
             times={`${startTime} to ${endTime}`}
             description={event.description}
+            
           />
         );
       });
@@ -77,7 +79,7 @@ class UserDash extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('mapStoP Events by User Id : ', state.userHistory);
+  console.log('mapStoP Events by User Id : ', state.userHistory);
   return {
     userHistory: state.userHistory,
     boxStatus: state.boxStatus.status,
