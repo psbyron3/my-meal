@@ -71,7 +71,7 @@ Event.findEventsInRadius = function (lat, lng) {
     .then((results) => {
       const filtered = results.filter((event) => {
         return event.Users.length;
-      })
+      });
       console.log('results from findEventsInRadius', results);
       return filtered;
     })
@@ -97,7 +97,7 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
         model: db.User,
         through: {
           model: db.UsersEvent,
-          where: { role: 'host',  },
+          where: { role: 'host' },
         },
       },
       {
@@ -121,7 +121,7 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
             }
           });
         }
-        //event.Users.length ensures that events with no relationship in the join table won't return
+        // event.Users.length ensures that events with no relationship in the join table won't return
         return tagMatch === tags.length && event.Users.length;
       });
     })
