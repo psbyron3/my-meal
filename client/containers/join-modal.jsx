@@ -47,12 +47,12 @@ class JoinModal extends Component {
 
   alreadyJoined() {
     const matchedEvent = this.props.userHistory.filter((event) => {
-      return event.id === this.props.selectedEvent.id
-    })
+      return event.id === this.props.selectedEvent.id;
+    });
     if (matchedEvent.length > 0) {
       return (<h6 className="alert">You are already attending this event.</h6>);
     }
-    return (<span></span>)
+    return (<span></span>);
   }
 
   authRender() {
@@ -127,7 +127,7 @@ function mapStateToProps(state) {
     selectedEvent: state.selectedEvent,
     userId: state.userInfo.id,
     authenticated: state.auth.authenticated,
-    userHistory: state.userHistory
+    userHistory: state.userHistory,
   };
 }
 
