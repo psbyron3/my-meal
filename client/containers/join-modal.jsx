@@ -72,9 +72,22 @@ class JoinModal extends Component {
         </Modal.Footer>
       );
     }
+
+    const matchedEvent = this.props.userHistory.filter((event) => {
+      return event.id === this.props.selectedEvent.id;
+    });
+    if (matchedEvent.length > 0) {
+      return (
+        <Modal.Footer>
+          {this.alreadyJoined()}
+          <Button onClick={this.handleJoinEvent} disabled>Join</Button>
+          <Button onClick={this.props.closeModal}>Cancel</Button>
+        </Modal.Footer>
+      );
+    }
+
     return (
       <Modal.Footer>
-        {this.alreadyJoined()}
         <Button onClick={this.handleJoinEvent}>Join</Button>
         <Button onClick={this.props.closeModal}>Cancel</Button>
       </Modal.Footer>
