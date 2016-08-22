@@ -69,4 +69,5 @@ AdvancedSearch.propTypes = {
   distance: PropTypes.number,
 };
 
+
 export default AdvancedSearch;

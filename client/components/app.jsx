@@ -5,6 +5,10 @@ import SearchBar from '../containers/searchBar';
 
 
 export default class App extends Component {
+  componentDidUpdate() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       <div>

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { createEvent } from '../actions/index';
 import FileInput from 'react-file-input';
@@ -222,9 +223,9 @@ class AddEvent extends Component {
                   <br />
 
                   <div className="pull-right">
-                    <button type="submit" className="btn btn-outline-danger">Cancel</button>
+                    <Link to="/"><button type="submit" className="btn btn-outline-danger">Cancel</button></Link>
                     <span> </span>
-                    <button type="submit" className="btn btn-outline-primary">Create</button>
+                    <button className="btn btn-outline-primary">Create</button>
 
                   </div>
                 </fieldset>

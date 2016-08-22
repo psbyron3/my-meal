@@ -202,10 +202,11 @@ export const SignUpFunc = (props, userPic) => {
 };
 
 export const SignOutFunc = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  localStorage.removeItem('userName');
-  localStorage.removeItem('userPic');
+  // localStorage.removeItem('token');
+  // localStorage.removeItem('userId');
+  // localStorage.removeItem('userName');
+  // localStorage.removeItem('userPic');
+  localStorage.clear();
   browserHistory.push('/');
   return {
     type: UNAUTH_USER,
