@@ -208,8 +208,18 @@ export const SignOutFunc = () => {
   // localStorage.removeItem('userPic');
   localStorage.clear();
   browserHistory.push('/');
-  return {
-    type: UNAUTH_USER,
+  return function (dispatch) {
+    dispatch({
+      type: UNAUTH_USER,
+    });
+    dispatch({
+      type: GET_ALL_EVENTS,
+      payload: [],
+    });
+    dispatch({
+      type: GET_EVENTS_BY_USER_ID,
+      payload: [],
+    });
   };
 };
 
