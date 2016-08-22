@@ -1,3 +1,5 @@
+$landing-text-margin: 25px;
+
 .landing-overlay {
   display: flex;
   flex-direction: column;
@@ -14,4 +16,12 @@
     color: $primary-white;
     font-family: $header-font-family;
   }
+}
+
+.lead {
+  margin: $landing-text-margin;
+}
+
+.featurette-heading {
+  margin: $landing-text-margin;
 }
