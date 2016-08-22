@@ -4,8 +4,10 @@ import { postUserReviewOfChef } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Col, Row, FormControl, textarea, Image } from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
+import moment from 'moment';
 
 const userId = window.localStorage.userId;
+
 
 class UserReview extends Component {
   constructor(props) {
@@ -46,11 +48,11 @@ class UserReview extends Component {
         <Col className="review-gutter" md={2} />
         <Col className="review-container" md={8}>
           <div className="review-event-basics">
-            <div className="review-event-image">
+            <div className="review-image-container">
               <Image
+                className="review-image"
                 src={this.props.eventPic}
                 role="presentation"
-                circle
               />
             </div>
             <div className="review-event-details">
@@ -58,26 +60,35 @@ class UserReview extends Component {
                 <h3>{this.props.eventName}</h3>
               </div>
               <div className="review-event-date">
-                {this.props.date}
+                {moment(this.props.date).format('MMMM DD, YYYY hh:mm A')}
               </div>
             </div>
           </div>
           <form className="review-rating-container" >
-            <StarRatingComponent
-              name={this.props.eventName}
-              starCount={5}
-              value={rating}
-              onStarClick={this.onStarClick}
-            />
-            <div className="review-comments">
-              <textarea onChange={this.onCommentChange} />
+            <div className="review-star-container">
+              <StarRatingComponent
+                className="review-stars"
+                name={this.props.eventName}
+                starCount={5}
+                value={rating}
+                onStarClick={this.onStarClick}
+              />
             </div>
-            <button
-              type="submit"
-              onClick={this.onReviewSubmit}
-              className="btn btn-primary"
-            >Submit Rating
-            </button>
+            <div className="review-comments">
+              <textarea
+                placeholder="How was your experience?"
+                className="review-comment-textarea"
+                onChange={this.onCommentChange}
+              />
+            </div>
+            <div className="review-button-container">
+              <button
+                type="submit"
+                onClick={this.onReviewSubmit}
+                className="btn btn-primary"
+              >Submit Rating
+              </button>
+            </div>
           </form>
         </Col>
         <Col className="review-gutter" md={2} />

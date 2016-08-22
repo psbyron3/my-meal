@@ -1,0 +1,140 @@
+@import "utils/mixins";
+// **************** User Dash Reviews******************//
+
+$review-container-margin : 100px;
+$review-image-height : 210px;
+$review-image-width : 230px;
+
+
+.review-gutter {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 50px;
+
+}
+
+.review-event-details {
+  text-align: center;
+  width: 40%;
+}
+
+.review-container {
+  display: flex;
+  flex-direction: column;
+  margin-top:$review-container-margin;
+  height: 250px;
+  @include box-shadow(0, 1.5px, 4px, 0px, rgba(0, 0, 0, 0.4));
+}
+
+.review-event-basics {
+  display: flex;
+  flex-direction: row;
+}
+
+.review-image-container {
+  height: $review-image-height;
+  width: $review-image-width;
+}
+
+.review-image {
+  height: $review-image-height;
+  width: $review-image-width;
+  padding: 20px;
+}
+
+.review-rating-container {
+  right: 5px;
+}
+
+.review-star-container {
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+  font-size: 20px;
+ 
+}
+
+
+
+.review-comments {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-bottom: 10px;
+  > .review-comment-textarea {
+    height: 125px;
+    width: 70%;
+    resize: none;
+  }
+}
+
+.review-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+  
+}
+
+
+
+
+
+
+// ******************** Previous Reviews ************* //
+
+.review-event-image {
+  height: $review-image-height;
+  width: 200px;
+  margin : 15px;
+}
+
+.review-title-and-stars {
+  display: flex;
+}
+
+.review-event-details {
+  text-align: center;
+  width: 60%
+}
+
+.star-review {
+  margin-left: auto;
+  font-size: 20px;
+}
+
+.review-content {
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+// .review-rating {
+//   text-align: center;
+//   perspective: 250px;
+//   top: 40%;
+//   width: 100%;
+
+//   span {
+//     cursor: pointer;
+//     padding: 0 10px;
+//     color: #fff;
+//     opacity: 0.5;
+//     transition: all 150ms;
+//     display: inline-block;
+//     transform: rotateX(45deg);
+//     transform-origin: center bottom;
+
+//     &.hover, :active {
+//       color: #ff0;
+//       opacity: 1;
+//       transform: rotateX(0deg);
+//       text-shadow: 0 0 30px #ffc;
+//     }
+//   }
+// }
