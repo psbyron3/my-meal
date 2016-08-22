@@ -9,7 +9,7 @@ class ReviewList extends Component {
   }
 
   renderPastReviews() {
-    if (this.props.reviews.length) {
+    if (this.props.reviews.length && Array.isArray(this.props.reviews)) {
       return this.props.reviews.map((review) => {
         return (
           <PastReview
