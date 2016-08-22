@@ -25,7 +25,6 @@ export const GET_EVENTS_TO_BE_REVIEWED = 'GET_EVENTS_TO_BE_REVIEWED';
 export const USER_INFO = 'USER_INFO';
 export const CLOSE_SEARCH_BOX = 'CLOSE_SEARCH_BOX';
 
-
 export const getEventsByUserId = (userId) => {
   return axios.get(`/api/event/users/${userId}`)
     .then((response) => {
@@ -448,28 +447,26 @@ export const createEvent = (props, dishPic) => {
 };
 
 export const joinEvent = (eventId, userId) => {
-  return function (dispatch) {
-    return axios.post(`api/event/join/${eventId}`, { userId })
-      .then((events) => {
-        console.log('WILL IT DISPATCH UPON JOINEVENT RESPONSE?', events);
+  return axios.post(`api/event/join/${eventId}`, { userId })
+    .then((events) => {
+      return function (dispatch) {
         dispatch({
           type: GET_EVENTS_BY_USER_ID,
           payload: events,
         });
         return events;
-      });
-  };
+      };
+    });
 };
 
 /** **************REVIEWS*********************/
 
 
 export const postUserReviewOfChef = (reviewData) => {
-  console.log('in post review action :', reviewData);
+  // console.log('in post review action :', reviewData);
   return function (dispatch) {
     return axios.post('/api/review/', reviewData)
       .then((response) => {
-        console.log('action review response: ', response);
         dispatch({
           type: GET_EVENTS_BY_USER_ID,
           payload: response,
