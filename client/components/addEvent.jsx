@@ -53,7 +53,7 @@ class AddEvent extends Component {
             <div className="col-md-6 col-md-offset-3">
               <form className="form-horizontal row col" onSubmit={handleSubmit(this.onSubmit)}>
                 <fieldset>
-                  <h3>Create New Event</h3>
+                  <h3 className="create-event-title">Bring them to the table. Host Now!</h3>
 
                   <ProfilePic onValueChange={this.onHandleSubmit} />
 

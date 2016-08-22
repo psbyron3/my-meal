@@ -103,7 +103,7 @@ class UserEditProfile extends Component {
                           <input type="text" className="form-control" {...email} />
                         </div>
 
-                        <div>
+                        <div className="user-restrictions">
                           {this.props.restrictions.map((restriction) => {
                             return (
                               <div style={{ display: 'inline-block' }} key={restriction.id}>

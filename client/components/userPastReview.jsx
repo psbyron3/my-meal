@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Col, Row, FormControl, textarea, Image } from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
+import moment from 'moment';
 
 const PastReview = ({ eventName, date, index, rating, eventPic, content }) => {
   // return (const { rating } = this.state;
@@ -15,24 +16,28 @@ const PastReview = ({ eventName, date, index, rating, eventPic, content }) => {
               role="presentation"
             />
           </div>
-          <div className="review-event-details">
-            <div className="review-event-title">
-              <h3>{eventName}</h3>
+          <div className="review-info">
+            <div className="review-title-and-stars">
+              <div className="review-event-details">
+                <div className="review-event-title">
+                  <h3>{eventName}</h3>
+                </div>
+                <div className="review-event-date">
+                  {moment(date).format('MMMM DD, YYYY')}
+                </div>
+              </div>
+              <div className="star-review">
+                <StarRatingComponent
+                  name={index}
+                  starCount={5}
+                  value={rating}
+                  editing={false}
+                />
+              </div>
             </div>
-            <div className="review-event-date">
-              {date}
+            <div className="review-content">
+              <p>{content}</p>
             </div>
-          </div>
-          <div className="star-review">
-            <StarRatingComponent
-              name={index}
-              starCount={5}
-              value={rating}
-              editing={false}
-            />
-          </div>
-          <div className="review-content">
-            <p>{content}</p>
           </div>
         </div>
       </Col>

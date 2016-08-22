@@ -26,15 +26,17 @@ class ChefInfo extends Component {
     let name = `${this.props.userInfo.firstName} ${this.props.userInfo.lastName}`;
 
     return (
-      <div className="chef-mc">
-        <img src={this.props.userInfo.userPic} alt="userpic" width="128" />
-        <br />
-        <span className="text-capitalize">name: {name}</span>
-        <br />
-        <span>email: {this.props.userInfo.email}</span>
-        <br />
-        <span>chef rating: {chefRating}</span>
-        <br />
+      <div className="chef-credents">
+        <div className="chef-mc">
+          <img src={this.props.userInfo.userPic} alt="userpic" width="128" />
+          <br />
+          <span className="text-capitalize">name: {name}</span>
+          <br />
+          <span>email: {this.props.userInfo.email}</span>
+          <br />
+          <span>chef rating: {chefRating}</span>
+          <br />
+        </div>
       </div>
     );
   }

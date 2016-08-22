@@ -37,6 +37,7 @@ class ChefUpcoming extends Component {
           rating={event.rating}
           clicked={this.onHandleClick}
           deleteEvent={this.props.DeleteEvent}
+          image={event.eventPic}
         />
       );
     });

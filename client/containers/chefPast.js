@@ -36,6 +36,7 @@ class ChefPast extends Component {
           eventId={pastEvent.id}
           deleteEvent={this.props.DeleteEvent}
           clicked={this.onHandleClick}
+          image={pastEvent.eventPic}
         />
       );
     });
