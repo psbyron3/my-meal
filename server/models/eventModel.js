@@ -69,8 +69,11 @@ Event.findEventsInRadius = function (lat, lng) {
     ],
   })
     .then((results) => {
+      const filtered = results.filter((event) => {
+        return event.Users.length;
+      });
       console.log('results from findEventsInRadius', results);
-      return results;
+      return filtered;
     })
     .catch((err) => {
       console.log('error in findEventsInRadius', err);
@@ -118,7 +121,8 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
             }
           });
         }
-        return tagMatch === tags.length;
+        // event.Users.length ensures that events with no relationship in the join table won't return
+        return tagMatch === tags.length && event.Users.length;
       });
     })
     .catch((err) => err);

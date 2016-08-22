@@ -37,10 +37,13 @@
 
 .autoComplete input[type=search] {
   width: 15px;
-  color: transparent;
+  color: #fff;
   cursor: pointer;
   z-index: 2;
   font-weight: $bold;
+  border: 2px solid #fff;
+  background-color: rgba(0,0,0,0);
+
 }
 
 .nav-search {
@@ -48,14 +51,14 @@
 }
 
 .autoComplete input[type=search]:hover {
-  background-color: #fff;
+  background-color: rgba(0,0,0,0);
 }
 
 .autoComplete input[type=search]:focus {
   width: 150px;
   padding-left: 32px;
-  color: #000;
-  background-color: #fff;
+  color: #fff;
+  background-color: rgba(247, 244, 239, 0.2);
   border-color: #F7F4EF;
   cursor: auto;
 }
@@ -104,8 +107,8 @@ input::-webkit-search-cancel-button {
 }
 
 input[type=search] {
-  background: #ededed url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
-  border: solid 1px #ccc;
+  background: rgba(0,0,0,0) url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+  border: solid 2px #fff;
   padding: 9px 10px 9px 32px;
   width: 55px;
   -webkit-border-radius: 10em;
@@ -114,21 +117,35 @@ input[type=search] {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
+  color: #fff;
 }
 
 input[type=search]:focus {
   width: 130px;
-  background-color: #fff;
+  background-color: rgba(197, 194, 189, 0.2);
   border-color: #F7F4EF;
+  color: #fff;
   -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
 }
 
-input:-moz-placeholder {
-  color: #999;
+/* Firefox 19+ */
+input[type=search]::-moz-placeholder {
+  color: #fff;
 }
 
-input::-webkit-input-placeholder {
-  color: #999;
+/* Firefox 18- */
+input[type=search]:-moz-placeholder {
+  color: #fff;
+}
+
+/* IE 10+ */
+input[type=search]:-ms-input-placeholder {
+  color: #fff;
+}
+
+/* Chrome/Opera/Safari */
+input[type=search]::-webkit-input-placeholder {
+  color: #fff;
 }
