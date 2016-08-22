@@ -219,7 +219,7 @@ export const SignOutFunc = () => {
     dispatch({
       type: GET_EVENTS_BY_USER_ID,
       payload: [],
-    })
+    });
   };
 };
 
