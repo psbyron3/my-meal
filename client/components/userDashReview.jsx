@@ -66,7 +66,7 @@ class UserReview extends Component {
                 <h3>{this.props.eventName}</h3>
               </div>
               <div className="review-event-date">
-                {moment(this.props.date).format("MMMM DD, YYYY hh:mm A")}
+                {moment(this.props.date).format('MMMM DD, YYYY hh:mm A')}
               </div>
             </div>
           </div>
@@ -80,21 +80,21 @@ class UserReview extends Component {
                 onStarClick={this.onStarClick}
               />
             </div>
-              <div className="review-comments">
-                <textarea
-                  placeholder="How was your experience?"
-                  className="review-comment-textarea"
-                  onChange={this.onCommentChange} 
-                />
-              </div>
-              <div className="review-button-container">
-                <button
-                  type="submit"
-                  onClick={this.onReviewSubmit}
-                  className="btn btn-primary"
-                >Submit Rating
-                </button>
-              </div>
+            <div className="review-comments">
+              <textarea
+                placeholder="How was your experience?"
+                className="review-comment-textarea"
+                onChange={this.onCommentChange}
+              />
+            </div>
+            <div className="review-button-container">
+              <button
+                type="submit"
+                onClick={this.onReviewSubmit}
+                className="btn btn-primary"
+              >Submit Rating
+              </button>
+            </div>
           </form>
         </Col>
         <Col className="review-gutter" md={2} />
