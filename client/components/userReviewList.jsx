@@ -28,7 +28,7 @@ class ReviewList extends Component {
       <div>
         <h3>You have no reviews to display.</h3>
       </div>
-  );
+    );
   }
 
   render() {

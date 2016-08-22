@@ -92,11 +92,12 @@ export const SignInFunc = (props) => {
         localStorage.setItem('userId', response.data.user.id);
         localStorage.setItem('userName', response.data.user.userName);
         localStorage.setItem('userPic', response.data.user.userPic);
+        const userId = response.data.user.id;
 
         return getEventsByUserId(response.data.user.id)
           .then((action) => {
             dispatch(action);
-            return getReviewsByUserId(localStorage.getItem('userId'))
+            return getReviewsByUserId(userId)
               .then((reviews) => {
                 dispatch(reviews);
                 browserHistory.push('/');
