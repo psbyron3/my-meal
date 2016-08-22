@@ -45,7 +45,8 @@ class UserEditProfile extends Component {
         });
       })
       .catch((err) => {
-        console.log('error in onSubmit in userEditProfile:', err);
+        // console.log('error in onSubmit in userEditProfile:', err);
+        return err;
       });
   }
 
@@ -60,7 +61,6 @@ class UserEditProfile extends Component {
       resetForm,
       initialValues,
     } = this.props;
-    console.log('state in edit profile...', this.state);
     return (
       <div className="top-margin">
         <div className="container">
@@ -139,7 +139,6 @@ class UserEditProfile extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state.userInfo(initialValues....)', state.userInfo);
   return {
     restrictions: state.tags.restrictions,
     initialValues: state.userInfo,

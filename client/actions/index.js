@@ -355,21 +355,18 @@ export const getAllEvents = (latitude, longitude, tags, distance) => {
 };
 
 export const getAllInRadius = (query, tags = [], distance = 5) => {
-  console.log('IN GETALLINRADIUS...searchParams =', tags, distance);
-  console.log('IN GETALLINRADIUS...query =', query);
+  // console.log('IN GETALLINRADIUS...searchParams =', tags, distance);
+  // console.log('IN GETALLINRADIUS...query =', query);
   return function (dispatch) {
     convertAddress(query)
       .then((response) => {
-        console.log('GEOCODE RESPONSE : ', response);
         const { latitude, longitude } = response;
-
         dispatch({
           type: MAP_CENTER,
           payload: { latitude, longitude },
         });
         getAllEvents(latitude, longitude, tags, distance)
           .then((events) => {
-            console.log('actions after getAllEvents :', events);
             dispatch({
               type: GET_ALL_EVENTS,
               payload: events.data,
@@ -410,7 +407,7 @@ export const createEvent = (props, dishPic) => {
       return coords;
     })
     .then((resp) => {
-      console.log(resp, 'RESP WITH NO PICTURE');
+      // console.log(resp, 'RESP WITH NO PICTURE');
       let url = null;
       if (typeof resp === 'object' && resp.data) {
         url = resp.data;

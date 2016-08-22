@@ -70,7 +70,7 @@ function mapStateToProps(state) {
   };
 }
 
-ChefDash.PropTypes = {
+ChefDash.propTypes = {
   ChefEventsFunc: PropTypes.func,
   ChatBoxFunc: PropTypes.func,
   boxStatus: PropTypes.string,

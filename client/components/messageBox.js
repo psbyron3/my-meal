@@ -21,7 +21,7 @@ class MessageBox extends Component {
   componentDidMount() {
     const eventId = this.props.eventId.eventId;
     axios.get(`/api/message/${eventId}`).then((result) => {
-      console.log('RESULT IS >>>>>>>>', result);
+      // console.log('RESULT IS >>>>>>>>', result);
       if (typeof result.data === 'object') {
         const messages = result.data;
         this.setState({ messages: [...this.state.messages, ...messages] }, () => {
@@ -96,7 +96,6 @@ class MessageBox extends Component {
       this.setState({ message: '' });
       // Keep scrollBAr down
       const msgbox = document.getElementsByClassName('panel-body msg_container_base');
-      console.log(msgbox, 'SCROLLL DOWN');
       msgbox[0].scrollTop = msgbox[0].scrollHeight;
     });
     this.socket.emit('message', msg); // trigger on message event server side
@@ -105,7 +104,7 @@ class MessageBox extends Component {
   renderMsg() {
     if (this.state.messages.length === 0) return (null);
     const msges = this.state.messages.map((message, index) => {
-      console.log('message is......', message);
+      // console.log('message is......', message);
       return (<MessageEntry
         key={index}
         body={message}
@@ -192,7 +191,7 @@ function mapStateToProps(state) {
   };
 }
 
-MessageBox.PropTypes = {
+MessageBox.propTypes = {
   eventId: PropTypes.object,
   ChatBoxFunc: PropTypes.func,
 

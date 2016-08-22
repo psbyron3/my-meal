@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 
 const GenreMenu = ({ selectedGenre, genres, onGenreChange }) => {
   function renderGenres() {
-    console.log('current genre:', typeof selectedGenre);
     return genres.map((genre) => {
       return (
         <option key={genre.id} value={genre.id}>
@@ -23,7 +22,7 @@ const GenreMenu = ({ selectedGenre, genres, onGenreChange }) => {
 };
 
 GenreMenu.propTypes = {
-  selectedGenre: PropTypes.array,
+  selectedGenre: PropTypes.number,
   genres: PropTypes.array,
   onGenreChange: PropTypes.func,
 };

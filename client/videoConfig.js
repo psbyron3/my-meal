@@ -11,7 +11,7 @@
     let videoWidth;
     let videoHeight;
 
-    console.log(windowHeight);
+    // console.log(windowHeight);
 
     $(element).each(function () {
       const videoAspectRatio = $(this).data('height') / $(this).data('width');
@@ -55,4 +55,3 @@
 
     $('.fillWidth').get(0).play();
   });
-

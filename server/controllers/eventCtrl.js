@@ -12,26 +12,24 @@ module.exports = {
   '/': {
     get(req, res) {
       console.log('Received GET at /api/event/');
-      console.log('getting all events');
       // maybe this should be findOne instead?
       Event.findAllEvents()
         .then((events) => {
           if (events.length === 0) {
-            console.log('no events exist yet');
+            // console.log('no events exist yet');
             res.end('no events exist yet');
           } else {
-            console.log('events exist');
-
+            // console.log('events exist');
             res.send(events);
           }
         })
         .catch((err) => {
           console.log(err);
+          res.send(err);
         });
     },
     post(req, res) {
       console.log('Received POST at /api/event/');
-      console.log('creating event');
 
       const newEvent = {
         eventName: req.body.eventName,
@@ -48,8 +46,6 @@ module.exports = {
         tags: req.body.tags,
       };
 
-      console.log(newEvent, 'NEW EVEEEEEEEEEEEEEEEEENT');
-
       Event.findEventByLocationAndDate(
         newEvent.latitude,
         newEvent.longitude,
@@ -62,11 +58,12 @@ module.exports = {
           }
           return Event.createEvent(newEvent)
             .then((result) => {
-              console.log('result of a succesful event creation..........______...');
+              // console.log('result of a succesful event creation..........______...');
               return res.send(result);
             });
         }).catch((err) => {
           console.log(err);
+          res.send(err);
         });
     },
     put(req, res) {
@@ -126,7 +123,6 @@ module.exports = {
 
       Event.findEventsInRadius(loc.lat, loc.lng)
         .then((result) => {
-          console.log('returned radius stuff');
           res.send(result);
         });
     },
@@ -146,7 +142,7 @@ module.exports = {
   '/users/:userId': {
     get(req, res) {
       const userId = url.parse(req.url, true).path.slice(7);
-      console.log('userId is:', userId);
+      // console.log('userId is:', userId);
       Event.findEventsByUser(userId)
         .then((results) => {
           res.send(results);
@@ -195,7 +191,7 @@ module.exports = {
       const userId = req.body.userId;
       Event.quitEvent(eventId, userId)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           res.send(result);
         });
     },

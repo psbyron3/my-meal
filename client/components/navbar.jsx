@@ -141,6 +141,7 @@ NavBarComp.propTypes = {
   authenticated: PropTypes.bool,
   SignOutFunc: PropTypes.func,
   showSearch: PropTypes.bool,
+  userInfo: PropTypes.object,
 };
 
 export default connect(mapStateToProps, { SignOutFunc })(NavBarComp);

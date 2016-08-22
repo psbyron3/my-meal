@@ -384,7 +384,5 @@ Dummy.init = function () {
             });
         });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => err);
 };
