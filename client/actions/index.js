@@ -216,6 +216,10 @@ export const SignOutFunc = () => {
       type: GET_ALL_EVENTS,
       payload: [],
     });
+    dispatch({
+      type: GET_EVENTS_BY_USER_ID,
+      payload: [],
+    })
   };
 };
 
