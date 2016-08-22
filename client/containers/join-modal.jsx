@@ -81,7 +81,7 @@ class JoinModal extends Component {
     return (<div></div>);
   }
 
-render() {
+  render() {
     let startTime = moment(this.props.selectedEvent.startDatetime).format('MMMM Do YYYY, h:mm');
     let endTime = moment(this.props.selectedEvent.endDatetime).format('h:mm');
     return (
