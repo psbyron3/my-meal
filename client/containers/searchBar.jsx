@@ -127,7 +127,7 @@ function mapStateToProps(state) {
     restrictions: state.tags.restrictions,
     genres: state.tags.genres,
     Tags: state.userInfo.Tags,
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
   };
 }
 
@@ -140,7 +140,7 @@ SearchBar.propTypes = {
   genres: PropTypes.array,
   getAllInRadius: PropTypes.func,
   getAllTags: PropTypes.func,
-  authenticated: PropTypes.bool
+  authenticated: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
