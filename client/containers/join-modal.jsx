@@ -17,10 +17,10 @@ class JoinModal extends Component {
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this.handleJoinEvent = this.handleJoinEvent.bind(this);
+    this.alreadyJoined = this.alreadyJoined.bind(this);
   }
 
   handleJoinEvent() {
-    console.log('eventId is:', this.props.selectedEvent.id, 'userId is...', this.props.userId);
     return joinEvent(this.props.selectedEvent.id, this.props.userId)
       .then(() => {
         this.props.closeModal();
@@ -45,6 +45,16 @@ class JoinModal extends Component {
     });
   }
 
+  alreadyJoined() {
+    const matchedEvent = this.props.userHistory.filter((event) => {
+      return event.id === this.props.selectedEvent.id
+    })
+    if (matchedEvent.length > 0) {
+      return (<h6 className="alert">You are already attending this event.</h6>);
+    }
+    return (<span></span>)
+  }
+
   authRender() {
     if (!this.props.authenticated) {
       return (
@@ -64,7 +74,8 @@ class JoinModal extends Component {
     }
     return (
       <Modal.Footer>
-        <Button onClick={this.handleJoinEvent}>Confirm</Button>
+        {this.alreadyJoined()}
+        <Button onClick={this.handleJoinEvent}>Join</Button>
         <Button onClick={this.props.closeModal}>Cancel</Button>
       </Modal.Footer>
     );
@@ -74,7 +85,12 @@ class JoinModal extends Component {
     if (this.props.selectedEvent.eventPic) {
       return (
         <div>
-          <Image className="modalImage" src={this.props.selectedEvent.eventPic} alt="Modal Picture" responsive />
+          <Image
+            className="modalImage"
+            src={this.props.selectedEvent.eventPic}
+            alt="Modal Picture"
+            responsive
+          />
         </div>
       );
     }
@@ -111,6 +127,7 @@ function mapStateToProps(state) {
     selectedEvent: state.selectedEvent,
     userId: state.userInfo.id,
     authenticated: state.auth.authenticated,
+    userHistory: state.userHistory
   };
 }
 
