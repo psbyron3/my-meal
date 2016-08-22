@@ -94,7 +94,7 @@ export const SignInFunc = (props) => {
         localStorage.setItem('userPic', response.data.user.userPic);
         const userId = response.data.user.id;
 
-        return getEventsByUserId(response.data.user.id)
+        return getEventsByUserId(userId)
           .then((action) => {
             dispatch(action);
             return getReviewsByUserId(userId)
@@ -446,7 +446,7 @@ export const createEvent = (props, dishPic) => {
 };
 
 export const joinEvent = (eventId, userId) => {
-  return axios.post(`api/event/join/${eventId}`, { userId })
+  return axios.post(`/api/event/join/${eventId}`, { userId })
     .then((events) => {
       return function (dispatch) {
         dispatch({
