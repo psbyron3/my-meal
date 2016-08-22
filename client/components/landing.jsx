@@ -87,7 +87,7 @@ class Landing extends Component {
                 <SearchBar />
               </div>
             </div>
-            <div className="filter" style={{zIndex:'1'}}></div>
+            <div className="filter" style={{ zIndex: '1' }}></div>
             <video className="fillWidth" autoPlay muted loop>
               <source src="https://s3-us-west-2.amazonaws.com/mymealmks/videos/523395704.mp4" type="video/mp4" />
             </video>
