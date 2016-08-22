@@ -4,12 +4,6 @@ import MapListEntry from './maplistentry';
 import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 
-
-// Table data as a list of array.
-// function rowGetter() {
-
-// }
-// Render your table
 class MapList extends Component {
   constructor(props) {
     super(props);
@@ -43,10 +37,6 @@ class MapList extends Component {
   }
 
   render() {
-    const rows = this.state.allEvents ?
-      this.state.allEvents.length
-      :
-      1;
     return (
       <div className="event-list">
         {this.renderList()}
