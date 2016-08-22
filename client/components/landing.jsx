@@ -126,7 +126,7 @@ class Landing extends Component {
         <hr className="featurette-divider" />
 
         <div className="row featurette">
-          <div className="col-md-7">
+          <div className="col-md-7 col-md-push-5">
             <h2 className="featurette-heading"> Book Now.
               <span className="text-muted"> You're meal awaits you </span>
             </h2>
@@ -137,7 +137,7 @@ class Landing extends Component {
               Need more details? Head to your dashboard and manage your meals.
             </p>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-5 col-md-pull-7">
             <img
               className="featurette-image img-responsive center-block"
               data-src="holder.js/500x500/auto" alt="500x500" src="../images/meal3.png"
