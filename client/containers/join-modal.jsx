@@ -86,19 +86,18 @@ class JoinModal extends Component {
     let endTime = moment(this.props.selectedEvent.endDatetime).format('h:mm');
     return (
       <Modal show={this.props.showModal} onHide={this.props.closeModal}>
-        <Modal.Header>
-          <h1>{this.props.selectedEvent.eventName}</h1>
+        <Modal.Header className="join-event-details">
+          <h1 className="join-event-name">{this.props.selectedEvent.eventName}</h1>
+          <div className="join-time-location">
+            <div className="join-event-address">{this.props.selectedEvent.address}</div>
+            <div className="join-event-time">{startTime} - {endTime}</div>
+          </div>
         </Modal.Header>
         <Modal.Body>
           {this.renderPic()}
-          <div className="eventDesc">
+          <div className="join-event-desc">
             <p>{this.props.selectedEvent.description}</p>
           </div>
-          <div className="eventPrice">
-            <h3>${this.props.selectedEvent.price}</h3>
-          </div>
-          <div>{this.props.selectedEvent.address}</div>
-          <div>{startTime} - {endTime}</div>
         </Modal.Body>
         {this.authRender()}
       </Modal>
