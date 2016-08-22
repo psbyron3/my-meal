@@ -28,11 +28,6 @@ $home-card-height: 235px;
   //@include box-shadow(0, 3px, 12px, 0px, rgba(0, 0, 0, 0.5));
 }
 
-.event-price {
-  display: flex;
-  justify-content: space-between;
-}
-
 //*********** List Cards ********** //
 
 #f1_container {
@@ -98,7 +93,9 @@ $home-card-height: 235px;
 }
 
 .event-price {
-  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px 0;
   margin: 0px;
 }
 
@@ -187,7 +184,7 @@ $home-card-height: 235px;
 // .list-entry {
 //   width: 50%;
 //   margin: 50px;
-  
+
 //   cursor: pointer;
 //   text-align: center;
 //   @include box-shadow(0, 1.5px, 4px, 0px, rgba(0, 0, 0, 0.4)); //(0, 2.5px, 2.5px, 6px, rgba(0, 0, 0, 0.2));
@@ -200,4 +197,3 @@ $home-card-height: 235px;
 //   //   margin-right: 20px;
 //   // }
 // }
-

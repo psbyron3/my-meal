@@ -32,6 +32,7 @@ class MapList extends Component {
           attending={event.attending}
           price={event.price}
           rating={event.Users[0].avgRating || 5}
+          chefPic={event.Users[0].userPic}
         />);
     });
   }

@@ -41,7 +41,7 @@ class UserDash extends Component {
             address={event.address}
             times={`${startTime} to ${endTime}`}
             description={event.description}
-
+            chefPic={event.Users[0].userPic}
           />
         );
       });
