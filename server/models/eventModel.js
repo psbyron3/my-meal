@@ -33,7 +33,7 @@ Event.findLastEvent = function () {
       });
     })
     .catch((err) => {
-      console.log('error in findLastEvent...', err);
+      // console.log('error in findLastEvent...', err);
       return err;
     });
 };
@@ -72,11 +72,10 @@ Event.findEventsInRadius = function (lat, lng) {
       const filtered = results.filter((event) => {
         return event.Users.length;
       });
-      console.log('results from findEventsInRadius', results);
       return filtered;
     })
     .catch((err) => {
-      console.log('error in findEventsInRadius', err);
+      // console.log('error in findEventsInRadius', err);
       return err;
     });
 };
@@ -178,7 +177,7 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
 Event.findEventsByUser = function (userId) {
   return db.User.findById(userId)
     .then((user) => {
-      console.log('user is:', user);
+      // console.log('user is:', user);
       return user.getEvents({
         include: [
           {
@@ -191,26 +190,23 @@ Event.findEventsByUser = function (userId) {
             },
           },
         ],
-      })
-        .then((results) => {
-          console.log('results of getEvents:', results);
-          return results;
-        });
-    });
+      });
+    })
+    .catch((err) => err);
 };
 
 Event.createEvent = function (newEvent) {
-  console.log(newEvent, 'EVENT CREATED WHERE BUG+++++++++++++++++++++++++++++++++++++++++++++');
+  // console.log(newEvent, 'EVENT CREATED WHERE BUG+++++++++++++++++++++++++++++++++++++++++++++');
   const newE = Object.assign({}, newEvent, { attending: 0 });
   return db.Event.create(newE)
     .then((event) => {
-      console.log('result of createEvent', event.eventName, newEvent.userId);
+      // console.log('result of createEvent', event.eventName, newEvent.userId);
       return User.addHostToEvent(event, newEvent.userId)
         .then(() => {
-          console.log('host added...adding tags');
+          // console.log('host added...adding tags');
           return Tag.addTagsToEvent(event, newEvent.tags)
             .then(() => {
-              console.log('tags added, getting events....');
+              // console.log('tags added, getting events....');
               return Event.findEventsByUser(newEvent.userId);
             });
         });
@@ -218,7 +214,7 @@ Event.createEvent = function (newEvent) {
 };
 
 Event.joinEvent = function (eventId, userId) {
-  console.log(`eventId is .... ${eventId}, and userId is....${userId}`);
+  // console.log(`eventId is .... ${eventId}, and userId is....${userId}`);
   return db.Event.findById(eventId)
     .then((event) => {
       if (!event) return {};
@@ -263,6 +259,5 @@ Event.quitEvent = function (eventId, userId) {
 
 // To be used only by chefs
 Event.destroyEvent = function (event) {
-  console.log('typeof event receieved in destroyEvent:', typeof event);
   return event.destroy();
 };

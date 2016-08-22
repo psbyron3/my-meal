@@ -91,6 +91,7 @@ MapView.propTypes = {
   openModal: PropTypes.func,
   setHoverEvent: PropTypes.func,
   location: PropTypes.object,
+  setAlert: PropTypes.func,
 };
 
 export default connect(mapStateToProps)(MapView);

@@ -7,7 +7,7 @@ const User = module.exports;
 
 // Used to save enscrypted password to database
 function hashPassword(pw) {
-  console.log('hashing password', pw);
+  // console.log('hashing password', pw);
   return new Promise(function (resolve, reject, next) {
     return bcrypt.genSalt(10, function (err, salt) {
       if (err) {
@@ -51,7 +51,7 @@ User.findUserByUsername = function (userName) {
 };
 
 User.findUserById = function (id) {
-  console.log('user id is......******.....', id);
+  // console.log('user id is......******.....', id);
   return db.User.findAll({
     where: {
       id,
@@ -83,11 +83,9 @@ User.findUserByEmail = function (email) {
 
 // Used in the Event.createEvent function only
 User.addHostToEvent = function (event, userId) {
-  console.log('inside userModel#$%@#$&^*&((%#^%#^$@#$@))');
   return db.User.findById(userId)
     .then((user) => {
-      console.log(user, 'UUUUUUUUUSEEEER');
-      console.log('User = ', user.userName);
+      // console.log('User = ', user.userName);
       event.setUsers([user], { role: 'host' })
         .then(() => event);
     });
@@ -104,7 +102,7 @@ User.findUsersByEvent = function (userId, eventId) {
 };
 
 User.createUser = function (attr, tags = []) {
-  console.log('creating user', attr);
+  // console.log('creating user', attr);
   return new Promise(function (resolve, reject) {
     return hashPassword(attr.password)
       .then(function (hashObj) {
@@ -112,7 +110,7 @@ User.createUser = function (attr, tags = []) {
         attr.salt = hashObj.salt;
       })
       .then(() => {
-        console.log('password hashed');
+        // console.log('password hashed');
         const newUser = Object.assign({}, attr, { avgRating: 0 });
         db.User.create(newUser)
           .then(function (result) {
@@ -123,7 +121,6 @@ User.createUser = function (attr, tags = []) {
                   include: db.Tag,
                 })
                   .then((user) => {
-                    console.log('user - - - - - - -', user);
                     resolve(user.dataValues);
                   });
               });
@@ -133,17 +130,13 @@ User.createUser = function (attr, tags = []) {
 };
 
 User.editUser = function (attr, tags = [], userId) {
-  console.log('editing user...', attr, tags, userId);
+  // console.log('editing user...', attr, tags, userId);
   return db.User.findById(userId)
     .then((user) => {
-      return user.update(attr, {
-        reset: false,
-      })
+      return user.update(attr, { reset: false })
         .then((updatedUser) => {
-          console.log('result of updating user.....', updatedUser);
           return updatedUser.setTags(tags)
             .then((result) => {
-              console.log('result of setting tags on update.....', result);
               return db.User.findById(userId, {
                 include: {
                   model: db.Tag,

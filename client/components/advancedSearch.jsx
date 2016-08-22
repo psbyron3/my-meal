@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import RestrictionMenu from './restrictions.jsx';
 import GenreMenu from './genres.jsx';
 import DistanceMenu from './distances.jsx';
@@ -55,5 +55,18 @@ class AdvancedSearch extends Component {
     );
   }
 }
+
+AdvancedSearch.propTypes = {
+  toggle: PropTypes.func,
+  show: PropTypes.bool,
+  onCheckChange: PropTypes.func,
+  selectedRestrictions: PropTypes.array,
+  restrictions: PropTypes.array,
+  onGenreChange: PropTypes.func,
+  selectedGenre: PropTypes.number,
+  genres: PropTypes.array,
+  onDistanceChange: PropTypes.func,
+  distance: PropTypes.number,
+};
 
 export default AdvancedSearch;

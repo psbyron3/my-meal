@@ -19,7 +19,7 @@ Message.createMessage = function (attr) {
 
 // find all reviews for a given event id
 Message.findMessagesByEventId = function (eventId) {
-  console.log('inside message model', eventId);
+  // console.log('inside message model', eventId);
   return db.Message.findAll({
     where: {
       eventId,
@@ -36,4 +36,3 @@ Message.findMessagesByEventId = function (eventId) {
       return rows;
     }).catch((err) => err);
 };
-

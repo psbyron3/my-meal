@@ -6,7 +6,7 @@ const dummy = require('./dummy');
 
 const sequelize = new Sequelize(config.database, config.user, config.password, config.connection);
 
-console.log('config obj = ', config, 'user=', config.user, 'password=', config.password);
+// console.log('config obj = ', config, 'user=', config.user, 'password=', config.password);
 
 sequelize
   .authenticate()

@@ -140,6 +140,7 @@ JoinModal.propTypes = {
   showModal: PropTypes.bool,
   userId: PropTypes.number,
   authenticated: PropTypes.bool,
+  userHistory: PropTypes.array,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(JoinModal);

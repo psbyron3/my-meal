@@ -52,7 +52,7 @@ Review.findReviewById = function (reviewId) {
       },
     ],
   })
-    .then(function (rows) {
+    .then((rows) => {
       return rows[0];
     });
 };
@@ -92,17 +92,13 @@ Review.findReviewsByChef = function (chefId) {
         ],
       },
     ],
-  })
-    .then((results) => {
-      console.log('results of findReviewsByChef:', results);
-      return results;
-    });
+  });
 };
 
 // find all reviews for a given event id
 Review.findReviewsByEvent = function (eventId) {
   return db.Review.findAll({ where: { eventId } })
-    .then(function (rows) {
+    .then((rows) => {
       return rows;
     });
 };
@@ -110,7 +106,7 @@ Review.findReviewsByEvent = function (eventId) {
 // find review for an event by a specific user
 Review.findReviewForEventbyUser = function (eventId, reviewerId) {
   return db.Review.findAll({ where: { eventId, reviewerId } })
-    .then(function (rows) {
+    .then((rows) => {
       return rows[0];
     });
 };

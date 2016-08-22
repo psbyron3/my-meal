@@ -8,11 +8,11 @@ module.exports = {
 
       const eventId = url.parse(req.url, true).path.split('/message/')[0][1];
 
-      console.log('getting all messages for event: ', eventId);
+      // console.log('getting all messages for event: ', eventId);
 
       Message.findMessagesByEventId(eventId)
         .then(function (messages) {
-          console.log('these are the messages', messages);
+          // console.log('these are the messages', messages);
           if (messages.length === 0) {
             console.log('messages do not exist');
             res.end(`No messages for this event: ${eventId}`);
@@ -52,4 +52,3 @@ module.exports = {
   },
 
 };
-

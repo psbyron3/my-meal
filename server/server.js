@@ -61,7 +61,7 @@ const connections = [];
 io.on('connection', (socket) => {
   // when a client send a message event
   socket.on('message', (body) => {
-    console.log('BOOODY', body);
+    // console.log('BOOODY', body);
     // emit this message to all other client that are listenning (if I want to exclude myself use broadcast)
     socket.broadcast.emit('message', body);
   });

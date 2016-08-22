@@ -3,7 +3,6 @@ const _ = require('lodash');
 
 export const convertAddress = (address) => {
   let response;
-  console.log('inside convertAddress.....', address);
   return axios({
     method: 'GET',
     url: 'https://maps.googleapis.com/maps/api/geocode/json',
@@ -13,7 +12,6 @@ export const convertAddress = (address) => {
     },
   })
     .then((payload) => {
-      console.log('inside response to convertAddress..', payload);
       response = payload.data.results[0].geometry.location;
       const coordinate = {
         latitude: response.lat,
@@ -23,7 +21,8 @@ export const convertAddress = (address) => {
       return coordinate;
     })
     .catch((err) => {
-      console.log('ERROR ', err);
+      // console.log('ERROR ', err);
+      return err;
     });
 };
 
