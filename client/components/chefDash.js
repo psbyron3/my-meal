@@ -33,9 +33,7 @@ class ChefDash extends Component {
           <Tab eventKey={1} title="Chef Info">
 
             <div className="user-feed">
-              chef info
               <ChefInfo />
-
             </div>
 
           </Tab>
@@ -43,7 +41,6 @@ class ChefDash extends Component {
           <Tab eventKey={2} title="Past Events">
 
             <div className="user-feed">
-              list of past events
               <ChefPast />
 
             </div>
@@ -53,7 +50,6 @@ class ChefDash extends Component {
           <Tab eventKey={3} title="Upcoming Events">
 
             <div>
-              list of future events
               <ChefUpcoming />
             </div>
 
