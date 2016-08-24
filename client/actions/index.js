@@ -359,6 +359,7 @@ export const getAllEvents = (latitude, longitude, tags, distance) => {
 export const getAllInRadius = (query, tags = [], distance = 5) => {
   // console.log('IN GETALLINRADIUS...searchParams =', tags, distance);
   // console.log('IN GETALLINRADIUS...query =', query);
+  const sorted = tags.length > 1 ? tags.sort((a, b) => a - b) : tags;
   return function (dispatch) {
     convertAddress(query)
       .then((response) => {
@@ -367,7 +368,7 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
           type: MAP_CENTER,
           payload: { latitude, longitude },
         });
-        getAllEvents(latitude, longitude, tags, distance)
+        getAllEvents(latitude, longitude, sorted, distance)
           .then((events) => {
             dispatch({
               type: GET_ALL_EVENTS,
