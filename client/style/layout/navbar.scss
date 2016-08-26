@@ -33,6 +33,19 @@
   height: 81px;
   width: 65px;
   margin-left: 15px;
+  display: inline-block;
+}
+
+.nav-search {
+  margin: 15px 10px 0;
+}
+
+.header-logo {
+  display: inline-block;
+}
+
+.header-search {
+  display: inline-block;
 }
 
 .autoComplete input[type=search] {
@@ -44,10 +57,6 @@
   border: 2px solid #fff;
   background-color: rgba(0,0,0,0);
 
-}
-
-.nav-search {
-  margin: 15px 10px 0;
 }
 
 .autoComplete input[type=search]:hover {
