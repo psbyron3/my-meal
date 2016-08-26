@@ -20,8 +20,16 @@ class NavBarComp extends Component {
     if (!this.props.authenticated) {
       return (
         <ul className="nav navbar-nav navbar-right">
-          <li><Link to="signIn">Log In</Link></li>
-          <li><Link to="signUp">Sign Up</Link></li>
+          <li>
+            <Link to="signIn">
+              <div className="authButton"><h5>Log In</h5></div>
+            </Link>
+          </li>
+          <li>
+            <Link to="signUp">
+              <div className="authButton"><h5>Sign Up</h5></div>
+            </Link>
+          </li>
         </ul>
       );
     }

@@ -41,13 +41,13 @@ module.exports = {
       console.log('parsing url............', url.parse(req.url, true).path);
       console.log('userId in /api/review/users/:userId is...', userId);
       Review.findReviewsByUser(userId)
-      .then((results) => {
-        console.log('results of findReviewsByUser', results);
-        res.send(results);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
+        .then((results) => {
+          console.log('results of findReviewsByUser', results);
+          res.send(results);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
     },
     post(req, res) {
       console.log('Received POST at /api/review/:userId');
