@@ -89,33 +89,35 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="nav-search searchbar" >
-        <form className="search-input">
-          <div >
-            <Autocomplete
-              className="autoComplete"
-              style={{ width: '90%' }}
-              onPlaceSelected={(place) => this.onFormSubmit(place)}
-              type="search"
-              placeholder="Search Location"
-              value={this.state.query}
-              onChange={this.onTextChange}
-              onKeyDown={this.onEnter}
+      <div className="header-search">
+        <div className="nav-search searchbar" >
+          <form className="search-input">
+            <div >
+              <Autocomplete
+                className="autoComplete"
+                style={{ width: '90%' }}
+                onPlaceSelected={(place) => this.onFormSubmit(place)}
+                type="search"
+                placeholder="Search Location"
+                value={this.state.query}
+                onChange={this.onTextChange}
+                onKeyDown={this.onEnter}
+              />
+            </div>
+            <AdvancedSearch
+              show={this.state.show}
+              toggle={this.toggle}
+              onCheckChange={this.onCheckChange}
+              selectedRestrictions={this.state.restrictions}
+              restrictions={this.props.restrictions}
+              onGenreChange={this.onGenreChange}
+              selectedGenre={this.state.genre}
+              genres={this.props.genres}
+              onDistanceChange={this.onDistanceChange}
+              distance={this.state.distance}
             />
-          </div>
-          <AdvancedSearch
-            show={this.state.show}
-            toggle={this.toggle}
-            onCheckChange={this.onCheckChange}
-            selectedRestrictions={this.state.restrictions}
-            restrictions={this.props.restrictions}
-            onGenreChange={this.onGenreChange}
-            selectedGenre={this.state.genre}
-            genres={this.props.genres}
-            onDistanceChange={this.onDistanceChange}
-            distance={this.state.distance}
-          />
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

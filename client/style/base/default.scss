@@ -7,9 +7,18 @@ html, body {
 }
 
 body {
-  padding-top: 100px;
   font-family: $base-font-family;
   background-color: $primary-white;
+}
+
+#routeView {
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 768px) {
+  #routeView {
+    margin-top: 115px;
+  }
 }
 
 .btn.btn-primary {

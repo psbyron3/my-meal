@@ -10,7 +10,7 @@ class NavBarComp extends Component {
   showSearchBox() {
     if (this.props.showSearch) {
       return (
-        <li> <SearchBar /> </li>
+        <SearchBar />
       );
     }
     return null;
@@ -20,8 +20,16 @@ class NavBarComp extends Component {
     if (!this.props.authenticated) {
       return (
         <ul className="nav navbar-nav navbar-right">
-          <li><a href="#"><Link to="signIn">Log In</Link></a></li>
-          <li><a href="#"><Link to="signUp">Sign Up</Link></a></li>
+          <li>
+            <Link to="signIn">
+              <div className="authButton"><h5>Log In</h5></div>
+            </Link>
+          </li>
+          <li>
+            <Link to="signUp">
+              <div className="authButton"><h5>Sign Up</h5></div>
+            </Link>
+          </li>
         </ul>
       );
     }
@@ -110,18 +118,17 @@ class NavBarComp extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link to="/">
-              <img src="../assets/share-eat.png" role="presentation" />
-            </Link>
+            <div className="header-logo">
+              <Link to="/">
+                <img src="../assets/share-eat.png" role="presentation" />
+              </Link>
+            </div>
+            {this.showSearchBox()}
           </div>
 
-          <ul className="nav navbar-nav">
-            {this.showSearchBox()}
-          </ul>
+
           <div className="collapse navbar-collapse">
-
             {this.authRender()}
-
           </div>
         </div>
       </div>
