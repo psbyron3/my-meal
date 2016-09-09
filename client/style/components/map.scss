@@ -20,6 +20,29 @@
   height: 40px;
 }
 
+.popover-content {
+  padding: 9px 18px;
+
+  p {
+    margin-bottom: 0.6em;
+  }
+}
+
+.popover-time::before {
+    content: "";
+    position: absolute;
+    width: 60%;
+    left: 20%;
+    border-top: 1px rgb(211, 233, 234) solid;
+}
+
+.popover-time {
+  font-style: italic;
+  font-size: 0.9em;
+  line-height: 2.7;
+  text-align: center;
+}
+
 .showAlert-false {
   display: none;
 }
