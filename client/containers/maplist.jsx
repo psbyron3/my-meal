@@ -39,8 +39,10 @@ class MapList extends Component {
 
   render() {
     return (
-      <div className="event-list">
-        {this.renderList()}
+      <div className="event-list-wrapper">
+        <div className="event-list">
+          {this.renderList()}
+        </div>
       </div>
     );
   }
