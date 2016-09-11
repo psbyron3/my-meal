@@ -1,5 +1,5 @@
 .map {
-  width: 50%;
+  width: 46%;
   height: 100vh;
   left: 0px;
   top: 0px;
@@ -60,4 +60,10 @@
   width: 300px;
   padding: 10px;
   border: 1px solid $primary-yellow;
+}
+
+@media screen and (max-width: 1072px) {
+  .map {
+    width: 61%;
+  }
 }

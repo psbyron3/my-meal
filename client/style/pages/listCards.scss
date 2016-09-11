@@ -6,7 +6,7 @@ $home-card-height: 235px;
   top: 100px;
   left: 45%;
   margin: 0;
-  width: 56%;
+  width: 55%;
   height: 100%;
 }
 
@@ -202,3 +202,21 @@ $home-card-height: 235px;
 //   //   margin-right: 20px;
 //   // }
 // }
+
+@media screen and (max-width: 1145px) {
+  #f1_container {
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+}
+
+@media screen and (max-width: 1072px) {
+  .event-list-wrapper {
+    left: 60%;
+    width: 40%;
+  }
+
+  .event-list {
+    justify-content: space-around;
+  }
+}
