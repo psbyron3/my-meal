@@ -21,8 +21,8 @@
 #searchMenu {
     position: absolute;
     float: right;
-    margin-top: 10px;
-    margin-left: -170px;
+    margin-top: 8px;
+    margin-left: -197px;
     padding: 10px;
     width: 370px;
     line-height: 18px;
@@ -64,14 +64,10 @@
 }
 
 #searchButton {
-  border-radius: 100%;
-  margin-left: 25px;
   border: none;
   cursor: pointer;
 
   &:focus, &:visited, &:hover {
-    border-radius: 100%;
-    margin-left: 25px;
     border: none;
   }
 }
@@ -110,8 +106,19 @@
   //   // }
   // }
 
-  @media (max-width: 420px) {
-    #distanceMenu {
-      float: left;
-    }
+@media screen and (max-width: 432px) {
+  #distanceMenu {
+    float: left;
   }
+  #searchMenu {
+    float: left;
+    margin-left: -71%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  #searchMenu {
+    padding: 10px 5px 10px 10px;
+    width: 100vw;
+  }
+}

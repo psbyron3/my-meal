@@ -11,6 +11,23 @@ body {
   background-color: $primary-white;
 }
 
+a {
+  color: $primary-orange;
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary-orange;
+  }
+}
+
+p {
+  margin: 0 0 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font-family;
+}
+
 #routeView {
   margin-top: 100px;
 }
@@ -34,23 +51,6 @@ body {
 a:focus, a:active:focus, a.active:focus{
     outline:none;
     box-shadow:none;
-}
-
-a {
-  color: $primary-orange;
-  text-decoration: none;
-
-  &:hover {
-    color: $secondary-orange;
-  }
-}
-
-p {
-  margin: 0 0 20px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: $header-font-family;
 }
 
 .alert {
