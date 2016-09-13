@@ -56,24 +56,22 @@ class MapView extends Component {
   render() {
     // console.log('location in map: ', this.props);
     return (
-      <div>Here is the map:
-        <div className="map">
-          <GoogleMap
-            bootstrapURLKeys={{
-              key: API_KEY,
-              language: 'en',
-            }}
-            defaultZoom={this.state.zoom}
-            center={this.props.location.latitude ?
-              {
-                lat: this.props.location.latitude,
-                lng: this.props.location.longitude,
-              }
-              : this.state.center}
-          >
-            {this.renderMarkers()}
-          </GoogleMap>
-        </div>
+      <div className="map">
+        <GoogleMap
+          bootstrapURLKeys={{
+            key: API_KEY,
+            language: 'en',
+          }}
+          defaultZoom={this.state.zoom}
+          center={this.props.location.latitude ?
+            {
+              lat: this.props.location.latitude,
+              lng: this.props.location.longitude,
+            }
+            : this.state.center}
+        >
+          {this.renderMarkers()}
+        </GoogleMap>
       </div>
     );
   }

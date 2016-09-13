@@ -12,6 +12,7 @@
 @import "components/userDash";
 @import "components/landing";
 @import "components/advancedSearch";
+
 // Layout -- Headers and footers
 @import "layout/navbar";
 
@@ -24,5 +25,6 @@
 @import "pages/userEditProfile";
 @import "pages/chefUpcoming";
 @import "pages/chefInfo";
+
 // mixins
 @import "utils/mixins";
