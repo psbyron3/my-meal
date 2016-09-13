@@ -1,6 +1,6 @@
 .map {
   width: 46%;
-  height: 100vh;
+  height: 101vh;
   left: 0px;
   top: 0px;
   margin: 0;
@@ -15,7 +15,7 @@
   margin: 0;
 }
 
-.marker  > img {
+.marker > img {
   width: 32px;
   height: 40px;
 }
@@ -47,23 +47,37 @@
   display: none;
 }
 
-.errorAlert span {
-  color: $primary-orange;
-}
-
 .errorAlert {
   background-color: $primary-white;
   z-index: 3;
   position: absolute;
-  left: 37%;
+  left: 50%;
   top: 300px;
-  width: 300px;
+  width: 280px;
+  margin-left: -140px;
   padding: 10px;
   border: 1px solid $primary-yellow;
+  text-align: center;
+
+  h4 {
+    margin-bottom: 1em;
+  }
+
+  p {
+    font-size: 0.8em;
+  }
 }
 
 @media screen and (max-width: 1072px) {
   .map {
     width: 61%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .map {
+    width: 100%;
+    height: 70vh;
+    position: absolute;
   }
 }

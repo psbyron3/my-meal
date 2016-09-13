@@ -215,8 +215,16 @@ $home-card-height: 235px;
     left: 60%;
     width: 40%;
   }
-
   .event-list {
     justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .event-list-wrapper {
+    top: 70vh;
+    left: 0;
+    width: 100%;
+    height: auto;
   }
 }
