@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 import { SignUpFunc } from '../actions/index';
 import $ from 'jquery';
 import { fileinput } from 'bootstrap-fileinput';
-import ProfilePic from './profilePic';
+import ProfilePic from '../components/profilePic';
 
 class SignUp extends Component {
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import PastReview from './userPastReview';
+import PastReview from '../components/userPastReview';
 
 class ReviewList extends Component {
   constructor(props) {

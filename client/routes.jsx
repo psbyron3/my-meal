@@ -4,12 +4,12 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
 import Home from './components/home.jsx';
 import Landing from './components/landing';
-import SignIn from './components/signIn';
-import SignUp from './components/signUp';
-import AddEvent from './components/addEvent';
-import RequireAuth from './components/require_auth';
-import UserDash from './components/userDash';
-import ChefDash from './components/chefDash.js';
+import SignIn from './containers/signIn';
+import SignUp from './containers/signUp';
+import AddEvent from './containers/addEvent';
+import RequireAuth from './containers/require_auth';
+import UserDash from './containers/userDash';
+import ChefDash from './containers/chefDash.js';
 
 export default (
   <Route path="/" component={App}>

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { convertAddress, reviewAverage } from '../utils/helper';
 import Gravatar from 'gravatar';
+
 const _ = require('lodash');
 
 export const MAP_CENTER = 'MAP_CENTER';
