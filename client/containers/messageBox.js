@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-import MessageEntry from './messageEntry';
+import MessageEntry from '../components/messageEntry';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { ChatBoxFunc } from '../actions/index';

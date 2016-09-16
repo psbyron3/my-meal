@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import NavBarComp from './navbar';
+import NavBarComp from '../containers/navbar';
 import SearchBar from '../containers/searchBar';
 
 

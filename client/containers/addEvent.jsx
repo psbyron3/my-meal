@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { createEvent } from '../actions/index';
 import FileInput from 'react-file-input';
-import ProfilePic from './profilePic';
+import ProfilePic from '../components/profilePic';
 
 class AddEvent extends Component {
   constructor(props) {
