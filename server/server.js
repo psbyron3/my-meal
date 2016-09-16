@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const path = require('path');
 const socketIo = require('socket.io');
 
-const dotenv = require('dotenv').config({path: '../.env'});
+const dotenv = require('dotenv').config();
 
 const db = require('./db/db.js');
 
@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.use(express.static('../client'));
+app.use(express.static('./client'));
 
 
 // Routing
