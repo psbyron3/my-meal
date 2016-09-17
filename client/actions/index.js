@@ -26,54 +26,50 @@ export const GET_EVENTS_TO_BE_REVIEWED = 'GET_EVENTS_TO_BE_REVIEWED';
 export const USER_INFO = 'USER_INFO';
 export const CLOSE_SEARCH_BOX = 'CLOSE_SEARCH_BOX';
 
-export const getEventsByUserId = (userId) => {
-  return axios.get(`/api/event/users/${userId}`)
-    .then((response) => {
-      return {
+export const getEventsByUserId = (userId) => (
+  axios.get(`/api/event/users/${userId}`)
+    .then(response => (
+      {
         type: GET_EVENTS_BY_USER_ID,
         payload: response,
-      };
-    })
-    .catch((err) => {
-      if (err) {
-        throw err;
       }
-    });
-};
+    ))
+    .catch(err => {
+      if (err) { throw err; }
+    })
+);
 
-export const getEventsToBeReviewed = (userId) => {
-  return axios.get(`/api/review/${userId}`)
-    .then((reviews) => {
-      return {
+
+export const getEventsToBeReviewed = (userId) => (
+  axios.get(`/api/review/${userId}`)
+    .then(reviews => (
+      {
         type: GET_EVENTS_TO_BE_REVIEWED,
         payload: reviews,
-      };
-    })
-    .catch((err) => {
-      if (err) {
-        throw err;
       }
-    });
-};
+    ))
+    .catch(err => {
+      if (err) { throw err; }
+    })
+);
 
-export const getReviewsByUserId = (userId) => {
-  return axios.get(`/api/review/users/${userId}`)
-    .then((reviews) => {
-      const action = {
+export const getReviewsByUserId = (userId) => (
+  axios.get(`/api/review/users/${userId}`)
+    .then(reviews => (
+      {
         type: ALL_USER_REVIEWS,
         payload: reviews.data,
-      };
-      return action;
-    });
-};
+      }
+    ))
+);
 
 /** *************** AUTHENTICATIONS *********************/
 
 export const SignInFunc = (props) => {
   const email = props.email;
   const password = props.password;
-  return (dispatch) => {
-    return axios({
+  return (dispatch) => (
+    axios({
       method: 'POST',
       url: '/api/auth/login',
       data: {
@@ -81,37 +77,37 @@ export const SignInFunc = (props) => {
         password,
       },
     })
-      .then((response) => {
-        dispatch({
-          type: AUTH_USER,
-        });
-        dispatch({
-          type: USER_INFO,
-          payload: response.data.user,
-        });
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', response.data.user.id);
-        localStorage.setItem('userName', response.data.user.userName);
-        localStorage.setItem('userPic', response.data.user.userPic);
-        const userId = response.data.user.id;
-
-        return getEventsByUserId(userId)
-          .then((action) => {
-            dispatch(action);
-            return getReviewsByUserId(userId)
-              .then((reviews) => {
-                dispatch(reviews);
-                browserHistory.push('/');
-              });
-          });
-      })
-      .catch(() => {
-        dispatch({
-          type: AUTH_ERROR,
-          payload: 'Invalid email or password',
-        });
+    .then((response) => {
+      dispatch({
+        type: AUTH_USER,
       });
-  };
+      dispatch({
+        type: USER_INFO,
+        payload: response.data.user,
+      });
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', response.data.user.id);
+      localStorage.setItem('userName', response.data.user.userName);
+      localStorage.setItem('userPic', response.data.user.userPic);
+      const userId = response.data.user.id;
+
+      return getEventsByUserId(userId)
+        .then((action) => {
+          dispatch(action);
+          return getReviewsByUserId(userId)
+            .then((reviews) => {
+              dispatch(reviews);
+              browserHistory.push('/');
+            });
+        });
+    })
+    .catch(() => {
+      dispatch({
+        type: AUTH_ERROR,
+        payload: 'Invalid email or password',
+      });
+    })
+  );
 };
 
 export const SignUpFunc = (props, userPic) => {
@@ -128,8 +124,8 @@ export const SignUpFunc = (props, userPic) => {
           const url = resp.data;
           return url;
         })
-        .then((url) => {
-          return axios({
+        .then((url) => (
+          axios({
             method: 'POST',
             url: '/api/auth/signup',
             data: {
@@ -143,26 +139,26 @@ export const SignUpFunc = (props, userPic) => {
               userPic: url,
             },
           })
-            .then((response) => {
-              localStorage.setItem('token', response.data.token);
-              localStorage.setItem('id', response.data.result.id);
-              localStorage.setItem('userPic', response.data.result.userPic);
-              dispatch({
-                type: AUTH_USER,
-              });
-              dispatch({
-                type: USER_INFO,
-                payload: response.data.result,
-              });
-              browserHistory.push('/');
-            })
-            .catch((err) => {
-              dispatch({
-                type: AUTH_ERROR_SIGNUP,
-                payload: 'Please use a different email',
-              });
+          .then((response) => {
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('id', response.data.result.id);
+            localStorage.setItem('userPic', response.data.result.userPic);
+            dispatch({
+              type: AUTH_USER,
             });
-        });
+            dispatch({
+              type: USER_INFO,
+              payload: response.data.result,
+            });
+            browserHistory.push('/');
+          })
+          .catch((err) => {
+            dispatch({
+              type: AUTH_ERROR_SIGNUP,
+              payload: 'Please use a different email',
+            });
+          })
+        ));
     };
   }
   return function (dispatch) {
@@ -243,48 +239,48 @@ export const ChefEventsFunc = () => {
 
   let chefEventsArray;
 
-  return (dispatch) => {
-    return axios({
+  return (dispatch) => (
+    axios({
       method: 'GET',
       url: `/api/event/users/${userId}`,
     })
-      .then((response) => {
-        chefEventsArray = response.data;
+    .then((response) => {
+      chefEventsArray = response.data;
 
-        return Promise.all(_.filter(chefEventsArray, (event) => {
-          return event.UsersEvent.role === 'host';
-        }))
-          .then((chefEventFiltered) => {
-            return Promise.all(_.map(chefEventFiltered, (event) => {
-              const eventId = event.UsersEvent.eventId;
-              return axios({
-                method: 'GET',
-                url: `/api/review/event/${eventId}`,
-              })
-                .then((reviews) => {
-                  event.reviews = reviews.data;
-                  const ratingArray = [];
-                  _.each(event.reviews, (review) => {
-                    if (typeof review.rating === 'number') {
-                      ratingArray.push(review.rating);
-                    }
-                  });
-                  event.rating = reviewAverage(ratingArray);
-                  return event;
-                });
-            }));
+      return Promise.all(_.filter(chefEventsArray, (event) =>
+        event.UsersEvent.role === 'host'
+      ))
+      .then((chefEventFiltered) => (
+        Promise.all(_.map(chefEventFiltered, (event) => {
+          const eventId = event.UsersEvent.eventId;
+          return axios({
+            method: 'GET',
+            url: `/api/review/event/${eventId}`,
           })
-          .then((result) => {
-            dispatch({
-              type: CHEF_EVENTS,
-              payload: result,
+          .then((reviews) => {
+            event.reviews = reviews.data;
+            const ratingArray = [];
+            _.each(event.reviews, (review) => {
+              if (typeof review.rating === 'number') {
+                ratingArray.push(review.rating);
+              }
             });
+            event.rating = reviewAverage(ratingArray);
+            return event;
           });
-      })
-      .catch((err) => {
-        throw err;
+        }))
+      ))
+      .then((result) => {
+        dispatch({
+          type: CHEF_EVENTS,
+          payload: result,
+        });
       });
-  };
+    })
+    .catch((err) => {
+      throw err;
+    })
+  );
 };
 
 
@@ -294,68 +290,66 @@ export const DeleteEvent = (eventId) => {
 
   let chefEventsArray;
 
-  return (dispatch) => {
-    return axios({
+  return (dispatch) => (
+    axios({
       method: 'DELETE',
       url: `/api/event/${eventId}`,
     })
-      .then(() => {
-        return axios({
-          method: 'GET',
-          url: `/api/event/users/${userId}`,
-        })
-          .then((response) => {
-            chefEventsArray = response.data;
-            return Promise.all(_.filter(chefEventsArray, (event) => {
-              return event.UsersEvent.role === 'host';
-            }))
-              .then((chefEventFiltered) => {
-                return Promise.all(_.map(chefEventFiltered, (event) => {
-                  const eventID = event.UsersEvent.eventID;
-                  return axios({
-                    method: 'GET',
-                    url: `/api/review/event/${eventID}`,
-                  })
-                    .then((reviews) => {
-                      event.reviews = reviews.data;
-                      const ratingArray = [];
-                      _.each(event.reviews, (review) => {
-                        if (typeof review.rating === 'number') {
-                          ratingArray.push(review.rating);
-                        }
-                      });
-                      event.rating = reviewAverage(ratingArray);
-                      return event;
-                    });
-                }));
-              })
-              .then((result) => {
-                dispatch({
-                  type: CHEF_EVENTS,
-                  payload: result,
-                });
+    .then(() => (
+      axios({
+        method: 'GET',
+        url: `/api/event/users/${userId}`,
+      })
+      .then((response) => {
+        chefEventsArray = response.data;
+        return Promise.all(_.filter(chefEventsArray, (event) => event.UsersEvent.role === 'host'))
+        .then((chefEventFiltered) => (
+          Promise.all(_.map(chefEventFiltered, (event) => {
+            const eventID = event.UsersEvent.eventID;
+            return axios({
+              method: 'GET',
+              url: `/api/review/event/${eventID}`,
+            })
+            .then((reviews) => {
+              event.reviews = reviews.data;
+              const ratingArray = [];
+              _.each(event.reviews, (review) => {
+                if (typeof review.rating === 'number') {
+                  ratingArray.push(review.rating);
+                }
               });
-          })
-          .catch((err) => {
-            throw err;
+              event.rating = reviewAverage(ratingArray);
+              return event;
+            });
+          }))
+        ))
+        .then((result) => {
+          dispatch({
+            type: CHEF_EVENTS,
+            payload: result,
           });
-      });
-  };
+        });
+      })
+      .catch((err) => {
+        throw err;
+      })
+    ))
+  );
 };
 
 
 /** ***************** EVENT FUNC ***********************/
 
-export const getAllEvents = (latitude, longitude, tags, distance) => {
-  return axios.get('/api/search/location', {
+export const getAllEvents = (latitude, longitude, tags, distance) => (
+  axios.get('/api/search/location', {
     params: {
       latitude,
       longitude,
       tags,
       distance,
     },
-  });
-};
+  })
+);
 
 export const getAllInRadius = (query, tags = [], distance = 5) => {
   // console.log('IN GETALLINRADIUS...searchParams =', tags, distance);
@@ -386,12 +380,12 @@ export const getAllInRadius = (query, tags = [], distance = 5) => {
   };
 };
 
-export const selectEvent = (event) => {
-  return {
+export const selectEvent = (event) => (
+  {
     type: SELECT_EVENT,
     payload: event,
-  };
-};
+  }
+);
 
 
 export const createEvent = (props, dishPic) => {
@@ -447,26 +441,26 @@ export const createEvent = (props, dishPic) => {
     });
 };
 
-export const joinEvent = (eventId, userId) => {
-  return axios.post(`/api/event/join/${eventId}`, { userId })
-    .then((events) => {
-      return function (dispatch) {
+export const joinEvent = (eventId, userId) => (
+  axios.post(`/api/event/join/${eventId}`, { userId })
+    .then(events => (
+      (dispatch) => {
         dispatch({
           type: GET_EVENTS_BY_USER_ID,
           payload: events,
         });
         return events;
-      };
-    });
-};
+      }
+    ))
+);
 
 /** **************REVIEWS*********************/
 
 
-export const postUserReviewOfChef = (reviewData) => {
+export const postUserReviewOfChef = (reviewData) => (
   // console.log('in post review action :', reviewData);
-  return function (dispatch) {
-    return axios.post('/api/review/', reviewData)
+  (dispatch) => (
+    axios.post('/api/review/', reviewData)
       .then((response) => {
         dispatch({
           type: GET_EVENTS_BY_USER_ID,
@@ -474,13 +468,11 @@ export const postUserReviewOfChef = (reviewData) => {
         });
         return getReviewsByUserId(reviewData.reviewerId);
       })
-      .catch((err) => {
-        if (err) {
-          throw err;
-        }
-      });
-  };
-};
+      .catch(err => {
+        if (err) { throw err; }
+      })
+  )
+);
 
 
 /** ******************** CHAT **************************/
@@ -493,25 +485,25 @@ export const EventIdFunc = (eventId, evName) => {
   };
 };
 
-export const ChatBoxFunc = (status) => {
-  return {
+export const ChatBoxFunc = (status) => (
+  {
     type: CLOSE_CHAT_BOX,
     payload: status,
-  };
-};
+  }
+);
 
-export const renderSearchFunc = (status) => {
-  return {
+export const renderSearchFunc = (status) => (
+  {
     type: CLOSE_SEARCH_BOX,
     payload: status,
-  };
-};
+  }
+);
 
 
 /** ***********Tags*******************/
 
-export const getAllTags = () => {
-  return axios.get('/api/tag')
+export const getAllTags = () => (
+  axios.get('/api/tag')
     .then((tags) => {
       const restrictions = tags.data.filter(tag => tag.restriction);
       const genres = tags.data.filter(tag => !tag.restriction);
@@ -528,5 +520,5 @@ export const getAllTags = () => {
     })
     .catch((err) => {
       throw err;
-    });
-};
+    })
+);

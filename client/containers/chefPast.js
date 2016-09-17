@@ -12,12 +12,10 @@ class ChefPast extends Component {
   }
 
   onHandleClick(e, evName) {
-    new Promise((resolve, reject) => {
-      resolve(this.props.ChatBoxFunc('false'));
-    }).then(() => {
-      return this.props.EventIdFunc(e, evName);
-    }).then(() => {
-      return this.props.ChatBoxFunc('true');
+    Promise((resolve, reject) => {
+      resolve(this.props.ChatBoxFunc('false'))
+    .then(() => this.props.EventIdFunc(e, evName))
+    .then(() => this.props.ChatBoxFunc('true'));
     });
   }
 
@@ -28,18 +26,16 @@ class ChefPast extends Component {
         </div>
       );
     }
-    return this.props.chefPastEvents.map((pastEvent) => {
-      return (
-        <ChefPastEntry
-          key={pastEvent.id}
-          eventName={pastEvent.eventName}
-          eventId={pastEvent.id}
-          deleteEvent={this.props.DeleteEvent}
-          clicked={this.onHandleClick}
-          image={pastEvent.eventPic}
-        />
-      );
-    });
+    return this.props.chefPastEvents.map((pastEvent) => (
+      <ChefPastEntry
+        key={pastEvent.id}
+        eventName={pastEvent.eventName}
+        eventId={pastEvent.id}
+        deleteEvent={this.props.DeleteEvent}
+        clicked={this.onHandleClick}
+        image={pastEvent.eventPic}
+      />
+    ));
   }
 
   render() {

@@ -25,25 +25,21 @@ class userDashView extends Component {
       return (<div> No reviews to give </div>);
     }
     return this.props.userHistory
-      .filter((event) => {
+      .filter(event => event.endDatetime <= now && !event.UsersEvent.wasReviewed)
         // console.log('now is.....', now, 'of type', typeof now);
         // console.log('endDatetime is......', event.endDatetime, 'of type', typeof event.endDatetime);
-        return event.endDatetime <= now && !event.UsersEvent.wasReviewed;
-      })
-      .map((event, index) => {
-        return (
-          <UserReview
-            hoverEvent={this.props.hoverEvent}
-            key={event.id}
-            index={event.id}
-            eventName={event.eventName}
-            eventPic={event.eventPic}
-            date={event.startDatetime}
-            price={event.price}
-            hostId={event.UsersEvent.userId}
-          />
-        );
-      });
+      .map((event, index) => (
+        <UserReview
+          hoverEvent={this.props.hoverEvent}
+          key={event.id}
+          index={event.id}
+          eventName={event.eventName}
+          eventPic={event.eventPic}
+          date={event.startDatetime}
+          price={event.price}
+          hostId={event.UsersEvent.userId}
+        />
+      ));
   }
 
   render() {

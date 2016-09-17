@@ -8,13 +8,11 @@ import { EventIdFunc, ChatBoxFunc } from '../actions/index';
 class DashEvent extends Component {
 
   onHandleClick(e, evName) {
-    new Promise((resolve, reject) => {
+    Promise((resolve, reject) => {
       resolve(this.props.ChatBoxFunc('false'));
-    }).then(() => {
-      return this.props.EventIdFunc(e, evName);
-    }).then(() => {
-      return this.props.ChatBoxFunc('true');
-    });
+    })
+    .then(() => this.props.EventIdFunc(e, evName))
+    .then(() => this.props.ChatBoxFunc('true'));
   }
 
   formatTime(time, str) {
@@ -115,6 +113,7 @@ DashEvent.propTypes = {
   boxStatus: PropTypes.bool,
   times: PropTypes.string,
   index: PropTypes.number,
+  chefPic: PropTypes.image,
 };
 
 export default connect(mapStateToProps, { EventIdFunc, ChatBoxFunc })(DashEvent);

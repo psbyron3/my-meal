@@ -71,43 +71,39 @@ class AddEvent extends Component {
                     <label htmlFor="genre"> Food Type </label>
                     <select className="form-control" id="genre" {...genre} value={genre.value || ''}>
                       <option></option>
-                      {this.props.genres.map((genreItem) => {
-                        return (
-                          <option key={genreItem.id} value={genreItem.id}>
-                            {genreItem.tagName}
-                          </option>
-                        );
-                      })}
+                      {this.props.genres.map(genreItem => (
+                        <option key={genreItem.id} value={genreItem.id}>
+                          {genreItem.tagName}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
                   <label> Other Preference : </label>
 
                   <div>
-                    {this.props.restrictions.map((restriction) => {
-                      return (
-                        <div key={restriction.id} style={{ display: 'inline-block' }} >
-                          <label
+                    {this.props.restrictions.map((restriction) => (
+                      <div key={restriction.id} style={{ display: 'inline-block' }} >
+                        <label
 
-                            className="checkboxLabel form-check-inline"
-                          >
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value={restriction.id}
-                              onChange={(event) => {
-                                if (event.target.checked) {
-                                  tags.addField(event.target.value);
-                                } else {
-                                  tags.removeField(tags.indexOf(event.target.value));
-                                }
-                              }}
-                            />
-                          {restriction.tagName}
-                          </label>
-                        </div>
-                      );
-                    })}
+                          className="checkboxLabel form-check-inline"
+                        >
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            value={restriction.id}
+                            onChange={(event) => {
+                              if (event.target.checked) {
+                                tags.addField(event.target.value);
+                              } else {
+                                tags.removeField(tags.indexOf(event.target.value));
+                              }
+                            }}
+                          />
+                        {restriction.tagName}
+                        </label>
+                      </div>
+                    ))}
                   </div>
 
                   <br />

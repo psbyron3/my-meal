@@ -31,24 +31,22 @@ class MapView extends Component {
   renderMarkers() {
     // console.log('allEvents in MapView:', this.props.allEvents);
     if (this.props.allEvents.length > 0) {
-      return this.props.allEvents.map((event) => {
-        return (
-          <MapMarker
-            index={event.id}
-            key={event.id}
-            lat={event.latitude}
-            lng={event.longitude}
-            eventName={event.eventName}
-            address={event.address}
-            startTime={event.startDatetime}
-            endTime={event.endDatetime}
-            openModal={this.props.openModal}
-            setCurrent={this.setCurrent}
-            currentMarker={this.state.currentMarker}
-            setHoverEvent={this.props.setHoverEvent}
-          />
-        );
-      });
+      return this.props.allEvents.map((event) => (
+        <MapMarker
+          index={event.id}
+          key={event.id}
+          lat={event.latitude}
+          lng={event.longitude}
+          eventName={event.eventName}
+          address={event.address}
+          startTime={event.startDatetime}
+          endTime={event.endDatetime}
+          openModal={this.props.openModal}
+          setCurrent={this.setCurrent}
+          currentMarker={this.state.currentMarker}
+          setHoverEvent={this.props.setHoverEvent}
+        />
+      ));
     }
     return (<span></span>);
   }

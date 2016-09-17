@@ -100,26 +100,24 @@ class SignUp extends Component {
                         </div>
 
                         <div>
-                          {this.props.restrictions.map((restriction) => {
-                            return (
-                              <div style={{ display: 'inline-block' }} key={restriction.id}>
-                                <label className="checkboxLabel">
-                                  <input
-                                    type="checkbox"
-                                    value={restriction.id}
-                                    onChange={(event) => {
-                                      if (event.target.checked) {
-                                        tags.addField(event.target.value);
-                                      } else {
-                                        tags.removeField(tags.indexOf(event.target.value));
-                                      }
-                                    }}
-                                  />
-                                {restriction.tagName}
-                                </label>
-                              </div>
-                            );
-                          })}
+                          {this.props.restrictions.map((restriction) => (
+                            <div style={{ display: 'inline-block' }} key={restriction.id}>
+                              <label className="checkboxLabel">
+                                <input
+                                  type="checkbox"
+                                  value={restriction.id}
+                                  onChange={(event) => {
+                                    if (event.target.checked) {
+                                      tags.addField(event.target.value);
+                                    } else {
+                                      tags.removeField(tags.indexOf(event.target.value));
+                                    }
+                                  }}
+                                />
+                              {restriction.tagName}
+                              </label>
+                            </div>
+                          ))}
                         </div>
 
                         <div className={`form-group ${userName.touched && userName.invalid ? 'has-danger' : ''}`}>
@@ -206,6 +204,7 @@ SignUp.propTypes = {
   handleSubmit: PropTypes.func,
   SignUpFunc: PropTypes.func,
   restrictions: PropTypes.array,
+  errorMessage: PropTypes.object,
 };
 
 function mapStateToProps(state) {

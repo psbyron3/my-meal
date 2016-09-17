@@ -38,16 +38,14 @@ class UserEditProfile extends Component {
   onSubmit(userAttr) {
     const userUpdate = Object.assign({}, userAttr, { tags: this.state.selectedRestrictions });
     this.props.editUser(userUpdate)
-      .then((response) => {
+      .then(response => {
         this.setState({
           wasChecked: false,
           submitted: true,
         });
       })
-      .catch((err) => {
+      .catch((err) => (err));
         // console.log('error in onSubmit in userEditProfile:', err);
-        return err;
-      });
   }
 
   showSuccess() {
@@ -104,21 +102,19 @@ class UserEditProfile extends Component {
                         </div>
 
                         <div className="user-restrictions">
-                          {this.props.restrictions.map((restriction) => {
-                            return (
-                              <div style={{ display: 'inline-block' }} key={restriction.id}>
-                                <label className="checkboxLabel">
-                                  <input
-                                    type="checkbox"
-                                    value={restriction.id}
-                                    checked={this.state.selectedRestrictions.indexOf(restriction.id) > -1}
-                                    onChange={this.onCheckChange}
-                                  />
-                                  &nbsp;{restriction.tagName}
-                                </label>
-                              </div>
-                            );
-                          })}
+                          {this.props.restrictions.map((restriction) => (
+                            <div style={{ display: 'inline-block' }} key={restriction.id}>
+                              <label className="checkboxLabel">
+                                <input
+                                  type="checkbox"
+                                  value={restriction.id}
+                                  checked={this.state.selectedRestrictions.indexOf(restriction.id) > -1}
+                                  onChange={this.onCheckChange}
+                                />
+                                &nbsp;{restriction.tagName}
+                              </label>
+                            </div>
+                          ))}
                         </div>
 
                       </div>

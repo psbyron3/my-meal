@@ -20,19 +20,15 @@ export const convertAddress = (address) => {
       };
       return coordinate;
     })
-    .catch((err) => {
+    .catch(err => (err));
       // console.log('ERROR ', err);
-      return err;
-    });
 };
 
 export const reviewAverage = (reviews) => {
   if (reviews.length === 0) {
     return 'n/a';
   }
-  return _.reduce(reviews, (sum, current) => {
-    return sum + current;
-  }, 0) / reviews.length;
+  return reviews.reduce((sum, current) => sum + current, 0) / reviews.length;
 };
 
 export const organizeChefPast = (allEvents) => {
@@ -40,15 +36,15 @@ export const organizeChefPast = (allEvents) => {
   let chefPastEvents;
 
   new Promise((resolve, reject) => {
-    chefPastEvents = _.filter(allEvents, (event) => {
-      return Date.parse(event.startDatetime) < Date.parse(currentDate);
-    });
+    chefPastEvents = _.filter(allEvents, (event) => (
+      Date.parse(event.startDatetime) < Date.parse(currentDate)
+    ));
     resolve(chefPastEvents);
   })
     .then((result) => {
-      result.sort((a, b) => {
-        return Date.parse(b.startDatetime) - Date.parse(a.startDatetime);
-      });
+      result.sort((a, b) => (
+        Date.parse(b.startDatetime) - Date.parse(a.startDatetime)
+      ));
     });
   return chefPastEvents;
 };
@@ -59,15 +55,15 @@ export const organizeChefUpcoming = (allEvents) => {
   let chefUpcomingEvents;
 
   new Promise((resolve, reject) => {
-    chefUpcomingEvents = _.filter(allEvents, (event) => {
-      return Date.parse(event.startDatetime) > Date.parse(currentDate);
-    });
+    chefUpcomingEvents = _.filter(allEvents, (event) => (
+      Date.parse(event.startDatetime) > Date.parse(currentDate)
+    ));
     resolve(chefUpcomingEvents);
   })
     .then((result) => {
-      result.sort((a, b) => {
-        return Date.parse(a.startDatetime) - Date.parse(b.startDatetime);
-      });
+      result.sort((a, b) => (
+        Date.parse(a.startDatetime) - Date.parse(b.startDatetime)
+      ));
     });
   return chefUpcomingEvents;
 };
