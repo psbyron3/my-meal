@@ -7,32 +7,30 @@ const Event = require('./eventModel.js');
 // create review for event in attr
 Review.createReview = function (attr) {
   return Review.findReviewForEventbyUser(attr.eventId, attr.reviewerId)
-    .then(() => {
+    .then(() => db.Review.create(attr)
       // console.log("review doesn't exist, creating now");
-      return db.Review.create(attr)
-        .then((result) => {
-          const { eventId, reviewerId } = result.dataValues;
-          return Review.findReviewsByChef(result.hostId)
-            .then((reviews) => {
-              return Review.updateAverage(reviews)
-                .then((user) => {
-                  return Event.findEventById(eventId)
-                    .then((event) => {
-                      return event.removeUsers([reviewerId])
-                        .then((confirm) => {
-                          return event.addUsers([reviewerId], {
-                            role: 'guest',
-                            wasReviewed: true,
-                          })
-                            .then(() => {
-                              return Event.findEventsByUser(attr.reviewerId);
-                            });
-                        });
-                    });
-                });
-            });
-        });
-    });
+      .then((result) => {
+        const { eventId, reviewerId } = result.dataValues;
+        return Review.findReviewsByChef(result.hostId)
+        .then((reviews) => (
+          Review.updateAverage(reviews)
+          .then((user) => (
+            Event.findEventById(eventId)
+            .then((event) => (
+              event.removeUsers([reviewerId])
+              .then((confirm) => (
+                event.addUsers([reviewerId],
+                  {
+                    role: 'guest',
+                    wasReviewed: true,
+                  })
+                .then(() => Event.findEventsByUser(attr.reviewerId))
+              ))
+            ))
+          ))
+        ));
+      })
+  );
 };
 
 // find one review based on review id
@@ -52,14 +50,12 @@ Review.findReviewById = function (reviewId) {
       },
     ],
   })
-    .then((rows) => {
-      return rows[0];
-    });
+  .then((rows) => rows[0]);
 };
 
 // find all reviews by a given reviewer id
 Review.findReviewsByUser = function (reviewerId) {
-  console.log('reviewerId in Review model findReviewsByUser...', reviewerId);
+  // console.log('reviewerId in Review model findReviewsByUser...', reviewerId);
   return db.Review.findAll({
     where: { reviewerId },
     include: [
@@ -75,11 +71,8 @@ Review.findReviewsByUser = function (reviewerId) {
       },
     ],
   })
-    .catch((err) => {
-      console.log('err in findReviewsByUser.....', err);
-      return err;
-    })
-  ;
+  .catch((err) => (err));
+      // console.log('err in findReviewsByUser.....', err);
 };
 
 // find all reviews for a chef
@@ -99,37 +92,29 @@ Review.findReviewsByChef = function (chefId) {
       },
     ],
   })
-    .catch((err) => {
-      console.log('error in findReviewsByChef', err);
-      return err;
-    });
+  .catch((err) => (err));
+      // console.log('error in findReviewsByChef', err);
 };
 
 // find all reviews for a given event id
-Review.findReviewsByEvent = function (eventId) {
-  return db.Review.findAll({ where: { eventId } })
-    .then((rows) => {
-      return rows;
-    });
-};
+Review.findReviewsByEvent = (eventId) => (
+  db.Review.findAll({ where: { eventId } })
+    .then((rows) => rows)
+);
 
 // find review for an event by a specific user
-Review.findReviewForEventbyUser = function (eventId, reviewerId) {
-  return db.Review.findAll({ where: { eventId, reviewerId } })
-    .then((rows) => {
-      return rows[0];
-    });
-};
+Review.findReviewForEventbyUser = (eventId, reviewerId) => (
+  db.Review.findAll({ where: { eventId, reviewerId } })
+  .then((rows) => rows[0])
+);
 
 Review.updateAverage = function (reviews) {
   const hostId = reviews[0].dataValues.hostId;
-  const avg = reviews.reduce((total, curr) => {
-    return total + curr.dataValues.rating;
-  }, 0) / reviews.length;
+  const avg = reviews.reduce((total, curr) => total + curr.dataValues.rating, 0) / reviews.length;
   return db.User.findById(hostId)
-    .then((user) => {
-      return user.update({
+    .then((user) => (
+      user.update({
         avgRating: avg,
-      });
-    });
+      })
+    ));
 };

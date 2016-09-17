@@ -8,12 +8,12 @@ const User = module.exports;
 // Used to save enscrypted password to database
 function hashPassword(pw) {
   // console.log('hashing password', pw);
-  return new Promise(function (resolve, reject, next) {
-    return bcrypt.genSalt(10, function (err, salt) {
+  return new Promise((resolve, reject, next) => (
+    bcrypt.genSalt(10, (err, salt) => {
       if (err) {
         return next(err);
       }
-      return bcrypt.hash(pw, salt, function (error, hash) {
+      return bcrypt.hash(pw, salt, (error, hash) => {
         if (error) {
           return next(error);
         }
@@ -22,18 +22,18 @@ function hashPassword(pw) {
           hash,
         });
       });
-    });
-  });
+    })
+  ));
 }
 
 // Used to compare submitted pw to saved, hashed pw
 User.comparePasswords = function (hashedPw, attempt) {
-  return new Promise(function (resolve, reject) {
-    return bcrypt.compare(attempt, hashedPw, function (err, res) {
+  return new Promise((resolve, reject) => (
+    bcrypt.compare(attempt, hashedPw, (err, res) => {
       if (err) return reject(err);
       return resolve(res);
-    });
-  });
+    })
+  ));
 };
 
 
@@ -61,9 +61,8 @@ User.findUserById = function (id) {
         model: db.Tag,
       },
     ],
-  }).then(function (rows) {
-    return rows[0];
-  });
+  })
+  .then((rows) => rows[0]);
 };
 
 User.findUserByEmail = function (email) {
@@ -76,9 +75,7 @@ User.findUserByEmail = function (email) {
         model: db.Tag,
       },
     ],
-  }).then(function (rows) {
-    return rows[0];
-  });
+  }).then((rows) => rows[0]);
 };
 
 // Used in the Event.createEvent function only
@@ -96,16 +93,14 @@ User.addHostToEvent = function (event, userId) {
 // userId parameter is to be used only to check hostId and should be the id of the user making the request
 User.findUsersByEvent = function (userId, eventId) {
   return db.Event.findById(eventId)
-    .then((event) => {
-      return event.getUsers();
-    });
+    .then((event) => event.getUsers());
 };
 
 User.createUser = function (attr, tags = []) {
   // console.log('creating user', attr);
-  return new Promise(function (resolve, reject) {
-    return hashPassword(attr.password)
-      .then(function (hashObj) {
+  return new Promise((resolve, reject) => (
+    hashPassword(attr.password)
+      .then((hashObj) => {
         attr.password = hashObj.hash;
         attr.salt = hashObj.salt;
       })
@@ -113,36 +108,31 @@ User.createUser = function (attr, tags = []) {
         // console.log('password hashed');
         const newUser = Object.assign({}, attr, { avgRating: 0 });
         db.User.create(newUser)
-          .then(function (result) {
-            const output = result.dataValues;
-            return result.setTags(tags)
-              .then((x) => {
-                return db.User.findById(output.id, {
-                  include: db.Tag,
-                })
-                  .then((user) => {
-                    resolve(user.dataValues);
-                  });
-              });
+        .then((result) => {
+          const output = result.dataValues;
+          return result.setTags(tags)
+          .then((x) => (
+            db.User.findById(output.id, {
+              include: db.Tag,
+            })
+          ))
+          .then((user) => {
+            resolve(user.dataValues);
           });
-      });
-  });
+        });
+      })
+  ));
 };
 
-User.editUser = function (attr, tags = [], userId) {
+User.editUser = (attr, tags = [], userId) => (
   // console.log('editing user...', attr, tags, userId);
-  return db.User.findById(userId)
-    .then((user) => {
-      return user.update(attr, { reset: false })
-        .then((updatedUser) => {
-          return updatedUser.setTags(tags)
-            .then((result) => {
-              return db.User.findById(userId, {
-                include: {
-                  model: db.Tag,
-                },
-              });
-            });
-        });
-    });
-};
+  db.User.findById(userId)
+    .then((user) => user.update(attr, { reset: false }))
+    .then((updatedUser) => updatedUser.setTags(tags))
+    .then((result) => (
+      db.User.findById(userId,
+        {
+          include: { model: db.Tag },
+        })
+    ))
+);

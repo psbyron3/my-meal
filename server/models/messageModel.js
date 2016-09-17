@@ -6,15 +6,13 @@ const Message = module.exports;
 
 // add a message to an event in attr
 Message.createMessage = function (attr) {
-  return User.findUserById(attr.userId).then(function (result) {
+  return User.findUserById(attr.userId).then(result => {
     attr.userName = result.dataValues.userName;
     return attr;
-  }).then(function () {
-    return db.Message.create(attr)
-      .then(function (result) {
-        return result.dataValues;
-      });
-  });
+  }).then(() => (
+    db.Message.create(attr)
+      .then(result => result.dataValues)
+  ));
 };
 
 // find all reviews for a given event id
@@ -32,7 +30,6 @@ Message.findMessagesByEventId = function (eventId) {
       },
     ],
   })
-    .then(function (rows) {
-      return rows;
-    }).catch((err) => err);
+  .then((rows) => rows)
+  .catch((err) => err);
 };

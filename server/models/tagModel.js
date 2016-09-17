@@ -28,13 +28,11 @@ Tag.removeTagsFromUser = function (tagIds, userId) {
     .then((user) => user.removeTags(tagIds));
 };
 
-Tag.getTagsByUser = function (userId) {
-  return db.User.findById(userId)
-    .then((user) => {
-      return user.getTags()
-        .then((results) => results);
-    });
-};
+Tag.getTagsByUser = (userId) => (
+  db.User.findById(userId)
+    .then((user) => user.getTags())
+    .then((results) => results)
+);
 
 // event is a row in the table, tags is an array of tag ids
 Tag.addTagsToEvent = function (event, tagIds) {

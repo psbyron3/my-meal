@@ -27,15 +27,13 @@ Event.findAllEvents = function () {
 // This is to take the place of findAllEvents at route '/api/event/' before deployment
 Event.findLastEvent = function () {
   return db.Event.max('id')
-    .then((maxId) => {
-      return db.Event.findAll({
+    .then((maxId) => (
+      db.Event.findAll({
         where: { id: maxId },
-      });
-    })
-    .catch((err) => {
+      })
+    ))
+    .catch((err) => (err));
       // console.log('error in findLastEvent...', err);
-      return err;
-    });
 };
 
 Event.findEventById = function (eventId) {
@@ -69,15 +67,11 @@ Event.findEventsInRadius = function (lat, lng) {
     ],
   })
     .then((results) => {
-      const filtered = results.filter((event) => {
-        return event.Users.length;
-      });
+      const filtered = results.filter((event) => event.Users.length);
       return filtered;
     })
-    .catch((err) => {
-      // console.log('error in findEventsInRadius', err);
-      return err;
-    });
+    .catch((err) => (err));
+      // console.log('error in findEventsInRadius', err)
 };
 
 Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
@@ -105,8 +99,8 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
       },
     ],
   })
-    .then((events) => {
-      return events.filter((event, index) => {
+    .then((events) => (
+      events.filter((event, index) => {
         let tagMatch = 0;
         let lastIndex = 0;
         if (tags.length <= event.Tags.length) {
@@ -122,8 +116,8 @@ Event.findEventsByParams = function (lat, lng, distance = 5, tags = []) {
         }
         // event.Users.length ensures that events with no relationship in the join table won't return
         return tagMatch === tags.length && event.Users.length;
-      });
-    })
+      })
+    ))
     .catch((err) => err);
 };
 
@@ -176,22 +170,20 @@ Event.findEventByLocationAndDate = function (lat, lng, start, end) {
 // Used to populate user dashboard
 Event.findEventsByUser = function (userId) {
   return db.User.findById(userId)
-    .then((user) => {
+    .then(user => (
       // console.log('user is:', user);
-      return user.getEvents({
+      user.getEvents({
         include: [
           {
             model: db.User,
             through: {
               model: db.UsersEvent,
-              where: {
-                userId,
-              },
+              where: { userId },
             },
           },
         ],
-      });
-    })
+      })
+    ))
     .catch((err) => err);
 };
 
@@ -199,18 +191,14 @@ Event.createEvent = function (newEvent) {
   // console.log(newEvent, 'EVENT CREATED WHERE BUG+++++++++++++++++++++++++++++++++++++++++++++');
   const newE = Object.assign({}, newEvent, { attending: 0 });
   return db.Event.create(newE)
-    .then((event) => {
+    .then(event => (
       // console.log('result of createEvent', event.eventName, newEvent.userId);
-      return User.addHostToEvent(event, newEvent.userId)
-        .then(() => {
+      User.addHostToEvent(event, newEvent.userId)
+        .then(() => Tag.addTagsToEvent(event, newEvent.tags))
           // console.log('host added...adding tags');
-          return Tag.addTagsToEvent(event, newEvent.tags)
-            .then(() => {
-              // console.log('tags added, getting events....');
-              return Event.findEventsByUser(newEvent.userId);
-            });
-        });
-    });
+        .then(() => Event.findEventsByUser(newEvent.userId))
+          // console.log('tags added, getting events....');
+    ));
 };
 
 Event.joinEvent = function (eventId, userId) {
@@ -225,12 +213,8 @@ Event.joinEvent = function (eventId, userId) {
             .then((result) => {
               if (result) return {};
               return event.addUsers([user], { role: 'guest', wasReviewed: false })
-                .then(() => {
-                  return event.increment('attending')
-                    .then(() => {
-                      return Event.findEventsByUser(userId);
-                    });
-                });
+                .then(() => event.increment('attending'))
+                .then(() => Event.findEventsByUser(userId));
             });
         });
     })
@@ -248,9 +232,7 @@ Event.quitEvent = function (eventId, userId) {
             .then((result) => {
               if (!result) return {};
               return event.removeUsers([user])
-                .then(() => {
-                  return event.decrement('attending');
-                });
+                .then(() => event.decrement('attending'));
             });
         });
     })

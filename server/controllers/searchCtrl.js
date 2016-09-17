@@ -8,30 +8,30 @@ module.exports = {
     get(req, res) {
       Event.findLastEvent()
         .then((result) => {
-          console.log('returning last event...');
+          // console.log('returning last event...');
           res.send(result);
         })
         .catch((err) => {
-          console.log('error in GET \'/\' findLastEvent...');
+          // console.log('error in GET \'/\' findLastEvent...');
           res.send(err);
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/search');
+      // console.log('Received POST at /api/search');
       res.end('Received POST at /api/search');
     },
     put(req, res) {
-      console.log('Received PUT at /api/search');
+      // console.log('Received PUT at /api/search');
       res.end('Received PUT at /api/search');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/search');
+      // console.log('Received DELETE at /api/search');
       res.end('Received DELETE at /api/search');
     },
   },
   '/location': {
     get(req, res) {
-      console.log('Received GET at /api/search/location....+++++.....', req.query);
+      // console.log('Received GET at /api/search/location....+++++.....', req.query);
       const latitude = req.query.latitude;
       const longitude = req.query.longitude;
       const distance = req.query.distance || 5;
@@ -45,21 +45,21 @@ module.exports = {
           res.send(results);
         })
         .catch((err) => {
-          console.log('Error in api/search/location', err);
+          // console.log('Error in api/search/location', err);
           // err is put in array in response to satisfy proptypes on client side
           res.send([err]);
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/search/location');
+      // console.log('Received POST at /api/search/location');
       res.end('Received POST at /api/search/location');
     },
     put(req, res) {
-      console.log('Received PUT at /api/search/location');
+      // console.log('Received PUT at /api/search/location');
       res.end('Received PUT at /api/search/location');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/search/location');
+      // console.log('Received DELETE at /api/search/location');
       res.end('Received DELETE at /api/search/location');
     },
   },
@@ -78,21 +78,21 @@ module.exports = {
           res.send(results);
         })
         .catch((err) => {
-          console.log('Error in api/search/test', err);
+          // console.log('Error in api/search/test', err);
           // err is put in array in response to satisfy proptypes on client side
           res.send([err]);
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/search/location');
+      // console.log('Received POST at /api/search/location');
       res.end('Received POST at /api/search/location');
     },
     put(req, res) {
-      console.log('Received PUT at /api/search/location');
+      // console.log('Received PUT at /api/search/location');
       res.end('Received PUT at /api/search/location');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/search/location');
+      // console.log('Received DELETE at /api/search/location');
       res.end('Received DELETE at /api/search/location');
     },
   },
