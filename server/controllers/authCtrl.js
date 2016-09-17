@@ -5,11 +5,11 @@ module.exports = {
 //* *************************SIGN UP*****************************
   '/signup': {
     get(req, res) {
-      console.log('Received GET at /api/auth/signup');
+      // console.log('Received GET at /api/auth/signup');
       res.end('Received GET at /api/auth/signup but endpoint is not rendering anything');
     },
     post(req, res) {
-      console.log('Received POST at /api/auth/signup');
+      // console.log('Received POST at /api/auth/signup');
       const newAccount = {
         userName: req.body.userName,
         password: req.body.password,
@@ -23,7 +23,7 @@ module.exports = {
       const tags = req.body.tags || [];
 
       User.findUserByEmail(newAccount.email)
-        .then(function (user) {
+        .then((user) => {
           // console.log(user, 'response from query');
           if (user) {
             // console.log('user exists');
@@ -33,7 +33,7 @@ module.exports = {
           } else {
             // console.log('user does not exist');
             User.createUser(newAccount, tags)
-              .then((result) => {
+              .then(result => {
                 // console.log('result of creationUser', result);
                 // console.log(process.env.secret, 'process');
                 // do session id/jwt stuff
@@ -50,18 +50,18 @@ module.exports = {
                   result,
                 });
               })
-              .catch(function (err) {
+              .catch(err => {
                 res.send(err);
               });
           }
         });
     },
     put(req, res) {
-      console.log('Received PUT at /api/auth/signup');
+      // console.log('Received PUT at /api/auth/signup');
       res.end('Received PUT at /api/auth/signup');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/auth/signup');
+      // console.log('Received DELETE at /api/auth/signup');
       res.end('Received DELETE at /api/auth/signup');
     },
   },
@@ -70,21 +70,21 @@ module.exports = {
 
   '/login': {
     get(req, res) {
-      console.log('Received GET at /api/auth/login');
+      // console.log('Received GET at /api/auth/login');
       res.end('Received GET at /api/auth/login');
     },
     post(req, res) {
-      console.log('Received POST at /api/auth/login');
+      // console.log('Received POST at /api/auth/login');
 
       const email = req.body.email;
       const password = req.body.password;
 
       User.findUserByEmail(email)
-        .then(function (user) {
+        .then(user => {
           if (user) {
-            console.log('user exists, checking pw');
+            // console.log('user exists, checking pw');
             User.comparePasswords(user.password, password)
-              .then(function (result) {
+              .then(result => {
                 if (result) {
                   // console.log('passwords match');
                   // proceed with login methods
@@ -109,7 +109,7 @@ module.exports = {
                     user,
                   });
                 } else {
-                  console.log('passwords do not match');
+                  // console.log('passwords do not match');
 
                   res.status(401).json({
                     success: false,
@@ -119,7 +119,7 @@ module.exports = {
                 }
               });
           } else {
-            console.log('user does not exist');
+            // console.log('user does not exist');
             res.status(401).json([{
               success: false,
               message: 'Failure: user does not exist',
@@ -129,11 +129,11 @@ module.exports = {
         });
     },
     put(req, res) {
-      console.log('Received PUT at /api/auth/login');
+      // console.log('Received PUT at /api/auth/login');
       res.end('Received PUT at /api/auth/login');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/auth/login');
+      // console.log('Received DELETE at /api/auth/login');
       res.end('Received DELETE at /api/auth/login');
     },
   },

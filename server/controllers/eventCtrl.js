@@ -11,7 +11,7 @@ const s3fsImpl = new S3FS('mymealmks', {
 module.exports = {
   '/': {
     get(req, res) {
-      console.log('Received GET at /api/event/');
+      // console.log('Received GET at /api/event/');
       // maybe this should be findOne instead?
       Event.findAllEvents()
         .then((events) => {
@@ -24,12 +24,12 @@ module.exports = {
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           res.send(err);
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/event/');
+      // console.log('Received POST at /api/event/');
 
       const newEvent = {
         eventName: req.body.eventName,
@@ -53,38 +53,36 @@ module.exports = {
         newEvent.endDatetime)
         .then((event) => {
           if (event.length > 0) {
-            console.log('event already added');
+            // console.log('event already added');
             return res.send('event already added');
           }
           return Event.createEvent(newEvent)
-            .then((result) => {
+            .then((result) => res.send(result));
               // console.log('result of a succesful event creation..........______...');
-              return res.send(result);
-            });
         }).catch((err) => {
-          console.log(err);
+          // console.log(err);
           res.send(err);
         });
     },
     put(req, res) {
-      console.log('Received PUT at /api/event/');
+      // console.log('Received PUT at /api/event/');
       res.end('Received PUT at /api/event/');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/event/');
+      // console.log('Received DELETE at /api/event/');
       res.end('Received DELETE at /api/event/');
     },
   },
 
   '/picture/': {
     get(req, res) {
-      console.log('Received GET at /api/event/picture');
+      // console.log('Received GET at /api/event/picture');
       res.end('Received GET at /api/event/picture');
     },
     post(req, res) {
-      console.log('Received POST at /api/event/picture');
+      // console.log('Received POST at /api/event/picture');
       const file = req.files.file; // get the file from the request object thanks to multyparty middleware
-      console.log('file is......', file);
+      // console.log('file is......', file);
       const stream = fs.createReadStream(file.path); // read the file
 
       const fsImplStyles = s3fsImpl.getPath(file.name);
@@ -92,34 +90,33 @@ module.exports = {
       // we are sending to s3 the file using this stream
       s3fsImpl.writeFile(file.originalFilename, stream, { ContentType: 'image/jpeg' })
         .then(() => {
-          console.log('streaming writeFile.....');
+          // console.log('streaming writeFile.....');
           fs.unlink(file.path, (err) => {
-            if (err) {
-              console.error('error occurred here....', err);
-            }
+            if (err) { throw err; }
+              // console.error('error occurred here....', err);
           });
           return res.end(picUrl);
         });
     },
     put(req, res) {
-      console.log('Received PUT at /api/event/picture');
+      // console.log('Received PUT at /api/event/picture');
       res.end('Received PUT at /api/event/picture');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/event/picture');
+      // console.log('Received DELETE at /api/event/picture');
       res.end('Received DELETE at /api/event/picture');
     },
   },
   '/location/': {
     get(req, res) {
-      console.log('Received GET at /api/event/location');
+      // console.log('Received GET at /api/event/location');
       const loc = {
         lat: req.query.latitude,
         lng: req.query.longitude,
         //address: req.query.address,
       };
-      console.log('loc.lat', loc.lat);
-      console.log('loc.lng', loc.lng);
+      // console.log('loc.lat', loc.lat);
+      // console.log('loc.lng', loc.lng);
 
       Event.findEventsInRadius(loc.lat, loc.lng)
         .then((result) => {
@@ -127,15 +124,15 @@ module.exports = {
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/event/location');
+      // console.log('Received POST at /api/event/location');
       res.end('Received POST at /api/event/location');
     },
     put(req, res) {
-      console.log('Received PUT at /api/event/location');
+      // console.log('Received PUT at /api/event/location');
       res.end('Received PUT at /api/event/location');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/event/location');
+      // console.log('Received DELETE at /api/event/location');
       res.end('Received DELETE at /api/event/location');
     },
   },
@@ -147,24 +144,24 @@ module.exports = {
         .then((results) => {
           res.send(results);
         });
-      console.log('Received GET at /api/event/users/:userId');
+      // console.log('Received GET at /api/event/users/:userId');
     },
     post(req, res) {
-      console.log('Received POST at /api/event/users/:userId');
+      // console.log('Received POST at /api/event/users/:userId');
       res.end('Received POST at /api/event/users/:userId');
     },
     put(req, res) {
-      console.log('Received PUT at /api/event/users/:userId');
+      // console.log('Received PUT at /api/event/users/:userId');
       res.end('Received PUT at /api/event/users/:userId');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/event/users/:userId');
+      // console.log('Received DELETE at /api/event/users/:userId');
       res.end('Received DELETE at /api/event/users/:userId');
     },
   },
   '/join/:eventId': {
     get(req, res) {
-      console.log('Received GET at /api/event/join/:eventId');
+      // console.log('Received GET at /api/event/join/:eventId');
       res.end('Received GET at /api/event/join/:eventId');
     },
     post(req, res) {
@@ -183,7 +180,7 @@ module.exports = {
         });
     },
     put(req, res) {
-      console.log('Received PUT at /api/event/join/:eventId');
+      // console.log('Received PUT at /api/event/join/:eventId');
       res.end('Received PUT at /api/event/join/:eventId');
     },
     delete(req, res) {
@@ -199,7 +196,7 @@ module.exports = {
   '/:eventId': {
     get(req, res) {
       // Used to get a specific event by id
-      console.log('Received GET at /api/event/:eventId');
+      // console.log('Received GET at /api/event/:eventId');
 
       const eventId = url.parse(req.url, true).path.slice(1);
 
@@ -212,13 +209,13 @@ module.exports = {
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/event/:eventId');
+      // console.log('Received POST at /api/event/:eventId');
       res.end('Received POST at /api/event/:eventId');
     },
     put(req, res) {
       // Used to edit an event
       const eventId = url.parse(req.url, true).path.slice(1);
-      console.log('Received PUT at /api/event/:eventId');
+      // console.log('Received PUT at /api/event/:eventId');
       Event.findEventById(eventId)
         .then((event) => event.update(req.body, { fields: Object.keys(req.body) }))
         .then(() => {
@@ -228,7 +225,7 @@ module.exports = {
     delete(req, res) {
       // Used to delete an event
       const eventId = url.parse(req.url, true).path.slice(1);
-      console.log('Received DELETE at /api/event/:eventId');
+      // console.log('Received DELETE at /api/event/:eventId');
       Event.findEventById(eventId)
         .then(Event.destroyEvent);
       res.end('Received DELETE at /api/event/:eventId');

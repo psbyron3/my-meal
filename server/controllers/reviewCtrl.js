@@ -6,11 +6,11 @@ const db = require('../db/db.js');
 module.exports = {
   '/': {
     get(req, res) {
-      console.log('Received GET at /api/review');
+      // console.log('Received GET at /api/review');
       res.end('Received GET at /api/review');
     },
     post(req, res) {
-      console.log('Received POST at /api/review');
+      // console.log('Received POST at /api/review');
       const newReview = req.body;
       const { eventId, reviewerId } = req.body;
       delete newReview.token;
@@ -20,29 +20,29 @@ module.exports = {
           res.send(reslt);
         })
         .catch((err) => {
-          console.log('error in POST at /api/review', err);
+          // console.log('error in POST at /api/review', err);
           res.send(err);
         });
     },
     put(req, res) {
-      console.log('Received PUT at /api/:review');
+      // console.log('Received PUT at /api/:review');
       res.end('Received PUT at /api/:review');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/:review');
+      // console.log('Received DELETE at /api/:review');
       res.end('Received DELETE at /api/:review');
     },
   },
   '/users/:userId': {
     get(req, res) {
-      console.log('Received GET at /api/review/users/:userId');
-      console.log('url is.....', req.url);
+      // console.log('Received GET at /api/review/users/:userId');
+      // console.log('url is.....', req.url);
       const userId = url.parse(req.url, true).path.slice(7);
-      console.log('parsing url............', url.parse(req.url, true).path);
-      console.log('userId in /api/review/users/:userId is...', userId);
+      // console.log('parsing url............', url.parse(req.url, true).path);
+      // console.log('userId in /api/review/users/:userId is...', userId);
       Review.findReviewsByUser(userId)
         .then((results) => {
-          console.log('results of findReviewsByUser', results);
+          // console.log('results of findReviewsByUser', results);
           res.send(results);
         })
         .catch((err) => {
@@ -50,21 +50,21 @@ module.exports = {
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/review/:userId');
+      // console.log('Received POST at /api/review/:userId');
       res.end('Received POST at /api/review/:userId');
     },
     put(req, res) {
-      console.log('Received PUT at /api/:review');
+      // console.log('Received PUT at /api/:review');
       res.end('Received PUT at /api/:review');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/:review');
+      // console.log('Received DELETE at /api/:review');
       res.end('Received DELETE at /api/:review');
     },
   },
   '/event/:eventId': {
     get(req, res) {
-      console.log('Received GET at /api/review/event/:eventId');
+      // console.log('Received GET at /api/review/event/:eventId');
 
       const eventId = url.parse(req.url, true).path.split('/event/')[1];
 
@@ -74,7 +74,7 @@ module.exports = {
         .then((reviews) => {
           // console.log('these are the reviews', reviews);
           if (reviews.length === 0) {
-            console.log('reviews do not exist');
+            // console.log('reviews do not exist');
             res.end('Received GET at /api/review/event/:eventId');
           } else {
             res.send(reviews);
@@ -82,15 +82,15 @@ module.exports = {
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/review/event/:eventId');
+      // console.log('Received POST at /api/review/event/:eventId');
       res.end('Received POST at /api/:reviewId');
     },
     put(req, res) {
-      console.log('Received PUT at /api/review/event/:eventId');
+      // console.log('Received PUT at /api/review/event/:eventId');
       res.end('Received PUT at /api/:reviewId');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/review/event/:eventId');
+      // console.log('Received DELETE at /api/review/event/:eventId');
       res.end('Received DELETE at /api/review/event/:eventId');
     },
   },
@@ -104,15 +104,15 @@ module.exports = {
         });
     },
     post(req, res) {
-      console.log('Received POST at /api/review/event/:eventId');
+      // console.log('Received POST at /api/review/event/:eventId');
       res.end('Received POST at /api/:reviewId');
     },
     put(req, res) {
-      console.log('Received PUT at /api/review/event/:eventId');
+      // console.log('Received PUT at /api/review/event/:eventId');
       res.end('Received PUT at /api/:reviewId');
     },
     delete(req, res) {
-      console.log('Received DELETE at /api/review/event/:eventId');
+      // console.log('Received DELETE at /api/review/event/:eventId');
       res.end('Received DELETE at /api/review/event/:eventId');
     },
   },
