@@ -185,13 +185,13 @@ class Landing extends Component {
 }
 
 
-const mapStateToProps = (state) => {
-  return {};
-};
+// const mapStateToProps = (state) => {
+//   return {};
+// };
 
 Landing.propTypes = {
   renderSearchFunc: PropTypes.func,
 };
 
-export default connect(mapStateToProps, { renderSearchFunc })(Landing);
+export default connect(null, { renderSearchFunc })(Landing);
 

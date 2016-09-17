@@ -46,9 +46,9 @@ class JoinModal extends Component {
   }
 
   alreadyJoined() {
-    const matchedEvent = this.props.userHistory.filter((event) => {
-      return event.id === this.props.selectedEvent.id;
-    });
+    const matchedEvent = this.props.userHistory.filter(event => (
+      event.id === this.props.selectedEvent.id
+    ));
     if (matchedEvent.length > 0) {
       return (<h6 className="alert">You are already attending this event.</h6>);
     }
@@ -73,9 +73,9 @@ class JoinModal extends Component {
       );
     }
 
-    const matchedEvent = this.props.userHistory.filter((event) => {
-      return event.id === this.props.selectedEvent.id;
-    });
+    const matchedEvent = this.props.userHistory.filter((event) => (
+      event.id === this.props.selectedEvent.id
+    ));
     if (matchedEvent.length > 0) {
       return (
         <Modal.Footer>

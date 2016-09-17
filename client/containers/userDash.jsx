@@ -79,7 +79,7 @@ class UserDash extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('mapStoP Events by User Id : ', state.userHistory);
+  // console.log('mapStoP Events by User Id : ', state.userHistory);
   return {
     userHistory: state.userHistory,
     boxStatus: state.boxStatus.status,

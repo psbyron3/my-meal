@@ -136,13 +136,13 @@ class NavBarComp extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => (
+  {
     authenticated: state.auth.authenticated,
     userInfo: state.userInfo,
     showSearch: state.showSearch.status,
-  };
-};
+  }
+);
 
 NavBarComp.propTypes = {
   authenticated: PropTypes.bool,

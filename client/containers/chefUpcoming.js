@@ -12,13 +12,11 @@ class ChefUpcoming extends Component {
   }
 
   onHandleClick(e, evName) {
-    new Promise((resolve, reject) => {
+    Promise((resolve, reject) => {
       resolve(this.props.ChatBoxFunc('false'));
-    }).then(() => {
-      return this.props.EventIdFunc(e, evName);
-    }).then(() => {
-      return this.props.ChatBoxFunc('true');
-    });
+    })
+    .then(() => this.props.EventIdFunc(e, evName))
+    .then(() => this.props.ChatBoxFunc('true'));
   }
 
   renderList() {
@@ -28,19 +26,17 @@ class ChefUpcoming extends Component {
         </div>
       );
     }
-    return this.props.chefEvents.map((event) => {
-      return (
-        <ChefUpcomingEntry
-          key={event.id}
-          eventName={event.eventName}
-          eventId={event.id}
-          rating={event.rating}
-          clicked={this.onHandleClick}
-          deleteEvent={this.props.DeleteEvent}
-          image={event.eventPic}
-        />
-      );
-    });
+    return this.props.chefEvents.map((event) => (
+      <ChefUpcomingEntry
+        key={event.id}
+        eventName={event.eventName}
+        eventId={event.id}
+        rating={event.rating}
+        clicked={this.onHandleClick}
+        deleteEvent={this.props.DeleteEvent}
+        image={event.eventPic}
+      />
+    ));
   }
 
   render() {

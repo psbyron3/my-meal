@@ -103,13 +103,13 @@ class MessageBox extends Component {
 
   renderMsg() {
     if (this.state.messages.length === 0) return (null);
-    const msges = this.state.messages.map((message, index) => {
+    const msges = this.state.messages.map((message, index) => (
       // console.log('message is......', message);
-      return (<MessageEntry
+      <MessageEntry
         key={index}
         body={message}
-      />);
-    });
+      />
+    ));
     return msges;
   }
 

@@ -15,9 +15,7 @@ class MapListEntry extends Component {
 
   handleEnter(e) {
     e.preventDefault();
-    const selectedEvent = this.props.allEvents.find((event) => {
-      return event.id === this.props.index;
-    });
+    const selectedEvent = this.props.allEvents.find((event) => event.id === this.props.index);
     // action creator that sets current selection
     this.props.selectEvent(selectedEvent);
   }

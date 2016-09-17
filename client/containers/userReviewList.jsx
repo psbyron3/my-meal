@@ -10,19 +10,17 @@ class ReviewList extends Component {
 
   renderPastReviews() {
     if (this.props.reviews.length && Array.isArray(this.props.reviews)) {
-      return this.props.reviews.map((review) => {
-        return (
-          <PastReview
-            key={review.id}
-            eventName={review.event.eventName}
-            date={review.event.startDatetime}
-            index={review.id}
-            rating={review.rating}
-            eventPic={review.event.eventPic}
-            content={review.content}
-          />
-        );
-      });
+      return this.props.reviews.map((review) => (
+        <PastReview
+          key={review.id}
+          eventName={review.event.eventName}
+          date={review.event.startDatetime}
+          index={review.id}
+          rating={review.rating}
+          eventPic={review.event.eventPic}
+          content={review.content}
+        />
+      ));
     }
     return (
       <div>
